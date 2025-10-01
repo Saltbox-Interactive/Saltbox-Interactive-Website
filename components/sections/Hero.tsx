@@ -41,20 +41,22 @@ export default function Hero({ title, subtitle, backgroundImage, className = "" 
       <div className="absolute inset-0 bg-noise opacity-5"></div>
       
       <div className="relative z-10 text-center px-6 max-w-6xl mx-auto">
-        <div className="mb-8 opacity-0 animate-[fadeIn_1s_ease-out_forwards]">
+        <div
+          className="mb-8 opacity-0 animate-[fadeIn_1s_ease-out_forwards]"
+          style={{ transform: `translateY(${scrollY * 0.15}px)` }}
+        >
           <h1 className="font-bebas text-7xl md:text-8xl lg:text-9xl tracking-wider text-white/90 mb-2" style={{ fontFamily: 'var(--font-bebas)' }}>
             {title}
           </h1>
           <div className="h-px w-32 mx-auto bg-gradient-to-r from-transparent via-accent to-transparent"></div>
         </div>
-        
-        <div className="space-y-4 opacity-0 animate-[fadeIn_1s_0.5s_ease-out_forwards]">
+
+        <div
+          className="space-y-4 opacity-0 animate-[fadeIn_1s_0.5s_ease-out_forwards]"
+          style={{ transform: `translateY(${scrollY * 0.25}px)` }}
+        >
           <p className="text-2xl md:text-3xl text-accent font-light tracking-[0.2em] uppercase">
             Discover. Learn. Preserve.
-          </p>
-          <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-            Historical preservation through digital simulation and education.
-            Using cutting-edge technology to bring the past into the present.
           </p>
         </div>
       </div>

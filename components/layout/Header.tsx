@@ -5,29 +5,41 @@ import { useState, useEffect } from "react";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+      const currentScrollY = window.scrollY;
+
+      // Show header when scrolling up or at the top
+      if (currentScrollY < lastScrollY || currentScrollY < 100) {
+        setIsVisible(true);
+      }
+      // Hide header when scrolling down past the first section
+      else if (currentScrollY > 100 && currentScrollY > lastScrollY) {
+        setIsVisible(false);
+      }
+
+      setLastScrollY(currentScrollY);
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [lastScrollY]);
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      scrolled ? "bg-black/90 backdrop-blur-md border-b border-accent/20" : "bg-transparent"
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-opacity duration-300 bg-black/90 backdrop-blur-md border-b border-accent/20 ${
+      isVisible ? "opacity-100" : "opacity-0 pointer-events-none"
     }`}>
       <nav className="container mx-auto px-6 py-4">
         <div className="flex justify-between items-center">
           <Link href="/" className="group flex items-center gap-3">
             <div className="flex flex-col">
-              <span className="text-2xl font-light tracking-[0.2em] text-foreground group-hover:text-accent transition-colors duration-300" style={{ fontFamily: 'var(--font-bebas)' }}>
+              <span className="text-2xl font-light tracking-[0.275em] text-foreground group-hover:text-accent transition-colors duration-300" style={{ fontFamily: 'var(--font-bebas)' }}>
                 SALTBOX
               </span>
-              <span className="text-xs tracking-[0.3em] text-accent/60 group-hover:text-accent transition-colors duration-300">
+              <span className="text-xs tracking-[0.2em] text-accent/60 group-hover:text-accent transition-colors duration-300">
                 INTERACTIVE
               </span>
             </div>

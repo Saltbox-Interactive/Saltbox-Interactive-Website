@@ -35,19 +35,8 @@ export default function Home() {
       {/* Introduction Section */}
       <section id="intro" className="min-h-screen flex items-center py-20 px-6 relative bg-gradient-to-b from-black via-gray-900/50 to-black">
         <div className="absolute inset-0 gradient-dust opacity-20"></div>
-        
-        <div className="container mx-auto relative z-10">
-          <div className="max-w-4xl mx-auto text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-light tracking-[0.2em] text-foreground mb-6" style={{ fontFamily: 'var(--font-bebas)' }}>
-              BRIDGING PAST AND FUTURE
-            </h2>
-            <div className="h-px w-32 mx-auto bg-gradient-to-r from-transparent via-accent/60 to-transparent mb-8"></div>
-            <p className="text-lg md:text-xl text-gray-300 leading-relaxed">
-              We create immersive digital experiences that preserve and share history. 
-              Through virtual reality, simulation, and interactive storytelling, we make the past accessible to everyone.
-            </p>
-          </div>
 
+        <div className="container mx-auto relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             {highlights.map((item, index) => (
               <Card key={index} className="bg-black/40 border-accent/10 hover:border-accent/30 transition-all duration-500 group">
@@ -73,25 +62,20 @@ export default function Home() {
       {/* Call to Action Section */}
       <section className="min-h-screen flex items-center justify-center px-6 relative bg-black">
         <div className="absolute inset-0 bg-noise opacity-5"></div>
-        
+
         <div className="container mx-auto max-w-3xl text-center relative z-10">
-          <h2 className="text-5xl md:text-6xl font-light tracking-[0.2em] text-foreground mb-8" style={{ fontFamily: 'var(--font-bebas)' }}>
-            JOIN THE JOURNEY
+          <h2 className="text-5xl md:text-6xl font-light tracking-[0.2em] text-foreground mb-12" style={{ fontFamily: 'var(--font-bebas)' }}>
+            EXPLORE OUR WORK
           </h2>
-          <div className="h-px w-32 mx-auto bg-gradient-to-r from-transparent via-accent/60 to-transparent mb-8"></div>
-          <p className="text-lg text-gray-300 mb-12 leading-relaxed">
-            Whether you're a historian, educator, or simply passionate about preserving the past, 
-            there's a place for you in our mission.
-          </p>
           <div className="flex flex-wrap gap-4 justify-center">
             <Link href="/projects">
               <Button variant="outline" size="lg">
-                Explore Projects
+                View Projects
               </Button>
             </Link>
             <Link href="/contact">
               <Button variant="primary" size="lg">
-                Get In Touch
+                Contact Us
               </Button>
             </Link>
           </div>
