@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { useState, useEffect } from "react";
 
 export default function Header() {
@@ -24,15 +23,8 @@ export default function Header() {
       <nav className="container mx-auto px-6 py-4">
         <div className="flex justify-between items-center">
           <Link href="/" className="group flex items-center gap-3">
-            <Image
-              src="/images/saltbox-logo.svg"
-              alt="Saltbox Interactive"
-              width={40}
-              height={40}
-              className="opacity-90 group-hover:opacity-100 transition-opacity duration-300"
-            />
             <div className="flex flex-col">
-              <span className="text-2xl font-light tracking-[0.2em] text-foreground hover:text-accent transition-colors duration-300" style={{ fontFamily: 'var(--font-bebas)' }}>
+              <span className="text-2xl font-light tracking-[0.2em] text-foreground group-hover:text-accent transition-colors duration-300" style={{ fontFamily: 'var(--font-bebas)' }}>
                 SALTBOX
               </span>
               <span className="text-xs tracking-[0.3em] text-accent/60 group-hover:text-accent transition-colors duration-300">

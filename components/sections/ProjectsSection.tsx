@@ -21,7 +21,7 @@ export default function ProjectsSection() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+        <div className="flex flex-col gap-12 max-w-3xl mx-auto">
           {projects.map((project) => (
             <Link key={project.id} href={`/projects/${project.slug}`} className="block group">
               <Card variant="interactive" className="h-full overflow-hidden">
