@@ -1,21 +1,48 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import Image from "next/image";
+import { useState, useEffect } from "react";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-gray-900/95 backdrop-blur-sm border-b border-gray-800">
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      scrolled ? "bg-black/90 backdrop-blur-md border-b border-accent/20" : "bg-transparent"
+    }`}>
       <nav className="container mx-auto px-6 py-4">
         <div className="flex justify-between items-center">
-          <Link href="/" className="text-2xl font-bold text-white hover:text-gray-300 transition-colors">
-            Saltbox Interactive
+          <Link href="/" className="group flex items-center gap-3">
+            <Image
+              src="/images/saltbox-logo.svg"
+              alt="Saltbox Interactive"
+              width={40}
+              height={40}
+              className="opacity-90 group-hover:opacity-100 transition-opacity duration-300"
+            />
+            <div className="flex flex-col">
+              <span className="text-2xl font-light tracking-[0.2em] text-foreground hover:text-accent transition-colors duration-300" style={{ fontFamily: 'var(--font-bebas)' }}>
+                SALTBOX
+              </span>
+              <span className="text-xs tracking-[0.3em] text-accent/60 group-hover:text-accent transition-colors duration-300">
+                INTERACTIVE
+              </span>
+            </div>
           </Link>
 
           <button
-            className="lg:hidden text-white"
+            className="lg:hidden text-foreground hover:text-accent transition-colors"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             <svg
@@ -25,42 +52,36 @@ export default function Header() {
               viewBox="0 0 24 24"
             >
               {isMenuOpen ? (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" />
               ) : (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 6h16M4 12h16M4 18h16" />
               )}
             </svg>
           </button>
 
           <div className="hidden lg:flex items-center gap-8">
-            <Link href="/#games" className="text-gray-300 hover:text-white transition-colors">
-              Games
+            <Link href="/projects" className="text-sm tracking-wider text-foreground/80 hover:text-accent transition-colors duration-300 uppercase">
+              Projects
             </Link>
-            <Link href="/#about" className="text-gray-300 hover:text-white transition-colors">
+            <Link href="/about" className="text-sm tracking-wider text-foreground/80 hover:text-accent transition-colors duration-300 uppercase">
               About
             </Link>
-            <Link href="/#news" className="text-gray-300 hover:text-white transition-colors">
-              News
-            </Link>
-            <Link href="/#contact" className="text-gray-300 hover:text-white transition-colors">
+            <Link href="/contact" className="text-sm tracking-wider text-foreground/80 hover:text-accent transition-colors duration-300 uppercase">
               Contact
             </Link>
           </div>
         </div>
 
         {isMenuOpen && (
-          <div className="lg:hidden mt-4 pb-4 border-t border-gray-800 pt-4">
+          <div className="lg:hidden mt-6 pb-4 border-t border-accent/20 pt-4">
             <div className="flex flex-col gap-4">
-              <Link href="/#games" className="text-gray-300 hover:text-white transition-colors" onClick={() => setIsMenuOpen(false)}>
-                Games
+              <Link href="/projects" className="text-sm tracking-wider text-foreground/80 hover:text-accent transition-colors duration-300 uppercase" onClick={() => setIsMenuOpen(false)}>
+                Projects
               </Link>
-              <Link href="/#about" className="text-gray-300 hover:text-white transition-colors" onClick={() => setIsMenuOpen(false)}>
+              <Link href="/about" className="text-sm tracking-wider text-foreground/80 hover:text-accent transition-colors duration-300 uppercase" onClick={() => setIsMenuOpen(false)}>
                 About
               </Link>
-              <Link href="/#news" className="text-gray-300 hover:text-white transition-colors" onClick={() => setIsMenuOpen(false)}>
-                News
-              </Link>
-              <Link href="/#contact" className="text-gray-300 hover:text-white transition-colors" onClick={() => setIsMenuOpen(false)}>
+              <Link href="/contact" className="text-sm tracking-wider text-foreground/80 hover:text-accent transition-colors duration-300 uppercase" onClick={() => setIsMenuOpen(false)}>
                 Contact
               </Link>
             </div>

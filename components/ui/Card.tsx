@@ -8,15 +8,15 @@ export interface CardProps extends HTMLAttributes<HTMLDivElement> {
 const Card = forwardRef<HTMLDivElement, CardProps>(
   ({ className, variant = "default", ...props }, ref) => {
     const variants = {
-      default: "bg-gray-800/50 backdrop-blur-sm border border-gray-700",
-      interactive: "bg-gray-800/50 backdrop-blur-sm border border-gray-700 hover:bg-gray-800 hover:border-gray-600 transition-all cursor-pointer",
+      default: "bg-gray-900/40 backdrop-blur-sm border border-accent/10",
+      interactive: "bg-gray-900/40 backdrop-blur-sm border border-accent/10 hover:bg-gray-900/60 hover:border-accent/30 transition-all duration-500 cursor-pointer",
     };
     
     return (
       <div
         ref={ref}
         className={cn(
-          "rounded-lg overflow-hidden",
+          "overflow-hidden",
           variants[variant],
           className
         )}

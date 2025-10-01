@@ -25,21 +25,26 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contact" className="py-20 px-6 bg-gray-800">
-      <div className="container mx-auto max-w-4xl">
+    <section id="contact" className="min-h-screen flex items-center py-20 px-6 relative bg-gradient-to-b from-black via-gray-900/50 to-black">
+      <div className="absolute inset-0 gradient-dust opacity-20"></div>
+      
+      <div className="container mx-auto max-w-4xl relative z-10">
         <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Get in Touch</h2>
-          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-            Have questions or want to collaborate? We'd love to hear from you!
+          <h2 className="text-5xl md:text-6xl font-light tracking-[0.2em] text-foreground mb-4" style={{ fontFamily: 'var(--font-bebas)' }}>
+            CONNECT
+          </h2>
+          <div className="h-px w-32 mx-auto bg-gradient-to-r from-transparent via-accent/60 to-transparent mb-6"></div>
+          <p className="text-lg text-gray-400 max-w-2xl mx-auto">
+            Join us in preserving history for future generations
           </p>
         </div>
 
-        <Card>
+        <Card className="bg-black/40 border-accent/20">
           <CardContent className="p-8">
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
+                  <label htmlFor="name" className="block text-xs tracking-wider uppercase text-accent/60 mb-2">
                     Name
                   </label>
                   <input
@@ -49,13 +54,13 @@ export default function ContactSection() {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-white focus:border-transparent"
+                    className="w-full px-4 py-3 bg-transparent border border-accent/20 text-foreground placeholder-gray-600 focus:outline-none focus:border-accent/60 transition-colors duration-300"
                     placeholder="Your Name"
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
+                  <label htmlFor="email" className="block text-xs tracking-wider uppercase text-accent/60 mb-2">
                     Email
                   </label>
                   <input
@@ -65,14 +70,14 @@ export default function ContactSection() {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-white focus:border-transparent"
+                    className="w-full px-4 py-3 bg-transparent border border-accent/20 text-foreground placeholder-gray-600 focus:outline-none focus:border-accent/60 transition-colors duration-300"
                     placeholder="your@email.com"
                   />
                 </div>
               </div>
 
               <div>
-                <label htmlFor="subject" className="block text-sm font-medium text-gray-300 mb-2">
+                <label htmlFor="subject" className="block text-xs tracking-wider uppercase text-accent/60 mb-2">
                   Subject
                 </label>
                 <select
@@ -81,19 +86,18 @@ export default function ContactSection() {
                   value={formData.subject}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-white focus:border-transparent"
+                  className="w-full px-4 py-3 bg-transparent border border-accent/20 text-foreground focus:outline-none focus:border-accent/60 transition-colors duration-300"
                 >
-                  <option value="">Select a subject</option>
-                  <option value="general">General Inquiry</option>
-                  <option value="press">Press & Media</option>
-                  <option value="business">Business Partnership</option>
-                  <option value="careers">Careers</option>
-                  <option value="support">Game Support</option>
+                  <option value="" className="bg-gray-900">Select a subject</option>
+                  <option value="collaboration" className="bg-gray-900">Historical Collaboration</option>
+                  <option value="technical" className="bg-gray-900">Technical Partnership</option>
+                  <option value="media" className="bg-gray-900">Press & Media</option>
+                  <option value="general" className="bg-gray-900">General Inquiry</option>
                 </select>
               </div>
 
               <div>
-                <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">
+                <label htmlFor="message" className="block text-xs tracking-wider uppercase text-accent/60 mb-2">
                   Message
                 </label>
                 <textarea
@@ -103,13 +107,13 @@ export default function ContactSection() {
                   onChange={handleChange}
                   required
                   rows={6}
-                  className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-white focus:border-transparent resize-none"
-                  placeholder="Your message..."
+                  className="w-full px-4 py-3 bg-transparent border border-accent/20 text-foreground placeholder-gray-600 focus:outline-none focus:border-accent/60 transition-colors duration-300 resize-none"
+                  placeholder="Tell us about your interest in historical preservation..."
                 />
               </div>
 
               <div className="text-center">
-                <Button type="submit" size="lg" className="w-full md:w-auto">
+                <Button type="submit" variant="outline" size="lg" className="w-full md:w-auto min-w-[200px]">
                   Send Message
                 </Button>
               </div>
@@ -118,15 +122,10 @@ export default function ContactSection() {
         </Card>
 
         <div className="mt-12 text-center">
-          <p className="text-gray-400 mb-4">Or reach out directly:</p>
-          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-            <a href="mailto:hello@saltboxinteractive.com" className="text-white hover:text-gray-300 flex items-center gap-2">
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-              </svg>
-              hello@saltboxinteractive.com
-            </a>
-          </div>
+          <p className="text-accent/60 text-sm tracking-wider uppercase mb-4">Direct Contact</p>
+          <a href="mailto:preserve@saltboxinteractive.com" className="text-foreground hover:text-accent transition-colors duration-300 tracking-wider">
+            preserve@saltboxinteractive.com
+          </a>
         </div>
       </div>
     </section>
