@@ -3,18 +3,22 @@
 import { useEffect, useState } from "react";
 
 interface HeroProps {
-  title: string;
+  title?: string;
   subtitle?: string;
   backgroundImage?: string;
   className?: string;
+  showMotto?: boolean;
 }
 
-export default function Hero({ title, subtitle, backgroundImage, className = "" }: HeroProps) {
+export default function Hero({ title, subtitle, backgroundImage, className = "", showMotto = false }: HeroProps) {
   const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY);
-    window.addEventListener("scroll", handleScroll);
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      setScrollY(currentScrollY);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -41,24 +45,65 @@ export default function Hero({ title, subtitle, backgroundImage, className = "" 
       <div className="absolute inset-0 bg-noise opacity-5"></div>
       
       <div className="relative z-10 text-center px-6 max-w-6xl mx-auto">
-        <div
-          className="mb-8 opacity-0 animate-[fadeIn_1s_ease-out_forwards]"
-          style={{ transform: `translateY(${scrollY * 0.15}px)` }}
-        >
-          <h1 className="font-bebas text-7xl md:text-8xl lg:text-9xl tracking-wider text-white/90 mb-2" style={{ fontFamily: 'var(--font-bebas)' }}>
-            {title}
-          </h1>
-          <div className="h-px w-32 mx-auto bg-gradient-to-r from-transparent via-accent to-transparent"></div>
-        </div>
+        {showMotto ? (
+          <div className="flex flex-col items-center justify-center gap-4 md:gap-6">
+            <div
+              className="text-5xl md:text-7xl lg:text-8xl font-light tracking-[0.3em] text-white transition-all duration-300"
+              style={{
+                fontFamily: 'var(--font-bebas)',
+                transform: `translateX(${scrollY * -1.5}px)`,
+                opacity: Math.max(0, 1 - scrollY / 300)
+              }}
+            >
+              DISCOVER
+            </div>
+            <div
+              className="text-5xl md:text-7xl lg:text-8xl font-light tracking-[0.3em] text-white transition-all duration-300"
+              style={{
+                fontFamily: 'var(--font-bebas)',
+                transform: `translateX(${scrollY * 1.5}px)`,
+                opacity: Math.max(0, 1 - scrollY / 300)
+              }}
+            >
+              LEARN
+            </div>
+            <div
+              className="text-5xl md:text-7xl lg:text-8xl font-light tracking-[0.3em] text-white transition-all duration-300"
+              style={{
+                fontFamily: 'var(--font-bebas)',
+                transform: `translateX(${scrollY * -1.5}px)`,
+                opacity: Math.max(0, 1 - scrollY / 300)
+              }}
+            >
+              PRESERVE
+            </div>
+          </div>
+        ) : (
+          <>
+            <div
+              className="mb-8 opacity-0 animate-[fadeIn_1s_ease-out_forwards]"
+              style={{ transform: `translateY(${scrollY * 0.15}px)` }}
+            >
+              {title && (
+                <>
+                  <h1 className="font-bebas text-7xl md:text-8xl lg:text-9xl tracking-wider text-white/90 mb-2" style={{ fontFamily: 'var(--font-bebas)' }}>
+                    {title}
+                  </h1>
+                  <div className="h-px w-32 mx-auto bg-gradient-to-r from-transparent via-accent to-transparent"></div>
+                </>
+              )}
+            </div>
 
-        <div
-          className="space-y-4 opacity-0 animate-[fadeIn_1s_0.5s_ease-out_forwards]"
-          style={{ transform: `translateY(${scrollY * 0.25}px)` }}
-        >
-          <p className="text-2xl md:text-3xl text-accent font-light tracking-[0.2em] uppercase">
-            Discover. Learn. Preserve.
-          </p>
-        </div>
+            <div
+              className="space-y-4 opacity-0 animate-[fadeIn_1s_0.5s_ease-out_forwards]"
+              style={{ transform: `translateY(${scrollY * 0.25}px)` }}
+            >
+              <p className="text-2xl md:text-3xl text-accent font-light tracking-[0.2em] uppercase">
+                Discover. Learn. Preserve.
+              </p>
+            </div>
+          </>
+        )}
       </div>
 
       {/* Scroll indicator */}

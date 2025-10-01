@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/Button";
 import { Card, CardContent } from "@/components/ui/Card";
 
@@ -11,6 +11,28 @@ export default function ContactSection() {
     subject: "",
     message: "",
   });
+
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true);
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -25,21 +47,29 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contact" className="min-h-screen flex items-center py-20 px-6 relative bg-gradient-to-b from-black via-gray-900/50 to-black">
+    <section
+      id="contact"
+      ref={sectionRef}
+      className="py-40 px-6 relative bg-gradient-to-b from-black via-gray-900/30 to-black"
+    >
       <div className="absolute inset-0 gradient-dust opacity-20"></div>
-      
-      <div className="container mx-auto max-w-4xl relative z-10">
-        <div className="text-center mb-12">
-          <h2 className="text-5xl md:text-6xl font-light tracking-[0.2em] text-foreground mb-4" style={{ fontFamily: 'var(--font-bebas)' }}>
-            CONNECT
+
+      <div
+        className={`relative z-10 transition-all duration-1000 ${
+          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'
+        }`}
+      >
+        <div className="text-center mb-32 max-w-4xl mx-auto">
+          <h2 className="text-6xl md:text-7xl lg:text-8xl font-light tracking-[0.15em] text-foreground mb-8" style={{ fontFamily: 'var(--font-bebas)' }}>
+            CONNECT WITH US
           </h2>
-          <div className="h-px w-32 mx-auto bg-gradient-to-r from-transparent via-accent/60 to-transparent mb-6"></div>
-          <p className="text-lg text-gray-400 max-w-2xl mx-auto">
+          <p className="text-xl md:text-2xl text-gray-300 leading-relaxed font-light">
             Join us in preserving history for future generations
           </p>
         </div>
 
-        <Card className="bg-black/40 border-accent/20">
+        <div className="container mx-auto max-w-4xl">
+          <Card className="bg-black/40 border-accent/20">
           <CardContent className="p-8">
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -121,11 +151,12 @@ export default function ContactSection() {
           </CardContent>
         </Card>
 
-        <div className="mt-12 text-center">
-          <p className="text-accent/60 text-sm tracking-wider uppercase mb-4">Direct Contact</p>
-          <a href="mailto:preserve@saltboxinteractive.com" className="text-foreground hover:text-accent transition-colors duration-300 tracking-wider">
-            preserve@saltboxinteractive.com
-          </a>
+          <div className="mt-16 text-center">
+            <p className="text-accent/60 text-sm tracking-wider uppercase mb-4">Direct Contact</p>
+            <a href="mailto:preserve@saltboxinteractive.com" className="text-foreground hover:text-accent transition-colors duration-300 tracking-wider text-lg">
+              preserve@saltboxinteractive.com
+            </a>
+          </div>
         </div>
       </div>
     </section>
