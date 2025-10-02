@@ -44,11 +44,13 @@ export default function RootLayout({
       >
         <SmoothScroll>
           <Header />
-          <main className="relative z-10 bg-black">
-            {children}
-            <div className="h-96"></div>
-          </main>
           <Footer />
+          <main className="relative" style={{ zIndex: 10, minHeight: '100vh' }}>
+            <div className="bg-black">
+              {children}
+            </div>
+            <div style={{ height: '400px', background: 'transparent' }}></div>
+          </main>
         </SmoothScroll>
       </body>
     </html>
