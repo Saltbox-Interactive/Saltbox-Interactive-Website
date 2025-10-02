@@ -6,6 +6,7 @@ import Link from "next/link";
 
 export default function Home() {
   const [visibleSections, setVisibleSections] = useState<Set<string>>(new Set());
+  const [scrollY, setScrollY] = useState(0);
   const introRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -32,6 +33,15 @@ export default function Home() {
     if (introRef.current) observer.observe(introRef.current);
 
     return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
@@ -84,12 +94,28 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Featured Project - Discover Old D'Hanis */}
+      {/* Parallax Background Image Section - Comes First */}
+      <section className="relative h-screen bg-black overflow-hidden">
+        <div
+          className="absolute inset-0 w-full h-full scale-110 z-10"
+          style={{
+            transform: `translateY(${scrollY * 0.3}px)`,
+          }}
+        >
+          <img
+            src="/images/dhanis1.jpg"
+            alt="Discover Old D'Hanis Background"
+            className="object-cover w-full h-full"
+          />
+        </div>
+      </section>
+
+      {/* Featured Project Content - Vertical Image and Text */}
       <section
         id="intro"
         ref={introRef}
         data-section="intro"
-        className="relative py-40 bg-gradient-to-b from-black via-gray-900/30 to-black overflow-hidden"
+        className="relative py-40 bg-gradient-to-b from-black via-gray-900/30 to-black"
       >
         <div className="absolute inset-0 gradient-dust opacity-20"></div>
 
@@ -100,20 +126,20 @@ export default function Home() {
               : 'opacity-0 translate-y-20'
           }`}
         >
-          {/* Large Background Image */}
-          <div className="relative w-full max-w-[1400px] mx-auto px-6 mb-20">
-            <div className="relative aspect-[21/9] overflow-hidden">
-              <img
-                src="/images/dhanis1.jpg"
-                alt="Discover Old D'Hanis"
-                className="object-cover w-full h-full"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
-            </div>
-          </div>
+          {/* Centered Content Container */}
+          <div className="relative w-full max-w-[1200px] mx-auto px-6">
+            <div className="flex items-center justify-center gap-12">
+              {/* Foreground Vertical Image - Left Side */}
+              <div className="flex-shrink-0 w-auto max-w-[400px]">
+                <img
+                  src="/images/dominics.jpeg"
+                  alt="Discover Old D'Hanis"
+                  className="w-full h-auto"
+                />
+              </div>
 
-          {/* Content Below Image */}
-          <div className="max-w-[900px] mx-auto px-6 md:px-12">
+              {/* Content - Right Side */}
+              <div className="flex-1 max-w-[600px]">
             <div className="mb-12">
               <p className="text-accent/70 text-xs tracking-[0.4em] uppercase mb-6">Now Available</p>
               <h2 className="text-6xl md:text-7xl lg:text-8xl font-light tracking-[0.15em] text-foreground mb-8" style={{ fontFamily: 'var(--font-bebas)' }}>
@@ -133,7 +159,7 @@ export default function Home() {
 
             <div className="inline-block">
               <Link
-                href="/projects/old-dhanis"
+                href="/projects/discover-old-dhanis"
                 className="inline-flex items-center gap-3 text-foreground hover:text-accent transition-colors duration-300 group"
               >
                 <span className="text-sm tracking-[0.2em] uppercase">Learn more</span>
@@ -141,6 +167,8 @@ export default function Home() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
               </Link>
+            </div>
+              </div>
             </div>
           </div>
         </div>
