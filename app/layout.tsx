@@ -3,6 +3,8 @@ import { Work_Sans, Bebas_Neue, Archivo_Black } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import SmoothScroll from "@/components/SmoothScroll";
+import "lenis/dist/lenis.css";
 
 const workSans = Work_Sans({
   variable: "--font-work-sans",
@@ -38,13 +40,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${workSans.variable} ${bebas.variable} ${archivoBlack.variable} antialiased`}
+        className={`${workSans.variable} ${bebas.variable} ${archivoBlack.variable} antialiased relative`}
       >
-        <Header />
-        <main>
-          {children}
-        </main>
-        <Footer />
+        <SmoothScroll>
+          <Header />
+          <main className="relative z-10 bg-black">
+            {children}
+            <div className="h-96"></div>
+          </main>
+          <Footer />
+        </SmoothScroll>
       </body>
     </html>
   );
