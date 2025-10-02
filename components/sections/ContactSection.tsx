@@ -153,8 +153,8 @@ export default function ContactSection() {
 
           <div className="mt-16 text-center">
             <p className="text-accent/60 text-sm tracking-wider uppercase mb-4">Direct Contact</p>
-            <a href="mailto:preserve@saltboxinteractive.com" className="text-foreground hover:text-accent transition-colors duration-300 tracking-wider text-lg">
-              preserve@saltboxinteractive.com
+            <a href="mailto:discover@saltboxinteractive.com" className="text-foreground hover:text-accent transition-colors duration-300 tracking-wider text-lg">
+              discover@saltboxinteractive.com
             </a>
           </div>
         </div>

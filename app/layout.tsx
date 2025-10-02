@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Work_Sans, Bebas_Neue } from "next/font/google";
+import { Work_Sans, Bebas_Neue, Archivo_Black } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
@@ -18,8 +18,15 @@ const bebas = Bebas_Neue({
   display: "swap",
 });
 
+const archivoBlack = Archivo_Black({
+  variable: "--font-archivo",
+  weight: "400",
+  subsets: ["latin"],
+  display: "swap",
+});
+
 export const metadata: Metadata = {
-  title: "Saltbox Interactive - Game Studio",
+  title: "Saltbox Interactive",
   description: "Saltbox Interactive is an independent game studio creating immersive gaming experiences.",
 };
 
@@ -31,10 +38,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${workSans.variable} ${bebas.variable} antialiased`}
+        className={`${workSans.variable} ${bebas.variable} ${archivoBlack.variable} antialiased`}
       >
         <Header />
-        <main className="pt-16">
+        <main>
           {children}
         </main>
         <Footer />

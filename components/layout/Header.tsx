@@ -29,24 +29,24 @@ export default function Header() {
   }, [lastScrollY]);
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-opacity duration-300 bg-black/90 backdrop-blur-md border-b border-accent/20 ${
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-opacity duration-300 ${
       isVisible ? "opacity-100" : "opacity-0 pointer-events-none"
     }`}>
-      <nav className="container mx-auto px-6 py-4">
+      <nav className="px-4 py-6 max-w-[1400px] mx-auto mt-6">
         <div className="flex justify-between items-center">
-          <Link href="/" className="group flex items-center gap-3">
-            <div className="flex flex-col">
-              <span className="text-2xl font-light tracking-[0.275em] text-foreground group-hover:text-accent transition-colors duration-300" style={{ fontFamily: 'var(--font-bebas)' }}>
-                SALTBOX
-              </span>
-              <span className="text-xs tracking-[0.2em] text-accent/60 group-hover:text-accent transition-colors duration-300">
-                INTERACTIVE
-              </span>
-            </div>
+          <Link href="/" className="group flex items-center gap-4 absolute left-8">
+            <img
+              src="/images/saltbox-logo-blank.png"
+              alt="Saltbox Interactive Logo"
+              className="w-12 h-12 object-contain"
+            />
+            <span className="text-xl font-normal tracking-wide text-foreground group-hover:text-accent transition-colors duration-300 translate-y-0.5 uppercase" style={{ fontFamily: 'var(--font-archivo)' }}>
+              Saltbox Interactive
+            </span>
           </Link>
 
           <button
-            className="lg:hidden text-foreground hover:text-accent transition-colors"
+            className="lg:hidden text-foreground hover:text-accent transition-colors absolute right-8"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             <svg
@@ -63,14 +63,14 @@ export default function Header() {
             </svg>
           </button>
 
-          <div className="hidden lg:flex items-center gap-8">
-            <Link href="/projects" className="text-sm tracking-wider text-foreground/80 hover:text-accent transition-colors duration-300 uppercase">
+          <div className="hidden lg:flex items-center gap-8 absolute right-8">
+            <Link href="/projects" className="text-base tracking-wider text-foreground/80 hover:text-accent transition-colors duration-300 uppercase" style={{ fontFamily: 'var(--font-bebas)' }}>
               Projects
             </Link>
-            <Link href="/about" className="text-sm tracking-wider text-foreground/80 hover:text-accent transition-colors duration-300 uppercase">
+            <Link href="/about" className="text-base tracking-wider text-foreground/80 hover:text-accent transition-colors duration-300 uppercase" style={{ fontFamily: 'var(--font-bebas)' }}>
               About
             </Link>
-            <Link href="/contact" className="text-sm tracking-wider text-foreground/80 hover:text-accent transition-colors duration-300 uppercase">
+            <Link href="/contact" className="text-base tracking-wider text-foreground/80 hover:text-accent transition-colors duration-300 uppercase" style={{ fontFamily: 'var(--font-bebas)' }}>
               Contact
             </Link>
           </div>

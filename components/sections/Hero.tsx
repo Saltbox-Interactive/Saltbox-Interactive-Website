@@ -24,7 +24,7 @@ export default function Hero({ title, subtitle, backgroundImage, className = "",
 
   return (
     <section
-      className={`relative min-h-[calc(100vh-4rem)] flex items-center justify-center overflow-hidden ${className}`}
+      className={`relative min-h-screen flex items-center justify-center overflow-hidden ${className}`}
     >
       {/* Background image */}
       {backgroundImage && (
