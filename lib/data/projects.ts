@@ -58,25 +58,15 @@ export const projects: Project[] = [
   {
     id: "2",
     slug: "discover-old-dhanis-remastered",
-    title: "Discover Old D'Hanis Remastered",
+    title: "Discover Old D'Hanis: Remastered",
     era: "1840s-1860s",
-    description: "An enhanced and expanded version of our original Old D'Hanis experience with improved graphics and new content.",
-    longDescription: `Discover Old D'Hanis Remastered takes our original virtual experience to the next level with dramatically improved visuals, expanded areas to explore, and deeper historical content. This remastered edition features updated graphics, enhanced interactivity, and additional storylines based on new historical research.
-
-    Explore previously unavailable areas of the settlement, interact with more detailed environments, and experience the history of Old D'Hanis like never before. The remastered edition includes new documentary footage, enhanced audio design, and a completely rebuilt user interface.
-
-    Whether you're revisiting Old D'Hanis or exploring it for the first time, this remastered edition offers the definitive way to experience this important piece of Texas history.`,
-    status: "In Development",
+    description: "Coming soon...",
+    longDescription: "Coming soon...",
+    status: "Coming Soon",
     color: "from-stone-800/40 to-amber-950/40",
     thumbnail: "/images/dominics-2.jpg",
     features: [
-      "Enhanced graphics and lighting",
-      "Expanded explorable areas",
-      "Additional historical content",
-      "Improved user interface",
-      "New documentary footage",
-      "Enhanced audio design",
-      "VR support"
+      "Coming soon..."
     ],
     technologies: [
       "Unreal Engine 5",
@@ -100,21 +90,13 @@ export const projects: Project[] = [
     slug: "project-medina",
     title: "Project Medina",
     era: "1850s-1870s",
-    description: "Experience the historic town of Medina, Texas through an immersive virtual reconstruction.",
-    longDescription: `Project Medina brings to life the historic community of Medina, Texas. Explore the rich heritage and architectural legacy of this Texas town through detailed 3D reconstructions and interactive storytelling.
-
-    Discover the stories of the settlers who built this community and learn about the cultural and historical significance of Medina in Texas history.
-
-    This project combines cutting-edge technology with meticulous historical research to create an authentic and educational experience.`,
+    description: "Coming soon...",
+    longDescription: "Coming soon...",
     status: "Coming Soon",
     color: "from-blue-900/40 to-gray-900/40",
     thumbnail: "/images/medina.jpg",
     features: [
-      "3D historical reconstruction",
-      "Interactive exploration",
-      "Educational narratives",
-      "Historical accuracy",
-      "Cultural heritage preservation"
+      "Coming soon..."
     ],
     technologies: [
       "Unity Engine",

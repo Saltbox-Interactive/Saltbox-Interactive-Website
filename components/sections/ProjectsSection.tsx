@@ -40,22 +40,6 @@ export default function ProjectsSection() {
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                 )}
-                <div className="absolute inset-0 bg-black/50 group-hover:bg-black/30 transition-colors duration-500"></div>
-              </div>
-
-              {/* Title Overlay */}
-              <div className="absolute inset-0 flex items-center justify-center p-6">
-                <h3
-                  className="text-4xl md:text-5xl lg:text-6xl font-light tracking-[0.2em] text-white text-center group-hover:scale-110"
-                  style={{
-                    fontFamily: 'var(--font-bebas)',
-                    transform: `translateY(${-scrollY * 0.08}px)`,
-                    transition: 'transform 0.1s ease-out',
-                    willChange: 'transform'
-                  }}
-                >
-                  {project.title}
-                </h3>
               </div>
 
               {/* Status Badge */}
@@ -65,10 +49,19 @@ export default function ProjectsSection() {
             </Link>
 
             {/* Title Below Card */}
-            <Link href={`/projects/${project.slug}`} className="mt-4 block hover:text-accent transition-colors duration-300">
-              <h4 className="text-2xl font-light tracking-[0.15em] text-white" style={{ fontFamily: 'var(--font-bebas)' }}>
+            <Link
+              href={`/projects/${project.slug}`}
+              className="mt-4 flex items-center gap-2 group/title"
+            >
+              <span className="text-accent transition-all duration-300 group-hover/title:-translate-x-1 text-lg">
+                [
+              </span>
+              <h4 className="text-lg font-light tracking-[0.15em] text-gray-400 group-hover/title:text-accent transition-colors duration-300 uppercase" style={{ fontFamily: 'var(--font-bebas)' }}>
                 {project.title}
               </h4>
+              <span className="text-accent transition-all duration-300 group-hover/title:translate-x-1 text-lg">
+                ]
+              </span>
             </Link>
           </div>
         ))}

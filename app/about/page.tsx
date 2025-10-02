@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function AboutPage() {
   const [scrollY, setScrollY] = useState(0);
@@ -202,6 +203,32 @@ export default function AboutPage() {
               </p>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* View Projects CTA */}
+      <section className="relative py-20 bg-black">
+        <div className="container mx-auto px-6 text-center">
+          <Link
+            href="/projects"
+            className="group relative inline-flex items-center justify-center px-12 py-4 overflow-hidden transition-all duration-300"
+          >
+            {/* Background border */}
+            <div className="absolute inset-0 border border-gray-500 group-hover:opacity-0 transition-opacity duration-300"></div>
+
+            {/* Corner borders (hover state) */}
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <div className="absolute top-0 left-0 w-4 h-4 border-t border-l border-accent"></div>
+              <div className="absolute top-0 right-0 w-4 h-4 border-t border-r border-accent"></div>
+              <div className="absolute bottom-0 left-0 w-4 h-4 border-b border-l border-accent"></div>
+              <div className="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-accent"></div>
+            </div>
+
+            {/* Text */}
+            <span className="relative z-10 text-gray-400 group-hover:text-accent transition-colors duration-300 tracking-wider text-sm uppercase font-light">
+              View Our Projects
+            </span>
+          </Link>
         </div>
       </section>
     </>

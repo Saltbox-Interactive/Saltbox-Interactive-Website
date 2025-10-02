@@ -17,6 +17,7 @@ body {
   color: var(--foreground);
   font-family: var(--font-work-sans), system-ui, sans-serif;
   overflow-x: hidden;
+  overscroll-behavior: none;
 }
 
 * {
@@ -27,6 +28,7 @@ body {
 
 html {
   scroll-behavior: smooth;
+  overscroll-behavior: none;
 }
 
 /* Custom Scrollbar */

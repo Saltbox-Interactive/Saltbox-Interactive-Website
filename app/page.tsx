@@ -57,38 +57,42 @@ export default function Home() {
 
         <div className="container mx-auto max-w-3xl relative z-10">
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-8">
-            <Link href="/projects" className="group relative">
-              <div className="relative overflow-hidden">
-                <div className="px-8 py-4 border border-accent/30 group-hover:border-accent transition-all duration-300 relative">
-                  <div className="absolute inset-0 bg-accent/0 group-hover:bg-accent/5 transition-colors duration-300"></div>
-                  <div className="relative flex items-center gap-3">
-                    <span className="text-sm tracking-[0.25em] uppercase text-foreground group-hover:text-accent transition-colors duration-300" style={{ fontFamily: 'var(--font-bebas)', fontSize: '1.1rem' }}>
-                      View Our Work
-                    </span>
-                    <svg className="w-4 h-4 text-accent opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                  </div>
-                </div>
+            <Link href="/projects" className="group relative inline-flex items-center justify-center px-8 py-4 overflow-hidden transition-all duration-300">
+              {/* Background border */}
+              <div className="absolute inset-0 border border-gray-500 group-hover:opacity-0 transition-opacity duration-300"></div>
+
+              {/* Corner borders (hover state) */}
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div className="absolute top-0 left-0 w-4 h-4 border-t border-l border-accent"></div>
+                <div className="absolute top-0 right-0 w-4 h-4 border-t border-r border-accent"></div>
+                <div className="absolute bottom-0 left-0 w-4 h-4 border-b border-l border-accent"></div>
+                <div className="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-accent"></div>
               </div>
+
+              {/* Text */}
+              <span className="relative z-10 text-gray-400 group-hover:text-accent transition-colors duration-300 tracking-[0.25em] uppercase" style={{ fontFamily: 'var(--font-bebas)', fontSize: '1.1rem' }}>
+                View Our Work
+              </span>
             </Link>
 
             <div className="h-px w-8 bg-accent/30 hidden sm:block"></div>
 
-            <Link href="/about" className="group relative">
-              <div className="relative overflow-hidden">
-                <div className="px-8 py-4 border border-accent/30 group-hover:border-accent transition-all duration-300 relative">
-                  <div className="absolute inset-0 bg-accent/0 group-hover:bg-accent/5 transition-colors duration-300"></div>
-                  <div className="relative flex items-center gap-3">
-                    <span className="text-sm tracking-[0.25em] uppercase text-foreground group-hover:text-accent transition-colors duration-300" style={{ fontFamily: 'var(--font-bebas)', fontSize: '1.1rem' }}>
-                      Our Mission
-                    </span>
-                    <svg className="w-4 h-4 text-accent opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                  </div>
-                </div>
+            <Link href="/about" className="group relative inline-flex items-center justify-center px-8 py-4 overflow-hidden transition-all duration-300">
+              {/* Background border */}
+              <div className="absolute inset-0 border border-gray-500 group-hover:opacity-0 transition-opacity duration-300"></div>
+
+              {/* Corner borders (hover state) */}
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div className="absolute top-0 left-0 w-4 h-4 border-t border-l border-accent"></div>
+                <div className="absolute top-0 right-0 w-4 h-4 border-t border-r border-accent"></div>
+                <div className="absolute bottom-0 left-0 w-4 h-4 border-b border-l border-accent"></div>
+                <div className="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-accent"></div>
               </div>
+
+              {/* Text */}
+              <span className="relative z-10 text-gray-400 group-hover:text-accent transition-colors duration-300 tracking-[0.25em] uppercase" style={{ fontFamily: 'var(--font-bebas)', fontSize: '1.1rem' }}>
+                Our Mission
+              </span>
             </Link>
           </div>
         </div>
