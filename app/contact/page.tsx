@@ -5,7 +5,8 @@ export default function ContactPage() {
   return (
     <>
       <Hero
-        title="Connect With Us"
+        title="Contact Us"
+        subtitle="Let's preserve history together"
         backgroundImage="/images/background_pic.jpg"
       />
       <ContactSection />

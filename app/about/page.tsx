@@ -3,6 +3,8 @@
 import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import Hero from "@/components/sections/Hero";
+import ParallaxImage from "@/components/ParallaxImage";
 
 export default function AboutPage() {
   const [scrollY, setScrollY] = useState(0);
@@ -46,35 +48,11 @@ export default function AboutPage() {
 
   return (
     <>
-      {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Background Image with Parallax */}
-        <div
-          className="absolute inset-0 bg-cover bg-center scale-110"
-          style={{
-            backgroundImage: `url(/images/background_pic.jpg)`,
-            transform: `translateY(${scrollY * 0.5}px) scale(1.1)`
-          }}
-        />
-
-        {/* Atmospheric background layers */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-gray-900/70 to-black"></div>
-
-        {/* Hero Text */}
-        <div className="relative z-10 text-center px-6 max-w-6xl mx-auto"
-          style={{
-            transform: `translateY(${scrollY * -0.3}px)`,
-            opacity: Math.max(0, 1 - scrollY / 500)
-          }}
-        >
-          <h1 className="text-8xl md:text-9xl lg:text-[12rem] font-light tracking-[0.2em] text-white mb-8" style={{ fontFamily: 'var(--font-bebas)' }}>
-            ABOUT US
-          </h1>
-          <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto font-light">
-            Preserving history through immersive digital experiences
-          </p>
-        </div>
-      </section>
+      <Hero
+        title="About Us"
+        subtitle="Learn about who we are"
+        backgroundImage="/images/background_pic.jpg"
+      />
 
       {/* Our Story Section with Background Image */}
       <section
@@ -83,17 +61,13 @@ export default function AboutPage() {
         id="story"
         className="relative min-h-screen flex items-center bg-black overflow-hidden"
       >
-        <div
-          className="absolute inset-0"
-          style={{
-            transform: `translateY(${scrollY * 0.15}px)`
-          }}
-        >
-          <Image
+        <div className="absolute inset-0">
+          <ParallaxImage
             src="/images/dhanis1.jpg"
             alt="D'Hanis Historic Street"
-            fill
-            className="object-cover opacity-50"
+            className="min-h-screen opacity-50"
+            intensity={1}
+            direction="vertical"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-transparent"></div>
         </div>
@@ -126,17 +100,13 @@ export default function AboutPage() {
         data-section="team"
         className="relative min-h-screen flex items-center bg-black overflow-hidden"
       >
-        <div
-          className="absolute inset-0"
-          style={{
-            transform: `translateY(${scrollY * 0.2}px)`
-          }}
-        >
-          <Image
+        <div className="absolute inset-0">
+          <ParallaxImage
             src="/images/dhanis2.jpg"
             alt="Historic D'Hanis"
-            fill
-            className="object-cover opacity-50"
+            className="min-h-screen opacity-50"
+            intensity={1}
+            direction="vertical"
           />
           <div className="absolute inset-0 bg-gradient-to-l from-black via-black/80 to-transparent"></div>
         </div>
@@ -169,17 +139,13 @@ export default function AboutPage() {
         data-section="mission"
         className="relative min-h-screen flex items-center bg-black overflow-hidden"
       >
-        <div
-          className="absolute inset-0"
-          style={{
-            transform: `translateY(${scrollY * 0.1}px)`
-          }}
-        >
-          <Image
+        <div className="absolute inset-0">
+          <ParallaxImage
             src="/images/dhanis3.jpg"
             alt="Historic D'Hanis Building"
-            fill
-            className="object-cover opacity-50"
+            className="min-h-screen opacity-50"
+            intensity={1}
+            direction="vertical"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-transparent"></div>
         </div>

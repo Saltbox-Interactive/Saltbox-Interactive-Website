@@ -5,7 +5,8 @@ export default function ProjectsPage() {
   return (
     <>
       <Hero
-        title="Discover Our Work"
+        title="Our Projects"
+        subtitle="Discover what we do"
         backgroundImage="/images/background_pic.jpg"
       />
       <ProjectsSection />

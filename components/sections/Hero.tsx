@@ -98,9 +98,11 @@ export default function Hero({ title, subtitle, backgroundImage, className = "",
               className="space-y-4 opacity-0 animate-[fadeIn_1s_0.5s_ease-out_forwards]"
               style={{ transform: `translateY(${scrollY * 0.25}px)` }}
             >
-              <p className="text-2xl md:text-3xl text-accent font-light tracking-[0.2em] uppercase">
-                Discover. Learn. Preserve.
-              </p>
+              {subtitle && (
+                <p className="text-2xl md:text-3xl text-accent font-light tracking-[0.2em]">
+                  {subtitle}
+                </p>
+              )}
             </div>
           </>
         )}

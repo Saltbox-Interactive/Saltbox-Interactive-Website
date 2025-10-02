@@ -3,10 +3,12 @@
 import { useEffect, useRef, useState } from "react";
 import Hero from "@/components/sections/Hero";
 import Link from "next/link";
+import ParallaxImage from "@/components/ParallaxImage";
 
 export default function Home() {
   const [visibleSections, setVisibleSections] = useState<Set<string>>(new Set());
   const [scrollY, setScrollY] = useState(0);
+  const aboutRef = useRef<HTMLDivElement>(null);
   const introRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -30,6 +32,7 @@ export default function Home() {
     const observer = new IntersectionObserver(handleIntersection, observerOptions);
 
     // Observe sections
+    if (aboutRef.current) observer.observe(aboutRef.current);
     if (introRef.current) observer.observe(introRef.current);
 
     return () => observer.disconnect();
@@ -51,8 +54,36 @@ export default function Home() {
         backgroundImage="/images/background_pic.jpg"
       />
 
+      {/* About Section - Red Barrels Style */}
+      <section
+        ref={aboutRef}
+        data-section="about"
+        className="relative py-20 px-6 bg-black"
+      >
+        <div className="absolute inset-0 bg-gradient-to-b from-black via-gray-900/30 to-black"></div>
+        <div className="absolute inset-0 gradient-dust opacity-20"></div>
+
+        <div
+          className={`relative z-10 container mx-auto max-w-4xl text-center transition-all duration-1000 ${
+            visibleSections.has('about')
+              ? 'opacity-100 translate-y-0'
+              : 'opacity-0 translate-y-20'
+          }`}
+        >
+          <h2 className="text-5xl md:text-6xl lg:text-7xl font-light tracking-[0.15em] text-white mb-8" style={{ fontFamily: 'var(--font-bebas)' }}>
+            WE CREATE<br />
+            IMMERSIVE HISTORICAL<br />
+            EXPERIENCES
+          </h2>
+
+          <p className="text-xl md:text-2xl text-gray-300 leading-relaxed font-light max-w-3xl mx-auto">
+            Saltbox Interactive is a team of historians, developers, and artists dedicated to preserving the past through interactive digital experiences. We transform historical locations into explorable virtual environments where history comes alive.
+          </p>
+        </div>
+      </section>
+
       {/* Quick Links Section */}
-      <section className="py-24 px-6 relative bg-black">
+      <section className="py-16 px-6 relative bg-black">
         <div className="absolute inset-0 bg-noise opacity-5"></div>
 
         <div className="container mx-auto max-w-3xl relative z-10">
@@ -99,19 +130,14 @@ export default function Home() {
       </section>
 
       {/* Parallax Background Image Section - Comes First */}
-      <section className="relative h-screen bg-black overflow-hidden">
-        <div
-          className="absolute inset-0 w-full h-full scale-110 z-10"
-          style={{
-            transform: `translateY(${scrollY * 0.3}px)`,
-          }}
-        >
-          <img
-            src="/images/dhanis1.jpg"
-            alt="Discover Old D'Hanis Background"
-            className="object-cover w-full h-full"
-          />
-        </div>
+      <section className="relative h-screen bg-black">
+        <ParallaxImage
+          src="/images/dhanis1.jpg"
+          alt="Discover Old D'Hanis Background"
+          className="h-screen"
+          intensity={1.5}
+          direction="vertical"
+        />
       </section>
 
       {/* Featured Project Content - Vertical Image and Text */}
@@ -119,7 +145,7 @@ export default function Home() {
         id="intro"
         ref={introRef}
         data-section="intro"
-        className="relative py-40 bg-gradient-to-b from-black via-gray-900/30 to-black"
+        className="relative py-24 bg-gradient-to-b from-black via-gray-900/30 to-black"
       >
         <div className="absolute inset-0 gradient-dust opacity-20"></div>
 

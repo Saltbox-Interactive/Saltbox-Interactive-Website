@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import Lenis from "lenis";
+import { ScrollSpeedContext } from "./ScrollSpeedContext";
 
 export default function SmoothScroll({
   children,
@@ -45,5 +46,33 @@ export default function SmoothScroll({
     document.body.scrollTop = 0;
   }, [pathname]);
 
-  return <>{children}</>;
+  const [contextValue, setContextValue] = useState({
+    lenis: null as Lenis | null,
+    setScrollSpeed: (duration: number, smooth = true) => {
+      if (lenisRef.current) {
+        lenisRef.current.options.duration = duration;
+      }
+    },
+  });
+
+  useEffect(() => {
+    if (lenisRef.current) {
+      setContextValue({
+        lenis: lenisRef.current,
+        setScrollSpeed: (duration: number, smooth = true) => {
+          if (lenisRef.current) {
+            lenisRef.current.options.duration = duration;
+          }
+        },
+      });
+    }
+  }, []);
+
+  // Remove the old setScrollSpeed useMemo
+
+  return (
+    <ScrollSpeedContext.Provider value={contextValue}>
+      {children}
+    </ScrollSpeedContext.Provider>
+  );
 }

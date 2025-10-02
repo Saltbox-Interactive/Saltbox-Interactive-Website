@@ -4,6 +4,8 @@ import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Project } from "@/lib/data/projects";
+import { useScrollSpeed } from "@/hooks/useScrollSpeed";
+import ParallaxImage from "@/components/ParallaxImage";
 
 export default function ProjectContent({ project }: { project: Project }) {
   const [scrollY, setScrollY] = useState(0);
@@ -15,8 +17,15 @@ export default function ProjectContent({ project }: { project: Project }) {
   const [featuresVisible, setFeaturesVisible] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [showArrows, setShowArrows] = useState(false);
+  const [playNowOpacity, setPlayNowOpacity] = useState(1);
   const mouseTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Apply slow scroll speed to screenshots section
+  useScrollSpeed(screenshotsRef, {
+    speed: 4.0, // Moderately slow - 3x slower than normal
+    threshold: 0.5, // Activate only when section is 50% visible - more precise zone
+  });
 
   useEffect(() => {
     const handleScroll = () => {
@@ -29,6 +38,19 @@ export default function ProjectContent({ project }: { project: Project }) {
       scrollTimeoutRef.current = setTimeout(() => {
         setShowArrows(false);
       }, 1500);
+
+      // Calculate position based on distance to footer
+      // Footer is fixed at bottom, so check if we're near the bottom of the page
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+      const scrollPosition = window.scrollY + windowHeight;
+      const distanceToBottom = documentHeight - scrollPosition;
+
+      // Start sliding down when within 600px of bottom (well before footer becomes visible)
+      const slideDistance = 600;
+      // Calculate how much to slide (0 = visible, 1 = fully slid down)
+      const slideAmount = Math.min(1, Math.max(0, 1 - (distanceToBottom / slideDistance)));
+      setPlayNowOpacity(slideAmount);
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => {
@@ -137,7 +159,10 @@ export default function ProjectContent({ project }: { project: Project }) {
       </section>
 
       {/* Play Now Section - Fixed Bottom Right */}
-      <div className="fixed bottom-12 right-12 z-50">
+      <div
+        className="fixed bottom-12 right-12 z-50 transition-transform duration-500 ease-out"
+        style={{ transform: `translateY(${playNowOpacity * 200}px)` }}
+      >
         <div className="flex items-center gap-4 px-6 py-4 bg-gray-800/80 backdrop-blur-sm">
           <span className="text-white text-lg font-light tracking-wider uppercase" style={{ fontFamily: 'var(--font-bebas)' }}>
             PLAY NOW:
@@ -319,22 +344,15 @@ export default function ProjectContent({ project }: { project: Project }) {
           <div className="container mx-auto px-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
               {/* Image */}
-              <div
-                className="relative aspect-video overflow-hidden"
-                style={{
-                  transform: `translateY(${scrollY * 0.05}px)`,
-                  transition: 'transform 0.1s ease-out'
-                }}
-              >
-                {project.gallery && project.gallery[0] && (
-                  <Image
-                    src={project.gallery[0]}
-                    alt={`${project.title} Feature 1`}
-                    fill
-                    className="object-cover"
-                  />
-                )}
-              </div>
+              {project.gallery && project.gallery[0] && (
+                <ParallaxImage
+                  src={project.gallery[0]}
+                  alt={`${project.title} Feature 1`}
+                  className="aspect-video"
+                  intensity={1}
+                  direction="vertical"
+                />
+              )}
 
               {/* Text */}
               <div
@@ -374,27 +392,65 @@ export default function ProjectContent({ project }: { project: Project }) {
               </div>
 
               {/* Image */}
-              <div
-                className="relative aspect-video overflow-hidden"
-                style={{
-                  transform: `translateY(${scrollY * 0.04}px)`,
-                  transition: 'transform 0.1s ease-out'
-                }}
-              >
-                {project.gallery && project.gallery[1] && (
-                  <Image
-                    src={project.gallery[1]}
-                    alt={`${project.title} Feature 2`}
-                    fill
-                    className="object-cover"
-                  />
-                )}
-              </div>
+              {project.gallery && project.gallery[1] && (
+                <ParallaxImage
+                  src={project.gallery[1]}
+                  alt={`${project.title} Feature 2`}
+                  className="aspect-video"
+                  intensity={1}
+                  direction="vertical"
+                />
+              )}
             </div>
           </div>
         </div>
       </section>
 
+      {/* Soundtrack Section - Only for Discover Old D'Hanis */}
+      {project.slug === 'discover-old-dhanis' && (
+        <section className="relative py-32 bg-black">
+          <div className="container mx-auto px-6 max-w-6xl">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+              {/* Image - Left Side */}
+              <ParallaxImage
+                src="/images/dominics.jpeg"
+                alt="Discover Old D'Hanis Soundtrack"
+                className="aspect-square"
+                intensity={1}
+                direction="vertical"
+              />
+
+              {/* Text - Right Side */}
+              <div>
+                <h2 className="text-5xl md:text-6xl lg:text-7xl font-light tracking-[0.15em] text-white mb-6" style={{ fontFamily: 'var(--font-bebas)' }}>
+                  THE DISCOVER<br />
+                  OLD D'HANIS<br />
+                  OFFICIAL SOUNDTRACK
+                </h2>
+
+                <p className="text-xl md:text-2xl text-gray-400 font-light mb-8">
+                  Music Composed And Produced By Joyce Lee
+                </p>
+
+                <div className="flex items-center gap-4">
+                  <span className="text-gray-300 text-lg font-light">Listen now on</span>
+                  <a
+                    href="https://www.youtube.com/playlist?list=YOUR_PLAYLIST_ID"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-400 hover:text-accent transition-colors duration-300"
+                    aria-label="YouTube"
+                  >
+                    <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Credits and Back to Projects Section */}
       <section className="relative py-20 bg-black">
