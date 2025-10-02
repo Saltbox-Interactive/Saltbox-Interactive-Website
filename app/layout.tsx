@@ -45,12 +45,12 @@ export default function RootLayout({
         <SmoothScroll>
           <Header />
           <Footer />
-          <main className="relative" style={{ zIndex: 10, minHeight: '100vh' }}>
+          <main className="relative" style={{ zIndex: 100, minHeight: '100vh' }}>
             <div className="bg-black">
               {children}
             </div>
-            <div style={{ height: '400px', background: 'transparent' }}></div>
           </main>
+          <div style={{ height: '400px', position: 'relative', zIndex: 1 }}></div>
         </SmoothScroll>
       </body>
     </html>
