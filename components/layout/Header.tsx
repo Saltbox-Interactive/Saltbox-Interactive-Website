@@ -29,9 +29,9 @@ export default function Header() {
   }, [lastScrollY]);
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-opacity duration-300 ${
+    <header className={`fixed top-0 left-0 right-0 transition-opacity duration-300 ${
       isVisible ? "opacity-100" : "opacity-0 pointer-events-none"
-    }`}>
+    }`} style={{ zIndex: 200 }}>
       <nav className="px-4 py-6 max-w-[1400px] mx-auto mt-6">
         <div className="flex justify-between items-center">
           <Link href="/" className="group flex items-center gap-4 absolute left-8">
