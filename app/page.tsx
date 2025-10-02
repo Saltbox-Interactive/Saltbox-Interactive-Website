@@ -42,47 +42,41 @@ export default function Home() {
       />
 
       {/* Quick Links Section */}
-      <section className="py-32 px-6 relative bg-black">
+      <section className="py-24 px-6 relative bg-black">
         <div className="absolute inset-0 bg-noise opacity-5"></div>
 
-        <div className="container mx-auto max-w-4xl relative z-10">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <Link href="/projects" className="group">
-              <div className="relative min-h-[220px] overflow-hidden rounded-lg border border-accent/20 hover:border-accent/50 transition-all duration-500 bg-black/40 backdrop-blur-sm">
-                <div className="absolute inset-0 bg-gradient-to-br from-accent/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div className="relative h-full flex flex-col items-center justify-center p-8 text-center">
-                  <div className="mb-5">
-                    <svg className="w-14 h-14 text-accent/60 group-hover:text-accent transition-colors duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+        <div className="container mx-auto max-w-3xl relative z-10">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-8">
+            <Link href="/projects" className="group relative">
+              <div className="relative overflow-hidden">
+                <div className="px-8 py-4 border border-accent/30 group-hover:border-accent transition-all duration-300 relative">
+                  <div className="absolute inset-0 bg-accent/0 group-hover:bg-accent/5 transition-colors duration-300"></div>
+                  <div className="relative flex items-center gap-3">
+                    <span className="text-sm tracking-[0.25em] uppercase text-foreground group-hover:text-accent transition-colors duration-300" style={{ fontFamily: 'var(--font-bebas)', fontSize: '1.1rem' }}>
+                      View Our Work
+                    </span>
+                    <svg className="w-4 h-4 text-accent opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
                   </div>
-                  <h3 className="text-3xl font-light tracking-[0.2em] text-foreground mb-4 group-hover:text-accent transition-colors duration-500" style={{ fontFamily: 'var(--font-bebas)' }}>
-                    VIEW OUR WORK
-                  </h3>
-                  <p className="text-gray-400 text-sm leading-relaxed mb-5">
-                    Explore our historical preservation projects
-                  </p>
-                  <div className="h-px w-14 bg-accent/40 group-hover:w-24 transition-all duration-500"></div>
                 </div>
               </div>
             </Link>
 
-            <Link href="/about" className="group">
-              <div className="relative min-h-[220px] overflow-hidden rounded-lg border border-accent/20 hover:border-accent/50 transition-all duration-500 bg-black/40 backdrop-blur-sm">
-                <div className="absolute inset-0 bg-gradient-to-br from-accent/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div className="relative h-full flex flex-col items-center justify-center p-8 text-center">
-                  <div className="mb-5">
-                    <svg className="w-14 h-14 text-accent/60 group-hover:text-accent transition-colors duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+            <div className="h-px w-8 bg-accent/30 hidden sm:block"></div>
+
+            <Link href="/about" className="group relative">
+              <div className="relative overflow-hidden">
+                <div className="px-8 py-4 border border-accent/30 group-hover:border-accent transition-all duration-300 relative">
+                  <div className="absolute inset-0 bg-accent/0 group-hover:bg-accent/5 transition-colors duration-300"></div>
+                  <div className="relative flex items-center gap-3">
+                    <span className="text-sm tracking-[0.25em] uppercase text-foreground group-hover:text-accent transition-colors duration-300" style={{ fontFamily: 'var(--font-bebas)', fontSize: '1.1rem' }}>
+                      Our Mission
+                    </span>
+                    <svg className="w-4 h-4 text-accent opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
                   </div>
-                  <h3 className="text-3xl font-light tracking-[0.2em] text-foreground mb-4 group-hover:text-accent transition-colors duration-500" style={{ fontFamily: 'var(--font-bebas)' }}>
-                    OUR MISSION
-                  </h3>
-                  <p className="text-gray-400 text-sm leading-relaxed mb-5">
-                    Discover the team preserving history
-                  </p>
-                  <div className="h-px w-14 bg-accent/40 group-hover:w-24 transition-all duration-500"></div>
                 </div>
               </div>
             </Link>
