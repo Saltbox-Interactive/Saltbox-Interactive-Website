@@ -4,12 +4,21 @@ import { useEffect, useRef, useState } from "react";
 import Hero from "@/components/sections/Hero";
 import Link from "next/link";
 import ParallaxImage from "@/components/ParallaxImage";
+import { useScrollSpeed } from "@/hooks/useScrollSpeed";
 
 export default function Home() {
   const [visibleSections, setVisibleSections] = useState<Set<string>>(new Set());
   const [scrollY, setScrollY] = useState(0);
   const aboutRef = useRef<HTMLDivElement>(null);
   const introRef = useRef<HTMLDivElement>(null);
+  const heroRef = useRef<HTMLElement>(null);
+
+  // Apply slow scroll speed to hero section while motto is animating
+  useScrollSpeed(heroRef, {
+    speed: 4.0, // Slow scroll during motto animation
+    threshold: 0.5, // Activate when section is 50% visible
+    downOnly: true, // Only slow down when scrolling down, not up
+  });
 
   useEffect(() => {
     const observerOptions = {
@@ -49,20 +58,69 @@ export default function Home() {
 
   return (
     <>
-      <Hero
-        showMotto={true}
-        backgroundImage="/images/background_pic.jpg"
-      />
+      {/* Fixed Background Hero */}
+      <div className="fixed inset-0 z-0">
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{
+            backgroundImage: 'url(/images/background_pic.jpg)',
+          }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-gray-900/80 to-black/90"></div>
+        <div className="absolute inset-0 gradient-dust opacity-40"></div>
+        <div className="absolute inset-0 bg-noise opacity-5"></div>
 
-      {/* About Section - Red Barrels Style */}
+        {/* Black overlay that fades in on scroll */}
+        <div
+          className="absolute inset-0 bg-black"
+          style={{ opacity: Math.min(1, scrollY / 700) }}
+        />
+      </div>
+
+      {/* Hero Content */}
+      <section ref={heroRef} className="relative min-h-screen flex items-center justify-center z-10">
+        <div className="relative z-10 text-center px-6 max-w-6xl mx-auto">
+          <div className="flex flex-col items-center justify-center gap-4 md:gap-6">
+            <div
+              className="text-5xl md:text-7xl lg:text-8xl font-light tracking-[0.3em] text-white transition-all duration-300"
+              style={{
+                fontFamily: 'var(--font-bebas)',
+                transform: `translateX(${scrollY * -1.5}px)`,
+                opacity: Math.max(0, 1 - scrollY / 300)
+              }}
+            >
+              DISCOVER
+            </div>
+            <div
+              className="text-5xl md:text-7xl lg:text-8xl font-light tracking-[0.3em] text-white transition-all duration-300"
+              style={{
+                fontFamily: 'var(--font-bebas)',
+                transform: `translateX(${scrollY * 1.5}px)`,
+                opacity: Math.max(0, 1 - scrollY / 300)
+              }}
+            >
+              LEARN
+            </div>
+            <div
+              className="text-5xl md:text-7xl lg:text-8xl font-light tracking-[0.3em] text-white transition-all duration-300"
+              style={{
+                fontFamily: 'var(--font-bebas)',
+                transform: `translateX(${scrollY * -1.5}px)`,
+                opacity: Math.max(0, 1 - scrollY / 300)
+              }}
+            >
+              PRESERVE
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* About Section - Scrolls over background */}
       <section
         ref={aboutRef}
         data-section="about"
-        className="relative py-20 px-6 bg-black"
+        className="relative py-32 px-6 z-20"
       >
-        <div className="absolute inset-0 bg-gradient-to-b from-black via-gray-900/30 to-black"></div>
-        <div className="absolute inset-0 gradient-dust opacity-20"></div>
-
         <div
           className={`relative z-10 container mx-auto max-w-4xl text-center transition-all duration-1000 ${
             visibleSections.has('about')
@@ -83,7 +141,7 @@ export default function Home() {
       </section>
 
       {/* Quick Links Section */}
-      <section className="py-16 px-6 relative bg-black">
+      <section className="py-16 px-6 relative bg-black z-20">
         <div className="absolute inset-0 bg-noise opacity-5"></div>
 
         <div className="container mx-auto max-w-3xl relative z-10">
@@ -130,11 +188,11 @@ export default function Home() {
       </section>
 
       {/* Parallax Background Image Section - Comes First */}
-      <section className="relative h-screen bg-black">
+      <section className="relative min-h-screen bg-black z-20 py-20">
         <ParallaxImage
           src="/images/dhanis1.jpg"
           alt="Discover Old D'Hanis Background"
-          className="h-screen"
+          className="min-h-screen"
           intensity={1.5}
           direction="vertical"
         />
@@ -145,9 +203,8 @@ export default function Home() {
         id="intro"
         ref={introRef}
         data-section="intro"
-        className="relative py-24 bg-gradient-to-b from-black via-gray-900/30 to-black"
+        className="relative -mt-96 bg-black z-20 pb-32"
       >
-        <div className="absolute inset-0 gradient-dust opacity-20"></div>
 
         <div
           className={`relative z-10 transition-all duration-1000 ${
@@ -157,19 +214,24 @@ export default function Home() {
           }`}
         >
           {/* Centered Content Container */}
-          <div className="relative w-full max-w-[1200px] mx-auto px-6">
-            <div className="flex items-center justify-center gap-12">
+          <div className="relative w-full max-w-[1600px] mx-auto px-6">
+            <div className="flex items-start gap-16">
               {/* Foreground Vertical Image - Left Side */}
-              <div className="flex-shrink-0 w-auto max-w-[400px]">
-                <img
-                  src="/images/dominics.jpeg"
-                  alt="Discover Old D'Hanis"
-                  className="w-full h-auto"
-                />
+              <div className="flex-shrink-0 w-[40vw] max-w-[600px]">
+                <div className="relative w-full">
+                  <img
+                    src="/images/dominics.jpeg"
+                    alt="Discover Old D'Hanis"
+                    className="w-full h-auto object-cover"
+                    style={{
+                      transform: `translateY(${scrollY * 0.15}px)`
+                    }}
+                  />
+                </div>
               </div>
 
               {/* Content - Right Side */}
-              <div className="flex-1 max-w-[600px]">
+              <div className="flex-1 max-w-[600px] pt-48 pl-8">
             <div className="mb-12">
               <p className="text-accent/70 text-xs tracking-[0.4em] uppercase mb-6">Now Available</p>
               <h2 className="text-6xl md:text-7xl lg:text-8xl font-light tracking-[0.15em] text-foreground mb-8" style={{ fontFamily: 'var(--font-bebas)' }}>
@@ -190,12 +252,17 @@ export default function Home() {
             <div className="inline-block">
               <Link
                 href="/projects/discover-old-dhanis"
-                className="inline-flex items-center gap-3 text-foreground hover:text-accent transition-colors duration-300 group"
+                className="flex items-center gap-2 group/title"
               >
-                <span className="text-sm tracking-[0.2em] uppercase">Learn more</span>
-                <svg className="w-5 h-5 group-hover:translate-x-2 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
+                <span className="text-accent transition-all duration-300 group-hover/title:-translate-x-1 text-lg">
+                  [
+                </span>
+                <span className="text-lg font-light tracking-[0.15em] text-gray-400 group-hover/title:text-accent transition-colors duration-300 uppercase" style={{ fontFamily: 'var(--font-bebas)' }}>
+                  Learn More
+                </span>
+                <span className="text-accent transition-all duration-300 group-hover/title:translate-x-1 text-lg">
+                  ]
+                </span>
               </Link>
             </div>
               </div>

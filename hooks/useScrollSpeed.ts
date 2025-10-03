@@ -5,17 +5,19 @@ interface UseScrollSpeedOptions {
   speed?: number; // Duration for Lenis (lower = faster, higher = slower)
   threshold?: number; // Intersection threshold (0-1)
   enabled?: boolean; // Allow disabling the effect
+  downOnly?: boolean; // Only apply slow scroll when scrolling down
 }
 
 export function useScrollSpeed(
   elementRef: React.RefObject<HTMLElement>,
   options: UseScrollSpeedOptions = {}
 ) {
-  const { speed = 0.6, threshold = 0.3, enabled = true } = options;
+  const { speed = 0.6, threshold = 0.3, enabled = true, downOnly = false } = options;
   const { lenis, setScrollSpeed } = useScrollSpeedContext();
   const normalSpeed = 1.2; // Default speed
   const isIntersectingRef = useRef(false);
   const checkIntervalRef = useRef<NodeJS.Timeout | null>(null);
+  const lastScrollY = useRef(0);
 
   useEffect(() => {
     if (!enabled || !elementRef.current || !lenis) return;
@@ -27,6 +29,9 @@ export function useScrollSpeed(
       const rect = element.getBoundingClientRect();
       const windowHeight = window.innerHeight;
       const windowWidth = window.innerWidth;
+      const currentScrollY = window.scrollY;
+      const isScrollingDown = currentScrollY > lastScrollY.current;
+      lastScrollY.current = currentScrollY;
 
       // Calculate what percentage of the element is visible
       const visibleHeight = Math.min(rect.bottom, windowHeight) - Math.max(rect.top, 0);
@@ -39,12 +44,19 @@ export function useScrollSpeed(
 
       const wasIntersecting = isIntersectingRef.current;
 
-      if (isVisible && !wasIntersecting) {
+      // If downOnly is true, only apply slow scroll when scrolling down
+      const shouldApplySlow = downOnly ? isScrollingDown : true;
+
+      if (isVisible && !wasIntersecting && shouldApplySlow) {
         // Entering the slow zone
         setScrollSpeed(speed, true);
         isIntersectingRef.current = true;
       } else if (!isVisible && wasIntersecting) {
         // Exiting the slow zone - return to normal speed IMMEDIATELY
+        setScrollSpeed(normalSpeed, true);
+        isIntersectingRef.current = false;
+      } else if (isVisible && wasIntersecting && !shouldApplySlow) {
+        // In the zone but scrolling up (when downOnly is true) - use normal speed
         setScrollSpeed(normalSpeed, true);
         isIntersectingRef.current = false;
       }
