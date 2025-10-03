@@ -193,7 +193,7 @@ export default function Home() {
           className="absolute inset-0 w-full h-full"
           style={{
             transform: `translateY(${scrollY * -0.2}px)`,
-            opacity: scrollY < 1500 ? 1 : Math.max(0, 1 - (scrollY - 1500) / 900)
+            opacity: scrollY < 1800 ? 1 : Math.max(0, 1 - (scrollY - 1800) / 600)
           }}
         >
           <img
@@ -201,6 +201,13 @@ export default function Home() {
             alt="Discover Old D'Hanis Background"
             className="w-full h-full object-cover"
           />
+          {/* Vignette overlay - Very dramatic fade */}
+          <div
+            className="absolute inset-0"
+            style={{
+              background: 'radial-gradient(ellipse 60% 50% at center, transparent 0%, rgba(0,0,0,0.2) 25%, rgba(0,0,0,0.5) 45%, rgba(0,0,0,0.75) 60%, rgba(0,0,0,0.9) 75%, rgba(0,0,0,0.98) 85%, black 90%)'
+            }}
+          ></div>
         </div>
       </section>
 
@@ -221,13 +228,13 @@ export default function Home() {
         >
           {/* Centered Content Container */}
           <div className="relative w-full max-w-[1800px] mx-auto px-6">
-            <div className="flex items-start justify-between gap-16">
+            <div className="flex items-start justify-between gap-24">
               {/* Foreground Vertical Image - Left Side */}
-              <div className="flex-shrink-0 w-[40vw] max-w-[500px]">
+              <div className="flex-shrink-0 w-[40vw] max-w-[550px] ml-48">
                 <ParallaxImage
-                  src="/images/dominics.jpeg"
+                  src="/images/dod-cover.jpg"
                   alt="Discover Old D'Hanis"
-                  className="w-full h-auto"
+                  className="w-full aspect-[2/3]"
                   intensity={1}
                   direction="vertical"
                 />
