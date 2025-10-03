@@ -156,6 +156,11 @@ export default function ProjectContent({ project }: { project: Project }) {
           </h1>
         </div>
 
+        {/* Page indicator - bottom left */}
+        <div className="absolute bottom-10 left-10 text-sm text-gray-400 tracking-wider opacity-0 animate-[fadeIn_1s_1s_ease-out_forwards]">
+          Saltbox Interactive | <span className="text-accent">{project.title}</span>
+        </div>
+
       </section>
 
       {/* Play Now Section - Fixed Bottom Right */}
@@ -192,7 +197,7 @@ export default function ProjectContent({ project }: { project: Project }) {
         }}
       >
         <div className="container mx-auto px-6 max-w-4xl">
-          <div className="space-y-6">
+          <div className="space-y-6 mb-20">
             {project.longDescription.split('\n\n').map((paragraph, index) => (
               <p
                 key={index}
@@ -206,6 +211,45 @@ export default function ProjectContent({ project }: { project: Project }) {
                 {paragraph.trim()}
               </p>
             ))}
+          </div>
+        </div>
+
+        {/* Horizontal line - full width */}
+        <div className="container mx-auto px-6 mb-20">
+          <div className="h-0.5 w-full bg-white/30"></div>
+        </div>
+
+        <div className="container mx-auto px-6">
+          {/* General Info Section */}
+          <div className="flex items-start gap-32">
+            <h3 className="text-lg font-light tracking-[0.2em] text-accent uppercase whitespace-nowrap" style={{ fontFamily: 'var(--font-bebas)' }}>
+              General Info
+            </h3>
+
+            <div className="flex flex-col gap-y-6 text-gray-300 flex-1 ml-24">
+              <div className="flex gap-x-40">
+                {project.releaseDate && (
+                  <div>
+                    <span className="text-gray-500 text-sm uppercase tracking-wider">Release Date</span>
+                    <p className="text-lg">{project.releaseDate}</p>
+                  </div>
+                )}
+
+                {project.platforms && project.platforms.length > 0 && (
+                  <div>
+                    <span className="text-gray-500 text-sm uppercase tracking-wider">Platforms</span>
+                    <p className="text-lg">{project.platforms.join(', ')}</p>
+                  </div>
+                )}
+              </div>
+
+              {project.genre && (
+                <div>
+                  <span className="text-gray-500 text-sm uppercase tracking-wider">Genre</span>
+                  <p className="text-lg">{project.genre}</p>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </section>
@@ -446,6 +490,60 @@ export default function ProjectContent({ project }: { project: Project }) {
                     </svg>
                   </a>
                 </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Steam Call to Action Section - Only for Discover Old D'Hanis */}
+      {project.slug === 'discover-old-dhanis' && (
+        <section className="relative py-32 bg-black">
+          <div className="container mx-auto px-6 max-w-6xl">
+            <div className="relative w-full aspect-[21/9] overflow-hidden">
+              {/* Background Image */}
+              <Image
+                src={project.thumbnail || '/images/dod-cover.jpg'}
+                alt="Play Discover Old D'Hanis on Steam"
+                fill
+                className="object-cover opacity-30"
+              />
+
+              {/* Overlay Content */}
+              <div className="absolute inset-0 flex flex-col items-center justify-center gap-8">
+                <h2 className="text-4xl md:text-5xl lg:text-6xl font-light tracking-[0.15em] text-white text-center" style={{ fontFamily: 'var(--font-bebas)' }}>
+                  PLAY DISCOVER OLD D'HANIS<br />
+                  ON STEAM
+                </h2>
+
+                {/* Steam Button */}
+                <a
+                  href="https://store.steampowered.com/app/3140860/Discover_Old_DHanis/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group relative inline-flex items-center justify-center gap-4 px-16 py-6 overflow-hidden transition-all duration-300"
+                >
+                  {/* Background border */}
+                  <div className="absolute inset-0 border-2 border-gray-500 group-hover:opacity-0 transition-opacity duration-300"></div>
+
+                  {/* Corner borders (hover state) */}
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="absolute top-0 left-0 w-6 h-6 border-t-2 border-l-2 border-accent"></div>
+                    <div className="absolute top-0 right-0 w-6 h-6 border-t-2 border-r-2 border-accent"></div>
+                    <div className="absolute bottom-0 left-0 w-6 h-6 border-b-2 border-l-2 border-accent"></div>
+                    <div className="absolute bottom-0 right-0 w-6 h-6 border-b-2 border-r-2 border-accent"></div>
+                  </div>
+
+                  {/* Steam Icon */}
+                  <svg className="w-8 h-8 relative z-10 text-gray-400 group-hover:text-accent transition-colors duration-300" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M11.979 0C5.678 0 .511 4.86.022 11.037l6.432 2.658c.545-.371 1.203-.59 1.912-.59.063 0 .125.004.188.006l2.861-4.142V8.91c0-2.495 2.028-4.524 4.524-4.524 2.494 0 4.524 2.031 4.524 4.527s-2.03 4.525-4.524 4.525h-.105l-4.076 2.911c0 .052.004.105.004.159 0 1.875-1.515 3.396-3.39 3.396-1.635 0-3.016-1.173-3.331-2.727L.436 15.27C1.862 20.307 6.486 24 11.979 24c6.627 0 11.999-5.373 11.999-12S18.605 0 11.979 0zM7.54 18.21l-1.473-.61c.262.543.714.999 1.314 1.25 1.297.539 2.793-.076 3.332-1.375.263-.63.264-1.319.005-1.949s-.75-1.121-1.377-1.383c-.624-.26-1.29-.249-1.878-.03l1.523.63c.956.4 1.409 1.5 1.009 2.455-.397.957-1.497 1.41-2.454 1.012H7.54zm11.415-9.303c0-1.662-1.353-3.015-3.015-3.015-1.665 0-3.015 1.353-3.015 3.015 0 1.665 1.35 3.015 3.015 3.015 1.663 0 3.015-1.35 3.015-3.015zm-5.273-.005c0-1.252 1.013-2.266 2.265-2.266 1.249 0 2.266 1.014 2.266 2.266 0 1.251-1.017 2.265-2.266 2.265-1.253 0-2.265-1.014-2.265-2.265z"/>
+                  </svg>
+
+                  {/* Text */}
+                  <span className="relative z-10 text-gray-400 group-hover:text-accent transition-colors duration-300 tracking-wider text-lg uppercase font-light">
+                    OPEN IN STEAM
+                  </span>
+                </a>
               </div>
             </div>
           </div>

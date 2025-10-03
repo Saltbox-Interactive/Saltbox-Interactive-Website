@@ -8,6 +8,7 @@ export default function ProjectsPage() {
         title="Our Projects"
         subtitle="Discover what we do"
         backgroundImage="/images/background_pic.jpg"
+        pageName="Projects"
       />
       <ProjectsSection />
       <section className="min-h-screen flex items-center justify-center bg-gradient-to-b from-black via-gray-900/50 to-black px-6">

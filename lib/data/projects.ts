@@ -13,6 +13,7 @@ export interface Project {
   gallery?: string[];
   releaseDate?: string;
   platforms?: string[];
+  genre?: string;
 }
 
 export const projects: Project[] = [
@@ -44,8 +45,9 @@ export const projects: Project[] = [
       "Historical research integration",
       "Interactive storytelling"
     ],
-    releaseDate: "Available Now",
-    platforms: ["PC", "Mac", "Web Browser"],
+    releaseDate: "May 22, 2025",
+    platforms: ["Windows", "Mac"],
+    genre: "Historical Exploration",
     gallery: [
       "/images/dod-screenshot-2.png",
       "/images/dod-screenshot-3.png",
@@ -76,6 +78,7 @@ export const projects: Project[] = [
     ],
     releaseDate: "Coming 2025",
     platforms: ["PC", "Mac", "VR Headsets"],
+    genre: "Historical Exploration",
     gallery: [
       "/images/dod-screenshot-2.png",
       "/images/dod-screenshot-3.png",
@@ -105,7 +108,8 @@ export const projects: Project[] = [
       "Interactive design"
     ],
     releaseDate: "TBA",
-    platforms: ["PC", "Mac", "Web Browser"]
+    platforms: ["PC", "Mac", "Web Browser"],
+    genre: "Historical Exploration"
   }
 ];
 

@@ -8,9 +8,10 @@ interface HeroProps {
   backgroundImage?: string;
   className?: string;
   showMotto?: boolean;
+  pageName?: string;
 }
 
-export default function Hero({ title, subtitle, backgroundImage, className = "", showMotto = false }: HeroProps) {
+export default function Hero({ title, subtitle, backgroundImage, className = "", showMotto = false, pageName }: HeroProps) {
   const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
@@ -108,8 +109,15 @@ export default function Hero({ title, subtitle, backgroundImage, className = "",
         )}
       </div>
 
+      {/* Page indicator - bottom left */}
+      {pageName && (
+        <div className="absolute bottom-10 left-10 text-sm text-gray-400 tracking-wider opacity-0 animate-[fadeIn_1s_1s_ease-out_forwards]">
+          Saltbox Interactive | <span className="text-accent">{pageName}</span>
+        </div>
+      )}
+
       {/* Scroll indicator */}
-      <button 
+      <button
         onClick={() => {
           document.getElementById('intro')?.scrollIntoView({ behavior: 'smooth' });
         }}

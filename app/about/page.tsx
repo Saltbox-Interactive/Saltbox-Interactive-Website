@@ -52,6 +52,7 @@ export default function AboutPage() {
         title="About Us"
         subtitle="Learn about who we are"
         backgroundImage="/images/background_pic.jpg"
+        pageName="About"
       />
 
       {/* Our Story Section with Background Image */}
