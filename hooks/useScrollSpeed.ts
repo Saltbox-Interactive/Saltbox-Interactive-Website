@@ -9,7 +9,7 @@ interface UseScrollSpeedOptions {
 }
 
 export function useScrollSpeed(
-  elementRef: React.RefObject<HTMLElement>,
+  elementRef: React.RefObject<HTMLElement | null>,
   options: UseScrollSpeedOptions = {}
 ) {
   const { speed = 0.6, threshold = 0.3, enabled = true, downOnly = false } = options;
