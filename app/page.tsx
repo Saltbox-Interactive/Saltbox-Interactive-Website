@@ -192,7 +192,8 @@ export default function Home() {
         <div
           className="absolute inset-0 w-full h-full"
           style={{
-            transform: `translateY(${scrollY * -0.2}px)`
+            transform: `translateY(${scrollY * -0.2}px)`,
+            opacity: scrollY < 1500 ? 1 : Math.max(0, 1 - (scrollY - 1500) / 900)
           }}
         >
           <img
@@ -208,7 +209,7 @@ export default function Home() {
         id="intro"
         ref={introRef}
         data-section="intro"
-        className="relative -mt-[60vh] z-20 pb-32"
+        className="relative -mt-[70vh] z-20 pb-32"
       >
 
         <div
@@ -219,8 +220,8 @@ export default function Home() {
           }`}
         >
           {/* Centered Content Container */}
-          <div className="relative w-full max-w-[1400px] mx-auto px-6">
-            <div className="flex items-start justify-center gap-16">
+          <div className="relative w-full max-w-[1800px] mx-auto px-6">
+            <div className="flex items-start justify-between gap-16">
               {/* Foreground Vertical Image - Left Side */}
               <div className="flex-shrink-0 w-[40vw] max-w-[500px]">
                 <ParallaxImage
@@ -233,21 +234,17 @@ export default function Home() {
               </div>
 
               {/* Content - Right Side */}
-              <div className="flex-1 max-w-[600px] pt-48">
+              <div className="flex-shrink-0 max-w-[450px] pt-48 ml-auto mr-32">
             <div className="mb-12">
               <p className="text-accent/70 text-xs tracking-[0.4em] uppercase mb-6">Now Available</p>
-              <h2 className="text-6xl md:text-7xl lg:text-8xl font-light tracking-[0.15em] text-foreground mb-8" style={{ fontFamily: 'var(--font-bebas)' }}>
+              <h2 className="text-4xl md:text-5xl font-light tracking-[0.15em] text-foreground mb-8" style={{ fontFamily: 'var(--font-bebas)' }}>
                 DISCOVER OLD D'HANIS
               </h2>
             </div>
 
-            <div className="space-y-8 mb-12">
-              <p className="text-gray-300 text-xl md:text-2xl leading-relaxed font-light">
-                Step back in time to 1870s Texas and experience the authentic daily life of a frontier town.
-              </p>
-              <p className="text-gray-400 text-lg leading-relaxed">
-                Explore historically accurate buildings, interact with period-appropriate objects, and discover
-                the stories of the people who built this community.
+            <div className="mb-12">
+              <p className="text-gray-300 text-xl leading-relaxed font-light">
+                Step back in time to 1870s Texas and experience the authentic daily life of a frontier town. Explore historically accurate buildings, interact with period-appropriate objects, and discover the stories of the people who built this community.
               </p>
             </div>
 
