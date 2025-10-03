@@ -2,11 +2,13 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -64,13 +66,13 @@ export default function Header() {
           </button>
 
           <div className="hidden lg:flex items-center gap-8 absolute right-8">
-            <Link href="/projects" className="text-base tracking-wider text-foreground/80 hover:text-accent transition-colors duration-300 uppercase" style={{ fontFamily: 'var(--font-bebas)' }}>
+            <Link href="/projects" className={`text-base tracking-wider transition-colors duration-300 uppercase ${pathname === '/projects' ? 'text-accent' : 'text-foreground/80 hover:text-accent'}`} style={{ fontFamily: 'var(--font-bebas)' }}>
               Projects
             </Link>
-            <Link href="/about" className="text-base tracking-wider text-foreground/80 hover:text-accent transition-colors duration-300 uppercase" style={{ fontFamily: 'var(--font-bebas)' }}>
+            <Link href="/about" className={`text-base tracking-wider transition-colors duration-300 uppercase ${pathname === '/about' ? 'text-accent' : 'text-foreground/80 hover:text-accent'}`} style={{ fontFamily: 'var(--font-bebas)' }}>
               About
             </Link>
-            <Link href="/contact" className="text-base tracking-wider text-foreground/80 hover:text-accent transition-colors duration-300 uppercase" style={{ fontFamily: 'var(--font-bebas)' }}>
+            <Link href="/contact" className={`text-base tracking-wider transition-colors duration-300 uppercase ${pathname === '/contact' ? 'text-accent' : 'text-foreground/80 hover:text-accent'}`} style={{ fontFamily: 'var(--font-bebas)' }}>
               Contact
             </Link>
           </div>
@@ -79,13 +81,13 @@ export default function Header() {
         {isMenuOpen && (
           <div className="lg:hidden mt-6 pb-4 border-t border-accent/20 pt-4">
             <div className="flex flex-col gap-4">
-              <Link href="/projects" className="text-sm tracking-wider text-foreground/80 hover:text-accent transition-colors duration-300 uppercase" onClick={() => setIsMenuOpen(false)}>
+              <Link href="/projects" className={`text-sm tracking-wider transition-colors duration-300 uppercase ${pathname === '/projects' ? 'text-accent' : 'text-foreground/80 hover:text-accent'}`} onClick={() => setIsMenuOpen(false)}>
                 Projects
               </Link>
-              <Link href="/about" className="text-sm tracking-wider text-foreground/80 hover:text-accent transition-colors duration-300 uppercase" onClick={() => setIsMenuOpen(false)}>
+              <Link href="/about" className={`text-sm tracking-wider transition-colors duration-300 uppercase ${pathname === '/about' ? 'text-accent' : 'text-foreground/80 hover:text-accent'}`} onClick={() => setIsMenuOpen(false)}>
                 About
               </Link>
-              <Link href="/contact" className="text-sm tracking-wider text-foreground/80 hover:text-accent transition-colors duration-300 uppercase" onClick={() => setIsMenuOpen(false)}>
+              <Link href="/contact" className={`text-sm tracking-wider transition-colors duration-300 uppercase ${pathname === '/contact' ? 'text-accent' : 'text-foreground/80 hover:text-accent'}`} onClick={() => setIsMenuOpen(false)}>
                 Contact
               </Link>
             </div>

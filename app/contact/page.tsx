@@ -8,6 +8,7 @@ export default function ContactPage() {
         title="Contact Us"
         subtitle="Let's preserve history together"
         backgroundImage="/images/background_pic.jpg"
+        pageName="Contact"
       />
       <ContactSection />
       <section className="min-h-screen flex items-center justify-center bg-gradient-to-b from-black via-gray-900/50 to-black px-6 relative">
