@@ -188,14 +188,19 @@ export default function Home() {
       </section>
 
       {/* Parallax Background Image Section - Comes First */}
-      <section className="relative min-h-screen bg-black z-20 py-20">
-        <ParallaxImage
-          src="/images/dhanis1.jpg"
-          alt="Discover Old D'Hanis Background"
-          className="min-h-screen"
-          intensity={1.5}
-          direction="vertical"
-        />
+      <section className="relative h-[150vh] bg-black z-10 overflow-hidden">
+        <div
+          className="absolute inset-0 w-full h-full"
+          style={{
+            transform: `translateY(${scrollY * -0.2}px)`
+          }}
+        >
+          <img
+            src="/images/dhanis1.jpg"
+            alt="Discover Old D'Hanis Background"
+            className="w-full h-full object-cover"
+          />
+        </div>
       </section>
 
       {/* Featured Project Content - Vertical Image and Text */}
@@ -203,7 +208,7 @@ export default function Home() {
         id="intro"
         ref={introRef}
         data-section="intro"
-        className="relative -mt-96 bg-black z-20 pb-32"
+        className="relative -mt-[60vh] z-20 pb-32"
       >
 
         <div
@@ -214,24 +219,21 @@ export default function Home() {
           }`}
         >
           {/* Centered Content Container */}
-          <div className="relative w-full max-w-[1600px] mx-auto px-6">
-            <div className="flex items-start gap-16">
+          <div className="relative w-full max-w-[1400px] mx-auto px-6">
+            <div className="flex items-start justify-center gap-16">
               {/* Foreground Vertical Image - Left Side */}
-              <div className="flex-shrink-0 w-[40vw] max-w-[600px]">
-                <div className="relative w-full">
-                  <img
-                    src="/images/dominics.jpeg"
-                    alt="Discover Old D'Hanis"
-                    className="w-full h-auto object-cover"
-                    style={{
-                      transform: `translateY(${scrollY * 0.15}px)`
-                    }}
-                  />
-                </div>
+              <div className="flex-shrink-0 w-[40vw] max-w-[500px]">
+                <ParallaxImage
+                  src="/images/dominics.jpeg"
+                  alt="Discover Old D'Hanis"
+                  className="w-full h-auto"
+                  intensity={1}
+                  direction="vertical"
+                />
               </div>
 
               {/* Content - Right Side */}
-              <div className="flex-1 max-w-[600px] pt-48 pl-8">
+              <div className="flex-1 max-w-[600px] pt-48">
             <div className="mb-12">
               <p className="text-accent/70 text-xs tracking-[0.4em] uppercase mb-6">Now Available</p>
               <h2 className="text-6xl md:text-7xl lg:text-8xl font-light tracking-[0.15em] text-foreground mb-8" style={{ fontFamily: 'var(--font-bebas)' }}>
