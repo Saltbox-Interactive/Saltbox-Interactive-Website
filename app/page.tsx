@@ -59,7 +59,12 @@ export default function Home() {
   return (
     <>
       {/* Fixed Background Hero */}
-      <div className="fixed inset-0 z-0">
+      <div
+        className="fixed inset-0 z-0"
+        style={{
+          opacity: scrollY > 3000 ? Math.max(0, 1 - (scrollY - 3000) / 500) : 1
+        }}
+      >
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{
@@ -216,7 +221,7 @@ export default function Home() {
         id="intro"
         ref={introRef}
         data-section="intro"
-        className="relative -mt-[70vh] z-20 pb-32"
+        className="relative -mt-[70vh] z-20 pb-96"
       >
 
         <div
@@ -274,6 +279,13 @@ export default function Home() {
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* End section that covers the fixed background and allows footer to show */}
+      <section className="relative bg-black" style={{ zIndex: 100, minHeight: '150vh' }}>
+        <div className="container mx-auto px-6 py-32">
+          {/* Empty space to allow footer to reveal */}
         </div>
       </section>
     </>
