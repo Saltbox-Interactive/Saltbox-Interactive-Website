@@ -110,20 +110,16 @@ export default function ContactSection() {
                 <label htmlFor="subject" className="block text-xs tracking-wider uppercase text-accent/60 mb-2">
                   Subject
                 </label>
-                <select
+                <input
+                  type="text"
                   id="subject"
                   name="subject"
                   value={formData.subject}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 bg-transparent border border-accent/20 text-foreground focus:outline-none focus:border-accent/60 transition-colors duration-300"
-                >
-                  <option value="" className="bg-gray-900">Select a subject</option>
-                  <option value="collaboration" className="bg-gray-900">Historical Collaboration</option>
-                  <option value="technical" className="bg-gray-900">Technical Partnership</option>
-                  <option value="media" className="bg-gray-900">Press & Media</option>
-                  <option value="general" className="bg-gray-900">General Inquiry</option>
-                </select>
+                  className="w-full px-4 py-3 bg-transparent border border-accent/20 text-foreground placeholder-gray-600 focus:outline-none focus:border-accent/60 transition-colors duration-300"
+                  placeholder="What's this about?"
+                />
               </div>
 
               <div>

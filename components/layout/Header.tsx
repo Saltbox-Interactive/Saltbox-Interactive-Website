@@ -1,14 +1,17 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { usePathname } from "next/navigation";
+import { ScrollSpeedContext } from "../ScrollSpeedContext";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const pathname = usePathname();
+  const { lenis } = useContext(ScrollSpeedContext);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -30,70 +33,241 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
 
+  // Disable scrolling when menu is open
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+      if (lenis) {
+        lenis.stop();
+      }
+    } else {
+      document.body.style.overflow = 'unset';
+      if (lenis) {
+        lenis.start();
+      }
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+      if (lenis) {
+        lenis.start();
+      }
+    };
+  }, [isMenuOpen, lenis]);
+
   return (
-    <header className={`fixed top-0 left-0 right-0 transition-opacity duration-300 ${
-      isVisible ? "opacity-100" : "opacity-0 pointer-events-none"
-    }`} style={{ zIndex: 200 }}>
-      <nav className="px-4 py-6 max-w-[1400px] mx-auto mt-6">
-        <div className="flex justify-between items-center">
-          <Link href="/" className="group flex items-center gap-4 absolute left-8">
-            <img
-              src="/images/saltbox-logo-blank.png"
-              alt="Saltbox Interactive Logo"
-              className="w-12 h-12 object-contain"
-            />
-            <span className="text-xl font-normal tracking-wide text-foreground group-hover:text-accent transition-colors duration-300 translate-y-0.5 uppercase" style={{ fontFamily: 'var(--font-archivo)' }}>
-              Saltbox Interactive
-            </span>
-          </Link>
+    <>
+      <header className={`fixed top-0 left-0 right-0 transition-opacity duration-300 ${
+        isVisible ? "opacity-100" : "opacity-0 pointer-events-none"
+      }`} style={{ zIndex: 200 }}>
+        <nav className="px-4 py-6 max-w-[1400px] mx-auto mt-6">
+          <div className="flex justify-between items-center">
+            <Link href="/" className="group flex items-center gap-4 absolute left-8">
+              <img
+                src="/images/saltbox-logo-blank.png"
+                alt="Saltbox Interactive Logo"
+                className="w-12 h-12 object-contain"
+              />
+              <span className="text-xl font-normal tracking-wide text-foreground group-hover:text-accent transition-colors duration-300 translate-y-0.5 uppercase" style={{ fontFamily: 'var(--font-archivo)' }}>
+                Saltbox Interactive
+              </span>
+            </Link>
 
-          <button
-            className="lg:hidden text-foreground hover:text-accent transition-colors absolute right-8"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
+            {/* Mobile menu toggle */}
+            <button
+              className="lg:hidden text-foreground hover:text-accent transition-colors absolute right-8"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
-              {isMenuOpen ? (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" />
-              ) : (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 6h16M4 12h16M4 18h16" />
-              )}
-            </svg>
-          </button>
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                {isMobileMenuOpen ? (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" />
+                ) : (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 6h16M4 12h16M4 18h16" />
+                )}
+              </svg>
+            </button>
 
-          <div className="hidden lg:flex items-center gap-8 absolute right-8">
-            <Link href="/projects" className={`text-base tracking-wider transition-colors duration-300 uppercase ${pathname === '/projects' ? 'text-accent' : 'text-foreground/80 hover:text-accent'}`} style={{ fontFamily: 'var(--font-bebas)' }}>
-              Projects
-            </Link>
-            <Link href="/about" className={`text-base tracking-wider transition-colors duration-300 uppercase ${pathname === '/about' ? 'text-accent' : 'text-foreground/80 hover:text-accent'}`} style={{ fontFamily: 'var(--font-bebas)' }}>
-              About
-            </Link>
-            <Link href="/contact" className={`text-base tracking-wider transition-colors duration-300 uppercase ${pathname === '/contact' ? 'text-accent' : 'text-foreground/80 hover:text-accent'}`} style={{ fontFamily: 'var(--font-bebas)' }}>
-              Contact
-            </Link>
-          </div>
-        </div>
-
-        {isMenuOpen && (
-          <div className="lg:hidden mt-6 pb-4 border-t border-accent/20 pt-4">
-            <div className="flex flex-col gap-4">
-              <Link href="/projects" className={`text-sm tracking-wider transition-colors duration-300 uppercase ${pathname === '/projects' ? 'text-accent' : 'text-foreground/80 hover:text-accent'}`} onClick={() => setIsMenuOpen(false)}>
+            {/* Desktop navigation */}
+            <div className="hidden lg:flex items-center gap-8 absolute right-8">
+              <Link href="/projects" className={`text-base tracking-wider transition-colors duration-300 uppercase ${pathname === '/projects' ? 'text-accent' : 'text-foreground/80 hover:text-accent'}`} style={{ fontFamily: 'var(--font-bebas)' }}>
                 Projects
               </Link>
-              <Link href="/about" className={`text-sm tracking-wider transition-colors duration-300 uppercase ${pathname === '/about' ? 'text-accent' : 'text-foreground/80 hover:text-accent'}`} onClick={() => setIsMenuOpen(false)}>
+              <Link href="/about" className={`text-base tracking-wider transition-colors duration-300 uppercase ${pathname === '/about' ? 'text-accent' : 'text-foreground/80 hover:text-accent'}`} style={{ fontFamily: 'var(--font-bebas)' }}>
                 About
               </Link>
-              <Link href="/contact" className={`text-sm tracking-wider transition-colors duration-300 uppercase ${pathname === '/contact' ? 'text-accent' : 'text-foreground/80 hover:text-accent'}`} onClick={() => setIsMenuOpen(false)}>
+              <Link href="/contact" className={`text-base tracking-wider transition-colors duration-300 uppercase ${pathname === '/contact' ? 'text-accent' : 'text-foreground/80 hover:text-accent'}`} style={{ fontFamily: 'var(--font-bebas)' }}>
                 Contact
+              </Link>
+              <button
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                className="text-base tracking-wider transition-colors duration-300 uppercase text-foreground/80 hover:text-accent flex items-center gap-2"
+                style={{ fontFamily: 'var(--font-bebas)' }}
+              >
+                {isMenuOpen ? '[Close] Menu' : '[Open] Menu'}
+              </button>
+            </div>
+          </div>
+
+          {/* Mobile dropdown menu */}
+          {isMobileMenuOpen && (
+            <div className="lg:hidden mt-6 pb-4 border-t border-accent/20 pt-4">
+              <div className="flex flex-col gap-4">
+                <Link href="/projects" className={`text-sm tracking-wider transition-colors duration-300 uppercase ${pathname === '/projects' ? 'text-accent' : 'text-foreground/80 hover:text-accent'}`} onClick={() => setIsMobileMenuOpen(false)}>
+                  Projects
+                </Link>
+                <Link href="/about" className={`text-sm tracking-wider transition-colors duration-300 uppercase ${pathname === '/about' ? 'text-accent' : 'text-foreground/80 hover:text-accent'}`} onClick={() => setIsMobileMenuOpen(false)}>
+                  About
+                </Link>
+                <Link href="/contact" className={`text-sm tracking-wider transition-colors duration-300 uppercase ${pathname === '/contact' ? 'text-accent' : 'text-foreground/80 hover:text-accent'}`} onClick={() => setIsMobileMenuOpen(false)}>
+                  Contact
+                </Link>
+              </div>
+            </div>
+          )}
+        </nav>
+      </header>
+
+      {/* Overlay - Click to close menu */}
+      {isMenuOpen && (
+        <div
+          className="fixed inset-0 bg-transparent"
+          style={{ zIndex: 198 }}
+          onClick={() => setIsMenuOpen(false)}
+        />
+      )}
+
+      {/* Menu Panel - Slides from top */}
+      <div
+        className={`fixed top-0 left-0 right-0 bg-black transition-transform duration-700 ease-in-out ${
+          isMenuOpen ? 'translate-y-0' : '-translate-y-full'
+        }`}
+        style={{ zIndex: 199, height: '92vh' }}
+      >
+        <div className="container mx-auto px-12 h-full flex items-center py-12">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-16 w-full max-w-7xl mx-auto">
+            {/* Left side - Navigation Links */}
+            <div className="flex flex-col justify-between h-full">
+              <div className="flex flex-col justify-center space-y-8">
+                <Link
+                  href="/projects"
+                  onClick={() => setIsMenuOpen(false)}
+                  className={`text-6xl md:text-7xl font-light tracking-[0.15em] text-white hover:text-accent transition-all duration-500 uppercase ${
+                    isMenuOpen ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
+                  }`}
+                  style={{
+                    fontFamily: 'var(--font-bebas)',
+                    transitionDelay: isMenuOpen ? '200ms' : '0ms'
+                  }}
+                >
+                  Projects
+                </Link>
+                <Link
+                  href="/about"
+                  onClick={() => setIsMenuOpen(false)}
+                  className={`text-6xl md:text-7xl font-light tracking-[0.15em] text-white hover:text-accent transition-all duration-500 uppercase ${
+                    isMenuOpen ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
+                  }`}
+                  style={{
+                    fontFamily: 'var(--font-bebas)',
+                    transitionDelay: isMenuOpen ? '350ms' : '0ms'
+                  }}
+                >
+                  About
+                </Link>
+                <Link
+                  href="/contact"
+                  onClick={() => setIsMenuOpen(false)}
+                  className={`text-6xl md:text-7xl font-light tracking-[0.15em] text-white hover:text-accent transition-all duration-500 uppercase ${
+                    isMenuOpen ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
+                  }`}
+                  style={{
+                    fontFamily: 'var(--font-bebas)',
+                    transitionDelay: isMenuOpen ? '500ms' : '0ms'
+                  }}
+                >
+                  Contact
+                </Link>
+              </div>
+
+              {/* Social Media Links - Bottom Left */}
+              <div className={`flex gap-6 mt-12 transition-all duration-500 ${
+                isMenuOpen ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
+              }`}
+              style={{ transitionDelay: isMenuOpen ? '650ms' : '0ms' }}
+              >
+                <Link href="https://www.linkedin.com/company/saltbox-interactive" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-accent transition-colors duration-300" aria-label="LinkedIn">
+                  <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                  </svg>
+                </Link>
+                <Link href="#" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-accent transition-colors duration-300 opacity-50" aria-label="YouTube (Coming Soon)">
+                  <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                  </svg>
+                </Link>
+                <Link href="https://store.steampowered.com/app/3140860/Discover_Old_DHanis/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-accent transition-colors duration-300" aria-label="Steam">
+                  <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M11.979 0C5.678 0 .511 4.86.022 11.037l6.432 2.658c.545-.371 1.203-.59 1.912-.59.063 0 .125.004.188.006l2.861-4.142V8.91c0-2.495 2.028-4.524 4.524-4.524 2.494 0 4.524 2.031 4.524 4.527s-2.03 4.525-4.524 4.525h-.105l-4.076 2.911c0 .052.004.105.004.159 0 1.875-1.515 3.396-3.39 3.396-1.635 0-3.016-1.173-3.331-2.727L.436 15.27C1.862 20.307 6.486 24 11.979 24c6.627 0 11.999-5.373 11.999-12S18.605 0 11.979 0zM7.54 18.21l-1.473-.61c.262.543.714.999 1.314 1.25 1.297.539 2.793-.076 3.332-1.375.263-.63.264-1.319.005-1.949s-.75-1.121-1.377-1.383c-.624-.26-1.29-.249-1.878-.03l1.523.63c.956.4 1.409 1.5 1.009 2.455-.397.957-1.497 1.41-2.454 1.012H7.54zm11.415-9.303c0-1.662-1.353-3.015-3.015-3.015-1.665 0-3.015 1.353-3.015 3.015 0 1.665 1.35 3.015 3.015 3.015 1.663 0 3.015-1.35 3.015-3.015zm-5.273-.005c0-1.252 1.013-2.266 2.265-2.266 1.249 0 2.266 1.014 2.266 2.266 0 1.251-1.017 2.265-2.266 2.265-1.253 0-2.265-1.014-2.265-2.265z"/>
+                  </svg>
+                </Link>
+              </div>
+            </div>
+
+            {/* Right side - Image Panels */}
+            <div className="hidden lg:grid grid-cols-2 gap-6">
+              {/* Discover Old D'Hanis Panel */}
+              <Link
+                href="/projects/discover-old-dhanis"
+                onClick={() => setIsMenuOpen(false)}
+                className={`relative h-full min-h-[60vh] overflow-hidden group cursor-pointer flex items-center justify-center transition-all duration-500 ${
+                  isMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                }`}
+                style={{ transitionDelay: isMenuOpen ? '300ms' : '0ms' }}
+              >
+                <img
+                  src="/images/dod-cover.jpg"
+                  alt="Discover Old D'Hanis"
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-black/50"></div>
+                <div className="relative z-10 text-center">
+                  <h3 className="text-4xl md:text-5xl font-light tracking-[0.15em] text-white uppercase" style={{ fontFamily: 'var(--font-bebas)' }}>
+                    Discover Old D'Hanis
+                  </h3>
+                  <p className="text-accent/80 text-sm tracking-wider uppercase mt-4">Play Now</p>
+                </div>
+              </Link>
+
+              {/* About Panel */}
+              <Link
+                href="/about"
+                onClick={() => setIsMenuOpen(false)}
+                className={`relative h-full min-h-[60vh] overflow-hidden group cursor-pointer flex items-center justify-center transition-all duration-500 ${
+                  isMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                }`}
+                style={{ transitionDelay: isMenuOpen ? '450ms' : '0ms' }}
+              >
+                <img
+                  src="/images/background_pic.jpg"
+                  alt="About Saltbox Interactive"
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-black/50"></div>
+                <div className="relative z-10 text-center">
+                  <h3 className="text-4xl md:text-5xl font-light tracking-[0.15em] text-white uppercase" style={{ fontFamily: 'var(--font-bebas)' }}>
+                    About Us
+                  </h3>
+                  <p className="text-accent/80 text-sm tracking-wider uppercase mt-4">Learn More</p>
+                </div>
               </Link>
             </div>
           </div>
-        )}
-      </nav>
-    </header>
+        </div>
+      </div>
+    </>
   );
 }

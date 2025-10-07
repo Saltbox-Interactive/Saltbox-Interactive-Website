@@ -10,10 +10,24 @@ export default function AboutPage() {
   const [scrollY, setScrollY] = useState(0);
   const [visibleSections, setVisibleSections] = useState<Set<string>>(new Set());
   const sectionRefs = useRef<{ [key: string]: HTMLElement | null }>({});
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const scrollSequenceRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
       setScrollY(window.scrollY);
+
+      // Handle scroll-triggered image sequence
+      if (scrollSequenceRef.current) {
+        const rect = scrollSequenceRef.current.getBoundingClientRect();
+        const scrollProgress = -rect.top / (rect.height - window.innerHeight);
+
+        if (scrollProgress >= 0 && scrollProgress <= 1) {
+          // Map scroll progress to image index (0-3 for 4 images)
+          const imageIndex = Math.min(3, Math.floor(scrollProgress * 4));
+          setCurrentImageIndex(imageIndex);
+        }
+      }
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
@@ -55,120 +69,172 @@ export default function AboutPage() {
         pageName="About"
       />
 
-      {/* Our Story Section with Background Image */}
+      {/* Intro Text Section */}
       <section
-        ref={(el) => { sectionRefs.current['story'] = el; }}
-        data-section="story"
-        id="story"
-        className="relative min-h-screen flex items-center bg-black overflow-hidden"
+        ref={(el) => { sectionRefs.current['intro'] = el; }}
+        data-section="intro"
+        className="relative py-32 bg-black"
       >
-        <div className="absolute inset-0">
-          <ParallaxImage
-            src="/images/dhanis1.jpg"
-            alt="D'Hanis Historic Street"
-            className="min-h-screen opacity-50"
-            intensity={1}
-            direction="vertical"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-transparent"></div>
-        </div>
-
-        <div className={`relative z-10 w-full py-32 px-6 md:px-12 transition-all duration-1000 ${
-          visibleSections.has('story') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'
+        <div className={`container mx-auto px-6 md:px-12 max-w-6xl transition-all duration-1000 ${
+          visibleSections.has('intro') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'
         }`}>
-          <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
-            <div>
-              <h2 className="text-7xl md:text-8xl lg:text-9xl font-light tracking-[0.15em] text-foreground mb-8 uppercase" style={{ fontFamily: 'var(--font-bebas)' }}>
-                OUR STORY
-              </h2>
-              <div className="h-1 w-24 bg-accent mb-12"></div>
-            </div>
-            <div className="space-y-6">
-              <p className="text-2xl md:text-3xl text-white leading-[1.4] font-light">
-                Saltbox Interactive was founded on the belief that history should be experienced, not just read about.
-              </p>
-              <p className="text-lg md:text-xl text-gray-300 leading-relaxed">
-                Our journey began with a simple question: What if we could use modern technology to step back in time?
-              </p>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-light text-white leading-[1.3] mb-12">
+            Saltbox Interactive was founded on the belief that history should be experienced, not just read about.
+          </h2>
+          <p className="text-xl md:text-2xl text-gray-400 leading-relaxed font-light max-w-4xl">
+            Our journey began with a simple question: What if we could use modern technology to step back in time? Today, we transform historical locations into explorable virtual environments where history comes alive.
+          </p>
+        </div>
+      </section>
+
+      {/* Full-Width Image Gallery Section */}
+      <section
+        ref={(el) => { sectionRefs.current['gallery1'] = el; }}
+        data-section="gallery1"
+        className="relative bg-black"
+      >
+        <div className={`transition-all duration-1000 ${
+          visibleSections.has('gallery1') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'
+        }`}>
+          {/* Large Featured Image */}
+          <div className="relative h-[70vh] md:h-[80vh] overflow-hidden">
+            <img
+              src="/images/dhanis1.jpg"
+              alt="Historical Reconstruction"
+              className="w-full h-full object-cover"
+            />
+          </div>
+
+          {/* Overlapping Images Layout */}
+          <div className="container mx-auto px-6 md:px-12 -mt-32 relative z-10">
+            <div className="grid grid-cols-2 gap-6 md:gap-8 max-w-5xl ml-auto">
+              <div className="relative h-[40vh] md:h-[50vh]">
+                <ParallaxImage
+                  src="/images/dhanis2.jpg"
+                  alt="Team at work"
+                  className="w-full h-full"
+                  intensity={1}
+                  direction="vertical"
+                />
+              </div>
+              <div className="relative h-[40vh] md:h-[50vh] mt-16">
+                <ParallaxImage
+                  src="/images/dhanis3.jpg"
+                  alt="Historical detail"
+                  className="w-full h-full"
+                  intensity={1}
+                  direction="vertical"
+                />
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Team Section with Background Image */}
+      {/* Team Philosophy Section */}
       <section
         ref={(el) => { sectionRefs.current['team'] = el; }}
         data-section="team"
-        className="relative min-h-screen flex items-center bg-black overflow-hidden"
+        className="relative py-32 md:py-48 bg-black"
       >
-        <div className="absolute inset-0">
-          <ParallaxImage
-            src="/images/dhanis2.jpg"
-            alt="Historic D'Hanis"
-            className="min-h-screen opacity-50"
-            intensity={1}
-            direction="vertical"
-          />
-          <div className="absolute inset-0 bg-gradient-to-l from-black via-black/80 to-transparent"></div>
-        </div>
-
-        <div className={`relative z-10 w-full py-32 px-6 md:px-12 transition-all duration-1000 ${
+        <div className={`container mx-auto px-6 md:px-12 max-w-6xl transition-all duration-1000 ${
           visibleSections.has('team') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'
         }`}>
-          <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
-            <div className="space-y-6 md:order-2">
+          <div className="grid md:grid-cols-5 gap-12 md:gap-16 items-center">
+            <div className="md:col-span-2">
+              <h2 className="text-6xl md:text-7xl lg:text-8xl font-light tracking-[0.15em] text-white mb-8 uppercase" style={{ fontFamily: 'var(--font-bebas)' }}>
+                THE TEAM
+              </h2>
+              <div className="h-1 w-20 bg-accent"></div>
+            </div>
+            <div className="md:col-span-3 space-y-6">
               <p className="text-2xl md:text-3xl text-white leading-[1.4] font-light">
                 We're a team of historians, developers, and artists united by our passion for preserving the past.
               </p>
-              <p className="text-lg md:text-xl text-gray-300 leading-relaxed">
-                We specialize in creating historically accurate digital experiences that transport users to pivotal moments in history.
+              <p className="text-lg md:text-xl text-gray-400 leading-relaxed">
+                Each project is a collaborative effort combining historical research, cutting-edge technology, and artistic vision to create authentic experiences that transport users to pivotal moments in history.
               </p>
-            </div>
-            <div className="md:order-1">
-              <h2 className="text-7xl md:text-8xl lg:text-9xl font-light tracking-[0.15em] text-foreground mb-8 uppercase" style={{ fontFamily: 'var(--font-bebas)' }}>
-                THE TEAM
-              </h2>
-              <div className="h-1 w-24 bg-accent mb-12"></div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Mission Section with Background Image */}
+      {/* Scroll-Triggered Image Sequence */}
+      <section
+        ref={scrollSequenceRef}
+        className="relative bg-black"
+        style={{ height: '400vh' }}
+      >
+        <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
+          {[
+            '/images/dhanis1.jpg',
+            '/images/dhanis2.jpg',
+            '/images/dhanis3.jpg',
+            '/images/dod-cover.jpg'
+          ].map((src, index) => (
+            <img
+              key={src}
+              src={src}
+              alt={`Team image ${index + 1}`}
+              className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500"
+              style={{
+                opacity: currentImageIndex === index ? 1 : 0,
+                zIndex: currentImageIndex === index ? 1 : 0
+              }}
+            />
+          ))}
+
+          {/* Optional: Progress indicator */}
+          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex gap-2 z-10">
+            {[0, 1, 2, 3].map((index) => (
+              <div
+                key={index}
+                className="w-2 h-2 rounded-full transition-colors duration-300"
+                style={{
+                  backgroundColor: currentImageIndex === index ? '#C9A063' : 'rgba(255,255,255,0.3)'
+                }}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Full-Width Mission Image */}
+      <section
+        ref={(el) => { sectionRefs.current['mission-image'] = el; }}
+        data-section="mission-image"
+        className="relative bg-black"
+      >
+        <div className={`transition-all duration-1000 ${
+          visibleSections.has('mission-image') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'
+        }`}>
+          <div className="relative h-[60vh] md:h-[80vh] overflow-hidden">
+            <img
+              src="/images/dod-cover.jpg"
+              alt="Our Work"
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
+          </div>
+        </div>
+      </section>
+
+      {/* Mission Statement */}
       <section
         ref={(el) => { sectionRefs.current['mission'] = el; }}
         data-section="mission"
-        className="relative min-h-screen flex items-center bg-black overflow-hidden"
+        className="relative py-32 md:py-48 bg-black"
       >
-        <div className="absolute inset-0">
-          <ParallaxImage
-            src="/images/dhanis3.jpg"
-            alt="Historic D'Hanis Building"
-            className="min-h-screen opacity-50"
-            intensity={1}
-            direction="vertical"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-transparent"></div>
-        </div>
-
-        <div className={`relative z-10 w-full py-32 px-6 md:px-12 transition-all duration-1000 ${
+        <div className={`container mx-auto px-6 md:px-12 max-w-6xl transition-all duration-1000 ${
           visibleSections.has('mission') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'
         }`}>
-          <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
-            <div>
-              <h2 className="text-7xl md:text-8xl lg:text-9xl font-light tracking-[0.15em] text-foreground mb-8 uppercase" style={{ fontFamily: 'var(--font-bebas)' }}>
-                OUR MISSION
-              </h2>
-              <div className="h-1 w-24 bg-accent mb-12"></div>
-            </div>
-            <div className="space-y-6">
-              <p className="text-2xl md:text-3xl text-white leading-[1.4] font-light">
-                From the dusty streets of frontier towns to the steel rails that connected a nation.
-              </p>
-              <p className="text-lg md:text-xl text-gray-300 leading-relaxed">
-                We're committed to capturing every detail, every story, and every lesson from our collective past.
-              </p>
-            </div>
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-5xl md:text-6xl lg:text-7xl font-light text-white leading-[1.3] mb-12">
+              From the dusty streets of frontier towns to the steel rails that connected a nation
+            </h2>
+            <p className="text-xl md:text-2xl text-gray-400 leading-relaxed font-light">
+              We're committed to capturing every detail, every story, and every lesson from our collective past. Through meticulous research and innovative technology, we preserve history for future generations.
+            </p>
           </div>
         </div>
       </section>
