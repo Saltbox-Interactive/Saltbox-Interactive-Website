@@ -78,9 +78,9 @@ export default function AboutPage() {
         <div className={`container mx-auto px-6 md:px-12 max-w-6xl transition-all duration-1000 ${
           visibleSections.has('intro') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'
         }`}>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-light text-white leading-[1.3] mb-12" style={{ fontFamily: 'var(--font-work-sans)' }}>
-            Saltbox Interactive was founded on the belief that history should be experienced, not just read about.
-          </h2>
+          <p className="text-2xl md:text-3xl text-white leading-[1.4] font-light mb-12" style={{ fontFamily: 'var(--font-work-sans)' }}>
+            <span className="bg-white text-black px-1">Saltbox Interactive</span> was founded on the belief that history should be experienced, not just read about.
+          </p>
           <p className="text-xl md:text-2xl text-gray-400 leading-relaxed font-light max-w-4xl" style={{ fontFamily: 'var(--font-work-sans)' }}>
             Our journey began with a simple question: What if we could use modern technology to step back in time? Today, we transform historical locations into explorable virtual environments where history comes alive.
           </p>

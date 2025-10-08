@@ -40,7 +40,7 @@ export default function AboutSection() {
             
             <div className="space-y-4">
               <p className="text-lg text-gray-300 leading-relaxed">
-                At Saltbox Interactive, we believe the past holds invaluable lessons for the future. 
+                At <span className="bg-white text-black px-1">Saltbox Interactive</span>, we believe the past holds invaluable lessons for the future. 
                 Through the convergence of historical expertise and cutting-edge technology, we create 
                 immersive digital experiences that bring history to life.
               </p>

@@ -55,6 +55,7 @@ export default function Header() {
       // Apply margin to all fixed elements
       const header = document.querySelector('header');
       const footer = document.querySelector('footer');
+      const fixedBackgrounds = document.querySelectorAll('.fixed');
 
       if (header) {
         (header as HTMLElement).style.marginRight = `${scrollbarWidth}px`;
@@ -62,6 +63,9 @@ export default function Header() {
       if (footer) {
         (footer as HTMLElement).style.marginRight = `${scrollbarWidth}px`;
       }
+      fixedBackgrounds.forEach((el) => {
+        (el as HTMLElement).style.marginRight = `${scrollbarWidth}px`;
+      });
 
       if (lenis) {
         lenis.stop();
@@ -73,6 +77,7 @@ export default function Header() {
       // Remove margin from all fixed elements
       const header = document.querySelector('header');
       const footer = document.querySelector('footer');
+      const fixedBackgrounds = document.querySelectorAll('.fixed');
 
       if (header) {
         (header as HTMLElement).style.marginRight = '0px';
@@ -80,6 +85,9 @@ export default function Header() {
       if (footer) {
         (footer as HTMLElement).style.marginRight = '0px';
       }
+      fixedBackgrounds.forEach((el) => {
+        (el as HTMLElement).style.marginRight = '0px';
+      });
 
       if (lenis) {
         lenis.start();
@@ -91,6 +99,7 @@ export default function Header() {
 
       const header = document.querySelector('header');
       const footer = document.querySelector('footer');
+      const fixedBackgrounds = document.querySelectorAll('.fixed');
 
       if (header) {
         (header as HTMLElement).style.marginRight = '0px';
@@ -98,6 +107,9 @@ export default function Header() {
       if (footer) {
         (footer as HTMLElement).style.marginRight = '0px';
       }
+      fixedBackgrounds.forEach((el) => {
+        (el as HTMLElement).style.marginRight = '0px';
+      });
 
       if (lenis) {
         lenis.start();
@@ -118,7 +130,7 @@ export default function Header() {
                 alt="Saltbox Interactive Logo"
                 className="w-12 h-12 object-contain"
               />
-              <span className="text-xl font-normal tracking-wide text-foreground group-hover:text-accent transition-colors duration-300 translate-y-0.5 uppercase" style={{ fontFamily: 'var(--font-archivo)' }}>
+              <span className="text-xl font-normal tracking-wide text-black bg-white group-hover:bg-accent transition-colors duration-300 translate-y-0.5 uppercase px-2 py-1" style={{ fontFamily: 'var(--font-bebas)' }}>
                 Saltbox Interactive
               </span>
             </Link>

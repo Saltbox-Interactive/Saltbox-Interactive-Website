@@ -100,7 +100,7 @@ export default function CreditsPage() {
             CITATION
           </h2>
           <p className="text-gray-300 italic">
-            Markert, Patricia G., Michael Salton, Emily Missetta Grant, and Joyce Lee. Discover Old D'Hanis for Windows/Mac, V. 1., Saltbox Interactive.
+            Markert, Patricia G., Michael Salton, Emily Missetta Grant, and Joyce Lee. Discover Old D'Hanis for Windows/Mac, V. 1., <span className="bg-white text-black px-1">Saltbox Interactive</span>.
           </p>
         </section>
 

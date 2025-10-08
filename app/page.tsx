@@ -139,8 +139,8 @@ export default function Home() {
             EXPERIENCES
           </h2>
 
-          <p className="text-xl md:text-2xl text-gray-300 leading-relaxed font-light max-w-3xl mx-auto">
-            Saltbox Interactive is a team of historians, developers, and artists dedicated to preserving the past through interactive digital experiences. We transform historical locations into explorable virtual environments where history comes alive.
+          <p className="text-xl md:text-2xl text-gray-300 leading-relaxed max-w-3xl mx-auto" style={{ fontFamily: 'var(--font-work-sans)' }}>
+            <span className="bg-white text-black px-1">Saltbox Interactive</span> is dedicated to preserving the past through interactive digital experiences. We create explorable virtual environments where history comes alive.
           </p>
         </div>
       </section>
@@ -151,21 +151,15 @@ export default function Home() {
 
         <div className="container mx-auto max-w-3xl relative z-10">
           <div className="flex items-center justify-center">
-            <Link href="/about" className="group relative inline-flex items-center justify-center px-8 py-4 overflow-hidden transition-all duration-300">
-              {/* Background border */}
-              <div className="absolute inset-0 border border-gray-500 group-hover:opacity-0 transition-opacity duration-300"></div>
-
-              {/* Corner borders (hover state) */}
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <div className="absolute top-0 left-0 w-4 h-4 border-t border-l border-accent"></div>
-                <div className="absolute top-0 right-0 w-4 h-4 border-t border-r border-accent"></div>
-                <div className="absolute bottom-0 left-0 w-4 h-4 border-b border-l border-accent"></div>
-                <div className="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-accent"></div>
-              </div>
-
-              {/* Text */}
-              <span className="relative z-10 text-gray-400 group-hover:text-accent transition-colors duration-300 tracking-[0.25em] uppercase" style={{ fontFamily: 'var(--font-bebas)', fontSize: '1.1rem' }}>
+            <Link href="/about" className="flex items-center gap-2 group">
+              <span className="text-accent transition-all duration-300 group-hover:-translate-x-1 text-lg">
+                [
+              </span>
+              <span className="text-lg font-light tracking-[0.15em] text-gray-400 group-hover:text-accent transition-colors duration-300 uppercase" style={{ fontFamily: 'var(--font-bebas)' }}>
                 Our Mission
+              </span>
+              <span className="text-accent transition-all duration-300 group-hover:translate-x-1 text-lg">
+                ]
               </span>
             </Link>
           </div>
@@ -235,8 +229,8 @@ export default function Home() {
             </div>
 
             <div className="mb-12">
-              <p className="text-gray-300 text-xl leading-relaxed font-light">
-                Step back in time to 1870s Texas and experience the authentic daily life of a frontier town. Explore historically accurate buildings, interact with period-appropriate objects, and discover the stories of the people who built this community.
+              <p className="text-gray-300 text-xl leading-relaxed" style={{ fontFamily: 'var(--font-work-sans)' }}>
+                Step into the past and unravel the rich history of Old D'Hanis. Explore this 19th-century town, from Alsatian and German settlers of 1847 to Black and Mexican families post-Civil War. Unearth archival fragments, archaeological photos, and oral histories to piece together the town's alluring stories.
               </p>
             </div>
 

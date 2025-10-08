@@ -2,6 +2,46 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'BBH Sans Hegarty';
+  src: url('/fonts/BBHSansHegarty-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Geo';
+  src: url('/fonts/Geo-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Geo';
+  src: url('/fonts/Geo-Italic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Roboto Condensed';
+  src: url('/fonts/RobotoCondensed-VariableFont_wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Roboto Condensed';
+  src: url('/fonts/RobotoCondensed-Italic-VariableFont_wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
 :root {
   --background: #0a0a0a;
   --foreground: #e8e2d5;
@@ -10,15 +50,24 @@
   --gray-dark: #1a1a1a;
   --gray-medium: #2a2a2a;
   --gray-light: #b8b0a0;
+  --font-bbh: 'BBH Sans Hegarty', sans-serif;
+  --font-geo: 'Geo', sans-serif;
+  --font-roboto-condensed: 'Roboto Condensed', sans-serif;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-work-sans), system-ui, sans-serif;
+  font-family: var(--font-work-sans), system-ui, sans-serif !important;
+  font-weight: 400;
   overflow-x: hidden;
   overscroll-behavior: none;
   position: relative;
+}
+
+p {
+  font-family: var(--font-work-sans), system-ui, sans-serif !important;
+  font-weight: 400 !important;
 }
 
 * {
@@ -76,6 +125,10 @@ a {
 }
 
 @layer utilities {
+  .font-work-sans {
+    font-family: 'Work Sans', sans-serif !important;
+  }
+
   .text-balance {
     text-wrap: balance;
   }

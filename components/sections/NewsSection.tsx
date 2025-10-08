@@ -31,7 +31,7 @@ export default function NewsSection() {
         <div className="text-center mb-12">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Latest News</h2>
           <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-            Stay updated with the latest developments from Saltbox Interactive
+            Stay updated with the latest developments from <span className="bg-white text-black px-1">Saltbox Interactive</span>
           </p>
         </div>
 
