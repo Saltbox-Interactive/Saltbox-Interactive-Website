@@ -30,6 +30,18 @@ body {
 html {
   scroll-behavior: smooth;
   overscroll-behavior: none;
+  overflow-x: hidden;
+  overflow-y: scroll !important;
+}
+
+/* Force scrollbar to always be visible, even with Lenis */
+html.lenis {
+  overflow-y: scroll !important;
+}
+
+html.menu-open,
+html.lenis.menu-open {
+  overflow-y: hidden !important;
 }
 
 /* Custom Scrollbar */

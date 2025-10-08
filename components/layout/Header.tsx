@@ -36,18 +36,69 @@ export default function Header() {
   // Disable scrolling when menu is open
   useEffect(() => {
     if (isMenuOpen) {
-      document.body.style.overflow = 'hidden';
+      // Measure actual scrollbar width by creating a temporary element
+      const outer = document.createElement('div');
+      outer.style.visibility = 'hidden';
+      outer.style.overflow = 'scroll';
+      document.body.appendChild(outer);
+
+      const inner = document.createElement('div');
+      outer.appendChild(inner);
+
+      const scrollbarWidth = outer.offsetWidth - inner.offsetWidth;
+
+      document.body.removeChild(outer);
+
+      document.documentElement.classList.add('menu-open');
+      document.body.style.marginRight = `${scrollbarWidth}px`;
+
+      // Apply margin to all fixed elements
+      const header = document.querySelector('header');
+      const footer = document.querySelector('footer');
+
+      if (header) {
+        (header as HTMLElement).style.marginRight = `${scrollbarWidth}px`;
+      }
+      if (footer) {
+        (footer as HTMLElement).style.marginRight = `${scrollbarWidth}px`;
+      }
+
       if (lenis) {
         lenis.stop();
       }
     } else {
-      document.body.style.overflow = 'unset';
+      document.documentElement.classList.remove('menu-open');
+      document.body.style.marginRight = '0px';
+
+      // Remove margin from all fixed elements
+      const header = document.querySelector('header');
+      const footer = document.querySelector('footer');
+
+      if (header) {
+        (header as HTMLElement).style.marginRight = '0px';
+      }
+      if (footer) {
+        (footer as HTMLElement).style.marginRight = '0px';
+      }
+
       if (lenis) {
         lenis.start();
       }
     }
     return () => {
-      document.body.style.overflow = 'unset';
+      document.documentElement.classList.remove('menu-open');
+      document.body.style.marginRight = '0px';
+
+      const header = document.querySelector('header');
+      const footer = document.querySelector('footer');
+
+      if (header) {
+        (header as HTMLElement).style.marginRight = '0px';
+      }
+      if (footer) {
+        (footer as HTMLElement).style.marginRight = '0px';
+      }
+
       if (lenis) {
         lenis.start();
       }
@@ -104,10 +155,10 @@ export default function Header() {
               </Link>
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="text-base tracking-wider transition-colors duration-300 uppercase text-foreground/80 hover:text-accent flex items-center gap-2"
+                className="text-base tracking-wider transition-colors duration-300 uppercase text-foreground/80 hover:text-accent"
                 style={{ fontFamily: 'var(--font-bebas)' }}
               >
-                {isMenuOpen ? '[Close] Menu' : '[Open] Menu'}
+                <span className="inline-block w-[50px] text-right">{isMenuOpen ? '[Close]' : '[Open]'}</span> Menu
               </button>
             </div>
           </div>
@@ -150,12 +201,12 @@ export default function Header() {
         <div className="container mx-auto px-12 h-full flex items-center py-12">
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-16 w-full max-w-7xl mx-auto">
             {/* Left side - Navigation Links */}
-            <div className="flex flex-col justify-between h-full">
-              <div className="flex flex-col justify-center space-y-8">
+            <div className="flex flex-col justify-between h-full -ml-8">
+              <div className="flex flex-col justify-start space-y-4 mt-8">
                 <Link
                   href="/projects"
                   onClick={() => setIsMenuOpen(false)}
-                  className={`text-6xl md:text-7xl font-light tracking-[0.15em] text-white hover:text-accent transition-all duration-500 uppercase ${
+                  className={`text-4xl md:text-5xl font-light tracking-[0.15em] text-white hover:text-accent transition-all duration-500 uppercase ${
                     isMenuOpen ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
                   }`}
                   style={{
@@ -168,7 +219,7 @@ export default function Header() {
                 <Link
                   href="/about"
                   onClick={() => setIsMenuOpen(false)}
-                  className={`text-6xl md:text-7xl font-light tracking-[0.15em] text-white hover:text-accent transition-all duration-500 uppercase ${
+                  className={`text-4xl md:text-5xl font-light tracking-[0.15em] text-white hover:text-accent transition-all duration-500 uppercase ${
                     isMenuOpen ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
                   }`}
                   style={{
@@ -181,7 +232,7 @@ export default function Header() {
                 <Link
                   href="/contact"
                   onClick={() => setIsMenuOpen(false)}
-                  className={`text-6xl md:text-7xl font-light tracking-[0.15em] text-white hover:text-accent transition-all duration-500 uppercase ${
+                  className={`text-4xl md:text-5xl font-light tracking-[0.15em] text-white hover:text-accent transition-all duration-500 uppercase ${
                     isMenuOpen ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
                   }`}
                   style={{
@@ -231,14 +282,13 @@ export default function Header() {
                 <img
                   src="/images/dod-cover.jpg"
                   alt="Discover Old D'Hanis"
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-150 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-black/50"></div>
+                <div className="absolute inset-0 bg-black/50 transition-colors duration-150 group-hover:bg-black/30"></div>
                 <div className="relative z-10 text-center">
                   <h3 className="text-4xl md:text-5xl font-light tracking-[0.15em] text-white uppercase" style={{ fontFamily: 'var(--font-bebas)' }}>
                     Discover Old D'Hanis
                   </h3>
-                  <p className="text-accent/80 text-sm tracking-wider uppercase mt-4">Play Now</p>
                 </div>
               </Link>
 
@@ -254,14 +304,13 @@ export default function Header() {
                 <img
                   src="/images/background_pic.jpg"
                   alt="About Saltbox Interactive"
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-150 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-black/50"></div>
+                <div className="absolute inset-0 bg-black/50 transition-colors duration-150 group-hover:bg-black/30"></div>
                 <div className="relative z-10 text-center">
                   <h3 className="text-4xl md:text-5xl font-light tracking-[0.15em] text-white uppercase" style={{ fontFamily: 'var(--font-bebas)' }}>
                     About Us
                   </h3>
-                  <p className="text-accent/80 text-sm tracking-wider uppercase mt-4">Learn More</p>
                 </div>
               </Link>
             </div>

@@ -78,10 +78,10 @@ export default function AboutPage() {
         <div className={`container mx-auto px-6 md:px-12 max-w-6xl transition-all duration-1000 ${
           visibleSections.has('intro') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'
         }`}>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-light text-white leading-[1.3] mb-12">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-light text-white leading-[1.3] mb-12" style={{ fontFamily: 'var(--font-work-sans)' }}>
             Saltbox Interactive was founded on the belief that history should be experienced, not just read about.
           </h2>
-          <p className="text-xl md:text-2xl text-gray-400 leading-relaxed font-light max-w-4xl">
+          <p className="text-xl md:text-2xl text-gray-400 leading-relaxed font-light max-w-4xl" style={{ fontFamily: 'var(--font-work-sans)' }}>
             Our journey began with a simple question: What if we could use modern technology to step back in time? Today, we transform historical locations into explorable virtual environments where history comes alive.
           </p>
         </div>
@@ -148,10 +148,10 @@ export default function AboutPage() {
               <div className="h-1 w-20 bg-accent"></div>
             </div>
             <div className="md:col-span-3 space-y-6">
-              <p className="text-2xl md:text-3xl text-white leading-[1.4] font-light">
+              <p className="text-2xl md:text-3xl text-white leading-[1.4] font-light" style={{ fontFamily: 'var(--font-work-sans)' }}>
                 We're a team of historians, developers, and artists united by our passion for preserving the past.
               </p>
-              <p className="text-lg md:text-xl text-gray-400 leading-relaxed">
+              <p className="text-lg md:text-xl text-gray-400 leading-relaxed" style={{ fontFamily: 'var(--font-work-sans)' }}>
                 Each project is a collaborative effort combining historical research, cutting-edge technology, and artistic vision to create authentic experiences that transport users to pivotal moments in history.
               </p>
             </div>
@@ -229,10 +229,10 @@ export default function AboutPage() {
           visibleSections.has('mission') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'
         }`}>
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-5xl md:text-6xl lg:text-7xl font-light text-white leading-[1.3] mb-12">
+            <h2 className="text-5xl md:text-6xl lg:text-7xl font-light text-white leading-[1.3] mb-12" style={{ fontFamily: 'var(--font-work-sans)' }}>
               From the dusty streets of frontier towns to the steel rails that connected a nation
             </h2>
-            <p className="text-xl md:text-2xl text-gray-400 leading-relaxed font-light">
+            <p className="text-xl md:text-2xl text-gray-400 leading-relaxed font-light" style={{ fontFamily: 'var(--font-work-sans)' }}>
               We're committed to capturing every detail, every story, and every lesson from our collective past. Through meticulous research and innovative technology, we preserve history for future generations.
             </p>
           </div>
@@ -258,7 +258,7 @@ export default function AboutPage() {
             </div>
 
             {/* Text */}
-            <span className="relative z-10 text-gray-400 group-hover:text-accent transition-colors duration-300 tracking-wider text-sm uppercase font-light">
+            <span className="relative z-10 text-gray-400 group-hover:text-accent transition-colors duration-300 tracking-[0.25em] uppercase" style={{ fontFamily: 'var(--font-bebas)', fontSize: '1.1rem' }}>
               View Our Projects
             </span>
           </Link>

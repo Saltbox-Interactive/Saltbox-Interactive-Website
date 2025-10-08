@@ -115,21 +115,6 @@ export default function Hero({ title, subtitle, backgroundImage, className = "",
           Saltbox Interactive | <span className="text-accent">{pageName}</span>
         </div>
       )}
-
-      {/* Scroll indicator */}
-      <button
-        onClick={() => {
-          document.getElementById('intro')?.scrollIntoView({ behavior: 'smooth' });
-        }}
-        className="absolute bottom-10 left-1/2 transform -translate-x-1/2 opacity-0 animate-[fadeIn_1s_1s_ease-out_forwards] cursor-pointer hover:text-accent transition-colors duration-300"
-        aria-label="Scroll down"
-      >
-        <div className="animate-bounce">
-          <svg className="w-6 h-6 text-accent/60 hover:text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-          </svg>
-        </div>
-      </button>
     </section>
   );
 }

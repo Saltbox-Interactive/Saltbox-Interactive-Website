@@ -150,27 +150,7 @@ export default function Home() {
         <div className="absolute inset-0 bg-noise opacity-5"></div>
 
         <div className="container mx-auto max-w-3xl relative z-10">
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-8">
-            <Link href="/projects" className="group relative inline-flex items-center justify-center px-8 py-4 overflow-hidden transition-all duration-300">
-              {/* Background border */}
-              <div className="absolute inset-0 border border-gray-500 group-hover:opacity-0 transition-opacity duration-300"></div>
-
-              {/* Corner borders (hover state) */}
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <div className="absolute top-0 left-0 w-4 h-4 border-t border-l border-accent"></div>
-                <div className="absolute top-0 right-0 w-4 h-4 border-t border-r border-accent"></div>
-                <div className="absolute bottom-0 left-0 w-4 h-4 border-b border-l border-accent"></div>
-                <div className="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-accent"></div>
-              </div>
-
-              {/* Text */}
-              <span className="relative z-10 text-gray-400 group-hover:text-accent transition-colors duration-300 tracking-[0.25em] uppercase" style={{ fontFamily: 'var(--font-bebas)', fontSize: '1.1rem' }}>
-                View Our Work
-              </span>
-            </Link>
-
-            <div className="h-px w-8 bg-accent/30 hidden sm:block"></div>
-
+          <div className="flex items-center justify-center">
             <Link href="/about" className="group relative inline-flex items-center justify-center px-8 py-4 overflow-hidden transition-all duration-300">
               {/* Background border */}
               <div className="absolute inset-0 border border-gray-500 group-hover:opacity-0 transition-opacity duration-300"></div>
@@ -278,6 +258,33 @@ export default function Home() {
             </div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* View Our Work Button */}
+      <section className="py-16 px-6 relative bg-black z-20">
+        <div className="absolute inset-0 bg-noise opacity-5"></div>
+
+        <div className="container mx-auto max-w-3xl relative z-10">
+          <div className="flex items-center justify-center">
+            <Link href="/projects" className="group relative inline-flex items-center justify-center px-8 py-4 overflow-hidden transition-all duration-300">
+              {/* Background border */}
+              <div className="absolute inset-0 border border-gray-500 group-hover:opacity-0 transition-opacity duration-300"></div>
+
+              {/* Corner borders (hover state) */}
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div className="absolute top-0 left-0 w-4 h-4 border-t border-l border-accent"></div>
+                <div className="absolute top-0 right-0 w-4 h-4 border-t border-r border-accent"></div>
+                <div className="absolute bottom-0 left-0 w-4 h-4 border-b border-l border-accent"></div>
+                <div className="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-accent"></div>
+              </div>
+
+              {/* Text */}
+              <span className="relative z-10 text-gray-400 group-hover:text-accent transition-colors duration-300 tracking-[0.25em] uppercase" style={{ fontFamily: 'var(--font-bebas)', fontSize: '1.1rem' }}>
+                View Our Work
+              </span>
+            </Link>
           </div>
         </div>
       </section>
