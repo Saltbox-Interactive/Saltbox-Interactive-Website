@@ -255,6 +255,28 @@ export default function ProjectContent({ project }: { project: Project }) {
         </div>
       </section>
 
+      {/* Scrolling Text Ticker - Only for Discover Old D'Hanis */}
+      {project.slug === 'discover-old-dhanis' && (
+        <section className="relative bg-black py-6 overflow-hidden">
+          <div className="inline-flex animate-scroll-seamless" style={{ minWidth: '200%' }}>
+            <div className="flex whitespace-nowrap flex-shrink-0">
+              {[...Array(25)].map((_, i) => (
+                <span key={`a-${i}`} className="text-3xl font-light tracking-[0.15em] text-white uppercase mx-16" style={{ fontFamily: 'var(--font-bebas)' }}>
+                  Discover. Learn. Preserve.
+                </span>
+              ))}
+            </div>
+            <div className="flex whitespace-nowrap flex-shrink-0" aria-hidden="true">
+              {[...Array(25)].map((_, i) => (
+                <span key={`b-${i}`} className="text-3xl font-light tracking-[0.15em] text-white uppercase mx-16" style={{ fontFamily: 'var(--font-bebas)' }}>
+                  Discover. Learn. Preserve.
+                </span>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* Screenshots Gallery - Scroll-based Slider */}
       {project.gallery && project.gallery.length > 0 && (
         <section ref={screenshotsRef} className="relative bg-black py-20">

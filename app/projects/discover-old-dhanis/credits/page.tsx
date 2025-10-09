@@ -25,26 +25,22 @@ export default function CreditsPage() {
           <div className="space-y-6">
             <div>
               <h3 className="text-xl text-white mb-1">Patricia Markert</h3>
-              <p className="text-gray-400 mb-2">Project Lead, Archaeologist</p>
-              <a href="mailto:pmarkert@uwo.ca" className="text-accent hover:underline text-sm">pmarkert@uwo.ca</a>
+              <p className="text-gray-400">Project Lead, Archaeologist</p>
             </div>
 
             <div>
               <h3 className="text-xl text-white mb-1">Michael Salton</h3>
-              <p className="text-gray-400 mb-2">Game Development, Environment Design</p>
-              <a href="mailto:michaeldsalton@gmail.com" className="text-accent hover:underline text-sm">michaeldsalton@gmail.com</a>
+              <p className="text-gray-400">Game Development, Environment Design</p>
             </div>
 
             <div>
               <h3 className="text-xl text-white mb-1">Emily Grant</h3>
-              <p className="text-gray-400 mb-2">Art, Modelling</p>
-              <a href="mailto:grantemilym0@gmail.com" className="text-accent hover:underline text-sm">grantemilym0@gmail.com</a>
+              <p className="text-gray-400">Art, Modelling</p>
             </div>
 
             <div>
               <h3 className="text-xl text-white mb-1">Hiu Yi Joyce Lee</h3>
-              <p className="text-gray-400 mb-2">Music, Sound</p>
-              <a href="mailto:joyceleehiuyi3@gmail.com" className="text-accent hover:underline text-sm">joyceleehiuyi3@gmail.com</a>
+              <p className="text-gray-400">Music, Sound</p>
             </div>
           </div>
         </section>
@@ -85,6 +81,7 @@ export default function CreditsPage() {
             <li>Community of D'Hanis and Medina County</li>
             <li>Portal to Texas History (University of North Texas Libraries)</li>
             <li>UTSA Special Collections</li>
+            <li>Mike Katchabaw</li>
           </ul>
         </section>
 

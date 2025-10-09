@@ -42,6 +42,16 @@ export default function ProjectsSection() {
                 )}
               </div>
 
+              {/* Dark Overlay */}
+              <div className="absolute inset-0 bg-black/30"></div>
+
+              {/* Title Overlay - Centered */}
+              <div className="absolute inset-0 flex items-center justify-center">
+                <h3 className="text-5xl md:text-6xl font-light tracking-[0.15em] text-white uppercase" style={{ fontFamily: 'var(--font-bebas)' }}>
+                  {project.title}
+                </h3>
+              </div>
+
               {/* Status Badge */}
               <div className="absolute top-6 left-6 bg-black/60 backdrop-blur-sm px-4 py-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 <span className="text-xs text-accent/80 tracking-wider uppercase">{project.status}</span>

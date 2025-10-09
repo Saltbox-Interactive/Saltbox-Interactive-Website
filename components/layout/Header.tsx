@@ -133,8 +133,11 @@ export default function Header() {
                 height={48}
                 className="object-contain"
               />
-              <span className="text-xl font-normal tracking-wide text-black bg-white group-hover:bg-accent transition-colors duration-300 translate-y-0.5 uppercase px-2 py-1" style={{ fontFamily: 'var(--font-bebas)' }}>
-                Saltbox Interactive
+              <span className="relative text-xl font-normal tracking-wide translate-y-0.5 uppercase px-2 py-1 overflow-hidden" style={{ fontFamily: 'var(--font-bebas)' }}>
+                <span className="relative z-10 text-black group-hover:text-white transition-colors duration-300">
+                  Saltbox Interactive
+                </span>
+                <span className="absolute inset-0 bg-white transform translate-x-0 group-hover:-translate-x-full transition-transform duration-500 ease-in-out"></span>
               </span>
             </Link>
 
@@ -221,7 +224,7 @@ export default function Header() {
                 <Link
                   href="/projects"
                   onClick={() => setIsMenuOpen(false)}
-                  className={`text-4xl md:text-5xl font-light tracking-[0.15em] text-white hover:text-accent transition-all duration-500 uppercase ${
+                  className={`group relative text-4xl md:text-5xl font-light tracking-[0.15em] uppercase overflow-hidden inline-block px-2 ${
                     isMenuOpen ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
                   }`}
                   style={{
@@ -229,12 +232,15 @@ export default function Header() {
                     transitionDelay: isMenuOpen ? '200ms' : '0ms'
                   }}
                 >
-                  Projects
+                  <span className="relative z-10 text-white group-hover:text-black transition-colors duration-300">
+                    Projects
+                  </span>
+                  <span className="absolute inset-0 bg-white transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-in-out"></span>
                 </Link>
                 <Link
                   href="/about"
                   onClick={() => setIsMenuOpen(false)}
-                  className={`text-4xl md:text-5xl font-light tracking-[0.15em] text-white hover:text-accent transition-all duration-500 uppercase ${
+                  className={`group relative text-4xl md:text-5xl font-light tracking-[0.15em] uppercase overflow-hidden inline-block px-2 ${
                     isMenuOpen ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
                   }`}
                   style={{
@@ -242,12 +248,15 @@ export default function Header() {
                     transitionDelay: isMenuOpen ? '350ms' : '0ms'
                   }}
                 >
-                  About
+                  <span className="relative z-10 text-white group-hover:text-black transition-colors duration-300">
+                    About
+                  </span>
+                  <span className="absolute inset-0 bg-white transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-in-out"></span>
                 </Link>
                 <Link
                   href="/contact"
                   onClick={() => setIsMenuOpen(false)}
-                  className={`text-4xl md:text-5xl font-light tracking-[0.15em] text-white hover:text-accent transition-all duration-500 uppercase ${
+                  className={`group relative text-4xl md:text-5xl font-light tracking-[0.15em] uppercase overflow-hidden inline-block px-2 ${
                     isMenuOpen ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
                   }`}
                   style={{
@@ -255,7 +264,10 @@ export default function Header() {
                     transitionDelay: isMenuOpen ? '500ms' : '0ms'
                   }}
                 >
-                  Contact
+                  <span className="relative z-10 text-white group-hover:text-black transition-colors duration-300">
+                    Contact
+                  </span>
+                  <span className="absolute inset-0 bg-white transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-in-out"></span>
                 </Link>
               </div>
 
