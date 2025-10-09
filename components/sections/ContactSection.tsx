@@ -13,6 +13,8 @@ export default function ContactSection() {
   });
 
   const [isVisible, setIsVisible] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -34,9 +36,39 @@ export default function ContactSection() {
     return () => observer.disconnect();
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        setSubmitStatus('success');
+        setFormData({
+          name: "",
+          email: "",
+          subject: "",
+          message: "",
+        });
+        // Reset success message after 5 seconds
+        setTimeout(() => setSubmitStatus('idle'), 5000);
+      } else {
+        setSubmitStatus('error');
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -139,9 +171,23 @@ export default function ContactSection() {
               </div>
 
               <div className="text-center">
-                <Button type="submit" variant="outline" size="lg" className="w-full md:w-auto min-w-[200px]">
-                  Send Message
+                <Button
+                  type="submit"
+                  variant="outline"
+                  size="lg"
+                  className="w-full md:w-auto min-w-[200px]"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? 'Sending...' : 'Send Message'}
                 </Button>
+
+                {submitStatus === 'success' && (
+                  <p className="mt-4 text-accent">Message sent successfully! We'll get back to you soon.</p>
+                )}
+
+                {submitStatus === 'error' && (
+                  <p className="mt-4 text-red-500">Failed to send message. Please try again or email us directly.</p>
+                )}
               </div>
             </form>
           </CardContent>
