@@ -4,7 +4,6 @@ import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Project } from "@/lib/data/projects";
-import { useScrollSpeed } from "@/hooks/useScrollSpeed";
 import ParallaxImage from "@/components/ParallaxImage";
 
 export default function ProjectContent({ project }: { project: Project }) {
@@ -20,12 +19,6 @@ export default function ProjectContent({ project }: { project: Project }) {
   const [playNowOpacity, setPlayNowOpacity] = useState(1);
   const mouseTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-
-  // Apply slow scroll speed to screenshots section
-  useScrollSpeed(screenshotsRef, {
-    speed: 4.0, // Moderately slow - 3x slower than normal
-    threshold: 0.5, // Activate only when section is 50% visible - more precise zone
-  });
 
   useEffect(() => {
     const handleScroll = () => {
@@ -168,15 +161,15 @@ export default function ProjectContent({ project }: { project: Project }) {
         className="fixed bottom-12 right-12 z-50 transition-transform duration-500 ease-out"
         style={{ transform: `translateY(${playNowOpacity * 200}px)` }}
       >
-        <div className="flex items-center gap-4 px-6 py-4 bg-gray-800/80 backdrop-blur-sm">
-          <span className="text-white text-lg font-light tracking-wider uppercase" style={{ fontFamily: 'var(--font-bebas)' }}>
+        <div className="flex items-center gap-4 px-6 py-4 bg-neutral-900/80 backdrop-blur-sm rounded-md">
+          <span className="text-accent text-lg font-light tracking-wider uppercase" style={{ fontFamily: 'var(--font-bebas)' }}>
             PLAY NOW:
           </span>
           <a
             href="https://store.steampowered.com/app/3140860/Discover_Old_DHanis/"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-gray-400 hover:text-accent transition-colors duration-300"
+            className="text-accent hover:text-accent/80 transition-colors duration-300"
             aria-label="Steam"
           >
             <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -261,15 +254,19 @@ export default function ProjectContent({ project }: { project: Project }) {
             <div className="relative w-full aspect-video">
                 {project.gallery.map((image, idx) => {
                   const isVisible = idx === currentImageIndex;
+                  const isNext = idx === currentImageIndex + 1;
+                  const isPrev = idx === currentImageIndex - 1;
 
                   return (
                     <div
                       key={idx}
                       className="absolute inset-0 w-full h-full"
                       style={{
-                        opacity: isVisible ? 1 : 0,
-                        transition: 'opacity 0.3s ease-out',
-                        pointerEvents: isVisible ? 'auto' : 'none'
+                        opacity: isVisible ? 1 : (isNext || isPrev) ? 0.15 : 0,
+                        transform: isNext ? 'translateX(10%)' : isPrev ? 'translateX(-10%)' : 'translateX(0)',
+                        transition: 'opacity 0.5s ease-out, transform 0.5s ease-out',
+                        pointerEvents: isVisible ? 'auto' : 'none',
+                        zIndex: isVisible ? 10 : 1
                       }}
                     >
                       <Image
@@ -521,27 +518,20 @@ export default function ProjectContent({ project }: { project: Project }) {
                   href="https://store.steampowered.com/app/3140860/Discover_Old_DHanis/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group relative inline-flex items-center justify-center gap-4 px-16 py-6 overflow-hidden transition-all duration-300"
+                  className="inline-flex items-center gap-3 group"
                 >
-                  {/* Background border */}
-                  <div className="absolute inset-0 border-2 border-gray-500 group-hover:opacity-0 transition-opacity duration-300"></div>
-
-                  {/* Corner borders (hover state) */}
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className="absolute top-0 left-0 w-6 h-6 border-t-2 border-l-2 border-accent"></div>
-                    <div className="absolute top-0 right-0 w-6 h-6 border-t-2 border-r-2 border-accent"></div>
-                    <div className="absolute bottom-0 left-0 w-6 h-6 border-b-2 border-l-2 border-accent"></div>
-                    <div className="absolute bottom-0 right-0 w-6 h-6 border-b-2 border-r-2 border-accent"></div>
-                  </div>
-
+                  <span className="text-accent transition-all duration-300 group-hover:-translate-x-1 text-xl">
+                    [
+                  </span>
                   {/* Steam Icon */}
-                  <svg className="w-8 h-8 relative z-10 text-gray-400 group-hover:text-accent transition-colors duration-300" fill="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-7 h-7 text-gray-400 group-hover:text-accent transition-colors duration-300" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M11.979 0C5.678 0 .511 4.86.022 11.037l6.432 2.658c.545-.371 1.203-.59 1.912-.59.063 0 .125.004.188.006l2.861-4.142V8.91c0-2.495 2.028-4.524 4.524-4.524 2.494 0 4.524 2.031 4.524 4.527s-2.03 4.525-4.524 4.525h-.105l-4.076 2.911c0 .052.004.105.004.159 0 1.875-1.515 3.396-3.39 3.396-1.635 0-3.016-1.173-3.331-2.727L.436 15.27C1.862 20.307 6.486 24 11.979 24c6.627 0 11.999-5.373 11.999-12S18.605 0 11.979 0zM7.54 18.21l-1.473-.61c.262.543.714.999 1.314 1.25 1.297.539 2.793-.076 3.332-1.375.263-.63.264-1.319.005-1.949s-.75-1.121-1.377-1.383c-.624-.26-1.29-.249-1.878-.03l1.523.63c.956.4 1.409 1.5 1.009 2.455-.397.957-1.497 1.41-2.454 1.012H7.54zm11.415-9.303c0-1.662-1.353-3.015-3.015-3.015-1.665 0-3.015 1.353-3.015 3.015 0 1.665 1.35 3.015 3.015 3.015 1.663 0 3.015-1.35 3.015-3.015zm-5.273-.005c0-1.252 1.013-2.266 2.265-2.266 1.249 0 2.266 1.014 2.266 2.266 0 1.251-1.017 2.265-2.266 2.265-1.253 0-2.265-1.014-2.265-2.265z"/>
                   </svg>
-
-                  {/* Text */}
-                  <span className="relative z-10 text-gray-400 group-hover:text-accent transition-colors duration-300 tracking-wider text-lg uppercase font-light">
-                    OPEN IN STEAM
+                  <span className="text-lg font-light tracking-[0.15em] text-gray-400 group-hover:text-accent transition-colors duration-300 uppercase" style={{ fontFamily: 'var(--font-bebas)' }}>
+                    Open in Steam
+                  </span>
+                  <span className="text-accent transition-all duration-300 group-hover:translate-x-1 text-xl">
+                    ]
                   </span>
                 </a>
               </div>
@@ -556,47 +546,29 @@ export default function ProjectContent({ project }: { project: Project }) {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
             {/* View Credits Button - Only for Discover Old D'Hanis */}
             {project.slug === 'discover-old-dhanis' && (
-              <Link
-                href="/projects/discover-old-dhanis/credits"
-                className="group relative inline-flex items-center justify-center px-12 py-4 overflow-hidden transition-all duration-300"
-              >
-                {/* Background border */}
-                <div className="absolute inset-0 border border-gray-500 group-hover:opacity-0 transition-opacity duration-300"></div>
-
-                {/* Corner borders (hover state) */}
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <div className="absolute top-0 left-0 w-4 h-4 border-t border-l border-accent"></div>
-                  <div className="absolute top-0 right-0 w-4 h-4 border-t border-r border-accent"></div>
-                  <div className="absolute bottom-0 left-0 w-4 h-4 border-b border-l border-accent"></div>
-                  <div className="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-accent"></div>
-                </div>
-
-                {/* Text */}
-                <span className="relative z-10 text-gray-400 group-hover:text-accent transition-colors duration-300 tracking-wider text-sm uppercase font-light">
+              <Link href="/projects/discover-old-dhanis/credits" className="inline-flex items-center gap-2 group">
+                <span className="text-accent transition-all duration-300 group-hover:-translate-x-1 text-lg">
+                  [
+                </span>
+                <span className="text-lg font-light tracking-[0.15em] text-gray-400 group-hover:text-accent transition-colors duration-300 uppercase" style={{ fontFamily: 'var(--font-bebas)' }}>
                   View Project Credits
+                </span>
+                <span className="text-accent transition-all duration-300 group-hover:translate-x-1 text-lg">
+                  ]
                 </span>
               </Link>
             )}
 
             {/* View All Projects Button */}
-            <Link
-              href="/projects"
-              className="group relative inline-flex items-center justify-center px-12 py-4 overflow-hidden transition-all duration-300"
-            >
-              {/* Background border */}
-              <div className="absolute inset-0 border border-gray-500 group-hover:opacity-0 transition-opacity duration-300"></div>
-
-              {/* Corner borders (hover state) */}
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <div className="absolute top-0 left-0 w-4 h-4 border-t border-l border-accent"></div>
-                <div className="absolute top-0 right-0 w-4 h-4 border-t border-r border-accent"></div>
-                <div className="absolute bottom-0 left-0 w-4 h-4 border-b border-l border-accent"></div>
-                <div className="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-accent"></div>
-              </div>
-
-              {/* Text */}
-              <span className="relative z-10 text-gray-400 group-hover:text-accent transition-colors duration-300 tracking-wider text-sm uppercase font-light">
+            <Link href="/projects" className="inline-flex items-center gap-2 group">
+              <span className="text-accent transition-all duration-300 group-hover:-translate-x-1 text-lg">
+                [
+              </span>
+              <span className="text-lg font-light tracking-[0.15em] text-gray-400 group-hover:text-accent transition-colors duration-300 uppercase" style={{ fontFamily: 'var(--font-bebas)' }}>
                 View All Projects
+              </span>
+              <span className="text-accent transition-all duration-300 group-hover:translate-x-1 text-lg">
+                ]
               </span>
             </Link>
           </div>

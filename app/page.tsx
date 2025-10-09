@@ -6,18 +6,32 @@ import Link from "next/link";
 import ParallaxImage from "@/components/ParallaxImage";
 import { useScrollSpeed } from "@/hooks/useScrollSpeed";
 
+const HERO_SCROLL_THRESHOLD = 300;
+
 export default function Home() {
   const [visibleSections, setVisibleSections] = useState<Set<string>>(new Set());
   const [scrollY, setScrollY] = useState(0);
+  const [virtualScroll, setVirtualScroll] = useState(0);
+  const [aboutText, setAboutText] = useState("");
+  const [introText, setIntroText] = useState("");
   const aboutRef = useRef<HTMLDivElement>(null);
   const introRef = useRef<HTMLDivElement>(null);
   const heroRef = useRef<HTMLElement>(null);
+  const scrollLockRef = useRef(false);
 
-  // Apply slow scroll speed to hero section while motto is animating
+  const aboutStaticText = "Saltbox Interactive is dedicated to preserving the past through interactive digital experiences. We create explorable virtual environments";
+  const aboutTypedText = " where history comes alive.";
+  const aboutFullText = aboutStaticText + aboutTypedText;
+
+  const introStaticText = "Step into the past and unravel the rich history of Old D'Hanis. Explore this 19th-century town, from Alsatian and German settlers of 1847 to Black and Mexican families post-Civil War. Unearth archival fragments, archaeological photos, and oral histories";
+  const introTypedText = " to piece together the town's alluring stories.";
+  const introFullText = introStaticText + introTypedText;
+
+  // Apply very slow scroll speed to hero section for motto animation effect
   useScrollSpeed(heroRef, {
-    speed: 4.0, // Slow scroll during motto animation
-    threshold: 0.5, // Activate when section is 50% visible
-    downOnly: true, // Only slow down when scrolling down, not up
+    speed: 6.0, // Very slow scroll during motto animation
+    threshold: 0.5,
+    downOnly: true,
   });
 
   useEffect(() => {
@@ -47,14 +61,64 @@ export default function Home() {
     return () => observer.disconnect();
   }, []);
 
+  // Typing effect for about paragraph - only types the last few words
+  useEffect(() => {
+    if (visibleSections.has('about') && aboutText.length < aboutTypedText.length) {
+      const timeout = setTimeout(() => {
+        setAboutText(aboutTypedText.slice(0, aboutText.length + 1));
+      }, 50);
+      return () => clearTimeout(timeout);
+    }
+  }, [visibleSections, aboutText, aboutTypedText]);
+
+  // Typing effect for intro paragraph - only types the last few words
+  useEffect(() => {
+    if (visibleSections.has('intro') && introText.length < introTypedText.length) {
+      const timeout = setTimeout(() => {
+        setIntroText(introTypedText.slice(0, introText.length + 1));
+      }, 50);
+      return () => clearTimeout(timeout);
+    }
+  }, [visibleSections, introText, introTypedText]);
+
   useEffect(() => {
     const handleScroll = () => {
       setScrollY(window.scrollY);
+
+      // Reset virtual scroll to full threshold (animated out) when we've scrolled past the hero
+      if (window.scrollY > 100) {
+        setVirtualScroll(HERO_SCROLL_THRESHOLD);
+        scrollLockRef.current = false;
+      } else if (window.scrollY === 0) {
+        // Reset to 0 when back at top
+        setVirtualScroll(0);
+      }
+    };
+
+    const handleWheel = (e: WheelEvent) => {
+      // Only lock scroll when we're at the top of the page
+      if (window.scrollY === 0) {
+        const newVirtualScroll = Math.max(0, Math.min(HERO_SCROLL_THRESHOLD, virtualScroll + e.deltaY));
+        setVirtualScroll(newVirtualScroll);
+
+        // Lock scrolling until threshold is reached
+        if (newVirtualScroll < HERO_SCROLL_THRESHOLD) {
+          e.preventDefault();
+          scrollLockRef.current = true;
+        } else {
+          scrollLockRef.current = false;
+        }
+      }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    window.addEventListener('wheel', handleWheel, { passive: false });
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('wheel', handleWheel);
+    };
+  }, [virtualScroll]);
 
   return (
     <>
@@ -90,8 +154,8 @@ export default function Home() {
               className="text-5xl md:text-7xl lg:text-8xl font-light tracking-[0.3em] text-white transition-all duration-300"
               style={{
                 fontFamily: 'var(--font-bebas)',
-                transform: `translateX(${scrollY * -1.5}px)`,
-                opacity: Math.max(0, 1 - scrollY / 300)
+                transform: `translateX(${virtualScroll * -1.5}px)`,
+                opacity: Math.max(0, 1 - virtualScroll / HERO_SCROLL_THRESHOLD)
               }}
             >
               DISCOVER
@@ -100,8 +164,8 @@ export default function Home() {
               className="text-5xl md:text-7xl lg:text-8xl font-light tracking-[0.3em] text-white transition-all duration-300"
               style={{
                 fontFamily: 'var(--font-bebas)',
-                transform: `translateX(${scrollY * 1.5}px)`,
-                opacity: Math.max(0, 1 - scrollY / 300)
+                transform: `translateX(${virtualScroll * 1.5}px)`,
+                opacity: Math.max(0, 1 - virtualScroll / HERO_SCROLL_THRESHOLD)
               }}
             >
               LEARN
@@ -110,8 +174,8 @@ export default function Home() {
               className="text-5xl md:text-7xl lg:text-8xl font-light tracking-[0.3em] text-white transition-all duration-300"
               style={{
                 fontFamily: 'var(--font-bebas)',
-                transform: `translateX(${scrollY * -1.5}px)`,
-                opacity: Math.max(0, 1 - scrollY / 300)
+                transform: `translateX(${virtualScroll * -1.5}px)`,
+                opacity: Math.max(0, 1 - virtualScroll / HERO_SCROLL_THRESHOLD)
               }}
             >
               PRESERVE
@@ -133,14 +197,30 @@ export default function Home() {
               : 'opacity-0 translate-y-20'
           }`}
         >
-          <h2 className="text-5xl md:text-6xl lg:text-7xl font-light tracking-[0.15em] text-white mb-8" style={{ fontFamily: 'var(--font-bebas)' }}>
+          <h2
+            className="text-5xl md:text-6xl lg:text-7xl font-light tracking-[0.15em] text-white mb-8"
+            style={{
+              fontFamily: 'var(--font-bebas)',
+            }}
+          >
             WE CREATE<br />
             IMMERSIVE HISTORICAL<br />
             EXPERIENCES
           </h2>
 
-          <p className="text-xl md:text-2xl text-gray-300 leading-relaxed max-w-3xl mx-auto" style={{ fontFamily: 'var(--font-work-sans)' }}>
-            <span className="bg-white text-black px-1">Saltbox Interactive</span> is dedicated to preserving the past through interactive digital experiences. We create explorable virtual environments where history comes alive.
+          <p
+            className="text-xl md:text-2xl text-gray-300 leading-relaxed max-w-3xl mx-auto"
+            style={{
+              fontFamily: 'var(--font-work-sans)',
+            }}
+          >
+            {aboutStaticText.split('Saltbox Interactive').map((part, i, arr) => (
+              <span key={i}>
+                {part}
+                {i < arr.length - 1 && <span className="bg-white text-black px-1">Saltbox Interactive</span>}
+              </span>
+            ))}
+            {aboutText}
           </p>
         </div>
       </section>
@@ -230,7 +310,7 @@ export default function Home() {
 
             <div className="mb-12">
               <p className="text-gray-300 text-xl leading-relaxed" style={{ fontFamily: 'var(--font-work-sans)' }}>
-                Step into the past and unravel the rich history of Old D'Hanis. Explore this 19th-century town, from Alsatian and German settlers of 1847 to Black and Mexican families post-Civil War. Unearth archival fragments, archaeological photos, and oral histories to piece together the town's alluring stories.
+                {introStaticText}{introText}
               </p>
             </div>
 
@@ -262,21 +342,15 @@ export default function Home() {
 
         <div className="container mx-auto max-w-3xl relative z-10">
           <div className="flex items-center justify-center">
-            <Link href="/projects" className="group relative inline-flex items-center justify-center px-8 py-4 overflow-hidden transition-all duration-300">
-              {/* Background border */}
-              <div className="absolute inset-0 border border-gray-500 group-hover:opacity-0 transition-opacity duration-300"></div>
-
-              {/* Corner borders (hover state) */}
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <div className="absolute top-0 left-0 w-4 h-4 border-t border-l border-accent"></div>
-                <div className="absolute top-0 right-0 w-4 h-4 border-t border-r border-accent"></div>
-                <div className="absolute bottom-0 left-0 w-4 h-4 border-b border-l border-accent"></div>
-                <div className="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-accent"></div>
-              </div>
-
-              {/* Text */}
-              <span className="relative z-10 text-gray-400 group-hover:text-accent transition-colors duration-300 tracking-[0.25em] uppercase" style={{ fontFamily: 'var(--font-bebas)', fontSize: '1.1rem' }}>
+            <Link href="/projects" className="flex items-center gap-2 group">
+              <span className="text-accent transition-all duration-300 group-hover:-translate-x-1 text-lg">
+                [
+              </span>
+              <span className="text-lg font-light tracking-[0.15em] text-gray-400 group-hover:text-accent transition-colors duration-300 uppercase" style={{ fontFamily: 'var(--font-bebas)' }}>
                 View Our Work
+              </span>
+              <span className="text-accent transition-all duration-300 group-hover:translate-x-1 text-lg">
+                ]
               </span>
             </Link>
           </div>

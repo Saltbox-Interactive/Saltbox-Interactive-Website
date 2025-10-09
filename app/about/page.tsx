@@ -7,31 +7,8 @@ import Hero from "@/components/sections/Hero";
 import ParallaxImage from "@/components/ParallaxImage";
 
 export default function AboutPage() {
-  const [scrollY, setScrollY] = useState(0);
   const [visibleSections, setVisibleSections] = useState<Set<string>>(new Set());
   const sectionRefs = useRef<{ [key: string]: HTMLElement | null }>({});
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const scrollSequenceRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-
-      // Handle scroll-triggered image sequence
-      if (scrollSequenceRef.current) {
-        const rect = scrollSequenceRef.current.getBoundingClientRect();
-        const scrollProgress = -rect.top / (rect.height - window.innerHeight);
-
-        if (scrollProgress >= 0 && scrollProgress <= 1) {
-          // Map scroll progress to image index (0-3 for 4 images)
-          const imageIndex = Math.min(3, Math.floor(scrollProgress * 4));
-          setCurrentImageIndex(imageIndex);
-        }
-      }
-    };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   useEffect(() => {
     const observerOptions = {
@@ -148,53 +125,10 @@ export default function AboutPage() {
               <div className="h-1 w-20 bg-accent"></div>
             </div>
             <div className="md:col-span-3 space-y-6">
-              <p className="text-2xl md:text-3xl text-white leading-[1.4] font-light" style={{ fontFamily: 'var(--font-work-sans)' }}>
-                We're a team of historians, developers, and artists united by our passion for preserving the past.
-              </p>
               <p className="text-lg md:text-xl text-gray-400 leading-relaxed" style={{ fontFamily: 'var(--font-work-sans)' }}>
                 Each project is a collaborative effort combining historical research, cutting-edge technology, and artistic vision to create authentic experiences that transport users to pivotal moments in history.
               </p>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Scroll-Triggered Image Sequence */}
-      <section
-        ref={scrollSequenceRef}
-        className="relative bg-black"
-        style={{ height: '400vh' }}
-      >
-        <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
-          {[
-            '/images/dhanis1.jpg',
-            '/images/dhanis2.jpg',
-            '/images/dhanis3.jpg',
-            '/images/dod-cover.jpg'
-          ].map((src, index) => (
-            <img
-              key={src}
-              src={src}
-              alt={`Team image ${index + 1}`}
-              className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500"
-              style={{
-                opacity: currentImageIndex === index ? 1 : 0,
-                zIndex: currentImageIndex === index ? 1 : 0
-              }}
-            />
-          ))}
-
-          {/* Optional: Progress indicator */}
-          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex gap-2 z-10">
-            {[0, 1, 2, 3].map((index) => (
-              <div
-                key={index}
-                className="w-2 h-2 rounded-full transition-colors duration-300"
-                style={{
-                  backgroundColor: currentImageIndex === index ? '#C9A063' : 'rgba(255,255,255,0.3)'
-                }}
-              />
-            ))}
           </div>
         </div>
       </section>
@@ -242,24 +176,15 @@ export default function AboutPage() {
       {/* View Projects CTA */}
       <section className="relative py-20 bg-black">
         <div className="container mx-auto px-6 text-center">
-          <Link
-            href="/projects"
-            className="group relative inline-flex items-center justify-center px-12 py-4 overflow-hidden transition-all duration-300"
-          >
-            {/* Background border */}
-            <div className="absolute inset-0 border border-gray-500 group-hover:opacity-0 transition-opacity duration-300"></div>
-
-            {/* Corner borders (hover state) */}
-            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              <div className="absolute top-0 left-0 w-4 h-4 border-t border-l border-accent"></div>
-              <div className="absolute top-0 right-0 w-4 h-4 border-t border-r border-accent"></div>
-              <div className="absolute bottom-0 left-0 w-4 h-4 border-b border-l border-accent"></div>
-              <div className="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-accent"></div>
-            </div>
-
-            {/* Text */}
-            <span className="relative z-10 text-gray-400 group-hover:text-accent transition-colors duration-300 tracking-[0.25em] uppercase" style={{ fontFamily: 'var(--font-bebas)', fontSize: '1.1rem' }}>
+          <Link href="/projects" className="flex items-center justify-center gap-2 group">
+            <span className="text-accent transition-all duration-300 group-hover:-translate-x-1 text-lg">
+              [
+            </span>
+            <span className="text-lg font-light tracking-[0.15em] text-gray-400 group-hover:text-accent transition-colors duration-300 uppercase" style={{ fontFamily: 'var(--font-bebas)' }}>
               View Our Projects
+            </span>
+            <span className="text-accent transition-all duration-300 group-hover:translate-x-1 text-lg">
+              ]
             </span>
           </Link>
         </div>

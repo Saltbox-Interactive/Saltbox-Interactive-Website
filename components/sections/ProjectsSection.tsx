@@ -19,14 +19,14 @@ export default function ProjectsSection() {
   }, []);
 
   return (
-    <section id="projects" className="relative bg-black py-20 px-6">
-      {/* Projects Grid */}
-      <div className="flex flex-col md:flex-row gap-6 max-w-[1400px] mx-auto">
+    <section id="projects" className="relative bg-black py-32 px-6">
+      {/* Projects Stack */}
+      <div className="flex flex-col gap-12 max-w-[1400px] mx-auto">
         {projects.map((project, index) => (
-          <div key={project.id} className="md:flex-1">
+          <div key={project.id} className="w-full">
             <Link
               href={`/projects/${project.slug}`}
-              className="relative h-[600px] block overflow-hidden group"
+              className="relative h-[400px] block overflow-hidden group"
               onMouseEnter={() => setHoveredProject(index)}
               onMouseLeave={() => setHoveredProject(null)}
             >
@@ -51,7 +51,7 @@ export default function ProjectsSection() {
             {/* Title Below Card */}
             <Link
               href={`/projects/${project.slug}`}
-              className="mt-4 flex items-center gap-2 group/title"
+              className="mt-8 flex items-center gap-2 group/title"
             >
               <span className="text-accent transition-all duration-300 group-hover/title:-translate-x-1 text-lg">
                 [

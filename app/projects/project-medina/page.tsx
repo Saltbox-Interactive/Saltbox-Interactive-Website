@@ -9,24 +9,15 @@ export default function ProjectMedinaPage() {
         </h1>
         <p className="text-3xl md:text-4xl text-gray-400 mb-16">Coming soon...</p>
 
-        <Link
-          href="/projects"
-          className="group relative inline-flex items-center justify-center px-12 py-4 overflow-hidden transition-all duration-300"
-        >
-          {/* Background border */}
-          <div className="absolute inset-0 border border-gray-500 group-hover:opacity-0 transition-opacity duration-300"></div>
-
-          {/* Corner borders (hover state) */}
-          <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            <div className="absolute top-0 left-0 w-4 h-4 border-t border-l border-accent"></div>
-            <div className="absolute top-0 right-0 w-4 h-4 border-t border-r border-accent"></div>
-            <div className="absolute bottom-0 left-0 w-4 h-4 border-b border-l border-accent"></div>
-            <div className="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-accent"></div>
-          </div>
-
-          {/* Text */}
-          <span className="relative z-10 text-gray-400 group-hover:text-accent transition-colors duration-300 tracking-wider text-sm uppercase font-light">
+        <Link href="/projects" className="inline-flex items-center gap-2 group">
+          <span className="text-accent transition-all duration-300 group-hover:-translate-x-1 text-lg">
+            [
+          </span>
+          <span className="text-lg font-light tracking-[0.15em] text-gray-400 group-hover:text-accent transition-colors duration-300 uppercase" style={{ fontFamily: 'var(--font-bebas)' }}>
             View All Projects
+          </span>
+          <span className="text-accent transition-all duration-300 group-hover:translate-x-1 text-lg">
+            ]
           </span>
         </Link>
       </div>
