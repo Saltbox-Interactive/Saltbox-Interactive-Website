@@ -1,5 +1,16 @@
 import Hero from "@/components/sections/Hero";
 import ProjectsSection from "@/components/sections/ProjectsSection";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Our Projects",
+  description: "Explore Saltbox Interactive's portfolio of immersive historical experiences. From Old D'Hanis to other historical preservation projects, discover how we bring the past to life.",
+  openGraph: {
+    title: "Our Projects | Saltbox Interactive",
+    description: "Explore our portfolio of immersive historical experiences and digital preservation projects.",
+    images: ["/images/dod-cover.jpg"]
+  }
+};
 
 export default function ProjectsPage() {
   return (

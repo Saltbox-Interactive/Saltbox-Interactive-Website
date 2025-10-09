@@ -7,8 +7,17 @@ import Hero from "@/components/sections/Hero";
 import ParallaxImage from "@/components/ParallaxImage";
 
 export default function AboutPage() {
+  const [scrollY, setScrollY] = useState(0);
   const [visibleSections, setVisibleSections] = useState<Set<string>>(new Set());
   const sectionRefs = useRef<{ [key: string]: HTMLElement | null }>({});
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   useEffect(() => {
     const observerOptions = {
@@ -75,10 +84,12 @@ export default function AboutPage() {
         }`}>
           {/* Large Featured Image */}
           <div className="relative h-[70vh] md:h-[80vh] overflow-hidden">
-            <img
+            <Image
               src="/images/dhanis1.jpg"
-              alt="Historical Reconstruction"
-              className="w-full h-full object-cover"
+              alt="Historic limestone building with arched doorway in Old D'Hanis, showcasing 19th-century Alsatian architecture"
+              fill
+              className="object-cover"
+              priority
             />
           </div>
 
@@ -88,7 +99,7 @@ export default function AboutPage() {
               <div className="relative h-[40vh] md:h-[50vh]">
                 <ParallaxImage
                   src="/images/dhanis2.jpg"
-                  alt="Team at work"
+                  alt="Detailed view of weathered stone masonry and traditional construction techniques in Old D'Hanis historic site"
                   className="w-full h-full"
                   intensity={1}
                   direction="vertical"
@@ -97,7 +108,7 @@ export default function AboutPage() {
               <div className="relative h-[40vh] md:h-[50vh] mt-16">
                 <ParallaxImage
                   src="/images/dhanis3.jpg"
-                  alt="Historical detail"
+                  alt="Close-up of historic architectural elements and textures from the Old D'Hanis settlement"
                   className="w-full h-full"
                   intensity={1}
                   direction="vertical"
@@ -143,10 +154,11 @@ export default function AboutPage() {
           visibleSections.has('mission-image') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'
         }`}>
           <div className="relative h-[60vh] md:h-[80vh] overflow-hidden">
-            <img
+            <Image
               src="/images/dod-cover.jpg"
-              alt="Our Work"
-              className="w-full h-full object-cover"
+              alt="Atmospheric view of historic Old D'Hanis landscape, featuring preserved ruins and vegetation of the 19th-century Texas settlement"
+              fill
+              className="object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
           </div>
@@ -163,10 +175,10 @@ export default function AboutPage() {
           visibleSections.has('mission') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'
         }`}>
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-5xl md:text-6xl lg:text-7xl font-light text-white leading-[1.3] mb-12" style={{ fontFamily: 'var(--font-work-sans)' }}>
-              From the dusty streets of frontier towns to the steel rails that connected a nation
+            <h2 className="text-5xl md:text-6xl lg:text-7xl font-light tracking-[0.1em] text-white leading-[1.3] mb-12 uppercase" style={{ fontFamily: 'var(--font-bebas)' }}>
+              Experience history like never before
             </h2>
-            <p className="text-xl md:text-2xl text-gray-400 leading-relaxed font-light" style={{ fontFamily: 'var(--font-work-sans)' }}>
+            <p className="text-xl md:text-2xl text-gray-400 leading-relaxed">
               We're committed to capturing every detail, every story, and every lesson from our collective past. Through meticulous research and innovative technology, we preserve history for future generations.
             </p>
           </div>

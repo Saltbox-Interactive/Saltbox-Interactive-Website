@@ -35,7 +35,7 @@ export default function ProjectsSection() {
                 {project.thumbnail && (
                   <Image
                     src={project.thumbnail}
-                    alt={project.title}
+                    alt={`${project.title} - ${project.description}`}
                     fill
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
                   />

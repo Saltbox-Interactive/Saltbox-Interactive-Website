@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Hero from "@/components/sections/Hero";
 import Link from "next/link";
+import Image from "next/image";
 import ParallaxImage from "@/components/ParallaxImage";
 import { useScrollSpeed } from "@/hooks/useScrollSpeed";
 
@@ -255,10 +256,12 @@ export default function Home() {
             opacity: scrollY < 1800 ? 1 : Math.max(0, 1 - (scrollY - 1800) / 600)
           }}
         >
-          <img
+          <Image
             src="/images/dhanis1.jpg"
-            alt="Discover Old D'Hanis Background"
-            className="w-full h-full object-cover"
+            alt="Panoramic view of Old D'Hanis historic site featuring preserved stone structures from the 1847 Alsatian settlement in Texas"
+            fill
+            className="object-cover"
+            priority
           />
           {/* Vignette overlay - Very dramatic fade */}
           <div
@@ -292,7 +295,7 @@ export default function Home() {
               <div className="flex-shrink-0 w-[40vw] max-w-[550px] ml-48">
                 <ParallaxImage
                   src="/images/dod-cover.jpg"
-                  alt="Discover Old D'Hanis"
+                  alt="Discover Old D'Hanis game cover art showing the historic settlement ruins with dramatic sky and authentic 19th-century Texas landscape"
                   className="w-full aspect-[2/3]"
                   intensity={1}
                   direction="vertical"

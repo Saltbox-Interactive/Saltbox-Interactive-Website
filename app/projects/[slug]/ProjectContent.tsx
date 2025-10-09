@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Project } from "@/lib/data/projects";
 import ParallaxImage from "@/components/ParallaxImage";
+import { VideoGameSchema, BreadcrumbSchema } from "@/components/StructuredData";
 
 export default function ProjectContent({ project }: { project: Project }) {
   const [scrollY, setScrollY] = useState(0);
@@ -117,6 +118,13 @@ export default function ProjectContent({ project }: { project: Project }) {
 
   return (
     <>
+      <VideoGameSchema project={project} />
+      <BreadcrumbSchema items={[
+        { name: "Home", url: "https://saltboxinteractive.com" },
+        { name: "Projects", url: "https://saltboxinteractive.com/projects" },
+        { name: project.title, url: `https://saltboxinteractive.com/projects/${project.slug}` }
+      ]} />
+
       {/* Hero Section with Game Logo/Title */}
       <section className="relative min-h-screen flex items-center justify-center bg-black overflow-hidden">
         {/* Background Image with Parallax */}
@@ -129,7 +137,7 @@ export default function ProjectContent({ project }: { project: Project }) {
           >
             <Image
               src={project.thumbnail}
-              alt={project.title}
+              alt={`Hero background image for ${project.title} - ${project.description}`}
               fill
               className="object-cover opacity-40"
             />
@@ -271,7 +279,7 @@ export default function ProjectContent({ project }: { project: Project }) {
                     >
                       <Image
                         src={image}
-                        alt={`${project.title} Screenshot ${idx + 1}`}
+                        alt={`${project.title} gameplay screenshot ${idx + 1} - Interactive historical exploration and authentic period environment`}
                         fill
                         className="object-cover"
                       />
@@ -388,7 +396,7 @@ export default function ProjectContent({ project }: { project: Project }) {
               {project.gallery && project.gallery[0] && (
                 <ParallaxImage
                   src={project.gallery[0]}
-                  alt={`${project.title} Feature 1`}
+                  alt={`In-game screenshot showcasing the immersive historical environment and exploration mechanics of ${project.title}`}
                   className="aspect-video"
                   intensity={1}
                   direction="vertical"
@@ -436,7 +444,7 @@ export default function ProjectContent({ project }: { project: Project }) {
               {project.gallery && project.gallery[1] && (
                 <ParallaxImage
                   src={project.gallery[1]}
-                  alt={`${project.title} Feature 2`}
+                  alt={`Detailed gameplay view highlighting interactive historical elements and authentic period reconstruction in ${project.title}`}
                   className="aspect-video"
                   intensity={1}
                   direction="vertical"
@@ -455,7 +463,7 @@ export default function ProjectContent({ project }: { project: Project }) {
               {/* Image - Left Side */}
               <ParallaxImage
                 src="/images/dominics.jpeg"
-                alt="Discover Old D'Hanis Soundtrack"
+                alt="Album artwork for the Discover Old D'Hanis Official Soundtrack, composed and produced by Joyce Lee"
                 className="aspect-square"
                 intensity={1}
                 direction="vertical"
@@ -501,7 +509,7 @@ export default function ProjectContent({ project }: { project: Project }) {
               {/* Background Image */}
               <Image
                 src={project.thumbnail || '/images/dod-cover.jpg'}
-                alt="Play Discover Old D'Hanis on Steam"
+                alt="Call-to-action banner featuring Discover Old D'Hanis with Steam platform link for game purchase"
                 fill
                 className="object-cover opacity-30"
               />

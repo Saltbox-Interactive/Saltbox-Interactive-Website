@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import SmoothScroll from "@/components/SmoothScroll";
+import { OrganizationSchema } from "@/components/StructuredData";
 import "lenis/dist/lenis.css";
 
 const workSans = Work_Sans({
@@ -28,8 +29,49 @@ const archivoBlack = Archivo_Black({
 });
 
 export const metadata: Metadata = {
-  title: "Saltbox Interactive",
-  description: "Saltbox Interactive is an independent game studio creating immersive gaming experiences.",
+  title: {
+    default: "Saltbox Interactive | Preserving History Through Interactive Experiences",
+    template: "%s | Saltbox Interactive"
+  },
+  description: "Saltbox Interactive creates immersive virtual environments where history comes alive. We preserve the past through interactive digital experiences, transforming historical locations into explorable virtual worlds.",
+  keywords: ["historical preservation", "virtual history", "interactive experiences", "digital heritage", "historical reconstruction", "Old D'Hanis", "virtual archaeology"],
+  authors: [{ name: "Saltbox Interactive" }],
+  creator: "Saltbox Interactive",
+  publisher: "Saltbox Interactive",
+  metadataBase: new URL('https://saltboxinteractive.com'),
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://saltboxinteractive.com",
+    siteName: "Saltbox Interactive",
+    title: "Saltbox Interactive | Preserving History Through Interactive Experiences",
+    description: "Create immersive virtual environments where history comes alive. Experience the past through interactive digital preservation.",
+    images: [
+      {
+        url: "/images/dod-cover.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Saltbox Interactive - Historical Preservation"
+      }
+    ]
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Saltbox Interactive | Preserving History Through Interactive Experiences",
+    description: "Create immersive virtual environments where history comes alive.",
+    images: ["/images/dod-cover.jpg"]
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
 };
 
 export default function RootLayout({
@@ -39,6 +81,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <OrganizationSchema />
+      </head>
       <body
         className={`${workSans.variable} ${bebas.variable} ${archivoBlack.variable} antialiased relative`}
       >

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState, useEffect, useContext } from "react";
 import { usePathname } from "next/navigation";
 import { ScrollSpeedContext } from "../ScrollSpeedContext";
@@ -125,10 +126,12 @@ export default function Header() {
         <nav className="px-4 py-6 max-w-[1400px] mx-auto mt-6">
           <div className="flex justify-between items-center">
             <Link href="/" className="group flex items-center gap-4 absolute left-8">
-              <img
+              <Image
                 src="/images/saltbox-logo-blank.png"
                 alt="Saltbox Interactive Logo"
-                className="w-12 h-12 object-contain"
+                width={48}
+                height={48}
+                className="object-contain"
               />
               <span className="text-xl font-normal tracking-wide text-black bg-white group-hover:bg-accent transition-colors duration-300 translate-y-0.5 uppercase px-2 py-1" style={{ fontFamily: 'var(--font-bebas)' }}>
                 Saltbox Interactive
@@ -291,10 +294,11 @@ export default function Header() {
                 }`}
                 style={{ transitionDelay: isMenuOpen ? '300ms' : '0ms' }}
               >
-                <img
+                <Image
                   src="/images/dod-cover.jpg"
-                  alt="Discover Old D'Hanis"
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-150 group-hover:scale-105"
+                  alt="Menu panel featuring Discover Old D'Hanis project with historic stone ruins and atmospheric landscape"
+                  fill
+                  className="object-cover transition-transform duration-150 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-black/50 transition-colors duration-150 group-hover:bg-black/30"></div>
                 <div className="relative z-10 text-center">
@@ -313,10 +317,11 @@ export default function Header() {
                 }`}
                 style={{ transitionDelay: isMenuOpen ? '450ms' : '0ms' }}
               >
-                <img
+                <Image
                   src="/images/background_pic.jpg"
-                  alt="About Saltbox Interactive"
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-150 group-hover:scale-105"
+                  alt="Menu panel for About section showing historic architecture and heritage preservation work at Saltbox Interactive"
+                  fill
+                  className="object-cover transition-transform duration-150 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-black/50 transition-colors duration-150 group-hover:bg-black/30"></div>
                 <div className="relative z-10 text-center">

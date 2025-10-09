@@ -1,5 +1,16 @@
 import Hero from "@/components/sections/Hero";
 import ContactSection from "@/components/sections/ContactSection";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Contact Us",
+  description: "Get in touch with Saltbox Interactive. Partner with us to preserve history through interactive digital experiences. We collaborate with historians, museums, and educational institutions.",
+  openGraph: {
+    title: "Contact Us | Saltbox Interactive",
+    description: "Let's preserve history together. Reach out to collaborate on historical preservation projects.",
+    images: ["/images/background_pic.jpg"]
+  }
+};
 
 export default function ContactPage() {
   return (
