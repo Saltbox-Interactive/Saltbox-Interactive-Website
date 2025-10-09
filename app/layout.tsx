@@ -34,9 +34,9 @@ export const metadata: Metadata = {
     template: "%s | Saltbox Interactive"
   },
   description: "Saltbox Interactive creates immersive virtual environments where history comes alive. We preserve the past through interactive digital experiences, transforming historical locations into explorable virtual worlds.",
-  keywords: ["historical preservation", "virtual history", "interactive experiences", "digital heritage", "historical reconstruction", "Old D'Hanis", "virtual archaeology"],
-  authors: [{ name: "Saltbox Interactive" }],
-  creator: "Saltbox Interactive",
+  keywords: ["historical preservation", "virtual history", "interactive experiences", "digital heritage", "historical reconstruction", "Old D'Hanis", "virtual archaeology", "Michael Salton", "game developer", "historical games"],
+  authors: [{ name: "Michael Salton" }, { name: "Saltbox Interactive" }],
+  creator: "Michael Salton",
   publisher: "Saltbox Interactive",
   metadataBase: new URL('https://saltboxinteractive.com'),
   openGraph: {

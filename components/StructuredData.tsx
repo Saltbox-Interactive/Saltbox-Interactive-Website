@@ -6,7 +6,11 @@ export function OrganizationSchema() {
     "url": "https://saltboxinteractive.com",
     "logo": "https://saltboxinteractive.com/images/dod-cover.jpg",
     "description": "Saltbox Interactive creates immersive virtual environments where history comes alive. We preserve the past through interactive digital experiences.",
-    "foundingDate": "2020",
+    "foundingDate": "2024",
+    "founder": {
+      "@type": "Person",
+      "name": "Michael Salton"
+    },
     "sameAs": [
       "https://store.steampowered.com/developer/saltboxinteractive"
     ],
@@ -36,7 +40,15 @@ export function VideoGameSchema({ project }: { project: any }) {
     "datePublished": project.releaseDate,
     "author": {
       "@type": "Organization",
-      "name": "Saltbox Interactive"
+      "name": "Saltbox Interactive",
+      "founder": {
+        "@type": "Person",
+        "name": "Michael Salton"
+      }
+    },
+    "creator": {
+      "@type": "Person",
+      "name": "Michael Salton"
     },
     "image": project.thumbnail,
     "aggregateRating": project.rating ? {
