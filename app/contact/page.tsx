@@ -3,7 +3,7 @@ import ContactSection from "@/components/sections/ContactSection";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Contact Us",
+  title: "Contact",
   description: "Get in touch with Saltbox Interactive. Partner with us to preserve history through interactive digital experiences. We collaborate with historians, museums, and educational institutions.",
   openGraph: {
     title: "Contact Us | Saltbox Interactive",

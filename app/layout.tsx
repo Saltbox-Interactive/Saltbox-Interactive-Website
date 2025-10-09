@@ -30,8 +30,8 @@ const archivoBlack = Archivo_Black({
 
 export const metadata: Metadata = {
   title: {
-    default: "Saltbox Interactive | Preserving History Through Interactive Experiences",
-    template: "%s | Saltbox Interactive"
+    default: "Saltbox Interactive",
+    template: "Saltbox Interactive | %s"
   },
   description: "Saltbox Interactive creates immersive virtual environments where history comes alive. We preserve the past through interactive digital experiences, transforming historical locations into explorable virtual worlds.",
   keywords: ["historical preservation", "virtual history", "interactive experiences", "digital heritage", "historical reconstruction", "Old D'Hanis", "virtual archaeology", "Michael Salton", "game developer", "historical games"],

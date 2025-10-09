@@ -3,7 +3,7 @@ import ProjectsSection from "@/components/sections/ProjectsSection";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Our Projects",
+  title: "Projects",
   description: "Explore Saltbox Interactive's portfolio of immersive historical experiences. From Old D'Hanis to other historical preservation projects, discover how we bring the past to life.",
   openGraph: {
     title: "Our Projects | Saltbox Interactive",
