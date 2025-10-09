@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       ...(project.features || []),
       project.genre,
       ...(project.platforms || [])
-    ].filter(Boolean),
+    ].filter((keyword): keyword is string => Boolean(keyword)),
     openGraph: {
       title: `${project.title} | Saltbox Interactive`,
       description: project.description,
