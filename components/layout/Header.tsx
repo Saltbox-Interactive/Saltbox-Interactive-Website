@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useRef } from "react";
 import { usePathname } from "next/navigation";
 import { ScrollSpeedContext } from "../ScrollSpeedContext";
 
@@ -11,8 +11,65 @@ export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const [typedText, setTypedText] = useState({ projects: "", about: "", contact: "", openClose: "", menu: "" });
   const pathname = usePathname();
   const { lenis } = useContext(ScrollSpeedContext);
+  const hasTyped = useRef(false);
+
+  // Typing animation for Projects
+  useEffect(() => {
+    const fullText = "PROJECTS";
+    if (typedText.projects.length < fullText.length) {
+      const timeout = setTimeout(() => {
+        setTypedText(prev => ({ ...prev, projects: fullText.slice(0, prev.projects.length + 1) }));
+      }, 30);
+      return () => clearTimeout(timeout);
+    }
+  }, [typedText.projects]);
+
+  // Typing animation for About (starts after Projects is done)
+  useEffect(() => {
+    const fullText = "ABOUT";
+    if (typedText.projects === "PROJECTS" && typedText.about.length < fullText.length) {
+      const timeout = setTimeout(() => {
+        setTypedText(prev => ({ ...prev, about: fullText.slice(0, prev.about.length + 1) }));
+      }, 30);
+      return () => clearTimeout(timeout);
+    }
+  }, [typedText.projects, typedText.about]);
+
+  // Typing animation for Contact (starts after About is done)
+  useEffect(() => {
+    const fullText = "CONTACT";
+    if (typedText.about === "ABOUT" && typedText.contact.length < fullText.length) {
+      const timeout = setTimeout(() => {
+        setTypedText(prev => ({ ...prev, contact: fullText.slice(0, prev.contact.length + 1) }));
+      }, 30);
+      return () => clearTimeout(timeout);
+    }
+  }, [typedText.about, typedText.contact]);
+
+  // Typing animation for [Open] (starts after Contact is done)
+  useEffect(() => {
+    const fullText = "[OPEN]";
+    if (typedText.contact === "CONTACT" && typedText.openClose.length < fullText.length) {
+      const timeout = setTimeout(() => {
+        setTypedText(prev => ({ ...prev, openClose: fullText.slice(0, prev.openClose.length + 1) }));
+      }, 30);
+      return () => clearTimeout(timeout);
+    }
+  }, [typedText.contact, typedText.openClose]);
+
+  // Typing animation for Menu (starts after [Open] is done)
+  useEffect(() => {
+    const fullText = "MENU";
+    if (typedText.openClose === "[OPEN]" && typedText.menu.length < fullText.length) {
+      const timeout = setTimeout(() => {
+        setTypedText(prev => ({ ...prev, menu: fullText.slice(0, prev.menu.length + 1) }));
+      }, 30);
+      return () => clearTimeout(timeout);
+    }
+  }, [typedText.openClose, typedText.menu]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -134,10 +191,10 @@ export default function Header() {
                 className="object-contain"
               />
               <span className="relative text-xl font-normal tracking-wide translate-y-0.5 uppercase px-2 py-1 overflow-hidden" style={{ fontFamily: 'var(--font-bebas)' }}>
-                <span className="relative z-10 text-black group-hover:text-white transition-colors duration-300">
+                <span className="relative z-10 text-white group-hover:text-black transition-colors duration-300">
                   Saltbox Interactive
                 </span>
-                <span className="absolute inset-0 bg-white transform translate-x-0 group-hover:-translate-x-full transition-transform duration-500 ease-in-out"></span>
+                <span className="absolute inset-0 bg-white transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-in-out"></span>
               </span>
             </Link>
 
@@ -161,22 +218,22 @@ export default function Header() {
             </button>
 
             {/* Desktop navigation */}
-            <div className="hidden lg:flex items-center gap-8 absolute right-8">
-              <Link href="/projects" className={`text-base tracking-wider transition-colors duration-300 uppercase ${pathname === '/projects' ? 'text-accent' : 'text-foreground/80 hover:text-accent'}`} style={{ fontFamily: 'var(--font-bebas)' }}>
-                Projects
+            <div className="hidden lg:flex items-center gap-4 absolute right-8">
+              <Link href="/projects" className={`text-base tracking-wider transition-colors duration-300 uppercase inline-block text-left ${pathname === '/projects' ? 'text-accent' : 'text-foreground/80 hover:text-accent'}`} style={{ fontFamily: 'var(--font-bebas)', minWidth: '70px' }}>
+                {typedText.projects}
               </Link>
-              <Link href="/about" className={`text-base tracking-wider transition-colors duration-300 uppercase ${pathname === '/about' ? 'text-accent' : 'text-foreground/80 hover:text-accent'}`} style={{ fontFamily: 'var(--font-bebas)' }}>
-                About
+              <Link href="/about" className={`text-base tracking-wider transition-colors duration-300 uppercase inline-block text-left ${pathname === '/about' ? 'text-accent' : 'text-foreground/80 hover:text-accent'}`} style={{ fontFamily: 'var(--font-bebas)', minWidth: '50px' }}>
+                {typedText.about}
               </Link>
-              <Link href="/contact" className={`text-base tracking-wider transition-colors duration-300 uppercase ${pathname === '/contact' ? 'text-accent' : 'text-foreground/80 hover:text-accent'}`} style={{ fontFamily: 'var(--font-bebas)' }}>
-                Contact
+              <Link href="/contact" className={`text-base tracking-wider transition-colors duration-300 uppercase inline-block text-left ${pathname === '/contact' ? 'text-accent' : 'text-foreground/80 hover:text-accent'}`} style={{ fontFamily: 'var(--font-bebas)', minWidth: '65px' }}>
+                {typedText.contact}
               </Link>
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="text-base tracking-wider transition-colors duration-300 uppercase text-foreground/80 hover:text-accent"
-                style={{ fontFamily: 'var(--font-bebas)' }}
+                className="text-base tracking-wider transition-colors duration-300 uppercase text-foreground/80 hover:text-accent inline-block"
+                style={{ fontFamily: 'var(--font-bebas)', minWidth: '105px', textAlign: 'left' }}
               >
-                <span className="inline-block w-[50px] text-right">{isMenuOpen ? '[Close]' : '[Open]'}</span> Menu
+                {isMenuOpen ? '[CLOSE]' : typedText.openClose} {typedText.menu}
               </button>
             </div>
           </div>

@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Work_Sans, Bebas_Neue, Archivo_Black } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import SmoothScroll from "@/components/SmoothScroll";
 import { OrganizationSchema } from "@/components/StructuredData";
@@ -99,7 +98,6 @@ export default function RootLayout({
         className={`${workSans.variable} ${bebas.variable} ${archivoBlack.variable} antialiased relative`}
       >
         <SmoothScroll>
-          <Header />
           <Footer />
           <main className="relative" style={{ zIndex: 100, minHeight: '100vh' }}>
             <div className="bg-black">
