@@ -17,7 +17,6 @@ export async function POST(request: Request) {
       );
     }
 
-    // Send email using Resend
     const { data, error } = await resend.emails.send({
       from: 'Saltbox Interactive <discover@saltboxinteractive.com>',
       to: 'discover@saltboxinteractive.com',
