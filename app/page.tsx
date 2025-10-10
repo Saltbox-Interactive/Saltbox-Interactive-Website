@@ -6,6 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import ParallaxImage from "@/components/ParallaxImage";
 import { useScrollSpeed } from "@/hooks/useScrollSpeed";
+import BracketLink from "@/components/ui/BracketLink";
 
 const HERO_SCROLL_THRESHOLD = 300;
 
@@ -232,17 +233,7 @@ export default function Home() {
 
         <div className="container mx-auto max-w-3xl relative z-10">
           <div className="flex items-center justify-center">
-            <Link href="/about" className="flex items-center gap-2 group">
-              <span className="text-accent transition-all duration-300 group-hover:-translate-x-1 text-lg">
-                [
-              </span>
-              <span className="text-lg font-light tracking-[0.15em] text-gray-400 group-hover:text-accent transition-colors duration-300 uppercase" style={{ fontFamily: 'var(--font-bebas)' }}>
-                Our Mission
-              </span>
-              <span className="text-accent transition-all duration-300 group-hover:translate-x-1 text-lg">
-                ]
-              </span>
-            </Link>
+            <BracketLink href="/about">Our Mission</BracketLink>
           </div>
         </div>
       </section>
@@ -318,20 +309,7 @@ export default function Home() {
             </div>
 
             <div className="inline-block">
-              <Link
-                href="/projects/discover-old-dhanis"
-                className="flex items-center gap-2 group/title"
-              >
-                <span className="text-accent transition-all duration-300 group-hover/title:-translate-x-1 text-lg">
-                  [
-                </span>
-                <span className="text-lg font-light tracking-[0.15em] text-gray-400 group-hover/title:text-accent transition-colors duration-300 uppercase" style={{ fontFamily: 'var(--font-bebas)' }}>
-                  Learn More
-                </span>
-                <span className="text-accent transition-all duration-300 group-hover/title:translate-x-1 text-lg">
-                  ]
-                </span>
-              </Link>
+              <BracketLink href="/projects/discover-old-dhanis">Learn More</BracketLink>
             </div>
               </div>
             </div>
@@ -399,20 +377,7 @@ export default function Home() {
                 </div>
 
                 <div className="inline-block">
-                  <Link
-                    href="/projects/discover-old-dhanis-remastered"
-                    className="flex items-center gap-2 group/title"
-                  >
-                    <span className="text-accent transition-all duration-300 group-hover/title:-translate-x-1 text-lg">
-                      [
-                    </span>
-                    <span className="text-lg font-light tracking-[0.15em] text-gray-400 group-hover/title:text-accent transition-colors duration-300 uppercase" style={{ fontFamily: 'var(--font-bebas)' }}>
-                      Learn More
-                    </span>
-                    <span className="text-accent transition-all duration-300 group-hover/title:translate-x-1 text-lg">
-                      ]
-                    </span>
-                  </Link>
+                  <BracketLink href="/projects/discover-old-dhanis-remastered">Learn More</BracketLink>
                 </div>
               </div>
             </div>
@@ -426,17 +391,7 @@ export default function Home() {
 
         <div className="container mx-auto max-w-3xl relative z-10">
           <div className="flex items-center justify-center">
-            <Link href="/projects" className="flex items-center gap-2 group">
-              <span className="text-accent transition-all duration-300 group-hover:-translate-x-1 text-lg">
-                [
-              </span>
-              <span className="text-lg font-light tracking-[0.15em] text-gray-400 group-hover:text-accent transition-colors duration-300 uppercase" style={{ fontFamily: 'var(--font-bebas)' }}>
-                View Our Work
-              </span>
-              <span className="text-accent transition-all duration-300 group-hover:translate-x-1 text-lg">
-                ]
-              </span>
-            </Link>
+            <BracketLink href="/projects">View Our Work</BracketLink>
           </div>
         </div>
       </section>

@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Hero from "@/components/sections/Hero";
 import ParallaxImage from "@/components/ParallaxImage";
+import BracketLink from "@/components/ui/BracketLink";
 
 export default function AboutPage() {
   const [scrollY, setScrollY] = useState(0);
@@ -188,17 +189,7 @@ export default function AboutPage() {
       {/* View Projects CTA */}
       <section className="relative py-20 bg-black">
         <div className="container mx-auto px-6 text-center">
-          <Link href="/projects" className="flex items-center justify-center gap-2 group">
-            <span className="text-accent transition-all duration-300 group-hover:-translate-x-1 text-lg">
-              [
-            </span>
-            <span className="text-lg font-light tracking-[0.15em] text-gray-400 group-hover:text-accent transition-colors duration-300 uppercase" style={{ fontFamily: 'var(--font-bebas)' }}>
-              View Our Projects
-            </span>
-            <span className="text-accent transition-all duration-300 group-hover:translate-x-1 text-lg">
-              ]
-            </span>
-          </Link>
+          <BracketLink href="/projects" className="justify-center">View Our Projects</BracketLink>
         </div>
       </section>
     </>

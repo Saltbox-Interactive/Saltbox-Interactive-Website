@@ -6,6 +6,7 @@ import Link from "next/link";
 import { Project } from "@/lib/data/projects";
 import ParallaxImage from "@/components/ParallaxImage";
 import { VideoGameSchema, BreadcrumbSchema } from "@/components/StructuredData";
+import BracketLink from "@/components/ui/BracketLink";
 
 export default function ProjectContent({ project }: { project: Project }) {
   const [scrollY, setScrollY] = useState(0);
@@ -881,31 +882,13 @@ export default function ProjectContent({ project }: { project: Project }) {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
             {/* View Credits Button - Only for Discover Old D'Hanis */}
             {project.slug === 'discover-old-dhanis' && (
-              <Link href="/projects/discover-old-dhanis/credits" className="inline-flex items-center gap-2 group">
-                <span className="text-accent transition-all duration-300 group-hover:-translate-x-1 text-lg">
-                  [
-                </span>
-                <span className="text-lg font-light tracking-[0.15em] text-gray-400 group-hover:text-accent transition-colors duration-300 uppercase" style={{ fontFamily: 'var(--font-bebas)' }}>
-                  View Project Credits
-                </span>
-                <span className="text-accent transition-all duration-300 group-hover:translate-x-1 text-lg">
-                  ]
-                </span>
-              </Link>
+              <BracketLink href="/projects/discover-old-dhanis/credits">
+                View Project Credits
+              </BracketLink>
             )}
 
             {/* View All Projects Button */}
-            <Link href="/projects" className="inline-flex items-center gap-2 group">
-              <span className="text-accent transition-all duration-300 group-hover:-translate-x-1 text-lg">
-                [
-              </span>
-              <span className="text-lg font-light tracking-[0.15em] text-gray-400 group-hover:text-accent transition-colors duration-300 uppercase" style={{ fontFamily: 'var(--font-bebas)' }}>
-                View All Projects
-              </span>
-              <span className="text-accent transition-all duration-300 group-hover:translate-x-1 text-lg">
-                ]
-              </span>
-            </Link>
+            <BracketLink href="/projects">View All Projects</BracketLink>
           </div>
         </div>
       </section>

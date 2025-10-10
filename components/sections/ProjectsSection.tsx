@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { projects } from "@/lib/data/projects";
+import BracketLink from "@/components/ui/BracketLink";
 
 export default function ProjectsSection() {
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
@@ -59,20 +60,9 @@ export default function ProjectsSection() {
             </Link>
 
             {/* Title Below Card */}
-            <Link
-              href={`/projects/${project.slug}`}
-              className="mt-8 flex items-center gap-2 group/title"
-            >
-              <span className="text-accent transition-all duration-300 group-hover/title:-translate-x-1 text-lg">
-                [
-              </span>
-              <h4 className="text-lg font-light tracking-[0.15em] text-gray-400 group-hover/title:text-accent transition-colors duration-300 uppercase" style={{ fontFamily: 'var(--font-bebas)' }}>
-                {project.title}
-              </h4>
-              <span className="text-accent transition-all duration-300 group-hover/title:translate-x-1 text-lg">
-                ]
-              </span>
-            </Link>
+            <BracketLink href={`/projects/${project.slug}`} className="mt-8">
+              {project.title}
+            </BracketLink>
           </div>
         ))}
       </div>
