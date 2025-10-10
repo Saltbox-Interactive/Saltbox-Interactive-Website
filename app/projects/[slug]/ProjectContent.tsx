@@ -7,15 +7,12 @@ import { Project } from "@/lib/data/projects";
 import ParallaxImage from "@/components/ParallaxImage";
 import { VideoGameSchema, BreadcrumbSchema } from "@/components/StructuredData";
 import BracketLink from "@/components/ui/BracketLink";
+import AnimatedSection from "@/components/ui/AnimatedSection";
 
 export default function ProjectContent({ project }: { project: Project }) {
   const [scrollY, setScrollY] = useState(0);
-  const descriptionRef = useRef<HTMLElement>(null);
   const screenshotsRef = useRef<HTMLElement>(null);
-  const featuresRef = useRef<HTMLElement>(null);
-  const [descriptionVisible, setDescriptionVisible] = useState(false);
   const [screenshotsVisible, setScreenshotsVisible] = useState(false);
-  const [featuresVisible, setFeaturesVisible] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [showArrows, setShowArrows] = useState(false);
   const [playNowOpacity, setPlayNowOpacity] = useState(1);
@@ -87,23 +84,15 @@ export default function ProjectContent({ project }: { project: Project }) {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.target === descriptionRef.current) {
-            setDescriptionVisible(entry.isIntersecting);
-          }
           if (entry.target === screenshotsRef.current) {
             setScreenshotsVisible(entry.isIntersecting);
-          }
-          if (entry.target === featuresRef.current) {
-            setFeaturesVisible(entry.isIntersecting);
           }
         });
       },
       { threshold: 0.2 }
     );
 
-    if (descriptionRef.current) observer.observe(descriptionRef.current);
     if (screenshotsRef.current) observer.observe(screenshotsRef.current);
-    if (featuresRef.current) observer.observe(featuresRef.current);
 
     return () => observer.disconnect();
   }, []);
@@ -193,26 +182,13 @@ export default function ProjectContent({ project }: { project: Project }) {
       </section>
 
       {/* Description Section */}
-      <section
-        ref={descriptionRef}
-        className="relative py-20 bg-black"
-        style={{
-          transform: `translateY(${descriptionVisible ? 0 : 60}px)`,
-          opacity: descriptionVisible ? 1 : 0,
-          transition: 'transform 0.8s ease-out, opacity 0.8s ease-out'
-        }}
-      >
+      <AnimatedSection className="relative py-20 bg-black">
         <div className="container mx-auto px-6 max-w-4xl">
           <div className="space-y-6 mb-20">
             {project.longDescription.split('\n\n').map((paragraph, index) => (
               <p
                 key={index}
                 className="text-xl md:text-2xl text-gray-300 leading-relaxed"
-                style={{
-                  transform: `translateY(${descriptionVisible ? 0 : 40}px)`,
-                  opacity: descriptionVisible ? 1 : 0,
-                  transition: `transform 0.8s ease-out ${index * 0.1}s, opacity 0.8s ease-out ${index * 0.1}s`
-                }}
               >
                 {paragraph.trim()}
               </p>
@@ -258,7 +234,7 @@ export default function ProjectContent({ project }: { project: Project }) {
             </div>
           </div>
         </div>
-      </section>
+      </AnimatedSection>
 
       {/* Scrolling Text Ticker - Only for Discover Old D'Hanis */}
       {project.slug === 'discover-old-dhanis' && (

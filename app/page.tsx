@@ -7,15 +7,17 @@ import Image from "next/image";
 import ParallaxImage from "@/components/ParallaxImage";
 import { useScrollSpeed } from "@/hooks/useScrollSpeed";
 import BracketLink from "@/components/ui/BracketLink";
+import AnimatedSection from "@/components/ui/AnimatedSection";
 
 const HERO_SCROLL_THRESHOLD = 300;
 
 export default function Home() {
-  const [visibleSections, setVisibleSections] = useState<Set<string>>(new Set());
   const [scrollY, setScrollY] = useState(0);
   const [virtualScroll, setVirtualScroll] = useState(0);
   const [aboutText, setAboutText] = useState("");
   const [introText, setIntroText] = useState("");
+  const [aboutVisible, setAboutVisible] = useState(false);
+  const [introVisible, setIntroVisible] = useState(false);
   const aboutRef = useRef<HTMLDivElement>(null);
   const introRef = useRef<HTMLDivElement>(null);
   const heroRef = useRef<HTMLElement>(null);
@@ -46,9 +48,11 @@ export default function Home() {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           const target = entry.target as HTMLElement;
-          const id = target.dataset.section;
-          if (id) {
-            setVisibleSections((prev) => new Set(prev).add(id));
+          if (target === aboutRef.current) {
+            setAboutVisible(true);
+          }
+          if (target === introRef.current) {
+            setIntroVisible(true);
           }
         }
       });
@@ -65,23 +69,23 @@ export default function Home() {
 
   // Typing effect for about paragraph - only types the last few words
   useEffect(() => {
-    if (visibleSections.has('about') && aboutText.length < aboutTypedText.length) {
+    if (aboutVisible && aboutText.length < aboutTypedText.length) {
       const timeout = setTimeout(() => {
         setAboutText(aboutTypedText.slice(0, aboutText.length + 1));
       }, 50);
       return () => clearTimeout(timeout);
     }
-  }, [visibleSections, aboutText, aboutTypedText]);
+  }, [aboutVisible, aboutText, aboutTypedText]);
 
   // Typing effect for intro paragraph - only types the last few words
   useEffect(() => {
-    if (visibleSections.has('intro') && introText.length < introTypedText.length) {
+    if (introVisible && introText.length < introTypedText.length) {
       const timeout = setTimeout(() => {
         setIntroText(introTypedText.slice(0, introText.length + 1));
       }, 50);
       return () => clearTimeout(timeout);
     }
-  }, [visibleSections, introText, introTypedText]);
+  }, [introVisible, introText, introTypedText]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -189,12 +193,11 @@ export default function Home() {
       {/* About Section - Scrolls over background */}
       <section
         ref={aboutRef}
-        data-section="about"
         className="relative py-32 px-6 z-20"
       >
         <div
           className={`relative z-10 container mx-auto max-w-4xl text-center transition-all duration-1000 ${
-            visibleSections.has('about')
+            aboutVisible
               ? 'opacity-100 translate-y-0'
               : 'opacity-0 translate-y-20'
           }`}
@@ -268,13 +271,12 @@ export default function Home() {
       <section
         id="intro"
         ref={introRef}
-        data-section="intro"
         className="relative -mt-[70vh] z-20 pb-96"
       >
 
         <div
           className={`relative z-10 transition-all duration-1000 ${
-            visibleSections.has('intro')
+            introVisible
               ? 'opacity-100 translate-y-0'
               : 'opacity-0 translate-y-20'
           }`}

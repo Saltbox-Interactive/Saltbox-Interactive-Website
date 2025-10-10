@@ -6,11 +6,10 @@ import Link from "next/link";
 import Hero from "@/components/sections/Hero";
 import ParallaxImage from "@/components/ParallaxImage";
 import BracketLink from "@/components/ui/BracketLink";
+import AnimatedSection from "@/components/ui/AnimatedSection";
 
 export default function AboutPage() {
   const [scrollY, setScrollY] = useState(0);
-  const [visibleSections, setVisibleSections] = useState<Set<string>>(new Set());
-  const sectionRefs = useRef<{ [key: string]: HTMLElement | null }>({});
 
   useEffect(() => {
     const handleScroll = () => {
@@ -18,33 +17,6 @@ export default function AboutPage() {
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  useEffect(() => {
-    const observerOptions = {
-      threshold: 0.2,
-      rootMargin: '0px 0px -100px 0px'
-    };
-
-    const handleIntersection = (entries: IntersectionObserverEntry[]) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const target = entry.target as HTMLElement;
-          const id = target.dataset.section;
-          if (id) {
-            setVisibleSections((prev) => new Set(prev).add(id));
-          }
-        }
-      });
-    };
-
-    const observer = new IntersectionObserver(handleIntersection, observerOptions);
-
-    Object.values(sectionRefs.current).forEach(ref => {
-      if (ref) observer.observe(ref);
-    });
-
-    return () => observer.disconnect();
   }, []);
 
   return (
@@ -57,14 +29,8 @@ export default function AboutPage() {
       />
 
       {/* Intro Text Section */}
-      <section
-        ref={(el) => { sectionRefs.current['intro'] = el; }}
-        data-section="intro"
-        className="relative py-32 bg-black"
-      >
-        <div className={`container mx-auto px-6 md:px-12 max-w-6xl transition-all duration-1000 ${
-          visibleSections.has('intro') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'
-        }`}>
+      <AnimatedSection id="intro" className="relative py-32 bg-black">
+        <div className="container mx-auto px-6 md:px-12 max-w-6xl">
           <p className="text-2xl md:text-3xl text-white leading-[1.4] font-light mb-12" style={{ fontFamily: 'var(--font-work-sans)' }}>
             <span className="bg-white text-black px-1">Saltbox Interactive</span> was founded on the belief that history should be experienced, not just read about.
           </p>
@@ -72,17 +38,11 @@ export default function AboutPage() {
             Our journey began with a simple question: What if we could use modern technology to step back in time? Today, we transform historical locations into explorable virtual environments where history comes alive.
           </p>
         </div>
-      </section>
+      </AnimatedSection>
 
       {/* Full-Width Image Gallery Section */}
-      <section
-        ref={(el) => { sectionRefs.current['gallery1'] = el; }}
-        data-section="gallery1"
-        className="relative bg-black"
-      >
-        <div className={`transition-all duration-1000 ${
-          visibleSections.has('gallery1') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'
-        }`}>
+      <AnimatedSection id="gallery1" className="relative bg-black">
+        <div>
           {/* Large Featured Image */}
           <div className="relative h-[70vh] md:h-[80vh] overflow-hidden">
             <Image
@@ -118,17 +78,11 @@ export default function AboutPage() {
             </div>
           </div>
         </div>
-      </section>
+      </AnimatedSection>
 
       {/* Team Philosophy Section */}
-      <section
-        ref={(el) => { sectionRefs.current['team'] = el; }}
-        data-section="team"
-        className="relative py-32 md:py-48 bg-black"
-      >
-        <div className={`container mx-auto px-6 md:px-12 max-w-6xl transition-all duration-1000 ${
-          visibleSections.has('team') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'
-        }`}>
+      <AnimatedSection id="team" className="relative py-32 md:py-48 bg-black">
+        <div className="container mx-auto px-6 md:px-12 max-w-6xl">
           <div className="grid md:grid-cols-5 gap-12 md:gap-16 items-center">
             <div className="md:col-span-2">
               <h2 className="text-6xl md:text-7xl lg:text-8xl font-light tracking-[0.15em] text-white mb-8 uppercase" style={{ fontFamily: 'var(--font-bebas)' }}>
@@ -143,17 +97,11 @@ export default function AboutPage() {
             </div>
           </div>
         </div>
-      </section>
+      </AnimatedSection>
 
       {/* Full-Width Mission Image */}
-      <section
-        ref={(el) => { sectionRefs.current['mission-image'] = el; }}
-        data-section="mission-image"
-        className="relative bg-black"
-      >
-        <div className={`transition-all duration-1000 ${
-          visibleSections.has('mission-image') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'
-        }`}>
+      <AnimatedSection id="mission-image" className="relative bg-black">
+        <div>
           <div className="relative h-[60vh] md:h-[80vh] overflow-hidden">
             <Image
               src="/images/dod-cover.jpg"
@@ -164,17 +112,11 @@ export default function AboutPage() {
             <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
           </div>
         </div>
-      </section>
+      </AnimatedSection>
 
       {/* Mission Statement */}
-      <section
-        ref={(el) => { sectionRefs.current['mission'] = el; }}
-        data-section="mission"
-        className="relative py-32 md:py-48 bg-black"
-      >
-        <div className={`container mx-auto px-6 md:px-12 max-w-6xl transition-all duration-1000 ${
-          visibleSections.has('mission') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'
-        }`}>
+      <AnimatedSection id="mission" className="relative py-32 md:py-48 bg-black">
+        <div className="container mx-auto px-6 md:px-12 max-w-6xl">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-5xl md:text-6xl lg:text-7xl font-light tracking-[0.1em] text-white leading-[1.3] mb-12 uppercase" style={{ fontFamily: 'var(--font-bebas)' }}>
               Experience history like never before
@@ -184,7 +126,7 @@ export default function AboutPage() {
             </p>
           </div>
         </div>
-      </section>
+      </AnimatedSection>
 
       {/* View Projects CTA */}
       <section className="relative py-20 bg-black">
