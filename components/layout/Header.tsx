@@ -11,10 +11,14 @@ export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
-  const [typedText, setTypedText] = useState({ projects: "", about: "", contact: "", openClose: "", menu: "" });
+  const [typedText, setTypedText] = useState({ projects: "", about: "", contact: "" });
   const pathname = usePathname();
   const { lenis } = useContext(ScrollSpeedContext);
-  const hasTyped = useRef(false);
+
+  // Reset typing animation when pathname changes
+  useEffect(() => {
+    setTypedText({ projects: "", about: "", contact: "" });
+  }, [pathname]);
 
   // Typing animation for Projects
   useEffect(() => {
@@ -48,28 +52,6 @@ export default function Header() {
       return () => clearTimeout(timeout);
     }
   }, [typedText.about, typedText.contact]);
-
-  // Typing animation for [Open] (starts after Contact is done)
-  useEffect(() => {
-    const fullText = "[OPEN]";
-    if (typedText.contact === "CONTACT" && typedText.openClose.length < fullText.length) {
-      const timeout = setTimeout(() => {
-        setTypedText(prev => ({ ...prev, openClose: fullText.slice(0, prev.openClose.length + 1) }));
-      }, 30);
-      return () => clearTimeout(timeout);
-    }
-  }, [typedText.contact, typedText.openClose]);
-
-  // Typing animation for Menu (starts after [Open] is done)
-  useEffect(() => {
-    const fullText = "MENU";
-    if (typedText.openClose === "[OPEN]" && typedText.menu.length < fullText.length) {
-      const timeout = setTimeout(() => {
-        setTypedText(prev => ({ ...prev, menu: fullText.slice(0, prev.menu.length + 1) }));
-      }, 30);
-      return () => clearTimeout(timeout);
-    }
-  }, [typedText.openClose, typedText.menu]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -230,10 +212,10 @@ export default function Header() {
               </Link>
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="text-base tracking-wider transition-colors duration-300 uppercase text-foreground/80 hover:text-accent inline-block"
-                style={{ fontFamily: 'var(--font-bebas)', minWidth: '105px', textAlign: 'left' }}
+                className="text-base tracking-wider transition-colors duration-300 uppercase text-foreground/80 hover:text-accent"
+                style={{ fontFamily: 'var(--font-bebas)' }}
               >
-                {isMenuOpen ? '[CLOSE] MENU' : `${typedText.openClose} ${typedText.menu}`}
+                {isMenuOpen ? '[CLOSE] MENU' : '[OPEN] MENU'}
               </button>
             </div>
           </div>
