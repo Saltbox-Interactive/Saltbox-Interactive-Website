@@ -233,7 +233,7 @@ export default function Header() {
                 className="text-base tracking-wider transition-colors duration-300 uppercase text-foreground/80 hover:text-accent inline-block"
                 style={{ fontFamily: 'var(--font-bebas)', minWidth: '105px', textAlign: 'left' }}
               >
-                {isMenuOpen ? '[CLOSE]' : typedText.openClose} {typedText.menu}
+                {isMenuOpen ? '[CLOSE] MENU' : `${typedText.openClose} ${typedText.menu}`}
               </button>
             </div>
           </div>
@@ -281,7 +281,7 @@ export default function Header() {
                 <Link
                   href="/projects"
                   onClick={() => setIsMenuOpen(false)}
-                  className={`group relative text-4xl md:text-5xl font-light tracking-[0.15em] uppercase overflow-hidden inline-block px-2 ${
+                  className={`group relative text-4xl md:text-5xl font-light tracking-[0.15em] uppercase inline-block ${
                     isMenuOpen ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
                   }`}
                   style={{
@@ -289,7 +289,7 @@ export default function Header() {
                     transitionDelay: isMenuOpen ? '200ms' : '0ms'
                   }}
                 >
-                  <span className="relative z-10 text-white group-hover:text-black transition-colors duration-300">
+                  <span className="relative z-10 text-white group-hover:text-black transition-colors duration-300 px-2 overflow-hidden inline-block">
                     Projects
                   </span>
                   <span className="absolute inset-0 bg-white transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-in-out"></span>
@@ -297,7 +297,7 @@ export default function Header() {
                 <Link
                   href="/about"
                   onClick={() => setIsMenuOpen(false)}
-                  className={`group relative text-4xl md:text-5xl font-light tracking-[0.15em] uppercase overflow-hidden inline-block px-2 ${
+                  className={`group relative text-4xl md:text-5xl font-light tracking-[0.15em] uppercase inline-block ${
                     isMenuOpen ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
                   }`}
                   style={{
@@ -305,7 +305,7 @@ export default function Header() {
                     transitionDelay: isMenuOpen ? '350ms' : '0ms'
                   }}
                 >
-                  <span className="relative z-10 text-white group-hover:text-black transition-colors duration-300">
+                  <span className="relative z-10 text-white group-hover:text-black transition-colors duration-300 px-2 overflow-hidden inline-block">
                     About
                   </span>
                   <span className="absolute inset-0 bg-white transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-in-out"></span>
@@ -313,7 +313,7 @@ export default function Header() {
                 <Link
                   href="/contact"
                   onClick={() => setIsMenuOpen(false)}
-                  className={`group relative text-4xl md:text-5xl font-light tracking-[0.15em] uppercase overflow-hidden inline-block px-2 ${
+                  className={`group relative text-4xl md:text-5xl font-light tracking-[0.15em] uppercase inline-block ${
                     isMenuOpen ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
                   }`}
                   style={{
@@ -321,7 +321,7 @@ export default function Header() {
                     transitionDelay: isMenuOpen ? '500ms' : '0ms'
                   }}
                 >
-                  <span className="relative z-10 text-white group-hover:text-black transition-colors duration-300">
+                  <span className="relative z-10 text-white group-hover:text-black transition-colors duration-300 px-2 overflow-hidden inline-block">
                     Contact
                   </span>
                   <span className="absolute inset-0 bg-white transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-in-out"></span>

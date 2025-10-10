@@ -21,6 +21,10 @@ export default function ProjectContent({ project }: { project: Project }) {
   const mouseTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
+  // Track element positions for parallax
+  const [imageOffsets, setImageOffsets] = useState<{ [key: string]: number }>({});
+  const imageRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
+
   useEffect(() => {
     const handleScroll = () => {
       setScrollY(window.scrollY);
@@ -34,7 +38,6 @@ export default function ProjectContent({ project }: { project: Project }) {
       }, 1500);
 
       // Calculate position based on distance to footer
-      // Footer is fixed at bottom, so check if we're near the bottom of the page
       const windowHeight = window.innerHeight;
       const documentHeight = document.documentElement.scrollHeight;
       const scrollPosition = window.scrollY + windowHeight;
@@ -42,10 +45,34 @@ export default function ProjectContent({ project }: { project: Project }) {
 
       // Start sliding down when within 600px of bottom (well before footer becomes visible)
       const slideDistance = 600;
-      // Calculate how much to slide (0 = visible, 1 = fully slid down)
       const slideAmount = Math.min(1, Math.max(0, 1 - (distanceToBottom / slideDistance)));
       setPlayNowOpacity(slideAmount);
+
+      // Calculate parallax offsets for tracked images
+      const newOffsets: { [key: string]: number } = {};
+      Object.keys(imageRefs.current).forEach((key) => {
+        const ref = imageRefs.current[key];
+        if (ref) {
+          const rect = ref.getBoundingClientRect();
+          const elementTop = rect.top;
+          const elementBottom = rect.bottom;
+
+          // Only apply parallax when element is visible in viewport
+          if (elementBottom > 0 && elementTop < windowHeight) {
+            // Calculate how far through the viewport the element is (0 to 1)
+            const viewportProgress = (windowHeight - elementTop) / (windowHeight + rect.height);
+            // Convert to offset range centered at 0
+            const normalizedProgress = (viewportProgress - 0.5) * 2;
+            newOffsets[key] = normalizedProgress;
+          } else {
+            newOffsets[key] = 0;
+          }
+        }
+      });
+      setImageOffsets(newOffsets);
     };
+
+    handleScroll(); // Initial calculation
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -277,6 +304,469 @@ export default function ProjectContent({ project }: { project: Project }) {
         </section>
       )}
 
+      {/* Image + Text Sections with Parallax */}
+      <section className="relative bg-black py-12">
+        {/* Remastered - Enhanced Image Gallery Layout */}
+        {project.slug === 'discover-old-dhanis-remastered' && project.gallery && project.gallery.length > 2 ? (
+          <>
+            {/* Large Full-Width Hero Image */}
+            <div className="py-20">
+              <div className="container mx-auto px-6 max-w-7xl">
+                <div
+                  ref={(el) => { imageRefs.current['hero1'] = el; }}
+                  className="relative aspect-[21/9] overflow-hidden"
+                  style={{
+                    transform: `translateY(${(imageOffsets['hero1'] || 0) * 80}px)`,
+                    transition: 'transform 0.1s ease-out'
+                  }}
+                >
+                  <Image
+                    src={project.gallery[2]}
+                    alt="Stunning photorealistic landscape showcasing Unreal Engine 5's Lumen and Nanite technology"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* First Feature - Image Left, Text Right */}
+            <div className="py-20">
+              <div className="container mx-auto px-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                  <ParallaxImage
+                    src={project.gallery[3]}
+                    alt={`${project.features[0]}`}
+                    className="aspect-video"
+                    intensity={1}
+                    direction="vertical"
+                  />
+                  <div
+                    style={{
+                      transform: `translateY(${scrollY * -0.03}px)`,
+                      transition: 'transform 0.1s ease-out'
+                    }}
+                  >
+                    <h3 className="text-4xl md:text-5xl font-light tracking-wider text-white mb-6" style={{ fontFamily: 'var(--font-bebas)' }}>
+                      {project.features[0]}
+                    </h3>
+                    <p className="text-lg text-gray-300 leading-relaxed">
+                      {project.longDescription.split('\n\n')[0]}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Small Image Grid */}
+            <div className="py-20">
+              <div className="container mx-auto px-6 max-w-7xl">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                  {project.gallery.slice(4, 8).map((img, idx) => (
+                    <ParallaxImage
+                      key={idx}
+                      src={img}
+                      alt={`Environmental detail showcasing realistic lighting and textures`}
+                      className="aspect-square"
+                      intensity={0.8}
+                      direction="vertical"
+                    />
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Second Feature - Text Left, Image Right */}
+            <div className="py-20">
+              <div className="container mx-auto px-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                  <div
+                    style={{
+                      transform: `translateY(${scrollY * -0.02}px)`,
+                      transition: 'transform 0.1s ease-out'
+                    }}
+                  >
+                    <h3 className="text-4xl md:text-5xl font-light tracking-wider text-white mb-6" style={{ fontFamily: 'var(--font-bebas)' }}>
+                      {project.features[1]}
+                    </h3>
+                    <p className="text-lg text-gray-300 leading-relaxed">
+                      {project.longDescription.split('\n\n')[1] || project.description}
+                    </p>
+                  </div>
+                  <ParallaxImage
+                    src={project.gallery[7]}
+                    alt={`${project.features[1]}`}
+                    className="aspect-video"
+                    intensity={1}
+                    direction="vertical"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Wide Panoramic Image */}
+            <div className="py-20">
+              <div className="container mx-auto px-6 max-w-7xl">
+                <div
+                  ref={(el) => { imageRefs.current['hero2'] = el; }}
+                  className="relative aspect-[21/9] overflow-hidden"
+                  style={{
+                    transform: `translateY(${(imageOffsets['hero2'] || 0) * 70}px)`,
+                    transition: 'transform 0.1s ease-out'
+                  }}
+                >
+                  <Image
+                    src={project.gallery[8]}
+                    alt="Expansive panoramic view showcasing dynamic weather and atmospheric effects"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Third Feature - Large Image Left, Small Images + Text Right */}
+            <div className="py-20">
+              <div className="container mx-auto px-6 max-w-7xl">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+                  <div
+                    ref={(el) => { imageRefs.current['portrait1'] = el; }}
+                    className="relative aspect-[4/5] overflow-hidden"
+                    style={{
+                      transform: `translateY(${(imageOffsets['portrait1'] || 0) * 60}px)`,
+                      transition: 'transform 0.1s ease-out'
+                    }}
+                  >
+                    <Image
+                      src={project.gallery[9]}
+                      alt="Detailed architectural reconstruction with period-accurate materials"
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  <div className="space-y-6">
+                    <div
+                      style={{
+                        transform: `translateY(${scrollY * -0.025}px)`,
+                        transition: 'transform 0.1s ease-out'
+                      }}
+                    >
+                      <h3 className="text-4xl md:text-5xl font-light tracking-wider text-white mb-6" style={{ fontFamily: 'var(--font-bebas)' }}>
+                        {project.features[2]}
+                      </h3>
+                      <p className="text-lg text-gray-300 leading-relaxed mb-8">
+                        {project.longDescription.split('\n\n')[2] || project.description}
+                      </p>
+                    </div>
+                    <div className="grid grid-cols-2 gap-4">
+                      {project.gallery.slice(10, 12).map((img, idx) => (
+                        <ParallaxImage
+                          key={idx}
+                          src={img}
+                          alt="Close-up environmental detail"
+                          className="aspect-square"
+                          intensity={0.6}
+                          direction="vertical"
+                        />
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Medium Image Duo */}
+            <div className="py-20">
+              <div className="container mx-auto px-6 max-w-7xl">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+                  <ParallaxImage
+                    src={project.gallery[12]}
+                    alt="Natural landscape with dynamic time-of-day lighting"
+                    className="aspect-video"
+                    intensity={1}
+                    direction="vertical"
+                  />
+                  <ParallaxImage
+                    src={project.gallery[13]}
+                    alt="Atmospheric environmental scene"
+                    className="aspect-video"
+                    intensity={1}
+                    direction="vertical"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Fourth Feature - Vertical Image Right, Text Left */}
+            <div className="py-20">
+              <div className="container mx-auto px-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                  <div
+                    style={{
+                      transform: `translateY(${scrollY * -0.028}px)`,
+                      transition: 'transform 0.1s ease-out'
+                    }}
+                  >
+                    <h3 className="text-4xl md:text-5xl font-light tracking-wider text-white mb-6" style={{ fontFamily: 'var(--font-bebas)' }}>
+                      {project.features[3]}
+                    </h3>
+                    <p className="text-lg text-gray-300 leading-relaxed">
+                      Explore every corner of the meticulously reconstructed settlement with unprecedented freedom and immersion. Discover hidden details in the limestone architecture, walk through authentic period structures with historically accurate interiors, and experience the sweeping Texas Hill Country landscape rendered in stunning photorealistic detail. Every building, every pathway, and every vista has been crafted to transport you back to the 1840s-1860s, allowing you to truly feel what life was like in this historic Alsatian settlement. From the weathered textures of hand-hewn timbers to the rolling hills stretching to the horizon, experience historical preservation like never before.
+                    </p>
+                  </div>
+                  <div
+                    ref={(el) => { imageRefs.current['vertical1'] = el; }}
+                    className="relative aspect-[3/4] overflow-hidden"
+                    style={{
+                      transform: `translateY(${(imageOffsets['vertical1'] || 0) * 50}px)`,
+                      transition: 'transform 0.1s ease-out'
+                    }}
+                  >
+                    <Image
+                      src={project.gallery[14]}
+                      alt={`${project.features[3]}`}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Large Showcase Grid */}
+            <div className="py-20">
+              <div className="container mx-auto px-6 max-w-7xl">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="grid grid-rows-2 gap-6">
+                    <ParallaxImage
+                      src={project.gallery[15]}
+                      alt="Richly detailed environment"
+                      className="aspect-video"
+                      intensity={1}
+                      direction="vertical"
+                    />
+                    <ParallaxImage
+                      src={project.gallery[16]}
+                      alt="Environmental vignette"
+                      className="aspect-video"
+                      intensity={0.7}
+                      direction="vertical"
+                    />
+                  </div>
+                  <div className="grid grid-rows-2 gap-6">
+                    {project.gallery.slice(17, 19).map((img, idx) => (
+                      <ParallaxImage
+                        key={idx}
+                        src={img}
+                        alt="Environmental vignette"
+                        className="aspect-[16/9]"
+                        intensity={0.7}
+                        direction="vertical"
+                      />
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Final Wide Hero */}
+            <div className="py-20">
+              <div className="container mx-auto px-6 max-w-7xl">
+                <div
+                  ref={(el) => { imageRefs.current['hero3'] = el; }}
+                  className="relative aspect-[21/9] overflow-hidden"
+                  style={{
+                    transform: `translateY(${(imageOffsets['hero3'] || 0) * 60}px)`,
+                    transition: 'transform 0.1s ease-out'
+                  }}
+                >
+                  <Image
+                    src={project.gallery[18]}
+                    alt="Epic vista showcasing the full scope of the remastered experience"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Remaining Images Grid */}
+            {project.gallery.length > 19 && (
+              <div className="py-20">
+                <div className="container mx-auto px-6 max-w-7xl">
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    {project.gallery.slice(19).map((img, idx) => (
+                      <ParallaxImage
+                        key={idx}
+                        src={img}
+                        alt="Additional environmental showcase"
+                        className="aspect-square"
+                        intensity={0.5}
+                        direction="vertical"
+                      />
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
+          </>
+        ) : (
+          <>
+            {/* Default Layout for Other Projects */}
+            <div className="py-20 flex items-center">
+              <div className="container mx-auto px-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                  {project.gallery && project.gallery[0] && (
+                    <ParallaxImage
+                      src={project.gallery[0]}
+                      alt={`In-game screenshot showcasing the immersive historical environment and exploration mechanics of ${project.title}`}
+                      className="aspect-video"
+                      intensity={1}
+                      direction="vertical"
+                    />
+                  )}
+                  <div
+                    style={{
+                      transform: `translateY(${scrollY * -0.03}px)`,
+                      transition: 'transform 0.1s ease-out'
+                    }}
+                  >
+                    <h3 className="text-4xl md:text-5xl font-light tracking-wider text-white mb-6" style={{ fontFamily: 'var(--font-bebas)' }}>
+                      {project.features[0] || 'FEATURE TITLE'}
+                    </h3>
+                    <p className="text-lg text-gray-300 leading-relaxed">
+                      {project.longDescription.split('\n\n')[0]}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="py-20 flex items-center">
+              <div className="container mx-auto px-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                  <div
+                    style={{
+                      transform: `translateY(${scrollY * -0.02}px)`,
+                      transition: 'transform 0.1s ease-out'
+                    }}
+                  >
+                    <h3 className="text-4xl md:text-5xl font-light tracking-wider text-white mb-6" style={{ fontFamily: 'var(--font-bebas)' }}>
+                      {project.features[1] || 'FEATURE TITLE'}
+                    </h3>
+                    <p className="text-lg text-gray-300 leading-relaxed">
+                      {project.longDescription.split('\n\n')[1] || project.description}
+                    </p>
+                  </div>
+                  {project.gallery && project.gallery[1] && (
+                    <ParallaxImage
+                      src={project.gallery[1]}
+                      alt={`Detailed gameplay view highlighting interactive historical elements and authentic period reconstruction in ${project.title}`}
+                      className="aspect-video"
+                      intensity={1}
+                      direction="vertical"
+                    />
+                  )}
+                </div>
+              </div>
+            </div>
+          </>
+        )}
+      </section>
+
+      {/* Soundtrack Section - Only for Discover Old D'Hanis */}
+      {project.slug === 'discover-old-dhanis' && (
+        <section className="relative py-32 bg-black">
+          <div className="container mx-auto px-6 max-w-6xl">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+              {/* Image - Left Side */}
+              <ParallaxImage
+                src="/images/dominics.jpeg"
+                alt="Album artwork for the Discover Old D'Hanis Official Soundtrack, composed and produced by Joyce Lee"
+                className="aspect-square"
+                intensity={1}
+                direction="vertical"
+              />
+
+              {/* Text - Right Side */}
+              <div>
+                <h2 className="text-5xl md:text-6xl lg:text-7xl font-light tracking-[0.15em] text-white mb-6" style={{ fontFamily: 'var(--font-bebas)' }}>
+                  THE DISCOVER<br />
+                  OLD D'HANIS<br />
+                  OFFICIAL SOUNDTRACK
+                </h2>
+
+                <p className="text-xl md:text-2xl text-gray-400 font-light mb-8">
+                  Music Composed And Produced By Joyce Lee
+                </p>
+
+                <div className="flex items-center gap-4">
+                  <span className="text-gray-300 text-lg font-light">Listen now on</span>
+                  <a
+                    href="https://www.youtube.com/playlist?list=YOUR_PLAYLIST_ID"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-400 hover:text-accent transition-colors duration-300"
+                    aria-label="YouTube"
+                  >
+                    <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Steam Call to Action Section - Only for Discover Old D'Hanis */}
+      {project.slug === 'discover-old-dhanis' && (
+        <section className="relative py-32 bg-black">
+          <div className="container mx-auto px-6 max-w-6xl">
+            <div className="relative w-full aspect-[21/9] overflow-hidden">
+              {/* Background Image */}
+              <Image
+                src={project.thumbnail || '/images/dod-cover.jpg'}
+                alt="Call-to-action banner featuring Discover Old D'Hanis with Steam platform link for game purchase"
+                fill
+                className="object-cover opacity-30"
+              />
+
+              {/* Overlay Content */}
+              <div className="absolute inset-0 flex flex-col items-center justify-center gap-8">
+                <h2 className="text-4xl md:text-5xl lg:text-6xl font-light tracking-[0.15em] text-white text-center" style={{ fontFamily: 'var(--font-bebas)' }}>
+                  PLAY DISCOVER OLD D'HANIS<br />
+                  ON STEAM
+                </h2>
+
+                {/* Steam Button */}
+                <a
+                  href="https://store.steampowered.com/app/3140860/Discover_Old_DHanis/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-3 group"
+                >
+                  <span className="text-accent transition-all duration-300 group-hover:-translate-x-1 text-xl">
+                    [
+                  </span>
+                  {/* Steam Icon */}
+                  <svg className="w-7 h-7 text-gray-400 group-hover:text-accent transition-colors duration-300" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M11.979 0C5.678 0 .511 4.86.022 11.037l6.432 2.658c.545-.371 1.203-.59 1.912-.59.063 0 .125.004.188.006l2.861-4.142V8.91c0-2.495 2.028-4.524 4.524-4.524 2.494 0 4.524 2.031 4.524 4.527s-2.03 4.525-4.524 4.525h-.105l-4.076 2.911c0 .052.004.105.004.159 0 1.875-1.515 3.396-3.39 3.396-1.635 0-3.016-1.173-3.331-2.727L.436 15.27C1.862 20.307 6.486 24 11.979 24c6.627 0 11.999-5.373 11.999-12S18.605 0 11.979 0zM7.54 18.21l-1.473-.61c.262.543.714.999 1.314 1.25 1.297.539 2.793-.076 3.332-1.375.263-.63.264-1.319.005-1.949s-.75-1.121-1.377-1.383c-.624-.26-1.29-.249-1.878-.03l1.523.63c.956.4 1.409 1.5 1.009 2.455-.397.957-1.497 1.41-2.454 1.012H7.54zm11.415-9.303c0-1.662-1.353-3.015-3.015-3.015-1.665 0-3.015 1.353-3.015 3.015 0 1.665 1.35 3.015 3.015 3.015 1.663 0 3.015-1.35 3.015-3.015zm-5.273-.005c0-1.252 1.013-2.266 2.265-2.266 1.249 0 2.266 1.014 2.266 2.266 0 1.251-1.017 2.265-2.266 2.265-1.253 0-2.265-1.014-2.265-2.265z"/>
+                  </svg>
+                  <span className="text-lg font-light tracking-[0.15em] text-gray-400 group-hover:text-accent transition-colors duration-300 uppercase" style={{ fontFamily: 'var(--font-bebas)' }}>
+                    Open in Steam
+                  </span>
+                  <span className="text-accent transition-all duration-300 group-hover:translate-x-1 text-xl">
+                    ]
+                  </span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* Screenshots Gallery - Scroll-based Slider */}
       {project.gallery && project.gallery.length > 0 && (
         <section ref={screenshotsRef} className="relative bg-black py-20">
@@ -404,168 +894,6 @@ export default function ProjectContent({ project }: { project: Project }) {
                   </svg>
                 </button>
               </div>
-          </div>
-        </section>
-      )}
-
-      {/* Image + Text Sections with Parallax */}
-      <section className="relative bg-black py-12">
-        {/* First Section - Image Left, Text Right */}
-        <div className="py-20 flex items-center">
-          <div className="container mx-auto px-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-              {/* Image */}
-              {project.gallery && project.gallery[0] && (
-                <ParallaxImage
-                  src={project.gallery[0]}
-                  alt={`In-game screenshot showcasing the immersive historical environment and exploration mechanics of ${project.title}`}
-                  className="aspect-video"
-                  intensity={1}
-                  direction="vertical"
-                />
-              )}
-
-              {/* Text */}
-              <div
-                style={{
-                  transform: `translateY(${scrollY * -0.03}px)`,
-                  transition: 'transform 0.1s ease-out'
-                }}
-              >
-                <h3 className="text-4xl md:text-5xl font-light tracking-wider text-white mb-6" style={{ fontFamily: 'var(--font-bebas)' }}>
-                  {project.features[0] || 'FEATURE TITLE'}
-                </h3>
-                <p className="text-lg text-gray-300 leading-relaxed">
-                  {project.longDescription.split('\n\n')[0]}
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Second Section - Text Left, Image Right */}
-        <div className="py-20 flex items-center">
-          <div className="container mx-auto px-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-              {/* Text */}
-              <div
-                style={{
-                  transform: `translateY(${scrollY * -0.02}px)`,
-                  transition: 'transform 0.1s ease-out'
-                }}
-              >
-                <h3 className="text-4xl md:text-5xl font-light tracking-wider text-white mb-6" style={{ fontFamily: 'var(--font-bebas)' }}>
-                  {project.features[1] || 'FEATURE TITLE'}
-                </h3>
-                <p className="text-lg text-gray-300 leading-relaxed">
-                  {project.longDescription.split('\n\n')[1] || project.description}
-                </p>
-              </div>
-
-              {/* Image */}
-              {project.gallery && project.gallery[1] && (
-                <ParallaxImage
-                  src={project.gallery[1]}
-                  alt={`Detailed gameplay view highlighting interactive historical elements and authentic period reconstruction in ${project.title}`}
-                  className="aspect-video"
-                  intensity={1}
-                  direction="vertical"
-                />
-              )}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Soundtrack Section - Only for Discover Old D'Hanis */}
-      {project.slug === 'discover-old-dhanis' && (
-        <section className="relative py-32 bg-black">
-          <div className="container mx-auto px-6 max-w-6xl">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-              {/* Image - Left Side */}
-              <ParallaxImage
-                src="/images/dominics.jpeg"
-                alt="Album artwork for the Discover Old D'Hanis Official Soundtrack, composed and produced by Joyce Lee"
-                className="aspect-square"
-                intensity={1}
-                direction="vertical"
-              />
-
-              {/* Text - Right Side */}
-              <div>
-                <h2 className="text-5xl md:text-6xl lg:text-7xl font-light tracking-[0.15em] text-white mb-6" style={{ fontFamily: 'var(--font-bebas)' }}>
-                  THE DISCOVER<br />
-                  OLD D'HANIS<br />
-                  OFFICIAL SOUNDTRACK
-                </h2>
-
-                <p className="text-xl md:text-2xl text-gray-400 font-light mb-8">
-                  Music Composed And Produced By Joyce Lee
-                </p>
-
-                <div className="flex items-center gap-4">
-                  <span className="text-gray-300 text-lg font-light">Listen now on</span>
-                  <a
-                    href="https://www.youtube.com/playlist?list=YOUR_PLAYLIST_ID"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-gray-400 hover:text-accent transition-colors duration-300"
-                    aria-label="YouTube"
-                  >
-                    <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-                    </svg>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* Steam Call to Action Section - Only for Discover Old D'Hanis */}
-      {project.slug === 'discover-old-dhanis' && (
-        <section className="relative py-32 bg-black">
-          <div className="container mx-auto px-6 max-w-6xl">
-            <div className="relative w-full aspect-[21/9] overflow-hidden">
-              {/* Background Image */}
-              <Image
-                src={project.thumbnail || '/images/dod-cover.jpg'}
-                alt="Call-to-action banner featuring Discover Old D'Hanis with Steam platform link for game purchase"
-                fill
-                className="object-cover opacity-30"
-              />
-
-              {/* Overlay Content */}
-              <div className="absolute inset-0 flex flex-col items-center justify-center gap-8">
-                <h2 className="text-4xl md:text-5xl lg:text-6xl font-light tracking-[0.15em] text-white text-center" style={{ fontFamily: 'var(--font-bebas)' }}>
-                  PLAY DISCOVER OLD D'HANIS<br />
-                  ON STEAM
-                </h2>
-
-                {/* Steam Button */}
-                <a
-                  href="https://store.steampowered.com/app/3140860/Discover_Old_DHanis/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-3 group"
-                >
-                  <span className="text-accent transition-all duration-300 group-hover:-translate-x-1 text-xl">
-                    [
-                  </span>
-                  {/* Steam Icon */}
-                  <svg className="w-7 h-7 text-gray-400 group-hover:text-accent transition-colors duration-300" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M11.979 0C5.678 0 .511 4.86.022 11.037l6.432 2.658c.545-.371 1.203-.59 1.912-.59.063 0 .125.004.188.006l2.861-4.142V8.91c0-2.495 2.028-4.524 4.524-4.524 2.494 0 4.524 2.031 4.524 4.527s-2.03 4.525-4.524 4.525h-.105l-4.076 2.911c0 .052.004.105.004.159 0 1.875-1.515 3.396-3.39 3.396-1.635 0-3.016-1.173-3.331-2.727L.436 15.27C1.862 20.307 6.486 24 11.979 24c6.627 0 11.999-5.373 11.999-12S18.605 0 11.979 0zM7.54 18.21l-1.473-.61c.262.543.714.999 1.314 1.25 1.297.539 2.793-.076 3.332-1.375.263-.63.264-1.319.005-1.949s-.75-1.121-1.377-1.383c-.624-.26-1.29-.249-1.878-.03l1.523.63c.956.4 1.409 1.5 1.009 2.455-.397.957-1.497 1.41-2.454 1.012H7.54zm11.415-9.303c0-1.662-1.353-3.015-3.015-3.015-1.665 0-3.015 1.353-3.015 3.015 0 1.665 1.35 3.015 3.015 3.015 1.663 0 3.015-1.35 3.015-3.015zm-5.273-.005c0-1.252 1.013-2.266 2.265-2.266 1.249 0 2.266 1.014 2.266 2.266 0 1.251-1.017 2.265-2.266 2.265-1.253 0-2.265-1.014-2.265-2.265z"/>
-                  </svg>
-                  <span className="text-lg font-light tracking-[0.15em] text-gray-400 group-hover:text-accent transition-colors duration-300 uppercase" style={{ fontFamily: 'var(--font-bebas)' }}>
-                    Open in Steam
-                  </span>
-                  <span className="text-accent transition-all duration-300 group-hover:translate-x-1 text-xl">
-                    ]
-                  </span>
-                </a>
-              </div>
-            </div>
           </div>
         </section>
       )}
