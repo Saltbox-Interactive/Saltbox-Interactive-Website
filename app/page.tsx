@@ -257,10 +257,10 @@ export default function Home() {
           }}
         >
           <Image
-            src="/images/dhanis1.jpg"
+            src="/images/temp/dod-temp-12.jpg"
             alt="Panoramic view of Old D'Hanis historic site featuring preserved stone structures from the 1847 Alsatian settlement in Texas"
             fill
-            className="object-cover"
+            className="object-contain"
             priority
           />
           {/* Vignette overlay - Very dramatic fade */}
@@ -333,6 +333,87 @@ export default function Home() {
                 </span>
               </Link>
             </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Parallax Background Image Section - Before Remastered */}
+      <section className="relative h-[150vh] bg-black z-10 overflow-hidden">
+        <div
+          className="absolute inset-0 w-full h-full"
+          style={{
+            transform: `translateY(${Math.max(0, (scrollY - 2400)) * -0.2}px)`,
+            opacity: scrollY < 4200 ? 1 : Math.max(0, 1 - (scrollY - 4200) / 600)
+          }}
+        >
+          <Image
+            src="/images/temp/dod-temp-2.jpg"
+            alt="Stunning photorealistic view of Old D'Hanis recreated in Unreal Engine 5"
+            fill
+            className="object-contain"
+          />
+          {/* Vignette overlay - Very dramatic fade */}
+          <div
+            className="absolute inset-0"
+            style={{
+              background: 'radial-gradient(ellipse 60% 50% at center, transparent 0%, rgba(0,0,0,0.2) 25%, rgba(0,0,0,0.5) 45%, rgba(0,0,0,0.75) 60%, rgba(0,0,0,0.9) 75%, rgba(0,0,0,0.98) 85%, black 90%)'
+            }}
+          ></div>
+        </div>
+      </section>
+
+      {/* Discover Old D'Hanis Remastered Section */}
+      <section
+        className="relative -mt-[70vh] z-20 pb-96"
+      >
+        <div className="relative z-10">
+          {/* Centered Content Container */}
+          <div className="relative w-full max-w-[1800px] mx-auto px-6">
+            <div className="flex items-start justify-between gap-24">
+              {/* Foreground Vertical Image - Left Side */}
+              <div className="flex-shrink-0 w-[40vw] max-w-[550px] ml-48">
+                <ParallaxImage
+                  src="/images/temp/dod-temp-1.jpg"
+                  alt="Discover Old D'Hanis Remastered game cover art showing photorealistic recreation with Unreal Engine 5"
+                  className="w-full aspect-[2/3]"
+                  intensity={1}
+                  direction="vertical"
+                />
+              </div>
+
+              {/* Content - Right Side */}
+              <div className="flex-shrink-0 max-w-[450px] pt-48 ml-auto mr-32">
+                <div className="mb-12">
+                  <p className="text-accent/70 text-xs tracking-[0.4em] uppercase mb-6">Coming 2026</p>
+                  <h2 className="text-4xl md:text-5xl font-light tracking-[0.15em] text-foreground mb-8" style={{ fontFamily: 'var(--font-bebas)' }}>
+                    DISCOVER OLD D'HANIS: REMASTERED
+                  </h2>
+                </div>
+
+                <div className="mb-12">
+                  <p className="text-gray-300 text-xl leading-relaxed" style={{ fontFamily: 'var(--font-work-sans)' }}>
+                    Experience Old D'Hanis like never before in this complete reimagining of the original game. Built from the ground up in Unreal Engine 5 with breathtaking photorealistic graphics and immersive environments.
+                  </p>
+                </div>
+
+                <div className="inline-block">
+                  <Link
+                    href="/projects/discover-old-dhanis-remastered"
+                    className="flex items-center gap-2 group/title"
+                  >
+                    <span className="text-accent transition-all duration-300 group-hover/title:-translate-x-1 text-lg">
+                      [
+                    </span>
+                    <span className="text-lg font-light tracking-[0.15em] text-gray-400 group-hover/title:text-accent transition-colors duration-300 uppercase" style={{ fontFamily: 'var(--font-bebas)' }}>
+                      Learn More
+                    </span>
+                    <span className="text-accent transition-all duration-300 group-hover/title:translate-x-1 text-lg">
+                      ]
+                    </span>
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
