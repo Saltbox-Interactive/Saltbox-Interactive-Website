@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { SOCIAL_LINKS } from "@/lib/constants";
 
 interface SocialLinksProps {
   variant?: "default" | "small";
@@ -10,11 +11,12 @@ export default function SocialLinks({
   className = ""
 }: SocialLinksProps) {
   const iconSize = variant === "small" ? "w-5 h-5" : "w-6 h-6";
+  const gap = variant === "small" ? "gap-4" : "gap-6";
 
   return (
-    <div className={`flex gap-${variant === "small" ? "4" : "6"} ${className}`}>
+    <div className={`flex ${gap} ${className}`}>
       <Link
-        href="https://www.linkedin.com/company/saltbox-interactive"
+        href={SOCIAL_LINKS.linkedin}
         target="_blank"
         rel="noopener noreferrer"
         className="text-gray-400 hover:text-accent transition-colors duration-300"
@@ -26,7 +28,7 @@ export default function SocialLinks({
       </Link>
 
       <Link
-        href="#"
+        href={SOCIAL_LINKS.youtube}
         target="_blank"
         rel="noopener noreferrer"
         className="text-gray-400 hover:text-accent transition-colors duration-300 opacity-50 cursor-not-allowed"
@@ -38,7 +40,7 @@ export default function SocialLinks({
       </Link>
 
       <Link
-        href="https://store.steampowered.com/app/3140860/Discover_Old_DHanis/"
+        href={SOCIAL_LINKS.steam}
         target="_blank"
         rel="noopener noreferrer"
         className="text-gray-400 hover:text-accent transition-colors duration-300"

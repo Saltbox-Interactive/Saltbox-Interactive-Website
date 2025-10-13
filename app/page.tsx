@@ -4,18 +4,22 @@ import { useEffect, useRef, useState } from "react";
 import Hero from "@/components/sections/Hero";
 import Link from "next/link";
 import Image from "next/image";
-import ParallaxImage from "@/components/ParallaxImage";
 import { useScrollSpeed } from "@/hooks/useScrollSpeed";
+import { useScrollPosition } from "@/hooks/useScrollPosition";
+import { useTypingEffect } from "@/hooks/useTypingEffect";
 import BracketLink from "@/components/ui/BracketLink";
 import AnimatedSection from "@/components/ui/AnimatedSection";
-
-const HERO_SCROLL_THRESHOLD = 300;
+import Typography from "@/components/ui/Typography";
+import SectionWrapper from "@/components/ui/SectionWrapper";
+import Container from "@/components/ui/Container";
+import FullWidthImage from "@/components/ui/FullWidthImage";
+import ProjectShowcase from "@/components/sections/ProjectShowcase";
+import { HOME_CONTENT } from "@/lib/data/content";
+import { SCROLL } from "@/lib/constants";
 
 export default function Home() {
-  const [scrollY, setScrollY] = useState(0);
+  const scrollY = useScrollPosition();
   const [virtualScroll, setVirtualScroll] = useState(0);
-  const [aboutText, setAboutText] = useState("");
-  const [introText, setIntroText] = useState("");
   const [aboutVisible, setAboutVisible] = useState(false);
   const [introVisible, setIntroVisible] = useState(false);
   const aboutRef = useRef<HTMLDivElement>(null);
@@ -23,17 +27,20 @@ export default function Home() {
   const heroRef = useRef<HTMLElement>(null);
   const scrollLockRef = useRef(false);
 
-  const aboutStaticText = "Saltbox Interactive is dedicated to preserving the past through interactive digital experiences. We create explorable virtual environments";
-  const aboutTypedText = " where history comes alive.";
-  const aboutFullText = aboutStaticText + aboutTypedText;
+  // Use typing effects from content
+  const aboutTypedText = useTypingEffect({
+    text: HOME_CONTENT.about.typedText,
+    enabled: aboutVisible,
+  });
 
-  const introStaticText = "Step into the past and unravel the rich history of Old D'Hanis. Explore this 19th-century town, from Alsatian and German settlers of 1847 to Black and Mexican families post-Civil War. Unearth archival fragments, archaeological photos, and oral histories";
-  const introTypedText = " to piece together the town's alluring stories.";
-  const introFullText = introStaticText + introTypedText;
+  const introTypedText = useTypingEffect({
+    text: HOME_CONTENT.intro.typedText,
+    enabled: introVisible,
+  });
 
   // Apply very slow scroll speed to hero section for motto animation effect
   useScrollSpeed(heroRef, {
-    speed: 6.0, // Very slow scroll during motto animation
+    speed: SCROLL.slowSpeed,
     threshold: 0.5,
     downOnly: true,
   });
@@ -67,33 +74,11 @@ export default function Home() {
     return () => observer.disconnect();
   }, []);
 
-  // Typing effect for about paragraph - only types the last few words
-  useEffect(() => {
-    if (aboutVisible && aboutText.length < aboutTypedText.length) {
-      const timeout = setTimeout(() => {
-        setAboutText(aboutTypedText.slice(0, aboutText.length + 1));
-      }, 50);
-      return () => clearTimeout(timeout);
-    }
-  }, [aboutVisible, aboutText, aboutTypedText]);
-
-  // Typing effect for intro paragraph - only types the last few words
-  useEffect(() => {
-    if (introVisible && introText.length < introTypedText.length) {
-      const timeout = setTimeout(() => {
-        setIntroText(introTypedText.slice(0, introText.length + 1));
-      }, 50);
-      return () => clearTimeout(timeout);
-    }
-  }, [introVisible, introText, introTypedText]);
-
   useEffect(() => {
     const handleScroll = () => {
-      setScrollY(window.scrollY);
-
       // Reset virtual scroll to full threshold (animated out) when we've scrolled past the hero
       if (window.scrollY > 100) {
-        setVirtualScroll(HERO_SCROLL_THRESHOLD);
+        setVirtualScroll(SCROLL.heroThreshold);
         scrollLockRef.current = false;
       } else if (window.scrollY === 0) {
         // Reset to 0 when back at top
@@ -104,11 +89,11 @@ export default function Home() {
     const handleWheel = (e: WheelEvent) => {
       // Only lock scroll when we're at the top of the page
       if (window.scrollY === 0) {
-        const newVirtualScroll = Math.max(0, Math.min(HERO_SCROLL_THRESHOLD, virtualScroll + e.deltaY));
+        const newVirtualScroll = Math.max(0, Math.min(SCROLL.heroThreshold, virtualScroll + e.deltaY));
         setVirtualScroll(newVirtualScroll);
 
         // Lock scrolling until threshold is reached
-        if (newVirtualScroll < HERO_SCROLL_THRESHOLD) {
+        if (newVirtualScroll < SCROLL.heroThreshold) {
           e.preventDefault();
           scrollLockRef.current = true;
         } else {
@@ -161,7 +146,7 @@ export default function Home() {
               style={{
                 fontFamily: 'var(--font-bebas)',
                 transform: `translateX(${virtualScroll * -1.5}px)`,
-                opacity: Math.max(0, 1 - virtualScroll / HERO_SCROLL_THRESHOLD)
+                opacity: Math.max(0, 1 - virtualScroll / SCROLL.heroThreshold)
               }}
             >
               DISCOVER
@@ -171,7 +156,7 @@ export default function Home() {
               style={{
                 fontFamily: 'var(--font-bebas)',
                 transform: `translateX(${virtualScroll * 1.5}px)`,
-                opacity: Math.max(0, 1 - virtualScroll / HERO_SCROLL_THRESHOLD)
+                opacity: Math.max(0, 1 - virtualScroll / SCROLL.heroThreshold)
               }}
             >
               LEARN
@@ -181,7 +166,7 @@ export default function Home() {
               style={{
                 fontFamily: 'var(--font-bebas)',
                 transform: `translateX(${virtualScroll * -1.5}px)`,
-                opacity: Math.max(0, 1 - virtualScroll / HERO_SCROLL_THRESHOLD)
+                opacity: Math.max(0, 1 - virtualScroll / SCROLL.heroThreshold)
               }}
             >
               PRESERVE
@@ -202,78 +187,47 @@ export default function Home() {
               : 'opacity-0 translate-y-20'
           }`}
         >
-          <h2
-            className="text-5xl md:text-6xl lg:text-7xl font-light tracking-[0.15em] text-white mb-8"
-            style={{
-              fontFamily: 'var(--font-bebas)',
-            }}
-          >
+          <Typography.Heading size="xl" className="mb-8">
             WE CREATE<br />
             IMMERSIVE HISTORICAL<br />
             EXPERIENCES
-          </h2>
+          </Typography.Heading>
 
-          <p
-            className="text-xl md:text-2xl text-gray-300 leading-relaxed max-w-3xl mx-auto"
-            style={{
-              fontFamily: 'var(--font-work-sans)',
-            }}
-          >
-            {aboutStaticText.split('Saltbox Interactive').map((part, i, arr) => (
+          <Typography.Body size="lg" className="max-w-3xl mx-auto">
+            {HOME_CONTENT.about.staticText.split('Saltbox Interactive').map((part, i, arr) => (
               <span key={i}>
                 {part}
                 {i < arr.length - 1 && <span className="bg-white text-black px-1">Saltbox Interactive</span>}
               </span>
             ))}
-            {aboutText}
-          </p>
+            {aboutTypedText}
+          </Typography.Body>
         </div>
       </section>
 
       {/* Quick Links Section */}
-      <section className="py-16 px-6 relative bg-black z-20">
-        <div className="absolute inset-0 bg-noise opacity-5"></div>
-
-        <div className="container mx-auto max-w-3xl relative z-10">
-          <div className="flex items-center justify-center">
-            <BracketLink href="/about">Our Mission</BracketLink>
-          </div>
-        </div>
-      </section>
+      <SectionWrapper className="py-16 px-6 z-20">
+        <Container size="sm" className="text-center">
+          <BracketLink href="/about">Our Mission</BracketLink>
+        </Container>
+      </SectionWrapper>
 
       {/* Parallax Background Image Section - Comes First */}
-      <section className="relative h-[150vh] bg-black z-10 overflow-hidden">
-        <div
-          className="absolute inset-0 w-full h-full"
-          style={{
-            transform: `translateY(${scrollY * -0.2}px)`,
-            opacity: scrollY < 1800 ? 1 : Math.max(0, 1 - (scrollY - 1800) / 600)
-          }}
-        >
-          <Image
-            src="/images/temp/dod-temp-12.jpg"
-            alt="Panoramic view of Old D'Hanis historic site featuring preserved stone structures from the 1847 Alsatian settlement in Texas"
-            fill
-            className="object-contain"
-            priority
-          />
-          {/* Vignette overlay - Very dramatic fade */}
-          <div
-            className="absolute inset-0"
-            style={{
-              background: 'radial-gradient(ellipse 60% 50% at center, transparent 0%, rgba(0,0,0,0.2) 25%, rgba(0,0,0,0.5) 45%, rgba(0,0,0,0.75) 60%, rgba(0,0,0,0.9) 75%, rgba(0,0,0,0.98) 85%, black 90%)'
-            }}
-          ></div>
-        </div>
-      </section>
+      <FullWidthImage
+        src="/images/temp/dod-temp-12.jpg"
+        alt="Panoramic view of Old D'Hanis historic site featuring preserved stone structures from the 1847 Alsatian settlement in Texas"
+        scrollY={scrollY}
+        parallaxSpeed={SCROLL.parallaxSpeed.slow}
+        fadeStart={1800}
+        priority
+      />
 
-      {/* Featured Project Content - Vertical Image and Text */}
+      {/* Featured Project Content - Discover Old D'Hanis */}
       <section
         id="intro"
         ref={introRef}
         className="relative -mt-[70vh] z-20 pb-96"
       >
-
         <div
           className={`relative z-10 transition-all duration-1000 ${
             introVisible
@@ -281,122 +235,46 @@ export default function Home() {
               : 'opacity-0 translate-y-20'
           }`}
         >
-          {/* Centered Content Container */}
-          <div className="relative w-full max-w-[1800px] mx-auto px-6">
-            <div className="flex items-start justify-between gap-24">
-              {/* Foreground Vertical Image - Left Side */}
-              <div className="flex-shrink-0 w-[40vw] max-w-[550px] ml-48">
-                <ParallaxImage
-                  src="/images/dod-cover.jpg"
-                  alt="Discover Old D'Hanis game cover art showing the historic settlement ruins with dramatic sky and authentic 19th-century Texas landscape"
-                  className="w-full aspect-[2/3]"
-                  intensity={1}
-                  direction="vertical"
-                />
-              </div>
-
-              {/* Content - Right Side */}
-              <div className="flex-shrink-0 max-w-[450px] pt-48 ml-auto mr-32">
-            <div className="mb-12">
-              <p className="text-accent/70 text-xs tracking-[0.4em] uppercase mb-6">Now Available</p>
-              <h2 className="text-4xl md:text-5xl font-light tracking-[0.15em] text-foreground mb-8" style={{ fontFamily: 'var(--font-bebas)' }}>
-                DISCOVER OLD D'HANIS
-              </h2>
-            </div>
-
-            <div className="mb-12">
-              <p className="text-gray-300 text-xl leading-relaxed" style={{ fontFamily: 'var(--font-work-sans)' }}>
-                {introStaticText}{introText}
-              </p>
-            </div>
-
-            <div className="inline-block">
-              <BracketLink href="/projects/discover-old-dhanis">Learn More</BracketLink>
-            </div>
-              </div>
-            </div>
-          </div>
+          <ProjectShowcase
+            imageSrc={HOME_CONTENT.projects.discoverOldDhanis.image}
+            imageAlt="Discover Old D'Hanis game cover art showing the historic settlement ruins with dramatic sky and authentic 19th-century Texas landscape"
+            status={HOME_CONTENT.projects.discoverOldDhanis.status}
+            title={HOME_CONTENT.projects.discoverOldDhanis.title}
+            description={`${HOME_CONTENT.intro.staticText}${introTypedText}`}
+            linkHref={HOME_CONTENT.projects.discoverOldDhanis.link}
+            imagePosition="left"
+          />
         </div>
       </section>
 
       {/* Parallax Background Image Section - Before Remastered */}
-      <section className="relative h-[150vh] bg-black z-10 overflow-hidden">
-        <div
-          className="absolute inset-0 w-full h-full"
-          style={{
-            transform: `translateY(${Math.max(0, (scrollY - 2400)) * -0.2}px)`,
-            opacity: scrollY < 4200 ? 1 : Math.max(0, 1 - (scrollY - 4200) / 600)
-          }}
-        >
-          <Image
-            src="/images/temp/dod-temp-2.jpg"
-            alt="Stunning photorealistic view of Old D'Hanis recreated in Unreal Engine 5"
-            fill
-            className="object-contain"
-          />
-          {/* Vignette overlay - Very dramatic fade */}
-          <div
-            className="absolute inset-0"
-            style={{
-              background: 'radial-gradient(ellipse 60% 50% at center, transparent 0%, rgba(0,0,0,0.2) 25%, rgba(0,0,0,0.5) 45%, rgba(0,0,0,0.75) 60%, rgba(0,0,0,0.9) 75%, rgba(0,0,0,0.98) 85%, black 90%)'
-            }}
-          ></div>
-        </div>
-      </section>
+      <FullWidthImage
+        src="/images/temp/dod-temp-2.jpg"
+        alt="Stunning photorealistic view of Old D'Hanis recreated in Unreal Engine 5"
+        scrollY={Math.max(0, scrollY - 2400)}
+        parallaxSpeed={SCROLL.parallaxSpeed.slow}
+        fadeStart={1800}
+      />
 
       {/* Discover Old D'Hanis Remastered Section */}
-      <section
-        className="relative -mt-[70vh] z-20 pb-96"
-      >
-        <div className="relative z-10">
-          {/* Centered Content Container */}
-          <div className="relative w-full max-w-[1800px] mx-auto px-6">
-            <div className="flex items-start justify-between gap-24">
-              {/* Foreground Vertical Image - Left Side */}
-              <div className="flex-shrink-0 w-[40vw] max-w-[550px] ml-48">
-                <ParallaxImage
-                  src="/images/temp/dod-temp-1.jpg"
-                  alt="Discover Old D'Hanis Remastered game cover art showing photorealistic recreation with Unreal Engine 5"
-                  className="w-full aspect-[2/3]"
-                  intensity={1}
-                  direction="vertical"
-                />
-              </div>
-
-              {/* Content - Right Side */}
-              <div className="flex-shrink-0 max-w-[450px] pt-48 ml-auto mr-32">
-                <div className="mb-12">
-                  <p className="text-accent/70 text-xs tracking-[0.4em] uppercase mb-6">Coming 2026</p>
-                  <h2 className="text-4xl md:text-5xl font-light tracking-[0.15em] text-foreground mb-8" style={{ fontFamily: 'var(--font-bebas)' }}>
-                    DISCOVER OLD D'HANIS: REMASTERED
-                  </h2>
-                </div>
-
-                <div className="mb-12">
-                  <p className="text-gray-300 text-xl leading-relaxed" style={{ fontFamily: 'var(--font-work-sans)' }}>
-                    Experience Old D'Hanis like never before in this complete reimagining of the original game. Built from the ground up in Unreal Engine 5 with breathtaking photorealistic graphics and immersive environments.
-                  </p>
-                </div>
-
-                <div className="inline-block">
-                  <BracketLink href="/projects/discover-old-dhanis-remastered">Learn More</BracketLink>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+      <section className="relative -mt-[70vh] z-20 pb-96">
+        <ProjectShowcase
+          imageSrc={HOME_CONTENT.projects.discoverOldDhanisRemastered.image}
+          imageAlt="Discover Old D'Hanis Remastered game cover art showing photorealistic recreation with Unreal Engine 5"
+          status={HOME_CONTENT.projects.discoverOldDhanisRemastered.status}
+          title={HOME_CONTENT.projects.discoverOldDhanisRemastered.title}
+          description={HOME_CONTENT.projects.discoverOldDhanisRemastered.description}
+          linkHref={HOME_CONTENT.projects.discoverOldDhanisRemastered.link}
+          imagePosition="left"
+        />
       </section>
 
       {/* View Our Work Button */}
-      <section className="py-16 px-6 relative bg-black z-20">
-        <div className="absolute inset-0 bg-noise opacity-5"></div>
-
-        <div className="container mx-auto max-w-3xl relative z-10">
-          <div className="flex items-center justify-center">
-            <BracketLink href="/projects">View Our Work</BracketLink>
-          </div>
-        </div>
-      </section>
+      <SectionWrapper className="py-16 px-6 z-20">
+        <Container size="sm" className="text-center">
+          <BracketLink href="/projects">View Our Work</BracketLink>
+        </Container>
+      </SectionWrapper>
 
       {/* End section that covers the fixed background and allows footer to show */}
       <section className="relative bg-black" style={{ zIndex: 100, minHeight: '150vh' }}>

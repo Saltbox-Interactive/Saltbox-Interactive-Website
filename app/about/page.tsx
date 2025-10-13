@@ -7,6 +7,7 @@ import Hero from "@/components/sections/Hero";
 import ParallaxImage from "@/components/ParallaxImage";
 import BracketLink from "@/components/ui/BracketLink";
 import AnimatedSection from "@/components/ui/AnimatedSection";
+import Typography from "@/components/ui/Typography";
 
 export default function AboutPage() {
   const [scrollY, setScrollY] = useState(0);
@@ -85,9 +86,9 @@ export default function AboutPage() {
         <div className="container mx-auto px-6 md:px-12 max-w-6xl">
           <div className="grid md:grid-cols-5 gap-12 md:gap-16 items-center">
             <div className="md:col-span-2">
-              <h2 className="text-6xl md:text-7xl lg:text-8xl font-light tracking-[0.15em] text-white mb-8 uppercase" style={{ fontFamily: 'var(--font-bebas)' }}>
+              <Typography.Heading size="2xl" className="mb-8">
                 THE TEAM
-              </h2>
+              </Typography.Heading>
               <div className="h-1 w-20 bg-accent"></div>
             </div>
             <div className="md:col-span-3 space-y-6">
@@ -118,12 +119,12 @@ export default function AboutPage() {
       <AnimatedSection id="mission" className="relative py-32 md:py-48 bg-black">
         <div className="container mx-auto px-6 md:px-12 max-w-6xl">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-5xl md:text-6xl lg:text-7xl font-light tracking-[0.1em] text-white leading-[1.3] mb-12 uppercase" style={{ fontFamily: 'var(--font-bebas)' }}>
+            <Typography.Heading size="xl" className="mb-12 leading-[1.3] tracking-[0.1em]">
               Experience history like never before
-            </h2>
-            <p className="text-xl md:text-2xl text-gray-400 leading-relaxed">
+            </Typography.Heading>
+            <Typography.Body size="lg" className="text-gray-400">
               We're committed to capturing every detail, every story, and every lesson from our collective past. Through meticulous research and innovative technology, we preserve history for future generations.
-            </p>
+            </Typography.Body>
           </div>
         </div>
       </AnimatedSection>

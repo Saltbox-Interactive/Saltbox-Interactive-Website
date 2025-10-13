@@ -1,6 +1,7 @@
 import Hero from "@/components/sections/Hero";
 import ProjectsSection from "@/components/sections/ProjectsSection";
 import type { Metadata } from "next";
+import Typography from "@/components/ui/Typography";
 
 export const metadata: Metadata = {
   title: "Projects",
@@ -24,13 +25,13 @@ export default function ProjectsPage() {
       <ProjectsSection />
       <section className="min-h-screen flex items-center justify-center bg-black px-6">
         <div className="container mx-auto text-center">
-          <h2 className="text-5xl md:text-6xl font-light tracking-[0.2em] text-foreground mb-6" style={{ fontFamily: 'var(--font-bebas)' }}>
+          <Typography.Heading size="xl" className="mb-6 text-foreground tracking-[0.2em]">
             MORE COMING SOON
-          </h2>
-          <p className="text-lg text-gray-400 max-w-2xl mx-auto">
-            We're constantly working on new projects to preserve and share historical moments. 
+          </Typography.Heading>
+          <Typography.Body className="text-gray-400 max-w-2xl mx-auto">
+            We're constantly working on new projects to preserve and share historical moments.
             Check back regularly for updates on our latest digital preservation efforts.
-          </p>
+          </Typography.Body>
         </div>
       </section>
     </>
