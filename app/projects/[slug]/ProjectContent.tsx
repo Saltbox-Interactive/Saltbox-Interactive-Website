@@ -6,6 +6,8 @@ import Link from "next/link";
 import { Project } from "@/lib/data/projects";
 import ParallaxImage from "@/components/ParallaxImage";
 import { VideoGameSchema, BreadcrumbSchema } from "@/components/StructuredData";
+import { FAQSchema, ReviewSchema } from "@/components/schemas";
+import { DISCOVER_OLD_DHANIS_FAQS, DISCOVER_OLD_DHANIS_REVIEWS } from "@/lib/data/seo";
 import BracketLink from "@/components/ui/BracketLink";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 
@@ -141,6 +143,17 @@ export default function ProjectContent({ project }: { project: Project }) {
         { name: "Projects", url: "https://saltboxinteractive.com/projects" },
         { name: project.title, url: `https://saltboxinteractive.com/projects/${project.slug}` }
       ]} />
+      {project.slug === 'discover-old-dhanis' && (
+        <>
+          <FAQSchema faqs={DISCOVER_OLD_DHANIS_FAQS} />
+          <ReviewSchema
+            itemName={DISCOVER_OLD_DHANIS_REVIEWS.itemName}
+            itemType="VideoGame"
+            aggregateRating={DISCOVER_OLD_DHANIS_REVIEWS.aggregateRating}
+            reviews={DISCOVER_OLD_DHANIS_REVIEWS.reviews}
+          />
+        </>
+      )}
 
       {/* Hero Section with Game Logo/Title */}
       <section className="relative min-h-screen flex items-center justify-center bg-black overflow-hidden">

@@ -8,20 +8,21 @@ import ParallaxImage from "@/components/ParallaxImage";
 import BracketLink from "@/components/ui/BracketLink";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import Typography from "@/components/ui/Typography";
+import Container from "@/components/ui/Container";
+import SectionWrapper from "@/components/ui/SectionWrapper";
+import { LocalBusinessSchema, FAQSchema } from "@/components/schemas";
+import { ABOUT_PAGE_FAQS } from "@/lib/data/seo";
+import { useScrollPosition } from "@/hooks/useScrollPosition";
+import { ABOUT_CONTENT } from "@/lib/data/content";
 
 export default function AboutPage() {
-  const [scrollY, setScrollY] = useState(0);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-    };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  const scrollY = useScrollPosition();
 
   return (
     <>
+      <LocalBusinessSchema />
+      <FAQSchema faqs={ABOUT_PAGE_FAQS} />
+
       <Hero
         title="About Us"
         subtitle="Learn about who we are"
@@ -31,14 +32,14 @@ export default function AboutPage() {
 
       {/* Intro Text Section */}
       <AnimatedSection id="intro" className="relative py-32 bg-black">
-        <div className="container mx-auto px-6 md:px-12 max-w-6xl">
-          <p className="text-2xl md:text-3xl text-white leading-[1.4] font-light mb-12" style={{ fontFamily: 'var(--font-work-sans)' }}>
-            <span className="bg-white text-black px-1">Saltbox Interactive</span> was founded on the belief that history should be experienced, not just read about.
-          </p>
-          <p className="text-xl md:text-2xl text-gray-400 leading-relaxed font-light max-w-4xl" style={{ fontFamily: 'var(--font-work-sans)' }}>
-            Our journey began with a simple question: What if we could use modern technology to step back in time? Today, we transform historical locations into explorable virtual environments where history comes alive.
-          </p>
-        </div>
+        <Container size="xl">
+          <Typography.Body size="xl" className="text-white leading-[1.4] mb-12">
+            <span className="bg-white text-black px-1">Saltbox Interactive</span> {ABOUT_CONTENT.intro.heading.replace('Saltbox Interactive ', '')}
+          </Typography.Body>
+          <Typography.Body size="lg" className="text-gray-400 max-w-4xl">
+            {ABOUT_CONTENT.intro.body}
+          </Typography.Body>
+        </Container>
       </AnimatedSection>
 
       {/* Full-Width Image Gallery Section */}
@@ -83,21 +84,21 @@ export default function AboutPage() {
 
       {/* Team Philosophy Section */}
       <AnimatedSection id="team" className="relative py-32 md:py-48 bg-black">
-        <div className="container mx-auto px-6 md:px-12 max-w-6xl">
+        <Container size="xl">
           <div className="grid md:grid-cols-5 gap-12 md:gap-16 items-center">
             <div className="md:col-span-2">
               <Typography.Heading size="2xl" className="mb-8">
-                THE TEAM
+                {ABOUT_CONTENT.team.title}
               </Typography.Heading>
               <div className="h-1 w-20 bg-accent"></div>
             </div>
             <div className="md:col-span-3 space-y-6">
-              <p className="text-lg md:text-xl text-gray-400 leading-relaxed" style={{ fontFamily: 'var(--font-work-sans)' }}>
-                Each project is a collaborative effort combining historical research, cutting-edge technology, and artistic vision to create authentic experiences that transport users to pivotal moments in history.
-              </p>
+              <Typography.Body className="text-gray-400">
+                {ABOUT_CONTENT.team.description}
+              </Typography.Body>
             </div>
           </div>
-        </div>
+        </Container>
       </AnimatedSection>
 
       {/* Full-Width Mission Image */}
@@ -117,24 +118,24 @@ export default function AboutPage() {
 
       {/* Mission Statement */}
       <AnimatedSection id="mission" className="relative py-32 md:py-48 bg-black">
-        <div className="container mx-auto px-6 md:px-12 max-w-6xl">
+        <Container size="xl">
           <div className="max-w-4xl mx-auto text-center">
             <Typography.Heading size="xl" className="mb-12 leading-[1.3] tracking-[0.1em]">
-              Experience history like never before
+              {ABOUT_CONTENT.mission.title}
             </Typography.Heading>
             <Typography.Body size="lg" className="text-gray-400">
-              We're committed to capturing every detail, every story, and every lesson from our collective past. Through meticulous research and innovative technology, we preserve history for future generations.
+              {ABOUT_CONTENT.mission.description}
             </Typography.Body>
           </div>
-        </div>
+        </Container>
       </AnimatedSection>
 
       {/* View Projects CTA */}
-      <section className="relative py-20 bg-black">
-        <div className="container mx-auto px-6 text-center">
+      <SectionWrapper className="py-20">
+        <Container size="sm" className="text-center">
           <BracketLink href="/projects" className="justify-center">View Our Projects</BracketLink>
-        </div>
-      </section>
+        </Container>
+      </SectionWrapper>
     </>
   );
 }

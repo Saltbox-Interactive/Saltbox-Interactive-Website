@@ -4,6 +4,7 @@ import "./globals.css";
 import Footer from "@/components/layout/Footer";
 import SmoothScroll from "@/components/SmoothScroll";
 import { OrganizationSchema } from "@/components/StructuredData";
+import BackToTop from "@/components/ui/BackToTop";
 import "lenis/dist/lenis.css";
 
 const workSans = Work_Sans({
@@ -105,6 +106,7 @@ export default function RootLayout({
             </div>
           </main>
           <div style={{ height: '400px', position: 'relative', zIndex: 1 }}></div>
+          <BackToTop />
         </SmoothScroll>
       </body>
     </html>

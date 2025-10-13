@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, ReactNode } from "react";
+import { useReducedMotion } from "@/hooks/useReducedMotion";
 
 interface AnimatedSectionProps {
   children: ReactNode;
@@ -21,8 +22,15 @@ export default function AnimatedSection({
 }: AnimatedSectionProps) {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
+  const prefersReducedMotion = useReducedMotion();
 
   useEffect(() => {
+    // If user prefers reduced motion, show immediately
+    if (prefersReducedMotion) {
+      setIsVisible(true);
+      return;
+    }
+
     const observerOptions = {
       threshold,
       rootMargin,
@@ -43,17 +51,17 @@ export default function AnimatedSection({
     }
 
     return () => observer.disconnect();
-  }, [threshold, rootMargin]);
+  }, [threshold, rootMargin, prefersReducedMotion]);
 
   return (
     <section
       ref={sectionRef}
       data-section={id}
-      className={`transition-all duration-1000 ${
+      className={`${prefersReducedMotion ? '' : 'transition-all duration-1000'} ${
         isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-20"
       } ${className}`}
       style={{
-        transitionDelay: `${delay}ms`,
+        transitionDelay: prefersReducedMotion ? '0ms' : `${delay}ms`,
       }}
     >
       {children}
