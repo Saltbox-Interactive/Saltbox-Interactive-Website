@@ -176,32 +176,32 @@ export default function ProjectContent({ project }: { project: Project }) {
         )}
 
         {/* Game Title/Logo */}
-        <div className="absolute bottom-24 left-0 right-0 z-10 text-center px-6"
+        <div className="absolute bottom-20 sm:bottom-24 left-0 right-0 z-10 text-center px-4 sm:px-6"
           style={{
             transform: `translateY(${scrollY * -0.2}px)`,
             opacity: Math.max(0, 1 - scrollY / 600)
           }}
         >
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-light tracking-[0.2em] text-white" style={{ fontFamily: 'var(--font-bebas)' }}>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-light tracking-[0.15em] sm:tracking-[0.2em] text-white" style={{ fontFamily: 'var(--font-bebas)' }}>
             {project.title}
           </h1>
         </div>
 
         {/* Page indicator - bottom left */}
-        <div className="absolute bottom-10 left-10 text-sm text-gray-400 tracking-wider opacity-0 animate-[fadeIn_1s_1s_ease-out_forwards]">
+        <div className="hidden sm:block absolute bottom-10 left-4 sm:left-10 text-xs sm:text-sm text-gray-400 tracking-wider opacity-0 animate-[fadeIn_1s_1s_ease-out_forwards]">
           Saltbox Interactive | <span className="text-accent">{project.title}</span>
         </div>
 
       </section>
 
       {/* Description Section */}
-      <AnimatedSection className="relative py-20 bg-black">
-        <div className="container mx-auto px-6 max-w-4xl">
-          <div className="space-y-6 mb-20">
+      <AnimatedSection className="relative py-12 sm:py-16 md:py-20 bg-black">
+        <div className="container mx-auto px-4 sm:px-6 max-w-4xl">
+          <div className="space-y-4 sm:space-y-6 mb-12 sm:mb-16 md:mb-20">
             {project.longDescription.split('\n\n').map((paragraph, index) => (
               <p
                 key={index}
-                className="text-xl md:text-2xl text-gray-300 leading-relaxed"
+                className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-300 leading-relaxed"
               >
                 {paragraph.trim()}
               </p>
@@ -210,38 +210,38 @@ export default function ProjectContent({ project }: { project: Project }) {
         </div>
 
         {/* Horizontal line - full width */}
-        <div className="container mx-auto px-6 mb-20">
+        <div className="container mx-auto px-4 sm:px-6 mb-12 sm:mb-16 md:mb-20">
           <div className="h-0.5 w-full bg-white/30"></div>
         </div>
 
-        <div className="container mx-auto px-6">
+        <div className="container mx-auto px-4 sm:px-6">
           {/* General Info Section */}
-          <div className="flex items-start gap-32">
-            <h3 className="text-lg font-light tracking-[0.2em] text-accent uppercase whitespace-nowrap" style={{ fontFamily: 'var(--font-bebas)' }}>
+          <div className="flex flex-col lg:flex-row lg:items-start gap-6 lg:gap-12">
+            <h3 className="text-lg sm:text-xl font-light tracking-[0.2em] text-accent uppercase" style={{ fontFamily: 'var(--font-bebas)' }}>
               General Info
             </h3>
 
-            <div className="flex flex-col gap-y-6 text-gray-300 flex-1 ml-24">
-              <div className="flex gap-x-40">
+            <div className="flex flex-col gap-y-6 text-gray-300 flex-1">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 {project.releaseDate && (
                   <div>
-                    <span className="text-gray-500 text-sm uppercase tracking-wider">Release Date</span>
-                    <p className="text-lg">{project.releaseDate}</p>
+                    <span className="text-gray-500 text-xs sm:text-sm uppercase tracking-wider block mb-2">Release Date</span>
+                    <p className="text-base sm:text-lg">{project.releaseDate}</p>
                   </div>
                 )}
 
                 {project.platforms && project.platforms.length > 0 && (
                   <div>
-                    <span className="text-gray-500 text-sm uppercase tracking-wider">Platforms</span>
-                    <p className="text-lg">{project.platforms.join(', ')}</p>
+                    <span className="text-gray-500 text-xs sm:text-sm uppercase tracking-wider block mb-2">Platforms</span>
+                    <p className="text-base sm:text-lg">{project.platforms.join(', ')}</p>
                   </div>
                 )}
               </div>
 
               {project.genre && (
                 <div>
-                  <span className="text-gray-500 text-sm uppercase tracking-wider">Genre</span>
-                  <p className="text-lg">{project.genre}</p>
+                  <span className="text-gray-500 text-xs sm:text-sm uppercase tracking-wider block mb-2">Genre</span>
+                  <p className="text-base sm:text-lg">{project.genre}</p>
                 </div>
               )}
             </div>

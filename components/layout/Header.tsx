@@ -174,17 +174,17 @@ export default function Header() {
       <header className={`fixed top-0 left-0 right-0 transition-opacity duration-300 ${
         isVisible ? "opacity-100" : "opacity-0 pointer-events-none"
       }`} style={{ zIndex: 200 }}>
-        <nav className="px-4 py-6 max-w-[1400px] mx-auto mt-6">
+        <nav className="px-4 sm:px-6 py-4 sm:py-6 max-w-[1400px] mx-auto mt-2 sm:mt-6">
           <div className="flex justify-between items-center">
-            <Link href="/" className="group flex items-center gap-4 absolute left-8">
+            <Link href="/" className="group flex items-center gap-2 sm:gap-4 absolute left-4 sm:left-8">
               <Image
                 src="/images/saltbox-logo-blank.png"
                 alt="Saltbox Interactive Logo"
-                width={48}
-                height={48}
-                className="object-contain"
+                width={40}
+                height={40}
+                className="object-contain sm:w-12 sm:h-12"
               />
-              <span className="relative text-xl font-normal tracking-wide translate-y-0.5 uppercase px-2 py-1 overflow-hidden" style={{ fontFamily: 'var(--font-bebas)' }}>
+              <span className="relative text-base sm:text-xl font-normal tracking-wide translate-y-0.5 uppercase px-2 py-1 overflow-hidden hidden sm:inline-block" style={{ fontFamily: 'var(--font-bebas)' }}>
                 <span className="relative z-10 text-white group-hover:text-black transition-colors duration-300">
                   Saltbox Interactive
                 </span>
@@ -194,8 +194,9 @@ export default function Header() {
 
             {/* Mobile menu toggle */}
             <button
-              className="lg:hidden text-foreground hover:text-accent transition-colors absolute right-8"
+              className="lg:hidden text-foreground hover:text-accent transition-colors absolute right-4 sm:right-8 p-2 -m-2"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
             >
               <svg
                 className="w-6 h-6"
@@ -246,13 +247,36 @@ export default function Header() {
           {isMobileMenuOpen && (
             <div className="lg:hidden mt-6 pb-4 border-t border-accent/20 pt-4">
               <div className="flex flex-col gap-4">
-                <Link href="/projects" className={`text-sm tracking-wider transition-colors duration-300 uppercase ${pathname === '/projects' ? 'text-accent' : 'text-foreground/80 hover:text-accent'}`} onClick={() => setIsMobileMenuOpen(false)}>
+                <Link
+                  href="/projects"
+                  className={`text-lg tracking-wider transition-colors duration-300 uppercase py-2 ${pathname === '/projects' ? 'text-accent' : 'text-foreground/80 active:text-accent'}`}
+                  style={{ fontFamily: 'var(--font-bebas)' }}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
                   Projects
                 </Link>
-                <Link href="/about" className={`text-sm tracking-wider transition-colors duration-300 uppercase ${pathname === '/about' ? 'text-accent' : 'text-foreground/80 hover:text-accent'}`} onClick={() => setIsMobileMenuOpen(false)}>
+                <Link
+                  href="/about"
+                  className={`text-lg tracking-wider transition-colors duration-300 uppercase py-2 ${pathname === '/about' ? 'text-accent' : 'text-foreground/80 active:text-accent'}`}
+                  style={{ fontFamily: 'var(--font-bebas)' }}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
                   About
                 </Link>
-                <Link href="/contact" className={`text-sm tracking-wider transition-colors duration-300 uppercase ${pathname === '/contact' ? 'text-accent' : 'text-foreground/80 hover:text-accent'}`} onClick={() => setIsMobileMenuOpen(false)}>
+                <Link
+                  href="/blog"
+                  className={`text-lg tracking-wider transition-colors duration-300 uppercase py-2 ${pathname === '/blog' ? 'text-accent' : 'text-foreground/80 active:text-accent'}`}
+                  style={{ fontFamily: 'var(--font-bebas)' }}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Blog
+                </Link>
+                <Link
+                  href="/contact"
+                  className={`text-lg tracking-wider transition-colors duration-300 uppercase py-2 ${pathname === '/contact' ? 'text-accent' : 'text-foreground/80 active:text-accent'}`}
+                  style={{ fontFamily: 'var(--font-bebas)' }}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
                   Contact
                 </Link>
               </div>
@@ -315,7 +339,7 @@ export default function Header() {
                   <span className="absolute inset-0 bg-white transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-in-out"></span>
                 </Link>
                 <Link
-                  href="/contact"
+                  href="/blog"
                   onClick={() => setIsMenuOpen(false)}
                   className={`group relative text-4xl md:text-5xl font-light tracking-[0.15em] uppercase inline-block overflow-hidden px-2 py-1 ${
                     isMenuOpen ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
@@ -323,6 +347,22 @@ export default function Header() {
                   style={{
                     fontFamily: 'var(--font-bebas)',
                     transitionDelay: isMenuOpen ? '500ms' : '0ms'
+                  }}
+                >
+                  <span className="relative z-10 text-white group-hover:text-black transition-colors duration-300">
+                    Blog
+                  </span>
+                  <span className="absolute inset-0 bg-white transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-in-out"></span>
+                </Link>
+                <Link
+                  href="/contact"
+                  onClick={() => setIsMenuOpen(false)}
+                  className={`group relative text-4xl md:text-5xl font-light tracking-[0.15em] uppercase inline-block overflow-hidden px-2 py-1 ${
+                    isMenuOpen ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
+                  }`}
+                  style={{
+                    fontFamily: 'var(--font-bebas)',
+                    transitionDelay: isMenuOpen ? '650ms' : '0ms'
                   }}
                 >
                   <span className="relative z-10 text-white group-hover:text-black transition-colors duration-300">
@@ -337,7 +377,7 @@ export default function Header() {
                 className={`transition-all duration-500 ${
                   isMenuOpen ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
                 }`}
-                style={{ transitionDelay: isMenuOpen ? '650ms' : '0ms' }}
+                style={{ transitionDelay: isMenuOpen ? '800ms' : '0ms' }}
               >
                 <SocialLinks />
               </div>

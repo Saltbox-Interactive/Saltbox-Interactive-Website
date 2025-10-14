@@ -20,14 +20,14 @@ export default function ProjectsSection() {
   }, []);
 
   return (
-    <section id="projects" className="relative bg-black py-32 px-6">
+    <section id="projects" className="relative bg-black py-16 sm:py-24 md:py-32 px-4 sm:px-6">
       {/* Projects Stack */}
-      <div className="flex flex-col gap-12 max-w-[1400px] mx-auto">
+      <div className="flex flex-col gap-8 sm:gap-12 max-w-[1400px] mx-auto">
         {projects.map((project, index) => (
           <div key={project.id} className="w-full">
             <Link
               href={`/projects/${project.slug}`}
-              className="relative h-[400px] block overflow-hidden group"
+              className="relative h-[250px] sm:h-[300px] md:h-[350px] lg:h-[400px] block overflow-hidden group"
               onMouseEnter={() => setHoveredProject(index)}
               onMouseLeave={() => setHoveredProject(null)}
             >
@@ -47,20 +47,20 @@ export default function ProjectsSection() {
               <div className="absolute inset-0 bg-black/30"></div>
 
               {/* Title Overlay - Centered */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <h3 className="text-5xl md:text-6xl font-light tracking-[0.15em] text-white uppercase" style={{ fontFamily: 'var(--font-bebas)' }}>
+              <div className="absolute inset-0 flex items-center justify-center px-4">
+                <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-light tracking-[0.1em] sm:tracking-[0.15em] text-white uppercase text-center" style={{ fontFamily: 'var(--font-bebas)' }}>
                   {project.title}
                 </h3>
               </div>
 
               {/* Status Badge */}
-              <div className="absolute top-6 left-6 bg-black/60 backdrop-blur-sm px-4 py-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <div className="absolute top-4 left-4 sm:top-6 sm:left-6 bg-black/60 backdrop-blur-sm px-3 py-1.5 sm:px-4 sm:py-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 <span className="text-xs text-accent/80 tracking-wider uppercase">{project.status}</span>
               </div>
             </Link>
 
             {/* Title Below Card */}
-            <BracketLink href={`/projects/${project.slug}`} className="mt-8">
+            <BracketLink href={`/projects/${project.slug}`} className="mt-4 sm:mt-6 md:mt-8">
               {project.title}
             </BracketLink>
           </div>

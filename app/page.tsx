@@ -139,10 +139,10 @@ export default function Home() {
 
       {/* Hero Content */}
       <section ref={heroRef} className="relative min-h-screen flex items-center justify-center z-10">
-        <div className="relative z-10 text-center px-6 max-w-6xl mx-auto">
-          <div className="flex flex-col items-center justify-center gap-4 md:gap-6">
+        <div className="relative z-10 text-center px-4 sm:px-6 max-w-6xl mx-auto">
+          <div className="flex flex-col items-center justify-center gap-3 sm:gap-4 md:gap-6">
             <div
-              className="text-5xl md:text-7xl lg:text-8xl font-light tracking-[0.3em] text-white transition-all duration-300"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-light tracking-[0.2em] sm:tracking-[0.25em] md:tracking-[0.3em] text-white transition-all duration-300"
               style={{
                 fontFamily: 'var(--font-bebas)',
                 transform: `translateX(${virtualScroll * -1.5}px)`,
@@ -152,7 +152,7 @@ export default function Home() {
               DISCOVER
             </div>
             <div
-              className="text-5xl md:text-7xl lg:text-8xl font-light tracking-[0.3em] text-white transition-all duration-300"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-light tracking-[0.2em] sm:tracking-[0.25em] md:tracking-[0.3em] text-white transition-all duration-300"
               style={{
                 fontFamily: 'var(--font-bebas)',
                 transform: `translateX(${virtualScroll * 1.5}px)`,
@@ -162,7 +162,7 @@ export default function Home() {
               LEARN
             </div>
             <div
-              className="text-5xl md:text-7xl lg:text-8xl font-light tracking-[0.3em] text-white transition-all duration-300"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-light tracking-[0.2em] sm:tracking-[0.25em] md:tracking-[0.3em] text-white transition-all duration-300"
               style={{
                 fontFamily: 'var(--font-bebas)',
                 transform: `translateX(${virtualScroll * -1.5}px)`,
@@ -178,7 +178,7 @@ export default function Home() {
       {/* About Section - Scrolls over background */}
       <section
         ref={aboutRef}
-        className="relative py-32 px-6 z-20"
+        className="relative py-16 sm:py-24 md:py-32 px-4 sm:px-6 z-20"
       >
         <div
           className={`relative z-10 container mx-auto max-w-4xl text-center transition-all duration-1000 ${
@@ -187,7 +187,7 @@ export default function Home() {
               : 'opacity-0 translate-y-20'
           }`}
         >
-          <Typography.Heading size="xl" className="mb-8">
+          <Typography.Heading size="xl" className="mb-6 sm:mb-8">
             WE CREATE<br />
             IMMERSIVE HISTORICAL<br />
             EXPERIENCES
@@ -206,7 +206,7 @@ export default function Home() {
       </section>
 
       {/* Quick Links Section */}
-      <SectionWrapper className="py-16 px-6 z-20">
+      <SectionWrapper className="py-12 sm:py-16 px-4 sm:px-6 z-20">
         <Container size="sm" className="text-center">
           <BracketLink href="/about">Our Mission</BracketLink>
         </Container>
@@ -220,13 +220,14 @@ export default function Home() {
         parallaxSpeed={SCROLL.parallaxSpeed.slow}
         fadeStart={1800}
         priority
+        height="60vh"
       />
 
       {/* Featured Project Content - Discover Old D'Hanis */}
       <section
         id="intro"
         ref={introRef}
-        className="relative -mt-[70vh] z-20 pb-96"
+        className="relative -mt-[10vh] sm:-mt-[20vh] lg:-mt-[40vh] z-20 pb-12 sm:pb-24 lg:pb-48"
       >
         <div
           className={`relative z-10 transition-all duration-1000 ${
@@ -254,10 +255,11 @@ export default function Home() {
         scrollY={Math.max(0, scrollY - 2400)}
         parallaxSpeed={SCROLL.parallaxSpeed.slow}
         fadeStart={1800}
+        height="60vh"
       />
 
       {/* Discover Old D'Hanis Remastered Section */}
-      <section className="relative -mt-[70vh] z-20 pb-96">
+      <section className="relative -mt-[10vh] sm:-mt-[20vh] lg:-mt-[40vh] z-20 pb-12 sm:pb-24 lg:pb-48">
         <ProjectShowcase
           imageSrc={HOME_CONTENT.projects.discoverOldDhanisRemastered.image}
           imageAlt="Discover Old D'Hanis Remastered game cover art showing photorealistic recreation with Unreal Engine 5"
@@ -270,15 +272,15 @@ export default function Home() {
       </section>
 
       {/* View Our Work Button */}
-      <SectionWrapper className="py-16 px-6 z-20">
+      <SectionWrapper className="py-12 sm:py-16 px-4 sm:px-6 z-20">
         <Container size="sm" className="text-center">
           <BracketLink href="/projects">View Our Work</BracketLink>
         </Container>
       </SectionWrapper>
 
       {/* End section that covers the fixed background and allows footer to show */}
-      <section className="relative bg-black" style={{ zIndex: 100, minHeight: '150vh' }}>
-        <div className="container mx-auto px-6 py-32">
+      <section className="relative bg-black" style={{ zIndex: 100, minHeight: '50vh' }}>
+        <div className="container mx-auto px-4 sm:px-6 py-12 sm:py-16 md:py-20">
           {/* Empty space to allow footer to reveal */}
         </div>
       </section>

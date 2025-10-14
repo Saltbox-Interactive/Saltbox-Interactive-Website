@@ -39,6 +39,20 @@ export const metadata: Metadata = {
   creator: "Michael Salton",
   publisher: "Saltbox Interactive",
   metadataBase: new URL('https://saltboxinteractive.com'),
+  viewport: {
+    width: "device-width",
+    initialScale: 1,
+    maximumScale: 5,
+    userScalable: true,
+  },
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "Saltbox Interactive",
+  },
+  formatDetection: {
+    telephone: false,
+  },
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -48,18 +62,29 @@ export const metadata: Metadata = {
     description: "Create immersive virtual environments where history comes alive. Experience the past through interactive digital preservation.",
     images: [
       {
-        url: "/images/dod-cover.jpg",
+        url: "https://saltboxinteractive.com/images/dod-cover.jpg",
         width: 1200,
         height: 630,
-        alt: "Saltbox Interactive - Historical Preservation"
+        alt: "Saltbox Interactive - Historical Preservation Through Digital Experiences"
       }
     ]
   },
   twitter: {
     card: "summary_large_image",
+    site: "@saltboxinteractive",
+    creator: "@michaelsalton",
     title: "Saltbox Interactive | Preserving History Through Interactive Experiences",
-    description: "Create immersive virtual environments where history comes alive.",
-    images: ["/images/dod-cover.jpg"]
+    description: "Create immersive virtual environments where history comes alive. Experience the past through interactive digital preservation.",
+    images: ["https://saltboxinteractive.com/images/dod-cover.jpg"]
+  },
+  alternates: {
+    canonical: "https://saltboxinteractive.com",
+    languages: {
+      "en-US": "https://saltboxinteractive.com",
+    },
+  },
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
   },
   robots: {
     index: true,

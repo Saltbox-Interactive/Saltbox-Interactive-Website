@@ -31,12 +31,12 @@ export default function ProjectShowcase({
   const isImageLeft = imagePosition === "left";
 
   return (
-    <div className={`relative w-full max-w-[1800px] mx-auto px-6 ${className}`}>
-      <div className="flex items-start justify-between gap-24">
+    <div className={`relative w-full max-w-[1800px] mx-auto px-4 sm:px-6 ${className}`}>
+      <div className="flex flex-col lg:flex-row items-start justify-between gap-8 sm:gap-12 lg:gap-24">
         {/* Image */}
         <div
-          className={`flex-shrink-0 w-[40vw] max-w-[550px] ${
-            isImageLeft ? "ml-48" : "ml-auto order-2"
+          className={`w-full lg:flex-shrink-0 lg:w-[40vw] lg:max-w-[550px] ${
+            isImageLeft ? "lg:ml-48" : "lg:ml-auto lg:order-2"
           }`}
         >
           <ParallaxImage
@@ -50,18 +50,18 @@ export default function ProjectShowcase({
 
         {/* Content */}
         <div
-          className={`flex-shrink-0 max-w-[450px] pt-48 ${
-            isImageLeft ? "ml-auto mr-32" : "ml-48 order-1"
+          className={`w-full lg:flex-shrink-0 lg:max-w-[450px] lg:pt-48 ${
+            isImageLeft ? "lg:ml-auto lg:mr-32" : "lg:ml-48 lg:order-1"
           }`}
         >
-          <div className="mb-12">
-            <StatusBadge className="mb-6">{status}</StatusBadge>
-            <Typography.Heading size="lg" className="mb-8 text-foreground">
+          <div className="mb-8 sm:mb-12">
+            <StatusBadge className="mb-4 sm:mb-6">{status}</StatusBadge>
+            <Typography.Heading size="lg" className="mb-6 sm:mb-8 text-foreground">
               {title}
             </Typography.Heading>
           </div>
 
-          <div className="mb-12">
+          <div className="mb-8 sm:mb-12">
             <Typography.Body size="base">{description}</Typography.Body>
           </div>
 

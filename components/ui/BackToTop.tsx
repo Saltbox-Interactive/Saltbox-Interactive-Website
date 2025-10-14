@@ -23,16 +23,18 @@ export default function BackToTop() {
   return (
     <button
       onClick={scrollToTop}
-      className={`fixed bottom-8 right-8 z-50 p-4 bg-accent/90 hover:bg-accent text-black rounded-full shadow-lg transition-all duration-300 ${
+      className={`fixed bottom-4 right-4 sm:bottom-8 sm:right-8 z-50 p-3 sm:p-4 bg-accent/90 hover:bg-accent active:bg-accent text-black rounded-full shadow-lg transition-all duration-300 ${
         isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-16 pointer-events-none"
       }`}
       aria-label="Back to top"
       style={{
         backdropFilter: "blur(10px)",
+        minWidth: "48px",
+        minHeight: "48px",
       }}
     >
       <svg
-        className="w-6 h-6"
+        className="w-5 h-5 sm:w-6 sm:h-6"
         fill="none"
         stroke="currentColor"
         viewBox="0 0 24 24"

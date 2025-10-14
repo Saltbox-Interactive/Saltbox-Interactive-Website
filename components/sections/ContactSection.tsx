@@ -82,7 +82,7 @@ export default function ContactSection() {
     <section
       id="contact"
       ref={sectionRef}
-      className="py-40 px-6 relative bg-gradient-to-b from-black via-gray-900/30 to-black"
+      className="py-20 sm:py-32 md:py-40 px-4 sm:px-6 relative bg-gradient-to-b from-black via-gray-900/30 to-black"
     >
       <div className="absolute inset-0 gradient-dust opacity-20"></div>
 
@@ -91,20 +91,20 @@ export default function ContactSection() {
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'
         }`}
       >
-        <div className="text-center mb-32 max-w-4xl mx-auto">
-          <h2 className="text-6xl md:text-7xl lg:text-8xl font-light tracking-[0.15em] text-foreground mb-8" style={{ fontFamily: 'var(--font-bebas)' }}>
+        <div className="text-center mb-16 sm:mb-24 md:mb-32 max-w-4xl mx-auto">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-light tracking-[0.15em] text-foreground mb-4 sm:mb-6 md:mb-8" style={{ fontFamily: 'var(--font-bebas)' }}>
             CONNECT WITH US
           </h2>
-          <p className="text-xl md:text-2xl text-gray-300 leading-relaxed font-light">
+          <p className="text-lg sm:text-xl md:text-2xl text-gray-300 leading-relaxed font-light px-4">
             Join us in preserving history for future generations
           </p>
         </div>
 
         <div className="container mx-auto max-w-4xl">
           <Card className="bg-black/40 border-accent/20">
-          <CardContent className="p-8">
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <CardContent className="p-4 sm:p-6 md:p-8">
+            <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                 <div>
                   <label htmlFor="name" className="block text-xs tracking-wider uppercase text-accent/60 mb-2">
                     Name
@@ -116,8 +116,9 @@ export default function ContactSection() {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 bg-transparent border border-accent/20 text-foreground placeholder-gray-600 focus:outline-none focus:border-accent/60 transition-colors duration-300"
+                    className="w-full px-4 py-3 sm:py-4 bg-transparent border border-accent/20 text-foreground placeholder-gray-600 focus:outline-none focus:border-accent/60 transition-colors duration-300 text-base sm:text-lg"
                     placeholder="Your Name"
+                    autoComplete="name"
                   />
                 </div>
 
@@ -132,8 +133,10 @@ export default function ContactSection() {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 bg-transparent border border-accent/20 text-foreground placeholder-gray-600 focus:outline-none focus:border-accent/60 transition-colors duration-300"
+                    className="w-full px-4 py-3 sm:py-4 bg-transparent border border-accent/20 text-foreground placeholder-gray-600 focus:outline-none focus:border-accent/60 transition-colors duration-300 text-base sm:text-lg"
                     placeholder="your@email.com"
+                    autoComplete="email"
+                    inputMode="email"
                   />
                 </div>
               </div>
@@ -149,7 +152,7 @@ export default function ContactSection() {
                   value={formData.subject}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 bg-transparent border border-accent/20 text-foreground placeholder-gray-600 focus:outline-none focus:border-accent/60 transition-colors duration-300"
+                  className="w-full px-4 py-3 sm:py-4 bg-transparent border border-accent/20 text-foreground placeholder-gray-600 focus:outline-none focus:border-accent/60 transition-colors duration-300 text-base sm:text-lg"
                   placeholder="What's this about?"
                 />
               </div>
@@ -165,7 +168,7 @@ export default function ContactSection() {
                   onChange={handleChange}
                   required
                   rows={6}
-                  className="w-full px-4 py-3 bg-transparent border border-accent/20 text-foreground placeholder-gray-600 focus:outline-none focus:border-accent/60 transition-colors duration-300 resize-none"
+                  className="w-full px-4 py-3 sm:py-4 bg-transparent border border-accent/20 text-foreground placeholder-gray-600 focus:outline-none focus:border-accent/60 transition-colors duration-300 resize-none text-base sm:text-lg"
                   placeholder="Tell us about your interest in historical preservation..."
                 />
               </div>
@@ -175,7 +178,7 @@ export default function ContactSection() {
                   type="submit"
                   variant="outline"
                   size="lg"
-                  className="w-full md:w-auto min-w-[200px]"
+                  className="w-full md:w-auto min-w-[200px] min-h-[48px] text-base sm:text-lg"
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? 'Sending...' : 'Send Message'}

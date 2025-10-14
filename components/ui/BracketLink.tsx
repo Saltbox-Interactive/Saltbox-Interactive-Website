@@ -21,20 +21,20 @@ export default function BracketLink({
     <Link
       href={href}
       onClick={onClick}
-      className={`inline-flex items-center gap-2 group ${className}`}
+      className={`inline-flex items-center gap-2 group py-2 ${className}`}
       target={target}
       rel={rel}
     >
-      <span className="text-accent transition-all duration-300 group-hover:-translate-x-1 text-lg">
+      <span className="text-accent transition-all duration-300 group-hover:-translate-x-1 text-base sm:text-lg">
         [
       </span>
       <span
-        className="text-lg font-light tracking-[0.15em] text-gray-400 group-hover:text-accent transition-colors duration-300 uppercase"
+        className="text-base sm:text-lg font-light tracking-[0.15em] text-gray-400 group-hover:text-accent transition-colors duration-300 uppercase"
         style={{ fontFamily: "var(--font-bebas)" }}
       >
         {children}
       </span>
-      <span className="text-accent transition-all duration-300 group-hover:translate-x-1 text-lg">
+      <span className="text-accent transition-all duration-300 group-hover:translate-x-1 text-base sm:text-lg">
         ]
       </span>
     </Link>
