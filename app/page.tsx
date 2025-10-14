@@ -220,14 +220,14 @@ export default function Home() {
         parallaxSpeed={SCROLL.parallaxSpeed.slow}
         fadeStart={1800}
         priority
-        height="60vh"
+        height="150vh"
       />
 
       {/* Featured Project Content - Discover Old D'Hanis */}
       <section
         id="intro"
         ref={introRef}
-        className="relative -mt-[10vh] sm:-mt-[20vh] lg:-mt-[40vh] z-20 pb-12 sm:pb-24 lg:pb-48"
+        className="relative -mt-[10vh] sm:-mt-[20vh] lg:-mt-[70vh] z-20 pb-12 sm:pb-24 lg:pb-96"
       >
         <div
           className={`relative z-10 transition-all duration-1000 ${
@@ -255,11 +255,11 @@ export default function Home() {
         scrollY={Math.max(0, scrollY - 2400)}
         parallaxSpeed={SCROLL.parallaxSpeed.slow}
         fadeStart={1800}
-        height="60vh"
+        height="150vh"
       />
 
       {/* Discover Old D'Hanis Remastered Section */}
-      <section className="relative -mt-[10vh] sm:-mt-[20vh] lg:-mt-[40vh] z-20 pb-12 sm:pb-24 lg:pb-48">
+      <section className="relative -mt-[10vh] sm:-mt-[20vh] lg:-mt-[70vh] z-20 pb-12 sm:pb-24 lg:pb-96">
         <ProjectShowcase
           imageSrc={HOME_CONTENT.projects.discoverOldDhanisRemastered.image}
           imageAlt="Discover Old D'Hanis Remastered game cover art showing photorealistic recreation with Unreal Engine 5"
@@ -279,8 +279,8 @@ export default function Home() {
       </SectionWrapper>
 
       {/* End section that covers the fixed background and allows footer to show */}
-      <section className="relative bg-black" style={{ zIndex: 100, minHeight: '50vh' }}>
-        <div className="container mx-auto px-4 sm:px-6 py-12 sm:py-16 md:py-20">
+      <section className="relative bg-black" style={{ zIndex: 100, minHeight: '150vh' }}>
+        <div className="container mx-auto px-4 sm:px-6 py-12 sm:py-24 md:py-32">
           {/* Empty space to allow footer to reveal */}
         </div>
       </section>

@@ -17,7 +17,7 @@ interface FullWidthImageProps {
 export default function FullWidthImage({
   src,
   alt,
-  height = "80vh",
+  height = "150vh",
   scrollY = 0,
   parallaxSpeed = -0.2,
   vignette = true,
