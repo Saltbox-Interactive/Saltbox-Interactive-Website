@@ -48,7 +48,7 @@ export default function AboutPage() {
           {/* Large Featured Image */}
           <div className="relative h-[50vh] sm:h-[60vh] md:h-[70vh] lg:h-[80vh] overflow-hidden">
             <Image
-              src="/images/dhanis1.jpg"
+              src="/images/temp/dod-temp-20.jpg"
               alt="Historic limestone building with arched doorway in Old D'Hanis, showcasing 19th-century Alsatian architecture"
               fill
               className="object-cover"
@@ -106,7 +106,7 @@ export default function AboutPage() {
         <div>
           <div className="relative h-[60vh] md:h-[80vh] overflow-hidden">
             <Image
-              src="/images/dod-cover.jpg"
+              src="/images/temp/dod-temp-23.jpg"
               alt="Atmospheric view of historic Old D'Hanis landscape, featuring preserved ruins and vegetation of the 19th-century Texas settlement"
               fill
               className="object-cover"
