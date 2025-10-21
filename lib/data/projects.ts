@@ -14,6 +14,10 @@ export interface Project {
   releaseDate?: string;
   platforms?: string[];
   genre?: string;
+  sections?: {
+    title: string;
+    content: string;
+  }[];
 }
 
 export const projects: Project[] = [
@@ -21,23 +25,27 @@ export const projects: Project[] = [
     id: "1",
     slug: "discover-old-dhanis",
     title: "Discover Old D'Hanis",
-    era: "1840s-1860s",
-    description: "An immersive virtual experience recreating the historic Alsatian community of Old D'Hanis, Texas.",
-    longDescription: `Step back in time to explore Old D'Hanis, a historic Alsatian settlement in Texas. This virtual experience brings to life the story of European immigrants who established a thriving community in the Texas frontier during the mid-1800s.
+    era: "1847-1920s",
+    description: "An immersive educational experience that invites you to explore the history of the old town of D'Hanis, TX.",
+    longDescription: `Discover Old D'Hanis is an immersive educational experience that invites you to explore the history of the old town of D'Hanis, TX. The game is based on data from the Old D'Hanis Archaeological Mapping Project, a real archaeological project that examined the ruins, stories, and landscapes of the historic town, alongside community members, in 2018.
 
-    Walk through meticulously recreated buildings, streets, and landmarks based on historical records and archaeological evidence. Learn about the daily lives, struggles, and triumphs of the settlers who made this place their home.
+    Enter D'Hanis and you will find yourself in front of the ruin of its Catholic church, grass beneath your feet, the sound of wind and the occasional bird in a landscape empty of people. You stand at the intersection of past and present. Walking through the historic streets, you will find virtual reconstructions of white-walled cottages from the 19th century alongside 21st century ruins scanned by archaeologists.
 
-    Experience the rich cultural heritage of the Alsatian immigrants and discover how their traditions shaped this unique Texas community.`,
+    Scattered throughout the landscape are pieces of D'Hanis' story – a 19th century photograph, archaeological field notes, a quote from an oral history, a newspaper article. Alone, these provide small snapshots of the town or the archaeological project through time. Together, they paint a fuller picture of D'Hanis and its residents, from the Alsatian and German migrants who founded the town in 1847 to the Black and Mexican families who made it their home following the Civil War and Mexican Revolution. Your role: to explore, to collect fragments, and to piece together the stories of the Old D'Hanis.
+
+    Based on the history of a real Texas town, Discover Old D'Hanis features 3D models of ruins, historically-informed landscape and sound design, interactive features, artistic reconstructions, and an original musical composition based on old German folk songs. It provides a glimpse into a real archaeology project and demonstrates how we come to understand the past through its fragments.
+
+    Discover Old D'Hanis is more than just a game; it's an invitation to join the efforts preserve and share the historical legacy of an historic place. Are you ready to uncover the stories and experience the old town?`,
     status: "Available Now",
     color: "from-amber-900/40 to-stone-900/40",
     thumbnail: "/images/dod-screenshot-8.jpg",
     features: [
-      "Historically accurate 3D reconstruction",
-      "Interactive historical markers",
-      "Educational content and narratives",
-      "Period-appropriate architecture",
-      "Cultural heritage exploration",
-      "Historical photo comparisons"
+      "Virtual reconstruction of 19th-century white-walled cottages",
+      "Landscape featuring 21st-century archaeological ruins",
+      "Interactive storytelling elements",
+      "Historical artifacts and documents",
+      "Original musical composition inspired by German folk songs",
+      "Stories of Alsatian, German, Black, and Mexican families"
     ],
     technologies: [
       "Unity Engine",

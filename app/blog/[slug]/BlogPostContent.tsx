@@ -5,7 +5,7 @@ import Link from "next/link";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import Container from "@/components/ui/Container";
 import Typography from "@/components/ui/Typography";
-import BracketLink from "@/components/ui/BracketLink";
+import BracketButton from "@/components/ui/BracketButton";
 import { ArticleSchema } from "@/components/schemas";
 import { BlogPost } from "@/lib/data/blog";
 import { useScrollPosition } from "@/hooks/useScrollPosition";
@@ -110,7 +110,7 @@ export default function BlogPostContent({ post }: { post: BlogPost }) {
                 if (linkMatch) {
                   return (
                     <div key={index} className="my-8">
-                      <BracketLink href={linkMatch[2]}>{linkMatch[1]}</BracketLink>
+                      <BracketButton href={linkMatch[2]}>{linkMatch[1]}</BracketButton>
                     </div>
                   );
                 }
@@ -158,7 +158,7 @@ export default function BlogPostContent({ post }: { post: BlogPost }) {
 
           {/* Back to Blog */}
           <div className="mt-12 text-center">
-            <BracketLink href="/blog">Back to All Posts</BracketLink>
+            <BracketButton href="/blog">Back to All Posts</BracketButton>
           </div>
         </Container>
       </AnimatedSection>

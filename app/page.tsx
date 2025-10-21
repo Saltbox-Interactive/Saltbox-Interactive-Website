@@ -7,7 +7,7 @@ import Image from "next/image";
 import { useScrollSpeed } from "@/hooks/useScrollSpeed";
 import { useScrollPosition } from "@/hooks/useScrollPosition";
 import { useTypingEffect } from "@/hooks/useTypingEffect";
-import BracketLink from "@/components/ui/BracketLink";
+import BracketButton from "@/components/ui/BracketButton";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import Typography from "@/components/ui/Typography";
 import SectionWrapper from "@/components/ui/SectionWrapper";
@@ -209,7 +209,7 @@ export default function Home() {
       {/* Quick Links Section */}
       <SectionWrapper className="py-12 sm:py-16 px-4 sm:px-6 z-20">
         <Container size="sm" className="text-center">
-          <BracketLink href="/about">Our Mission</BracketLink>
+          <BracketButton href="/about">Our Mission</BracketButton>
         </Container>
       </SectionWrapper>
 
@@ -228,7 +228,7 @@ export default function Home() {
       <section
         id="intro"
         ref={introRef}
-        className="relative -mt-[10vh] sm:-mt-[20vh] lg:-mt-[70vh] z-20 pb-12 sm:pb-24 lg:pb-96"
+        className="relative -mt-[10vh] sm:-mt-[20vh] lg:-mt-[70vh] z-20 pb-12 sm:pb-24 lg:pb-32"
       >
         <div
           className={`relative z-10 transition-all duration-1000 ${
@@ -275,7 +275,7 @@ export default function Home() {
       {/* View Our Work Button */}
       <SectionWrapper className="py-12 sm:py-16 px-4 sm:px-6 z-20">
         <Container size="sm" className="text-center">
-          <BracketLink href="/projects">View Our Work</BracketLink>
+          <BracketButton href="/projects">View Our Work</BracketButton>
         </Container>
       </SectionWrapper>
 

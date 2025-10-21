@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Hero from "@/components/sections/Hero";
 import ParallaxImage from "@/components/ParallaxImage";
-import BracketLink from "@/components/ui/BracketLink";
+import BracketButton from "@/components/ui/BracketButton";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import Typography from "@/components/ui/Typography";
 import Container from "@/components/ui/Container";
@@ -134,7 +134,7 @@ export default function AboutPage() {
       {/* View Projects CTA */}
       <SectionWrapper className="py-20">
         <Container size="sm" className="text-center">
-          <BracketLink href="/projects" className="justify-center">View Our Projects</BracketLink>
+          <BracketButton href="/projects" className="justify-center">View Our Projects</BracketButton>
         </Container>
       </SectionWrapper>
 

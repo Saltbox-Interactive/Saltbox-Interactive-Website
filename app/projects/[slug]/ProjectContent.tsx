@@ -8,8 +8,10 @@ import ParallaxImage from "@/components/ParallaxImage";
 import { VideoGameSchema, BreadcrumbSchema } from "@/components/StructuredData";
 import { FAQSchema, ReviewSchema } from "@/components/schemas";
 import { DISCOVER_OLD_DHANIS_FAQS, DISCOVER_OLD_DHANIS_REVIEWS } from "@/lib/data/seo";
-import BracketLink from "@/components/ui/BracketLink";
+import BracketButton from "@/components/ui/BracketButton";
+import BoxButton from "@/components/ui/BoxButton";
 import AnimatedSection from "@/components/ui/AnimatedSection";
+import EmailSubscribe from "@/components/sections/EmailSubscribe";
 
 export default function ProjectContent({ project }: { project: Project }) {
   const [scrollY, setScrollY] = useState(0);
@@ -20,6 +22,8 @@ export default function ProjectContent({ project }: { project: Project }) {
   const [playNowOpacity, setPlayNowOpacity] = useState(1);
   const mouseTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const emailSectionRef = useRef<HTMLDivElement | null>(null);
+  const steamBannerRef = useRef<HTMLElement | null>(null);
 
   // Track element positions for parallax
   const [imageOffsets, setImageOffsets] = useState<{ [key: string]: number }>({});
@@ -36,17 +40,36 @@ export default function ProjectContent({ project }: { project: Project }) {
       scrollTimeoutRef.current = setTimeout(() => {
         setShowArrows(false);
       }, 1500);
+      // Calculate position based on Steam banner visibility
+      if (steamBannerRef.current) {
+        const bannerRect = steamBannerRef.current.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
 
-      // Calculate position based on distance to footer
-      const windowHeight = window.innerHeight;
-      const documentHeight = document.documentElement.scrollHeight;
-      const scrollPosition = window.scrollY + windowHeight;
-      const distanceToBottom = documentHeight - scrollPosition;
+        // Start fading when Steam banner enters viewport from bottom
+        const fadeDistance = 400;
+        const distanceFromBottom = bannerRect.top - windowHeight;
+        const bannerBottom = bannerRect.bottom;
 
-      // Start sliding down when within 600px of bottom (well before footer becomes visible)
-      const slideDistance = 600;
-      const slideAmount = Math.min(1, Math.max(0, 1 - (distanceToBottom / slideDistance)));
-      setPlayNowOpacity(slideAmount);
+        // Fade out when banner is approaching (top coming into view)
+        if (distanceFromBottom < fadeDistance && distanceFromBottom > 0) {
+          const fadeAmount = Math.min(1, Math.max(0, 1 - (distanceFromBottom / fadeDistance)));
+          setPlayNowOpacity(fadeAmount);
+        }
+        // Keep hidden while banner is in viewport
+        else if (bannerRect.top < windowHeight && bannerBottom > 0) {
+          setPlayNowOpacity(1);
+        }
+        // Show when banner has scrolled past (banner bottom is above viewport)
+        else if (bannerBottom < 0) {
+          setPlayNowOpacity(0);
+        }
+        // Show when banner hasn't appeared yet
+        else {
+          setPlayNowOpacity(0);
+        }
+      } else {
+        setPlayNowOpacity(0);
+      }
 
       // Calculate parallax offsets for tracked images
       const newOffsets: { [key: string]: number } = {};
@@ -198,7 +221,7 @@ export default function ProjectContent({ project }: { project: Project }) {
       <AnimatedSection className="relative py-12 sm:py-16 md:py-20 bg-black">
         <div className="container mx-auto px-4 sm:px-6 max-w-4xl">
           <div className="space-y-4 sm:space-y-6 mb-12 sm:mb-16 md:mb-20">
-            {project.longDescription.split('\n\n').map((paragraph, index) => (
+            {project.longDescription.split('\n\n').slice(0, 2).map((paragraph, index) => (
               <p
                 key={index}
                 className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-300 leading-relaxed"
@@ -583,9 +606,9 @@ export default function ProjectContent({ project }: { project: Project }) {
             <div className="py-20 flex items-center">
               <div className="container mx-auto px-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-                  {project.gallery && project.gallery[0] && (
+                  {project.gallery && "/images/temp/dod-temp-9.jpg" && (
                     <ParallaxImage
-                      src={project.gallery[0]}
+                      src={"/images/temp/dod-temp-9.jpg"}
                       alt={`In-game screenshot showcasing the immersive historical environment and exploration mechanics of ${project.title}`}
                       className="aspect-video"
                       intensity={1}
@@ -602,7 +625,7 @@ export default function ProjectContent({ project }: { project: Project }) {
                       {project.features[0] || 'FEATURE TITLE'}
                     </h3>
                     <p className="text-lg text-gray-300 leading-relaxed">
-                      {project.longDescription.split('\n\n')[0]}
+                      {project.longDescription.split('\n\n')[2] || project.longDescription.split('\n\n')[0]}
                     </p>
                   </div>
                 </div>
@@ -622,7 +645,7 @@ export default function ProjectContent({ project }: { project: Project }) {
                       {project.features[1] || 'FEATURE TITLE'}
                     </h3>
                     <p className="text-lg text-gray-300 leading-relaxed">
-                      {project.longDescription.split('\n\n')[1] || project.description}
+                      {project.longDescription.split('\n\n')[3] || project.description}
                     </p>
                   </div>
                   {project.gallery && project.gallery[1] && (
@@ -637,6 +660,38 @@ export default function ProjectContent({ project }: { project: Project }) {
                 </div>
               </div>
             </div>
+
+            {/* Third section - only for Discover Old D'Hanis */}
+            {project.slug === 'discover-old-dhanis' && (
+              <div className="py-20 flex items-center">
+                <div className="container mx-auto px-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                    {project.gallery && project.gallery[2] && (
+                      <ParallaxImage
+                        src={project.gallery[2]}
+                        alt={`Interactive historical exploration experience in ${project.title}`}
+                        className="aspect-video"
+                        intensity={1}
+                        direction="vertical"
+                      />
+                    )}
+                    <div
+                      style={{
+                        transform: `translateY(${scrollY * -0.025}px)`,
+                        transition: 'transform 0.1s ease-out'
+                      }}
+                    >
+                      <h3 className="text-4xl md:text-5xl font-light tracking-wider text-white mb-6" style={{ fontFamily: 'var(--font-bebas)' }}>
+                        {project.features[2] || 'FEATURE TITLE'}
+                      </h3>
+                      <p className="text-lg text-gray-300 leading-relaxed">
+                        {project.longDescription.split('\n\n')[4] || project.description}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
           </>
         )}
       </section>
@@ -644,7 +699,7 @@ export default function ProjectContent({ project }: { project: Project }) {
       {/* Soundtrack Section - Only for Discover Old D'Hanis */}
       {project.slug === 'discover-old-dhanis' && (
         <section className="relative py-32 bg-black">
-          <div className="container mx-auto px-6 max-w-6xl">
+          <div className="container mx-auto px-6 max-w-7xl">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
               {/* Image - Left Side */}
               <ParallaxImage
@@ -673,7 +728,7 @@ export default function ProjectContent({ project }: { project: Project }) {
                     href="https://www.youtube.com/playlist?list=YOUR_PLAYLIST_ID"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-gray-400 hover:text-accent transition-colors duration-300"
+                    className="text-gray-400 hover:text-accent group-hover:text-white transition-colors duration-300"
                     aria-label="YouTube"
                   >
                     <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
@@ -687,57 +742,10 @@ export default function ProjectContent({ project }: { project: Project }) {
         </section>
       )}
 
-      {/* Steam Call to Action Section - Only for Discover Old D'Hanis */}
-      {project.slug === 'discover-old-dhanis' && (
-        <section className="relative py-32 bg-black">
-          <div className="container mx-auto px-6 max-w-6xl">
-            <div className="relative w-full aspect-[21/9] overflow-hidden">
-              {/* Background Image */}
-              <Image
-                src={project.thumbnail || '/images/dod-cover.jpg'}
-                alt="Call-to-action banner featuring Discover Old D'Hanis with Steam platform link for game purchase"
-                fill
-                className="object-cover opacity-30"
-              />
-
-              {/* Overlay Content */}
-              <div className="absolute inset-0 flex flex-col items-center justify-center gap-8">
-                <h2 className="text-4xl md:text-5xl lg:text-6xl font-light tracking-[0.15em] text-white text-center" style={{ fontFamily: 'var(--font-bebas)' }}>
-                  PLAY DISCOVER OLD D'HANIS<br />
-                  ON STEAM
-                </h2>
-
-                {/* Steam Button */}
-                <a
-                  href="https://store.steampowered.com/app/3140860/Discover_Old_DHanis/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-3 group"
-                >
-                  <span className="text-accent transition-all duration-300 group-hover:-translate-x-1 text-xl">
-                    [
-                  </span>
-                  {/* Steam Icon */}
-                  <svg className="w-7 h-7 text-gray-400 group-hover:text-accent transition-colors duration-300" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M11.979 0C5.678 0 .511 4.86.022 11.037l6.432 2.658c.545-.371 1.203-.59 1.912-.59.063 0 .125.004.188.006l2.861-4.142V8.91c0-2.495 2.028-4.524 4.524-4.524 2.494 0 4.524 2.031 4.524 4.527s-2.03 4.525-4.524 4.525h-.105l-4.076 2.911c0 .052.004.105.004.159 0 1.875-1.515 3.396-3.39 3.396-1.635 0-3.016-1.173-3.331-2.727L.436 15.27C1.862 20.307 6.486 24 11.979 24c6.627 0 11.999-5.373 11.999-12S18.605 0 11.979 0zM7.54 18.21l-1.473-.61c.262.543.714.999 1.314 1.25 1.297.539 2.793-.076 3.332-1.375.263-.63.264-1.319.005-1.949s-.75-1.121-1.377-1.383c-.624-.26-1.29-.249-1.878-.03l1.523.63c.956.4 1.409 1.5 1.009 2.455-.397.957-1.497 1.41-2.454 1.012H7.54zm11.415-9.303c0-1.662-1.353-3.015-3.015-3.015-1.665 0-3.015 1.353-3.015 3.015 0 1.665 1.35 3.015 3.015 3.015 1.663 0 3.015-1.35 3.015-3.015zm-5.273-.005c0-1.252 1.013-2.266 2.265-2.266 1.249 0 2.266 1.014 2.266 2.266 0 1.251-1.017 2.265-2.266 2.265-1.253 0-2.265-1.014-2.265-2.265z"/>
-                  </svg>
-                  <span className="text-lg font-light tracking-[0.15em] text-gray-400 group-hover:text-accent transition-colors duration-300 uppercase" style={{ fontFamily: 'var(--font-bebas)' }}>
-                    Open in Steam
-                  </span>
-                  <span className="text-accent transition-all duration-300 group-hover:translate-x-1 text-xl">
-                    ]
-                  </span>
-                </a>
-              </div>
-            </div>
-          </div>
-        </section>
-      )}
-
       {/* Screenshots Gallery - Scroll-based Slider */}
       {project.gallery && project.gallery.length > 0 && (
         <section ref={screenshotsRef} className="relative bg-black py-20">
-          <div className="container mx-auto px-6 max-w-6xl">
+          <div className="container mx-auto px-6 max-w-7xl">
             <div className="relative w-full aspect-video">
                 {project.gallery.map((image, idx) => {
                   const isVisible = idx === currentImageIndex;
@@ -865,22 +873,109 @@ export default function ProjectContent({ project }: { project: Project }) {
         </section>
       )}
 
-      {/* Credits and Back to Projects Section */}
-      <section className="relative py-20 bg-black">
-        <div className="container mx-auto px-6 text-center">
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-            {/* View Credits Button - Only for Discover Old D'Hanis */}
-            {project.slug === 'discover-old-dhanis' && (
-              <BracketLink href="/projects/discover-old-dhanis/credits">
-                View Project Credits
-              </BracketLink>
-            )}
+      {/* Credits Section - Only for Discover Old D'Hanis */}
+      {project.slug === 'discover-old-dhanis' && (
+        <section className="relative py-32 bg-black">
+          <div className="container mx-auto px-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+              {/* Image - Left Side */}
+              {project.gallery && "/images/temp/dod-temp-9.jpg" && (
+                <ParallaxImage
+                  src={"/images/temp/dod-temp-9.jpg"}
+                  alt="The amazing team behind Discover Old D'Hanis"
+                  className="aspect-video"
+                  intensity={1}
+                  direction="vertical"
+                />
+              )}
 
-            {/* View All Projects Button */}
-            <BracketLink href="/projects">View All Projects</BracketLink>
+              {/* Text and Button - Right Side */}
+              <div className="flex flex-col gap-8">
+                <h2 className="text-4xl md:text-5xl lg:text-6xl font-light tracking-[0.15em] text-white" style={{ fontFamily: 'var(--font-bebas)' }}>
+                  SEE THE AMAZING TEAM<br />
+                  BEHIND DISCOVER<br />
+                  OLD D'HANIS
+                </h2>
+
+                <BracketButton href="/projects/discover-old-dhanis/credits">
+                  View Project Credits
+                </BracketButton>
+              </div>
+            </div>
           </div>
+        </section>
+      )}
+
+      {/* Steam Call to Action Section - Only for Discover Old D'Hanis */}
+      {project.slug === 'discover-old-dhanis' && (
+        <section ref={steamBannerRef} className="relative py-32 bg-black">
+          <div className="container mx-auto px-2 max-w-full">
+            <div className="relative w-full aspect-[21/9] overflow-hidden">
+              {/* Background Image */}
+              <Image
+                src={project.thumbnail || '/images/dod-cover.jpg'}
+                alt="Call-to-action banner featuring Discover Old D'Hanis with Steam platform link for game purchase"
+                fill
+                className="object-cover opacity-30"
+              />
+
+              {/* Overlay Content */}
+              <div className="absolute inset-0 flex flex-col items-center justify-center gap-8">
+                <h2 className="text-4xl md:text-5xl lg:text-6xl font-light tracking-[0.15em] text-white text-center" style={{ fontFamily: 'var(--font-bebas)' }}>
+                  PLAY DISCOVER OLD D'HANIS<br />
+                  ON STEAM
+                </h2>
+
+                <BoxButton
+                  href="https://store.steampowered.com/app/3140860/Discover_Old_DHanis/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-lg"
+                  icon={
+                    <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M11.979 0C5.678 0 .511 4.86.022 11.037l6.432 2.658c.545-.371 1.203-.59 1.912-.59.063 0 .125.004.188.006l2.861-4.142V8.91c0-2.495 2.028-4.524 4.524-4.524 2.494 0 4.524 2.031 4.524 4.527s-2.03 4.525-4.524 4.525h-.105l-4.076 2.911c0 .052.004.105.004.159 0 1.875-1.515 3.396-3.39 3.396-1.635 0-3.016-1.173-3.331-2.727L.436 15.27C1.862 20.307 6.486 24 11.979 24c6.627 0 11.999-5.373 11.999-12S18.605 0 11.979 0zM7.54 18.21l-1.473-.61c.262.543.714.999 1.314 1.25 1.297.539 2.793-.076 3.332-1.375.263-.63.264-1.319.005-1.949s-.75-1.121-1.377-1.383c-.624-.26-1.29-.249-1.878-.03l1.523.63c.956.4 1.409 1.5 1.009 2.455-.397.957-1.497 1.41-2.454 1.012H7.54zm11.415-9.303c0-1.662-1.353-3.015-3.015-3.015-1.665 0-3.015 1.353-3.015 3.015 0 1.665 1.35 3.015 3.015 3.015 1.663 0 3.015-1.35 3.015-3.015zm-5.273-.005c0-1.252 1.013-2.266 2.265-2.266 1.249 0 2.266 1.014 2.266 2.266 0 1.251-1.017 2.265-2.266 2.265-1.253 0-2.265-1.014-2.265-2.265z"/>
+                    </svg>
+                  }
+                >
+                  Play on Steam
+                </BoxButton>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
+
+      {/* Email Subscribe Section */}
+      <div ref={emailSectionRef} className="relative bg-black" style={{ zIndex: 100 }}>
+        <EmailSubscribe />
+      </div>
+
+      {/* Fixed Play on Steam Button - Only for Discover Old D'Hanis */}
+      {project.slug === 'discover-old-dhanis' && (
+        <div
+          className="fixed bottom-8 right-8 transition-all duration-500 z-[150]"
+          style={{
+            transform: `translateY(${playNowOpacity * 100}%)`,
+            opacity: 1 - playNowOpacity
+          }}
+        >
+          <a
+            href="https://store.steampowered.com/app/3140860/Discover_Old_DHanis/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group inline-flex items-center gap-3 bg-[#1a1a1a] px-6 py-4 rounded-lg transition-all duration-300"
+          >
+            {/* Steam Icon */}
+            <svg className="w-6 h-6 text-accent group-hover:text-white transition-colors duration-300" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M11.979 0C5.678 0 .511 4.86.022 11.037l6.432 2.658c.545-.371 1.203-.59 1.912-.59.063 0 .125.004.188.006l2.861-4.142V8.91c0-2.495 2.028-4.524 4.524-4.524 2.494 0 4.524 2.031 4.524 4.527s-2.03 4.525-4.524 4.525h-.105l-4.076 2.911c0 .052.004.105.004.159 0 1.875-1.515 3.396-3.39 3.396-1.635 0-3.016-1.173-3.331-2.727L.436 15.27C1.862 20.307 6.486 24 11.979 24c6.627 0 11.999-5.373 11.999-12S18.605 0 11.979 0zM7.54 18.21l-1.473-.61c.262.543.714.999 1.314 1.25 1.297.539 2.793-.076 3.332-1.375.263-.63.264-1.319.005-1.949s-.75-1.121-1.377-1.383c-.624-.26-1.29-.249-1.878-.03l1.523.63c.956.4 1.409 1.5 1.009 2.455-.397.957-1.497 1.41-2.454 1.012H7.54zm11.415-9.303c0-1.662-1.353-3.015-3.015-3.015-1.665 0-3.015 1.353-3.015 3.015 0 1.665 1.35 3.015 3.015 3.015 1.663 0 3.015-1.35 3.015-3.015zm-5.273-.005c0-1.252 1.013-2.266 2.265-2.266 1.249 0 2.266 1.014 2.266 2.266 0 1.251-1.017 2.265-2.266 2.265-1.253 0-2.265-1.014-2.265-2.265z"/>
+            </svg>
+            <span className="text-base font-light tracking-[0.15em] text-accent group-hover:text-white transition-colors duration-300 uppercase" style={{ fontFamily: 'var(--font-bebas)' }}>
+              Play on Steam
+            </span>
+          </a>
         </div>
-      </section>
+      )}
     </>
   );
 }

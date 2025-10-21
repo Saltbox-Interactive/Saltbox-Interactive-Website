@@ -7,6 +7,7 @@ import AnimatedSection from "@/components/ui/AnimatedSection";
 import Container from "@/components/ui/Container";
 import Typography from "@/components/ui/Typography";
 import EmailSubscribe from "@/components/sections/EmailSubscribe";
+import BoxButton from "@/components/ui/BoxButton";
 import { blogPosts, getAllCategories } from "@/lib/data/blog";
 import { useState } from "react";
 
@@ -33,39 +34,13 @@ export default function BlogPage() {
           {/* Category Filter */}
           <div className="flex flex-wrap gap-2 sm:gap-3 mb-8 sm:mb-12 justify-center">
             {categories.map((category) => (
-              <button
+              <BoxButton
                 key={category}
                 onClick={() => setSelectedCategory(category)}
-                className={`group relative px-6 py-3 transition-all duration-300 ${
-                  selectedCategory === category ? "text-accent" : "text-gray-400"
-                }`}
+                isActive={selectedCategory === category}
               >
-                <div
-                  className={`absolute inset-0 border transition-opacity duration-300 ${
-                    selectedCategory === category
-                      ? "border-accent opacity-100"
-                      : "border-gray-500 group-hover:opacity-0"
-                  }`}
-                ></div>
-                {selectedCategory !== category && (
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className="absolute top-0 left-0 w-3 h-3 border-t border-l border-accent"></div>
-                    <div className="absolute top-0 right-0 w-3 h-3 border-t border-r border-accent"></div>
-                    <div className="absolute bottom-0 left-0 w-3 h-3 border-b border-l border-accent"></div>
-                    <div className="absolute bottom-0 right-0 w-3 h-3 border-b border-r border-accent"></div>
-                  </div>
-                )}
-                <span
-                  className={`relative text-sm tracking-wider uppercase transition-colors duration-300 ${
-                    selectedCategory === category
-                      ? "text-accent"
-                      : "group-hover:text-accent"
-                  }`}
-                  style={{ fontFamily: "var(--font-bebas)" }}
-                >
-                  {category}
-                </span>
-              </button>
+                {category}
+              </BoxButton>
             ))}
           </div>
 

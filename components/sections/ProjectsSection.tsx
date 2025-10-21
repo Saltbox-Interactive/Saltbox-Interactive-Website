@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { projects } from "@/lib/data/projects";
-import BracketLink from "@/components/ui/BracketLink";
+import BracketButton from "@/components/ui/BracketButton";
 
 export default function ProjectsSection() {
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
@@ -60,9 +60,9 @@ export default function ProjectsSection() {
             </Link>
 
             {/* Title Below Card */}
-            <BracketLink href={`/projects/${project.slug}`} className="mt-4 sm:mt-6 md:mt-8">
+            <BracketButton href={`/projects/${project.slug}`} className="mt-4 sm:mt-6 md:mt-8">
               {project.title}
-            </BracketLink>
+            </BracketButton>
           </div>
         ))}
       </div>

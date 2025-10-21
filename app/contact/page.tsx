@@ -1,5 +1,6 @@
 import Hero from "@/components/sections/Hero";
 import ContactSection from "@/components/sections/ContactSection";
+import EmailSubscribe from "@/components/sections/EmailSubscribe";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -40,6 +41,11 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
+
+      {/* Email Subscribe Section */}
+      <div className="relative bg-black" style={{ zIndex: 100 }}>
+        <EmailSubscribe />
+      </div>
     </>
   );
 }

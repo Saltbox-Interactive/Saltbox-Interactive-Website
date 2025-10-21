@@ -79,6 +79,6 @@ export const OBSERVER_OPTIONS = {
 // Social Links
 export const SOCIAL_LINKS = {
   linkedin: "https://www.linkedin.com/company/saltbox-interactive",
-  youtube: "#", // Coming soon
+  youtube: "https://www.youtube.com/@SaltboxInteractive",
   steam: "https://store.steampowered.com/app/3140860/Discover_Old_DHanis/",
 } as const;

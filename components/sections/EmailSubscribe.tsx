@@ -2,10 +2,17 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import BracketLink from "@/components/ui/BracketLink";
+import BracketButton from "@/components/ui/BracketButton";
 
 export default function EmailSubscribe() {
   const [showForm, setShowForm] = useState(false);
+  const [emailValue, setEmailValue] = useState("");
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const handleSubmit = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    setIsSubmitted(true);
+  };
 
   return (
     <section className="relative bg-black py-16 sm:py-20 md:py-24 pb-36 sm:pb-44 md:pb-52 border-b border-accent/10">
@@ -28,7 +35,7 @@ export default function EmailSubscribe() {
               className="text-2xl sm:text-3xl md:text-4xl font-light tracking-[0.2em] text-white"
               style={{ fontFamily: 'var(--font-bebas)' }}
             >
-              SUBSCRIBE TO OUR EMAIL TO DISCOVER WITH US.
+              EXPLORE THE PAST WITH US. SUBSCRIBE.
             </h2>
 
             <div className="flex justify-start">
@@ -72,26 +79,41 @@ export default function EmailSubscribe() {
                 showForm ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-full pointer-events-none'
               }`}
             >
-              <div className="w-full space-y-6">
-                <input
-                  type="text"
-                  placeholder="Name"
-                  className="w-full bg-black border border-accent/20 text-white px-4 py-5 focus:outline-none focus:border-accent transition-colors text-base"
-                />
-                <div className="relative">
+              {!isSubmitted ? (
+                <div className="w-full space-y-6">
                   <input
-                    type="email"
-                    placeholder="Email"
+                    type="text"
+                    placeholder="Name"
                     className="w-full bg-black border border-accent/20 text-white px-4 py-5 focus:outline-none focus:border-accent transition-colors text-base"
                   />
-                  <span className="absolute left-[4.25rem] top-1/2 -translate-y-1/2 text-accent text-base pointer-events-none">*</span>
+                  <div className="relative">
+                    <input
+                      type="email"
+                      placeholder="Email"
+                      value={emailValue}
+                      onChange={(e) => setEmailValue(e.target.value)}
+                      className="w-full bg-black border border-accent/20 text-white px-4 py-5 focus:outline-none focus:border-accent transition-colors text-base"
+                    />
+                    {!emailValue && (
+                      <span className="absolute left-[4.25rem] top-1/2 -translate-y-1/2 text-accent text-base pointer-events-none">*</span>
+                    )}
+                  </div>
+                  <div className="flex justify-start">
+                    <BracketButton href="#" onClick={handleSubmit}>
+                      SUBMIT
+                    </BracketButton>
+                  </div>
                 </div>
-                <div className="flex justify-start">
-                  <BracketLink href="#">
-                    SUBMIT
-                  </BracketLink>
+              ) : (
+                <div className="w-full flex items-start py-0">
+                  <p
+                    className="text-2xl sm:text-3xl md:text-4xl font-light tracking-[0.2em] text-white"
+                    style={{ fontFamily: 'var(--font-bebas)' }}
+                  >
+                    THANKS FOR SUBSCRIBING.
+                  </p>
                 </div>
-              </div>
+              )}
             </div>
           </div>
         </div>

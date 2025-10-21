@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import BracketLink from "@/components/ui/BracketLink";
+import BracketButton from "@/components/ui/BracketButton";
 
 export const metadata: Metadata = {
   title: "Discover Old D'Hanis Credits",
@@ -21,7 +21,7 @@ export default function CreditsPage() {
         {/* Team Section */}
         <section className="mb-16">
           <h2 className="text-3xl font-light tracking-wider text-accent mb-8 border-b border-accent/30 pb-3" style={{ fontFamily: 'var(--font-bebas)' }}>
-            TEAM
+            PROJECT TEAM
           </h2>
           <div className="space-y-6">
             <div>
@@ -57,43 +57,106 @@ export default function CreditsPage() {
           </ul>
         </section>
 
-        {/* Project Support Section */}
+        {/* Communities Section */}
         <section className="mb-16">
           <h2 className="text-3xl font-light tracking-wider text-accent mb-8 border-b border-accent/30 pb-3" style={{ fontFamily: 'var(--font-bebas)' }}>
-            PROJECT SUPPORT
+            WITH HEARTFELT THANKS TO THE COMMUNITIES WHO MADE THIS POSSIBLE
           </h2>
           <ul className="space-y-3 text-gray-300">
-            <li>Western University</li>
-            <li>Binghamton University</li>
-            <li>National Geographic Society</li>
+            <li>D'Hanis</li>
+            <li>Castroville</li>
+            <li>Quihi</li>
+            <li>Vandenburg / New Fountain</li>
+            <li>Hondo</li>
+            <li>Medina County</li>
+          </ul>
+        </section>
+
+        {/* Field Crew Section */}
+        <section className="mb-16">
+          <h2 className="text-3xl font-light tracking-wider text-accent mb-8 border-b border-accent/30 pb-3" style={{ fontFamily: 'var(--font-bebas)' }}>
+            THE OLD D'HANIS FIELD CREW (2018)
+          </h2>
+          <ul className="space-y-3 text-gray-300">
+            <li>Hunter Crosby</li>
+            <li>Nolan O'Hara</li>
+            <li>Emily Sainz</li>
+          </ul>
+        </section>
+
+        {/* Funding and Support Section */}
+        <section className="mb-16">
+          <h2 className="text-3xl font-light tracking-wider text-accent mb-8 border-b border-accent/30 pb-3" style={{ fontFamily: 'var(--font-bebas)' }}>
+            FUNDING AND SUPPORT
+          </h2>
+          <ul className="space-y-3 text-gray-300">
             <li>Wenner-Gren Foundation</li>
-            <li>Mellon Foundation/American Council of Learned Societies</li>
+            <li>National Geographic Society</li>
             <li>Council of Texas Archeologists</li>
+            <li>Mellon Foundation / American Council of Learned Societies</li>
+            <li>Binghamton University Research Foundation</li>
+            <li>Western University Faculty of Social Science Research Funds</li>
             <li>Medina County Historical Commission</li>
+            <li>Castro Colonies Heritage Association</li>
+          </ul>
+        </section>
+
+        {/* Quotes and Citations Section */}
+        <section className="mb-16">
+          <h2 className="text-3xl font-light tracking-wider text-accent mb-8 border-b border-accent/30 pb-3" style={{ fontFamily: 'var(--font-bebas)' }}>
+            FEATURING QUOTES AND CITATIONS FROM
+          </h2>
+          <ul className="space-y-3 text-gray-300 text-sm">
+            <li>Barr, Alwyn (2004) The African Texans. University of Texas Institute of Texan Cultures at San Antonio. San Antonio.</li>
+            <li>CCHA Castro Colonies Heritage Association (Compilation) (1994) The History of Medina County, Texas (Vol. 1). Curtis Media. Dallas.</li>
+            <li>Crook, Cornelia (1988) Henri Castro: A Study of Early Colonization in Texas. St. Mary's University Press. San Antonio.</li>
+            <li>Domenech, Abbé (1858) Missionary Adventures in Texas and Mexico: A Personal Narrative of Six Years Sojourn in those Regions. Longman, Brown, Green, Longmans and Roberts. London.</li>
+            <li>Fohn, Nicholas (1981) Fohn Memories: Heritage of a Castro Colony Immigrant Family in Texas. Self-published by Nicholas H. Fohn. Uvalde, Texas.</li>
+            <li>Jordan, Terry G. (1978) Texas Log Buildings: A Folk Architecture. University of Texas Press Austin.</li>
+            <li>National Register of Historic Places (1972) D'Hanis Historic District. National Register of Historic Places Inventory – Nomination Form. National Archives Catalog.</li>
+            <li>Sowell, Andrew Jackson (1986) Texas Indian Fighters. State House Press. McMurry University. Abilene.</li>
+          </ul>
+        </section>
+
+        {/* Resources Section */}
+        <section className="mb-16">
+          <h2 className="text-3xl font-light tracking-wider text-accent mb-8 border-b border-accent/30 pb-3" style={{ fontFamily: 'var(--font-bebas)' }}>
+            FEATURING RESOURCES FROM
+          </h2>
+          <ul className="space-y-3 text-gray-300">
+            <li>The Old D'Hanis Archaeological Mapping Project</li>
+            <li>St. Dominic's / Holy Cross Parish Records (FamilySearch.com)</li>
+            <li>University of San Antonio Libraries</li>
+            <li>Medina County Land Records</li>
+            <li>Rothe & Associates, PLLC</li>
+            <li>The Portal to Texas History, University of North Texas Libraries</li>
+            <li>The Dolph Briscoe Center for American History</li>
+            <li>Texas General Land Office</li>
+            <li>The Library of Congress</li>
+            <li>Ancestry.com</li>
+            <li>Texas State Library and Archives</li>
+            <li>Texas Digital Archive</li>
+            <li>Newspapers.com</li>
           </ul>
         </section>
 
         {/* Special Thanks Section */}
         <section className="mb-16">
           <h2 className="text-3xl font-light tracking-wider text-accent mb-8 border-b border-accent/30 pb-3" style={{ fontFamily: 'var(--font-bebas)' }}>
-            SPECIAL THANKS
+            A SPECIAL THANKS TO
           </h2>
           <ul className="space-y-3 text-gray-300">
-            <li>Community of D'Hanis and Medina County</li>
-            <li>Portal to Texas History (University of North Texas Libraries)</li>
-            <li>UTSA Special Collections</li>
+            <li>Polo Rodriguez</li>
+            <li>The Rodriguez Family</li>
+            <li>Stella Boone</li>
+            <li>Elsie Rothe</li>
+            <li>Holy Cross Parish</li>
+            <li>John and Margaret Bergmann</li>
+            <li>Joe Fohn</li>
+            <li>Phil and Mary King</li>
+            <li>Tom Fillinger</li>
+            <li>Jeremy Trombley</li>
             <li>Mike Katchabaw</li>
-          </ul>
-        </section>
-
-        {/* Cited Projects Section */}
-        <section className="mb-16">
-          <h2 className="text-3xl font-light tracking-wider text-accent mb-8 border-b border-accent/30 pb-3" style={{ fontFamily: 'var(--font-bebas)' }}>
-            CITED PROJECTS
-          </h2>
-          <ul className="space-y-3 text-gray-300">
-            <li>Old D'Hanis Archaeological Mapping Project</li>
-            <li>Castro Colonies Oral History Project</li>
           </ul>
         </section>
 
@@ -109,7 +172,7 @@ export default function CreditsPage() {
 
         {/* Back Button */}
         <div className="text-center">
-          <BracketLink href="/projects/discover-old-dhanis">Back to Project</BracketLink>
+          <BracketButton href="/projects/discover-old-dhanis">Back to Project</BracketButton>
         </div>
       </div>
     </div>

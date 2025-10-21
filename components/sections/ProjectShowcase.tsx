@@ -3,7 +3,7 @@
 import ParallaxImage from "@/components/ParallaxImage";
 import Typography from "@/components/ui/Typography";
 import StatusBadge from "@/components/ui/StatusBadge";
-import BracketLink from "@/components/ui/BracketLink";
+import BracketButton from "@/components/ui/BracketButton";
 
 interface ProjectShowcaseProps {
   imageSrc: string;
@@ -66,7 +66,7 @@ export default function ProjectShowcase({
           </div>
 
           <div className="inline-block">
-            <BracketLink href={linkHref}>{linkText}</BracketLink>
+            <BracketButton href={linkHref}>{linkText}</BracketButton>
           </div>
         </div>
       </div>

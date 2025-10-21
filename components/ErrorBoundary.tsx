@@ -3,7 +3,7 @@
 import React, { Component, ReactNode, ErrorInfo } from "react";
 import Typography from "./ui/Typography";
 import Container from "./ui/Container";
-import BracketLink from "./ui/BracketLink";
+import BracketButton from "./ui/BracketButton";
 
 interface Props {
   children: ReactNode;
@@ -46,7 +46,7 @@ export default class ErrorBoundary extends Component<Props, State> {
               or return to the homepage.
             </Typography.Body>
             <div className="flex gap-6 justify-center">
-              <BracketLink href="/">Go Home</BracketLink>
+              <BracketButton href="/">Go Home</BracketButton>
               <button
                 onClick={() => window.location.reload()}
                 className="inline-flex items-center gap-2 group"

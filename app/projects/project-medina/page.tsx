@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import BracketLink from "@/components/ui/BracketLink";
+import BracketButton from "@/components/ui/BracketButton";
 
 export const metadata: Metadata = {
   title: "Project Medina",
@@ -15,7 +15,7 @@ export default function ProjectMedinaPage() {
         </h1>
         <p className="text-3xl md:text-4xl text-gray-400 mb-16">Coming soon...</p>
 
-        <BracketLink href="/projects">View All Projects</BracketLink>
+        <BracketButton href="/projects">View All Projects</BracketButton>
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 import Typography from "@/components/ui/Typography";
 import Container from "@/components/ui/Container";
-import BracketLink from "@/components/ui/BracketLink";
+import BracketButton from "@/components/ui/BracketButton";
 
 export default function NotFound() {
   return (
@@ -21,8 +21,8 @@ export default function NotFound() {
           Let's get you back to the present.
         </Typography.Body>
         <div className="flex flex-wrap gap-6 justify-center">
-          <BracketLink href="/">Return Home</BracketLink>
-          <BracketLink href="/projects">View Projects</BracketLink>
+          <BracketButton href="/">Return Home</BracketButton>
+          <BracketButton href="/projects">View Projects</BracketButton>
         </div>
       </Container>
     </section>
