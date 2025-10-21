@@ -14,6 +14,7 @@ import { LocalBusinessSchema, FAQSchema } from "@/components/schemas";
 import { ABOUT_PAGE_FAQS } from "@/lib/data/seo";
 import { useScrollPosition } from "@/hooks/useScrollPosition";
 import { ABOUT_CONTENT } from "@/lib/data/content";
+import EmailSubscribe from "@/components/sections/EmailSubscribe";
 
 export default function AboutPage() {
   const scrollY = useScrollPosition();
@@ -136,6 +137,11 @@ export default function AboutPage() {
           <BracketLink href="/projects" className="justify-center">View Our Projects</BracketLink>
         </Container>
       </SectionWrapper>
+
+      {/* Email Subscribe Section */}
+      <div className="relative bg-black" style={{ zIndex: 100 }}>
+        <EmailSubscribe />
+      </div>
     </>
   );
 }

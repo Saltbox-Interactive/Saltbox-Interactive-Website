@@ -6,6 +6,7 @@ import Hero from "@/components/sections/Hero";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import Container from "@/components/ui/Container";
 import Typography from "@/components/ui/Typography";
+import EmailSubscribe from "@/components/sections/EmailSubscribe";
 import { blogPosts, getAllCategories } from "@/lib/data/blog";
 import { useState } from "react";
 
@@ -139,6 +140,11 @@ export default function BlogPage() {
           )}
         </Container>
       </AnimatedSection>
+
+      {/* Email Subscribe Section */}
+      <div className="relative bg-black" style={{ zIndex: 100 }}>
+        <EmailSubscribe />
+      </div>
     </>
   );
 }

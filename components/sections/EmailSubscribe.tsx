@@ -1,15 +1,18 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import BracketLink from "@/components/ui/BracketLink";
 
 export default function EmailSubscribe() {
+  const [showForm, setShowForm] = useState(false);
+
   return (
     <section className="relative bg-black py-16 sm:py-20 md:py-24 pb-36 sm:pb-44 md:pb-52 border-b border-accent/10">
       <div className="container mx-auto px-4 sm:px-6">
         <div className="relative flex flex-col lg:flex-row lg:items-start gap-8">
           {/* Left - Logo */}
-          <div className="flex justify-start lg:absolute lg:left-0 lg:-ml-12">
+          <div className="flex justify-start lg:absolute lg:left-[-7rem] lg:-top-8">
             <Image
               src="/images/saltbox-logo.svg"
               alt="Saltbox Interactive"
@@ -29,20 +32,67 @@ export default function EmailSubscribe() {
             </h2>
 
             <div className="flex justify-start">
-              <BracketLink href="/contact">
-                SUBSCRIBE
-              </BracketLink>
+              <button
+                onClick={() => setShowForm(!showForm)}
+                className="inline-flex items-center gap-2 group py-2"
+              >
+                <span className="text-accent transition-all duration-300 group-hover:-translate-x-1 text-base sm:text-lg">
+                  [
+                </span>
+                <span
+                  className="text-base sm:text-lg font-light tracking-[0.15em] text-gray-400 group-hover:text-accent transition-colors duration-300 uppercase"
+                  style={{ fontFamily: "var(--font-bebas)" }}
+                >
+                  {showForm ? "CLOSE" : "SUBSCRIBE"}
+                </span>
+                <span className="text-accent transition-all duration-300 group-hover:translate-x-1 text-base sm:text-lg">
+                  ]
+                </span>
+              </button>
             </div>
           </div>
 
-          {/* Right - Image */}
-          <div className="relative w-full aspect-[4/3] lg:aspect-[3/2] lg:w-1/3 lg:absolute lg:right-0 lg:mr-[-6rem]">
-            <Image
-              src="/images/temp/dod-temp-12.jpg"
-              alt="Historic site"
-              fill
-              className="object-cover"
-            />
+          {/* Right - Image or Form */}
+          <div className="relative w-full lg:w-1/3 lg:absolute lg:right-0 lg:mr-[-6rem] overflow-hidden">
+            <div
+              className={`relative w-full aspect-[4/3] lg:aspect-[3/2] transition-all duration-700 ease-in-out ${
+                showForm ? 'translate-y-full opacity-0' : 'translate-y-0 opacity-100'
+              }`}
+            >
+              <Image
+                src="/images/temp/dod-temp-12.jpg"
+                alt="Historic site"
+                fill
+                className="object-cover"
+              />
+            </div>
+
+            <div
+              className={`absolute inset-0 flex items-start transition-all duration-700 ease-in-out ${
+                showForm ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-full pointer-events-none'
+              }`}
+            >
+              <div className="w-full space-y-6">
+                <input
+                  type="text"
+                  placeholder="Name"
+                  className="w-full bg-black border border-accent/20 text-white px-4 py-5 focus:outline-none focus:border-accent transition-colors text-base"
+                />
+                <div className="relative">
+                  <input
+                    type="email"
+                    placeholder="Email"
+                    className="w-full bg-black border border-accent/20 text-white px-4 py-5 focus:outline-none focus:border-accent transition-colors text-base"
+                  />
+                  <span className="absolute left-[4.25rem] top-1/2 -translate-y-1/2 text-accent text-base pointer-events-none">*</span>
+                </div>
+                <div className="flex justify-start">
+                  <BracketLink href="#">
+                    SUBMIT
+                  </BracketLink>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

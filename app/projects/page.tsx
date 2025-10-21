@@ -1,5 +1,6 @@
 import Hero from "@/components/sections/Hero";
 import ProjectsSection from "@/components/sections/ProjectsSection";
+import EmailSubscribe from "@/components/sections/EmailSubscribe";
 import type { Metadata } from "next";
 import Typography from "@/components/ui/Typography";
 
@@ -34,6 +35,11 @@ export default function ProjectsPage() {
           </Typography.Body>
         </div>
       </section>
+
+      {/* Email Subscribe Section */}
+      <div className="relative bg-black" style={{ zIndex: 100 }}>
+        <EmailSubscribe />
+      </div>
     </>
   );
 }
