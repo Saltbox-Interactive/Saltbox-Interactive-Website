@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next'
 import { projects } from '@/lib/data/projects'
+import { blogPosts } from '@/lib/data/blog'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://saltboxinteractive.com'
@@ -25,6 +26,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
+      url: `${baseUrl}/blog`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly' as const,
+      priority: 0.8,
+    },
+    {
       url: `${baseUrl}/contact`,
       lastModified: new Date(),
       changeFrequency: 'monthly' as const,
@@ -32,13 +39,29 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ]
 
-  // Dynamic project pages
+  // Project pages
   const projectPages = projects.map((project) => ({
     url: `${baseUrl}/projects/${project.slug}`,
     lastModified: new Date(),
     changeFrequency: 'monthly' as const,
-    priority: 0.8,
+    priority: 0.9,
   }))
 
-  return [...staticPages, ...projectPages]
+  // Credits page for Discover Old D'Hanis
+  const creditsPage = {
+    url: `${baseUrl}/projects/discover-old-dhanis/credits`,
+    lastModified: new Date(),
+    changeFrequency: 'monthly' as const,
+    priority: 0.6,
+  }
+
+  // Blog posts
+  const blogPages = blogPosts.map((post) => ({
+    url: `${baseUrl}/blog/${post.slug}`,
+    lastModified: new Date(post.date),
+    changeFrequency: 'monthly' as const,
+    priority: 0.7,
+  }))
+
+  return [...staticPages, ...projectPages, creditsPage, ...blogPages]
 }
