@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect, useContext, useRef } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { ScrollSpeedContext } from "../ScrollSpeedContext";
 import SocialLinks from "@/components/ui/SocialLinks";
 
@@ -14,7 +14,15 @@ export default function Header() {
   const [lastScrollY, setLastScrollY] = useState(0);
   const [typedText, setTypedText] = useState({ projects: "", about: "", contact: "", openMenu: "" });
   const pathname = usePathname();
+  const router = useRouter();
   const { lenis } = useContext(ScrollSpeedContext);
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (pathname === href) {
+      e.preventDefault();
+      window.location.href = href;
+    }
+  };
 
   // Reset typing animation when pathname changes
   useEffect(() => {
@@ -214,13 +222,13 @@ export default function Header() {
 
             {/* Desktop navigation */}
             <div className="hidden lg:flex items-center gap-4 absolute right-8">
-              <Link href="/projects" className={`text-base tracking-wider transition-colors duration-300 uppercase inline-block text-left ${pathname === '/projects' ? 'text-accent' : 'text-foreground/80 hover:text-accent'}`} style={{ fontFamily: 'var(--font-bebas)', minWidth: '70px' }}>
+              <Link href="/projects" onClick={(e) => handleNavClick(e, '/projects')} className={`text-base tracking-wider transition-colors duration-300 uppercase inline-block text-left ${pathname === '/projects' ? 'text-accent' : 'text-foreground/80 hover:text-accent'}`} style={{ fontFamily: 'var(--font-bebas)', minWidth: '70px' }}>
                 {typedText.projects}
               </Link>
-              <Link href="/about" className={`text-base tracking-wider transition-colors duration-300 uppercase inline-block text-left ${pathname === '/about' ? 'text-accent' : 'text-foreground/80 hover:text-accent'}`} style={{ fontFamily: 'var(--font-bebas)', minWidth: '50px' }}>
+              <Link href="/about" onClick={(e) => handleNavClick(e, '/about')} className={`text-base tracking-wider transition-colors duration-300 uppercase inline-block text-left ${pathname === '/about' ? 'text-accent' : 'text-foreground/80 hover:text-accent'}`} style={{ fontFamily: 'var(--font-bebas)', minWidth: '50px' }}>
                 {typedText.about}
               </Link>
-              <Link href="/contact" className={`text-base tracking-wider transition-colors duration-300 uppercase inline-block text-left ${pathname === '/contact' ? 'text-accent' : 'text-foreground/80 hover:text-accent'}`} style={{ fontFamily: 'var(--font-bebas)', minWidth: '65px' }}>
+              <Link href="/contact" onClick={(e) => handleNavClick(e, '/contact')} className={`text-base tracking-wider transition-colors duration-300 uppercase inline-block text-left ${pathname === '/contact' ? 'text-accent' : 'text-foreground/80 hover:text-accent'}`} style={{ fontFamily: 'var(--font-bebas)', minWidth: '65px' }}>
                 {typedText.contact}
               </Link>
               <button
@@ -251,7 +259,7 @@ export default function Header() {
                   href="/projects"
                   className={`text-lg tracking-wider transition-colors duration-300 uppercase py-2 ${pathname === '/projects' ? 'text-accent' : 'text-foreground/80 active:text-accent'}`}
                   style={{ fontFamily: 'var(--font-bebas)' }}
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  onClick={(e) => { handleNavClick(e, '/projects'); setIsMobileMenuOpen(false); }}
                 >
                   Projects
                 </Link>
@@ -259,7 +267,7 @@ export default function Header() {
                   href="/about"
                   className={`text-lg tracking-wider transition-colors duration-300 uppercase py-2 ${pathname === '/about' ? 'text-accent' : 'text-foreground/80 active:text-accent'}`}
                   style={{ fontFamily: 'var(--font-bebas)' }}
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  onClick={(e) => { handleNavClick(e, '/about'); setIsMobileMenuOpen(false); }}
                 >
                   About
                 </Link>
@@ -267,7 +275,7 @@ export default function Header() {
                   href="/blog"
                   className={`text-lg tracking-wider transition-colors duration-300 uppercase py-2 ${pathname === '/blog' ? 'text-accent' : 'text-foreground/80 active:text-accent'}`}
                   style={{ fontFamily: 'var(--font-bebas)' }}
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  onClick={(e) => { handleNavClick(e, '/blog'); setIsMobileMenuOpen(false); }}
                 >
                   Blog
                 </Link>
@@ -275,7 +283,7 @@ export default function Header() {
                   href="/contact"
                   className={`text-lg tracking-wider transition-colors duration-300 uppercase py-2 ${pathname === '/contact' ? 'text-accent' : 'text-foreground/80 active:text-accent'}`}
                   style={{ fontFamily: 'var(--font-bebas)' }}
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  onClick={(e) => { handleNavClick(e, '/contact'); setIsMobileMenuOpen(false); }}
                 >
                   Contact
                 </Link>
@@ -308,7 +316,7 @@ export default function Header() {
               <div className="flex flex-col justify-start space-y-4 mt-8">
                 <Link
                   href="/projects"
-                  onClick={() => setIsMenuOpen(false)}
+                  onClick={(e) => { handleNavClick(e, '/projects'); setIsMenuOpen(false); }}
                   className={`group relative text-4xl md:text-5xl font-light tracking-[0.15em] uppercase inline-block overflow-hidden px-2 py-1 ${
                     isMenuOpen ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
                   }`}
@@ -324,7 +332,7 @@ export default function Header() {
                 </Link>
                 <Link
                   href="/about"
-                  onClick={() => setIsMenuOpen(false)}
+                  onClick={(e) => { handleNavClick(e, '/about'); setIsMenuOpen(false); }}
                   className={`group relative text-4xl md:text-5xl font-light tracking-[0.15em] uppercase inline-block overflow-hidden px-2 py-1 ${
                     isMenuOpen ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
                   }`}
@@ -340,7 +348,7 @@ export default function Header() {
                 </Link>
                 <Link
                   href="/blog"
-                  onClick={() => setIsMenuOpen(false)}
+                  onClick={(e) => { handleNavClick(e, '/blog'); setIsMenuOpen(false); }}
                   className={`group relative text-4xl md:text-5xl font-light tracking-[0.15em] uppercase inline-block overflow-hidden px-2 py-1 ${
                     isMenuOpen ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
                   }`}
@@ -356,7 +364,7 @@ export default function Header() {
                 </Link>
                 <Link
                   href="/contact"
-                  onClick={() => setIsMenuOpen(false)}
+                  onClick={(e) => { handleNavClick(e, '/contact'); setIsMenuOpen(false); }}
                   className={`group relative text-4xl md:text-5xl font-light tracking-[0.15em] uppercase inline-block overflow-hidden px-2 py-1 ${
                     isMenuOpen ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
                   }`}
@@ -388,7 +396,7 @@ export default function Header() {
               {/* Discover Old D'Hanis Panel */}
               <Link
                 href="/projects/discover-old-dhanis"
-                onClick={() => setIsMenuOpen(false)}
+                onClick={(e) => { handleNavClick(e, '/projects/discover-old-dhanis'); setIsMenuOpen(false); }}
                 className={`relative h-full min-h-[60vh] overflow-hidden group cursor-pointer flex items-center justify-center transition-all duration-500 ${
                   isMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
                 }`}
@@ -411,7 +419,7 @@ export default function Header() {
               {/* About Panel */}
               <Link
                 href="/about"
-                onClick={() => setIsMenuOpen(false)}
+                onClick={(e) => { handleNavClick(e, '/about'); setIsMenuOpen(false); }}
                 className={`relative h-full min-h-[60vh] overflow-hidden group cursor-pointer flex items-center justify-center transition-all duration-500 ${
                   isMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
                 }`}
