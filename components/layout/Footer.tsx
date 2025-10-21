@@ -3,7 +3,7 @@ import SocialLinks from "@/components/ui/SocialLinks";
 
 export default function Footer() {
   return (
-    <footer className="fixed bottom-0 left-0 right-0 w-full bg-black border-t border-accent/10" style={{ zIndex: 50, pointerEvents: 'auto' }}>
+    <footer className="fixed bottom-0 left-0 right-0 w-full bg-black" style={{ zIndex: 50, pointerEvents: 'auto' }}>
       <div className="absolute inset-0 bg-noise opacity-5"></div>
 
       <div className="container mx-auto px-6 py-12 relative z-10">
@@ -70,7 +70,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 pt-8 border-t border-accent/10 text-center">
+        <div className="mt-12 pt-8 text-center">
           <p className="text-gray-500 text-xs tracking-wider">
             &copy; {new Date().getFullYear()} SALTBOX INTERACTIVE. ALL RIGHTS RESERVED.
           </p>

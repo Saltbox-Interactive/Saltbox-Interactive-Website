@@ -14,6 +14,7 @@ import SectionWrapper from "@/components/ui/SectionWrapper";
 import Container from "@/components/ui/Container";
 import FullWidthImage from "@/components/ui/FullWidthImage";
 import ProjectShowcase from "@/components/sections/ProjectShowcase";
+import EmailSubscribe from "@/components/sections/EmailSubscribe";
 import { HOME_CONTENT } from "@/lib/data/content";
 import { SCROLL } from "@/lib/constants";
 
@@ -259,7 +260,7 @@ export default function Home() {
       />
 
       {/* Discover Old D'Hanis Remastered Section */}
-      <section className="relative -mt-[10vh] sm:-mt-[20vh] lg:-mt-[70vh] z-20 pb-12 sm:pb-24 lg:pb-96">
+      <section className="relative -mt-[10vh] sm:-mt-[20vh] lg:-mt-[70vh] z-20 pb-12 sm:pb-24">
         <ProjectShowcase
           imageSrc={HOME_CONTENT.projects.discoverOldDhanisRemastered.image}
           imageAlt="Discover Old D'Hanis Remastered game cover art showing photorealistic recreation with Unreal Engine 5"
@@ -279,10 +280,9 @@ export default function Home() {
       </SectionWrapper>
 
       {/* End section that covers the fixed background and allows footer to show */}
-      <section className="relative bg-black" style={{ zIndex: 100, minHeight: '150vh' }}>
-        <div className="container mx-auto px-4 sm:px-6 py-12 sm:py-24 md:py-32">
-          {/* Empty space to allow footer to reveal */}
-        </div>
+      <section className="relative bg-black" style={{ zIndex: 100 }}>
+        {/* Email Subscribe Section */}
+        <EmailSubscribe />
       </section>
     </>
   );
