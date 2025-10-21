@@ -9,7 +9,7 @@ export default function EmailSubscribe() {
   const [emailValue, setEmailValue] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const handleSubmit = (e: React.MouseEvent<HTMLAnchorElement>) => {
+  const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setIsSubmitted(true);
   };
@@ -99,7 +99,7 @@ export default function EmailSubscribe() {
                     )}
                   </div>
                   <div className="flex justify-start">
-                    <BracketButton href="#" onClick={handleSubmit}>
+                    <BracketButton onClick={handleSubmit}>
                       SUBMIT
                     </BracketButton>
                   </div>

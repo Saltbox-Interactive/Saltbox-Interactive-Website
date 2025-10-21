@@ -24,7 +24,7 @@ export default function ProjectsPage() {
         pageName="Projects"
       />
       <ProjectsSection />
-      <section className="min-h-screen flex items-center justify-center bg-black px-4 sm:px-6">
+      <section className="py-32 flex items-center justify-center bg-black px-4 sm:px-6">
         <div className="container mx-auto text-center">
           <Typography.Heading size="xl" className="mb-4 sm:mb-6 text-foreground tracking-[0.15em] sm:tracking-[0.2em]">
             MORE COMING SOON
