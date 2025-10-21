@@ -20,9 +20,8 @@ export default function NotFound() {
           It seems this page has vanished into the mists of history.
           Let's get you back to the present.
         </Typography.Body>
-        <div className="flex flex-wrap gap-6 justify-center">
+        <div className="flex justify-center">
           <BracketButton href="/">Return Home</BracketButton>
-          <BracketButton href="/projects">View Projects</BracketButton>
         </div>
       </Container>
     </section>
