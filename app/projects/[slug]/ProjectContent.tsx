@@ -32,6 +32,7 @@ export default function ProjectContent({ project }: { project: Project }) {
   useEffect(() => {
     const handleScroll = () => {
       setScrollY(window.scrollY);
+      const windowHeight = window.innerHeight;
 
       if (scrollTimeoutRef.current) {
         clearTimeout(scrollTimeoutRef.current);
@@ -43,7 +44,6 @@ export default function ProjectContent({ project }: { project: Project }) {
       // Calculate position based on Steam banner visibility
       if (steamBannerRef.current) {
         const bannerRect = steamBannerRef.current.getBoundingClientRect();
-        const windowHeight = window.innerHeight;
 
         // Start fading when Steam banner enters viewport from bottom
         const fadeDistance = 400;

@@ -106,7 +106,6 @@ export const projects: Project[] = [
       "/images/temp/dod-temp-5.jpg",
       "/images/temp/dod-temp-8.jpg",
       "/images/temp/dod-temp-9.jpg",
-      "/images/temp/dod-temp-10.jpg",
       "/images/temp/dod-temp-11.jpg",
       "/images/temp/dod-temp-12.jpg",
       "/images/temp/dod-temp-14.jpg",
