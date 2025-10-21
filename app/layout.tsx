@@ -62,7 +62,7 @@ export const metadata: Metadata = {
     description: "Create immersive virtual environments where history comes alive. Experience the past through interactive digital preservation.",
     images: [
       {
-        url: "https://saltboxinteractive.com/images/dod-cover.jpg",
+        url: "https://saltboxinteractive.com/images/saltbox-logo.svg",
         width: 1200,
         height: 630,
         alt: "Saltbox Interactive - Historical Preservation Through Digital Experiences"
@@ -75,7 +75,7 @@ export const metadata: Metadata = {
     creator: "@michaelsalton",
     title: "Saltbox Interactive | Preserving History Through Interactive Experiences",
     description: "Create immersive virtual environments where history comes alive. Experience the past through interactive digital preservation.",
-    images: ["https://saltboxinteractive.com/images/dod-cover.jpg"]
+    images: ["https://saltboxinteractive.com/images/saltbox-logo.svg"]
   },
   alternates: {
     canonical: "https://saltboxinteractive.com",
