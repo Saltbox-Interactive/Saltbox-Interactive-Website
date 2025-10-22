@@ -1,19 +1,14 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
-import AnimatedSection from "@/components/ui/AnimatedSection";
-import Container from "@/components/ui/Container";
 import Typography from "@/components/ui/Typography";
 import BracketButton from "@/components/ui/BracketButton";
+import EmailSubscribe from "@/components/sections/EmailSubscribe";
 import { ArticleSchema } from "@/components/schemas";
 import { BlogPost } from "@/lib/data/blog";
-import { useScrollPosition } from "@/hooks/useScrollPosition";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
 
 export default function BlogPostContent({ post }: { post: BlogPost }) {
-  const scrollY = useScrollPosition();
-
   return (
     <>
       <ArticleSchema
@@ -29,9 +24,31 @@ export default function BlogPostContent({ post }: { post: BlogPost }) {
         }}
       />
 
+      {/* Title Above Image */}
+      <div className="relative bg-black">
+        <div className="container mx-auto px-6 pt-48 pb-12 max-w-5xl">
+          <Typography.Heading size="xl">
+            {post.title}
+          </Typography.Heading>
+        </div>
+      </div>
+
+      {/* Hero Image */}
+      <section className="relative bg-black">
+        <div className="relative w-full h-[85vh] overflow-hidden">
+          <Image
+            src={post.coverImage}
+            alt={post.title}
+            fill
+            className="object-cover"
+            priority
+          />
+        </div>
+      </section>
+
       {/* Breadcrumbs */}
-      <div className="relative z-50 bg-black">
-        <div className="container mx-auto px-6 pt-24">
+      <div className="relative bg-black">
+        <div className="container mx-auto px-6 pt-6 max-w-5xl">
           <Breadcrumbs items={[
             { label: "News", href: "/news" },
             { label: post.title }
@@ -39,79 +56,56 @@ export default function BlogPostContent({ post }: { post: BlogPost }) {
         </div>
       </div>
 
-      {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center bg-black overflow-hidden">
-        {/* Background Image with Parallax */}
-        <div
-          className="absolute inset-0"
-          style={{
-            transform: `translateY(${scrollY * 0.5}px)`,
-          }}
-        >
-          <Image
-            src={post.coverImage}
-            alt={post.title}
-            fill
-            className="object-cover opacity-40"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black"></div>
-        </div>
-
-        {/* Content */}
-        <div
-          className="relative z-10 text-center px-6 max-w-4xl"
-          style={{
-            transform: `translateY(${scrollY * -0.2}px)`,
-            opacity: Math.max(0, 1 - scrollY / 600),
-          }}
-        >
-          {/* Category Badge */}
-          <div className="mb-6">
-            <span
-              className="inline-block px-4 py-2 text-sm tracking-wider uppercase border border-accent/50 text-accent"
-              style={{
-                fontFamily: "var(--font-bebas)",
-                backgroundColor: "rgba(0, 0, 0, 0.8)",
-              }}
-            >
-              {post.category}
-            </span>
-          </div>
-
-          <Typography.Heading size="3xl" className="mb-6">
-            {post.title}
-          </Typography.Heading>
-
-          <div className="flex items-center justify-center gap-6 text-gray-400">
-            <span>{post.author}</span>
-            <span>•</span>
-            <time dateTime={post.date}>
-              {new Date(post.date).toLocaleDateString("en-US", {
-                year: "numeric",
-                month: "long",
-                day: "numeric",
-              })}
-            </time>
-          </div>
-        </div>
-      </section>
-
       {/* Article Content */}
-      <AnimatedSection className="relative py-20 bg-black">
-        <Container size="md">
+      <section className="relative py-12 bg-black">
+        <div className="container mx-auto px-6 max-w-3xl">
+          {/* Title and Meta */}
+          <div className="mb-12">
+            <Typography.Heading size="xl" className="mb-6">
+              {post.title}
+            </Typography.Heading>
+
+            {/* Date & Tags */}
+            <div className="flex items-center gap-3 text-sm">
+              <time dateTime={post.date} className="text-gray-500">
+                {new Date(post.date).toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })}
+              </time>
+              {post.project && (
+                <>
+                  <span className="text-gray-700">|</span>
+                  <div className="flex items-center gap-2 text-[10px] uppercase tracking-wider">
+                    <span className="text-gray-400">{post.project}</span>
+                    <span className="text-gray-700">•</span>
+                    <span className="text-gray-400">{post.category}</span>
+                  </div>
+                </>
+              )}
+              {!post.project && (
+                <>
+                  <span className="text-gray-700">|</span>
+                  <span className="text-[10px] uppercase tracking-wider text-gray-400">{post.category}</span>
+                </>
+              )}
+            </div>
+          </div>
+
+          {/* Article Body */}
           <article className="prose prose-invert prose-lg max-w-none">
             {post.content.split("\n\n").map((paragraph, index) => {
               // Handle headings
               if (paragraph.startsWith("## ")) {
                 return (
-                  <Typography.Heading
+                  <h2
                     key={index}
-                    size="lg"
-                    className="mt-12 mb-6 first:mt-0"
+                    className="text-3xl font-light tracking-[0.15em] text-white uppercase mt-12 mb-6 first:mt-0"
+                    style={{ fontFamily: "var(--font-bebas)" }}
                   >
                     {paragraph.replace("## ", "")}
-                  </Typography.Heading>
+                  </h2>
                 );
               }
 
@@ -131,48 +125,55 @@ export default function BlogPostContent({ post }: { post: BlogPost }) {
               if (paragraph.startsWith("- ")) {
                 const items = paragraph.split("\n");
                 return (
-                  <ul key={index} className="space-y-2 my-6 text-gray-300">
-                    {items.map((item, i) => (
-                      <li key={i} className="text-lg">
-                        {item.replace("- ", "")}
-                      </li>
-                    ))}
+                  <ul key={index} className="space-y-3 my-6 list-disc pl-6">
+                    {items.map((item, i) => {
+                      const cleanedItem = item.replace("- ", "");
+                      const parts = cleanedItem.split("**");
+
+                      return (
+                        <li
+                          key={i}
+                          className="text-lg text-gray-300 leading-relaxed"
+                          style={{ fontFamily: "var(--font-work-sans)" }}
+                        >
+                          {parts.map((part, idx) => {
+                            // Odd indices are bold text
+                            if (idx % 2 === 1) {
+                              return <strong key={idx} className="text-white">{part}</strong>;
+                            }
+                            return part;
+                          })}
+                        </li>
+                      );
+                    })}
                   </ul>
                 );
               }
 
               // Regular paragraphs
               return (
-                <Typography.Body key={index} className="mb-6 text-gray-300">
+                <p
+                  key={index}
+                  className="text-lg text-gray-300 leading-relaxed mb-6"
+                  style={{ fontFamily: "var(--font-work-sans)" }}
+                >
                   {paragraph}
-                </Typography.Body>
+                </p>
               );
             })}
           </article>
 
-          {/* Tags */}
-          {post.tags && post.tags.length > 0 && (
-            <div className="mt-12 pt-8 border-t border-white/10">
-              <div className="flex flex-wrap gap-2">
-                {post.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="px-3 py-1 text-xs tracking-wider uppercase border border-white/20 text-gray-400"
-                    style={{ fontFamily: "var(--font-bebas)" }}
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* Back to Blog */}
-          <div className="mt-12 text-center">
-            <BracketButton href="/blog">Back to All Posts</BracketButton>
+          {/* Back to News */}
+          <div className="mt-16 pt-8 border-t border-white/10">
+            <BracketButton href="/news">Back to All News</BracketButton>
           </div>
-        </Container>
-      </AnimatedSection>
+        </div>
+      </section>
+
+      {/* Email Subscribe Section */}
+      <div className="relative bg-black">
+        <EmailSubscribe />
+      </div>
     </>
   );
 }
