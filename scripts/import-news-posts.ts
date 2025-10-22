@@ -1,5 +1,5 @@
 import { createClient } from '@sanity/client'
-import { blogPosts } from '../lib/data/blog'
+import { newsPosts } from '../lib/data/news'
 
 const client = createClient({
   projectId: '3pup2fx7',
@@ -9,10 +9,10 @@ const client = createClient({
   apiVersion: '2024-01-01',
 })
 
-async function importBlogPosts() {
-  console.log(`Starting import of ${blogPosts.length} blog posts...`)
+async function importNewsPosts() {
+  console.log(`Starting import of ${newsPosts.length} news posts...`)
 
-  for (const post of blogPosts) {
+  for (const post of newsPosts) {
     try {
       // Convert markdown content to Sanity blocks
       // For now, we'll create a simple paragraph block
@@ -102,4 +102,4 @@ async function importBlogPosts() {
   console.log('Go to each post and upload the corresponding image from your /public/images folder.')
 }
 
-importBlogPosts()
+importNewsPosts()
