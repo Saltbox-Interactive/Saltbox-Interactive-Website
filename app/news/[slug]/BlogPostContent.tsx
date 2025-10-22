@@ -6,18 +6,65 @@ import BracketButton from "@/components/ui/BracketButton";
 import EmailSubscribe from "@/components/sections/EmailSubscribe";
 import ShareButtons from "@/components/ui/ShareButtons";
 import { ArticleSchema } from "@/components/schemas";
-import { BlogPost } from "@/lib/data/blog";
+import { NewsPost } from "@/lib/sanity/queries";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
+import { PortableText } from "@portabletext/react";
+import { urlForImage } from "@/lib/sanity/image";
 
-export default function BlogPostContent({ post }: { post: BlogPost }) {
-  const postUrl = typeof window !== 'undefined' ? window.location.href : `https://saltboxinteractive.com/news/${post.slug}`;
+export default function BlogPostContent({ post }: { post: NewsPost }) {
+  const postUrl = typeof window !== 'undefined' ? window.location.href : `https://saltboxinteractive.com/news/${post.slug.current}`;
+  const imageUrl = post.coverImage ? urlForImage(post.coverImage).url() : '/images/placeholder.jpg';
+
+  const portableTextComponents = {
+    block: {
+      h2: ({ children }: any) => (
+        <h2
+          className="text-3xl font-light tracking-[0.15em] text-white uppercase mt-12 mb-6 first:mt-0"
+          style={{ fontFamily: "var(--font-bebas)" }}
+        >
+          {children}
+        </h2>
+      ),
+      normal: ({ children }: any) => (
+        <p
+          className="text-lg text-gray-300 leading-relaxed mb-6"
+          style={{ fontFamily: "var(--font-work-sans)" }}
+        >
+          {children}
+        </p>
+      ),
+    },
+    list: {
+      bullet: ({ children }: any) => (
+        <ul className="space-y-3 my-6 list-disc pl-6">{children}</ul>
+      ),
+    },
+    listItem: {
+      bullet: ({ children }: any) => (
+        <li
+          className="text-lg text-gray-300 leading-relaxed"
+          style={{ fontFamily: "var(--font-work-sans)" }}
+        >
+          {children}
+        </li>
+      ),
+    },
+    marks: {
+      strong: ({ children }: any) => (
+        <strong className="text-white">{children}</strong>
+      ),
+      link: ({ value, children }: any) => (
+        <BracketButton href={value.href}>{children}</BracketButton>
+      ),
+    },
+  };
 
   return (
     <>
       <ArticleSchema
         headline={post.title}
         description={post.excerpt}
-        image={post.coverImage}
+        image={imageUrl}
         datePublished={post.date}
         dateModified={post.date}
         author={{ name: post.author }}
@@ -40,7 +87,7 @@ export default function BlogPostContent({ post }: { post: BlogPost }) {
       <section className="relative bg-black">
         <div className="relative w-full h-[85vh] overflow-hidden">
           <Image
-            src={post.coverImage}
+            src={imageUrl}
             alt={post.title}
             fill
             className="object-cover"
@@ -103,72 +150,7 @@ export default function BlogPostContent({ post }: { post: BlogPost }) {
 
           {/* Article Body */}
           <article className="prose prose-invert prose-lg max-w-none">
-            {post.content.split("\n\n").map((paragraph, index) => {
-              // Handle headings
-              if (paragraph.startsWith("## ")) {
-                return (
-                  <h2
-                    key={index}
-                    className="text-3xl font-light tracking-[0.15em] text-white uppercase mt-12 mb-6 first:mt-0"
-                    style={{ fontFamily: "var(--font-bebas)" }}
-                  >
-                    {paragraph.replace("## ", "")}
-                  </h2>
-                );
-              }
-
-              // Handle links
-              if (paragraph.startsWith("[") && paragraph.includes("](")) {
-                const linkMatch = paragraph.match(/\[([^\]]+)\]\(([^)]+)\)/);
-                if (linkMatch) {
-                  return (
-                    <div key={index} className="my-8">
-                      <BracketButton href={linkMatch[2]}>{linkMatch[1]}</BracketButton>
-                    </div>
-                  );
-                }
-              }
-
-              // Handle lists
-              if (paragraph.startsWith("- ")) {
-                const items = paragraph.split("\n");
-                return (
-                  <ul key={index} className="space-y-3 my-6 list-disc pl-6">
-                    {items.map((item, i) => {
-                      const cleanedItem = item.replace("- ", "");
-                      const parts = cleanedItem.split("**");
-
-                      return (
-                        <li
-                          key={i}
-                          className="text-lg text-gray-300 leading-relaxed"
-                          style={{ fontFamily: "var(--font-work-sans)" }}
-                        >
-                          {parts.map((part, idx) => {
-                            // Odd indices are bold text
-                            if (idx % 2 === 1) {
-                              return <strong key={idx} className="text-white">{part}</strong>;
-                            }
-                            return part;
-                          })}
-                        </li>
-                      );
-                    })}
-                  </ul>
-                );
-              }
-
-              // Regular paragraphs
-              return (
-                <p
-                  key={index}
-                  className="text-lg text-gray-300 leading-relaxed mb-6"
-                  style={{ fontFamily: "var(--font-work-sans)" }}
-                >
-                  {paragraph}
-                </p>
-              );
-            })}
+            <PortableText value={post.content} components={portableTextComponents} />
           </article>
 
           {/* Back to News */}

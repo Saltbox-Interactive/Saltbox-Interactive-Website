@@ -177,6 +177,12 @@ export default function Header() {
     };
   }, [isMenuOpen, lenis]);
 
+  // Don't render header at all on studio, structure, or vision pages
+  const isStudioPage = pathname?.startsWith('/studio') || pathname?.startsWith('/structure') || pathname?.startsWith('/vision');
+  if (isStudioPage) {
+    return null;
+  }
+
   return (
     <>
       <header className={`fixed top-0 left-0 right-0 transition-opacity duration-300 ${

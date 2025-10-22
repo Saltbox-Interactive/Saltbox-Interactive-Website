@@ -1,10 +1,11 @@
 import Link from "next/link";
 import Image from "next/image";
+import { urlForImage } from "@/lib/sanity/image";
 
 interface NewsCardProps {
   slug: string;
   title: string;
-  coverImage: string;
+  coverImage: any;
   date: string;
   category: string;
   project?: string;
@@ -18,6 +19,12 @@ export default function NewsCard({
   category,
   project,
 }: NewsCardProps) {
+  // Handle both Sanity images and regular image paths
+  const imageUrl = coverImage
+    ? typeof coverImage === 'string'
+      ? coverImage
+      : urlForImage(coverImage).width(800).height(450).url()
+    : '/images/placeholder.jpg';
   return (
     <Link
       href={`/news/${slug}`}
@@ -28,7 +35,7 @@ export default function NewsCard({
         {/* Image */}
         <div className="relative aspect-video overflow-hidden">
           <Image
-            src={coverImage}
+            src={imageUrl}
             alt={title}
             fill
             className="object-cover group-hover:scale-105 transition-transform duration-500"

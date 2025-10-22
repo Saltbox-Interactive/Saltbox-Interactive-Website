@@ -1,17 +1,18 @@
-"use client";
-
 import Hero from "@/components/sections/Hero";
 import EmailSubscribe from "@/components/sections/EmailSubscribe";
 import NewsCard from "@/components/ui/NewsCard";
 import SectionTitle from "@/components/ui/SectionTitle";
-import { blogPosts } from "@/lib/data/blog";
+import { getAllNewsPosts } from "@/lib/sanity/queries";
 
-export default function BlogPage() {
-  // Get 2 most recent posts for "Recent News"
-  const recentPosts = blogPosts.slice(0, 2);
+export default async function BlogPage() {
+  // Fetch all posts from Sanity
+  const allNewsPosts = await getAllNewsPosts();
+
+  // Get 2 most recent posts for "Latest News"
+  const recentPosts = allNewsPosts.slice(0, 2);
 
   // Get remaining posts for "All News"
-  const allPosts = blogPosts.slice(2);
+  const allPosts = allNewsPosts.slice(2);
 
   return (
     <>
@@ -40,9 +41,9 @@ export default function BlogPage() {
             <div className="flex-1 relative overflow-hidden">
               <div className="flex gap-6">
                 {recentPosts.map((post) => (
-                  <div key={post.slug} className="flex-shrink-0 w-[calc(50%-12px)]">
+                  <div key={post._id} className="flex-shrink-0 w-[calc(50%-12px)]">
                     <NewsCard
-                      slug={post.slug}
+                      slug={post.slug.current}
                       title={post.title}
                       coverImage={post.coverImage}
                       date={post.date}
@@ -71,9 +72,9 @@ export default function BlogPage() {
           {/* News Cards Grid */}
           <div className="grid grid-cols-3 gap-6">
             {allPosts.map((post) => (
-              <div key={post.slug} className="w-full">
+              <div key={post._id} className="w-full">
                 <NewsCard
-                  slug={post.slug}
+                  slug={post.slug.current}
                   title={post.title}
                   coverImage={post.coverImage}
                   date={post.date}

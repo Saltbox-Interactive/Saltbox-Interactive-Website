@@ -1,11 +1,13 @@
 import { notFound } from "next/navigation";
-import { getPostBySlug, blogPosts } from "@/lib/data/blog";
+import { getAllNewsPosts, getNewsPostBySlug } from "@/lib/sanity/queries";
 import BlogPostContent from "./BlogPostContent";
 import type { Metadata } from "next";
+import { urlForImage } from "@/lib/sanity/image";
 
 export async function generateStaticParams() {
-  return blogPosts.map((post) => ({
-    slug: post.slug,
+  const posts = await getAllNewsPosts();
+  return posts.map((post) => ({
+    slug: post.slug.current,
   }));
 }
 
@@ -15,13 +17,15 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = await getNewsPostBySlug(slug);
 
   if (!post) {
     return {
       title: "Post Not Found",
     };
   }
+
+  const imageUrl = post.coverImage ? urlForImage(post.coverImage).url() : undefined;
 
   return {
     title: post.title,
@@ -30,10 +34,10 @@ export async function generateMetadata({
     openGraph: {
       title: `${post.title} | Saltbox Interactive Blog`,
       description: post.excerpt,
-      images: post.coverImage
+      images: imageUrl
         ? [
             {
-              url: post.coverImage,
+              url: imageUrl,
               width: 1200,
               height: 630,
               alt: post.title,
@@ -48,7 +52,7 @@ export async function generateMetadata({
       card: "summary_large_image",
       title: `${post.title} | Saltbox Interactive Blog`,
       description: post.excerpt,
-      images: post.coverImage ? [post.coverImage] : [],
+      images: imageUrl ? [imageUrl] : [],
     },
   };
 }
@@ -59,7 +63,7 @@ export default async function BlogPostPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = await getNewsPostBySlug(slug);
 
   if (!post) {
     notFound();
