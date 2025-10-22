@@ -172,15 +172,9 @@ export default function ContactSection() {
               </div>
 
               <div className="text-center pt-4">
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="inline-block"
-                >
-                  <BracketButton as="span">
-                    {isSubmitting ? 'Sending...' : 'Send Message'}
-                  </BracketButton>
-                </button>
+                <BracketButton type="submit">
+                  {isSubmitting ? 'Sending...' : 'Send Message'}
+                </BracketButton>
 
                 {submitStatus === 'success' && (
                   <p className="mt-4 text-accent">Message sent successfully! We'll get back to you soon.</p>
