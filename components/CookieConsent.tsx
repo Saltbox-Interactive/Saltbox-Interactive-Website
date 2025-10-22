@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import BracketButton from "./ui/BracketButton";
-import BoxButton from "./ui/BoxButton";
+import WhiteBoxButton from "./ui/WhiteBoxButton";
 
 export default function CookieConsent() {
   const [showBanner, setShowBanner] = useState(false);
@@ -41,33 +41,29 @@ export default function CookieConsent() {
   if (!showBanner) return null;
 
   return (
-    <div className="fixed bottom-8 left-8 bg-black p-6 z-[200] max-w-2xl shadow-2xl">
-      <div className="flex items-center gap-8">
-        <div className="flex-1">
-          <h3
-            className="text-xl font-light tracking-wider text-white mb-2 uppercase"
-            style={{ fontFamily: 'var(--font-bebas)' }}
-          >
-            Cookie Consent
-          </h3>
+    <div className="fixed bottom-8 left-8 bg-[#1a1a1a] p-6 z-[200] max-w-2xl shadow-2xl">
+      <h3
+        className="text-xl font-light tracking-wider text-white mb-2 uppercase"
+        style={{ fontFamily: 'var(--font-bebas)' }}
+      >
+        Cookie Consent
+      </h3>
 
-          <p className="text-white text-sm leading-relaxed">
-            We use cookies to analyze site traffic and improve your experience. By clicking "Accept", you consent to our use of cookies for analytics purposes.
-            {' '}
-            <a href="/privacy" className="text-accent hover:underline">
-              Learn more
-            </a>
-          </p>
-        </div>
+      <p className="text-white text-sm leading-relaxed mb-4">
+        We use cookies to analyze site traffic and improve your experience. By clicking "Accept", you consent to our use of cookies for analytics purposes.
+        {' '}
+        <a href="/privacy" className="text-accent hover:underline">
+          Learn more
+        </a>
+      </p>
 
-        <div className="flex gap-3 flex-shrink-0">
-          <BracketButton onClick={handleDecline}>
-            Decline
-          </BracketButton>
-          <BoxButton onClick={handleAccept}>
-            Accept
-          </BoxButton>
-        </div>
+      <div className="flex gap-6 justify-end">
+        <BracketButton onClick={handleDecline}>
+          Decline
+        </BracketButton>
+        <WhiteBoxButton onClick={handleAccept}>
+          Accept
+        </WhiteBoxButton>
       </div>
     </div>
   );
