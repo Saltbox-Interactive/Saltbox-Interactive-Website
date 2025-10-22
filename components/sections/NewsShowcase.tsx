@@ -1,23 +1,35 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { NewsPost } from "@/lib/sanity/queries";
+import { getAllNewsPosts, NewsPost } from "@/lib/sanity/queries";
 import SectionTitle from "@/components/ui/SectionTitle";
 import BracketButton from "@/components/ui/BracketButton";
 import ArrowButton from "@/components/ui/ArrowButton";
 import NewsCard from "@/components/ui/NewsCard";
 
-interface NewsShowcaseProps {
-  posts: NewsPost[];
-}
-
-export default function NewsShowcase({ posts }: NewsShowcaseProps) {
+export default function NewsShowcase() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
+  const [latestPosts, setLatestPosts] = useState<NewsPost[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
-  const latestPosts = posts.slice(0, 6);
+  // Fetch latest 6 news posts from Sanity
+  useEffect(() => {
+    async function fetchPosts() {
+      try {
+        const posts = await getAllNewsPosts();
+        console.log('Fetched posts:', posts.length);
+        setLatestPosts(posts.slice(0, 6));
+      } catch (error) {
+        console.error('Error fetching news posts for homepage:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    fetchPosts();
+  }, []);
 
   const checkScrollButtons = () => {
     if (scrollContainerRef.current) {
@@ -67,7 +79,9 @@ export default function NewsShowcase({ posts }: NewsShowcaseProps) {
 
           {/* News Cards Container */}
           <div className="flex-1 relative overflow-hidden">
-            {latestPosts.length === 0 ? (
+            {isLoading ? (
+              <div className="text-gray-400 text-lg">Loading news...</div>
+            ) : latestPosts.length === 0 ? (
               <div className="text-gray-400 text-lg">No news at this moment. Check back soon!</div>
             ) : (
               <>
