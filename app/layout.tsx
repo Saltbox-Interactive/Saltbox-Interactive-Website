@@ -4,6 +4,7 @@ import "./globals.css";
 import Footer from "@/components/layout/Footer";
 import SmoothScroll from "@/components/SmoothScroll";
 import { OrganizationSchema } from "@/components/StructuredData";
+import GoogleAnalytics from "@/components/GoogleAnalytics";
 import BackToTop from "@/components/ui/BackToTop";
 import "lenis/dist/lenis.css";
 
@@ -119,6 +120,7 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <OrganizationSchema />
+        {process.env.NEXT_PUBLIC_GA_ID && <GoogleAnalytics ga_id={process.env.NEXT_PUBLIC_GA_ID} />}
       </head>
       <body
         className={`${workSans.variable} ${bebas.variable} ${archivoBlack.variable} antialiased relative`}

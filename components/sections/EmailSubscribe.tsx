@@ -6,12 +6,35 @@ import BracketButton from "@/components/ui/BracketButton";
 
 export default function EmailSubscribe() {
   const [showForm, setShowForm] = useState(false);
+  const [nameValue, setNameValue] = useState("");
   const [emailValue, setEmailValue] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState("");
 
-  const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    setIsSubmitted(true);
+    setError("");
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: nameValue, email: emailValue }),
+      });
+
+      if (response.ok) {
+        setIsSubmitted(true);
+      } else {
+        const data = await response.json();
+        setError(data.error || 'Something went wrong');
+      }
+    } catch (err) {
+      setError('Failed to subscribe. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -84,6 +107,8 @@ export default function EmailSubscribe() {
                   <input
                     type="text"
                     placeholder="Name"
+                    value={nameValue}
+                    onChange={(e) => setNameValue(e.target.value)}
                     className="w-full bg-black border border-accent/20 text-white px-4 py-5 focus:outline-none focus:border-accent transition-colors text-base"
                   />
                   <div className="relative">
@@ -98,9 +123,12 @@ export default function EmailSubscribe() {
                       <span className="absolute left-[4.25rem] top-1/2 -translate-y-1/2 text-accent text-base pointer-events-none">*</span>
                     )}
                   </div>
+                  {error && (
+                    <p className="text-red-500 text-sm">{error}</p>
+                  )}
                   <div className="flex justify-start">
-                    <BracketButton onClick={handleSubmit}>
-                      SUBMIT
+                    <BracketButton onClick={handleSubmit} className={isSubmitting ? 'opacity-50 pointer-events-none' : ''}>
+                      {isSubmitting ? 'SUBMITTING...' : 'SUBMIT'}
                     </BracketButton>
                   </div>
                 </div>
