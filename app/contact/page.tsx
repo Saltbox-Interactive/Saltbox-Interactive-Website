@@ -19,7 +19,7 @@ export default function ContactPage() {
       <Hero
         title="Contact Us"
         subtitle="Let's preserve history together"
-        backgroundImage="/images/background_pic.jpg"
+        backgroundImage="/images/temp/dod-temp-3.jpg"
         pageName="Contact"
       />
       <ContactSection />

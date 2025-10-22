@@ -81,4 +81,8 @@ export const SOCIAL_LINKS = {
   linkedin: "https://www.linkedin.com/company/saltbox-interactive",
   youtube: "https://www.youtube.com/@SaltboxInteractive",
   steam: "https://store.steampowered.com/app/3140860/Discover_Old_DHanis/",
+  facebook: "#",
+  instagram: "#",
+  twitter: "#",
+  discord: "#",
 } as const;

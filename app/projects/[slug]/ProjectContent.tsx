@@ -182,16 +182,6 @@ export default function ProjectContent({ project }: { project: Project }) {
         </>
       )}
 
-      {/* Breadcrumbs */}
-      <div className="relative z-50 bg-black">
-        <div className="container mx-auto px-6 pt-24">
-          <Breadcrumbs items={[
-            { label: "Projects", href: "/projects" },
-            { label: project.title }
-          ]} />
-        </div>
-      </div>
-
       {/* Hero Section with Game Logo/Title */}
       <section className="relative min-h-screen flex items-center justify-center bg-black overflow-hidden">
         {/* Background Image with Parallax */}
@@ -224,11 +214,13 @@ export default function ProjectContent({ project }: { project: Project }) {
           </h1>
         </div>
 
-        {/* Page indicator - bottom left */}
-        <div className="hidden sm:block absolute bottom-10 left-4 sm:left-10 text-xs sm:text-sm text-gray-400 tracking-wider opacity-0 animate-[fadeIn_1s_1s_ease-out_forwards]">
-          Saltbox Interactive | <span className="text-accent">{project.title}</span>
+        {/* Breadcrumbs - bottom left */}
+        <div className="hidden sm:block absolute bottom-10 left-4 sm:left-10 text-xs sm:text-sm text-gray-400 tracking-wider opacity-0 animate-[fadeIn_1s_1s_ease-out_forwards] z-10">
+          <Breadcrumbs items={[
+            { label: "Projects", href: "/projects" },
+            { label: project.title }
+          ]} />
         </div>
-
       </section>
 
       {/* Description Section */}

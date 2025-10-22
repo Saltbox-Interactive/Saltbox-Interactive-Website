@@ -27,7 +27,7 @@ export default function AboutPage() {
       <Hero
         title="About Us"
         subtitle="Learn about who we are"
-        backgroundImage="/images/background_pic.jpg"
+        backgroundImage="/images/temp/dod-temp-1.jpg"
         pageName="About"
       />
 
