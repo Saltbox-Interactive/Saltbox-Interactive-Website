@@ -41,29 +41,33 @@ export default function CookieConsent() {
   if (!showBanner) return null;
 
   return (
-    <div className="fixed bottom-8 left-8 bg-black border border-accent/30 p-6 z-[200] max-w-md shadow-2xl">
-      <h3
-        className="text-2xl font-light tracking-wider text-accent mb-4 uppercase"
-        style={{ fontFamily: 'var(--font-bebas)' }}
-      >
-        Cookie Consent
-      </h3>
+    <div className="fixed bottom-8 left-8 bg-black p-6 z-[200] max-w-2xl shadow-2xl">
+      <div className="flex items-center gap-8">
+        <div className="flex-1">
+          <h3
+            className="text-xl font-light tracking-wider text-white mb-2 uppercase"
+            style={{ fontFamily: 'var(--font-bebas)' }}
+          >
+            Cookie Consent
+          </h3>
 
-      <p className="text-gray-300 text-sm mb-6 leading-relaxed">
-        We use cookies to analyze site traffic and improve your experience. By clicking "Accept", you consent to our use of cookies for analytics purposes.
-        {' '}
-        <a href="/privacy" className="text-accent hover:underline">
-          Learn more
-        </a>
-      </p>
+          <p className="text-white text-sm leading-relaxed">
+            We use cookies to analyze site traffic and improve your experience. By clicking "Accept", you consent to our use of cookies for analytics purposes.
+            {' '}
+            <a href="/privacy" className="text-accent hover:underline">
+              Learn more
+            </a>
+          </p>
+        </div>
 
-      <div className="flex gap-3">
-        <BracketButton onClick={handleDecline}>
-          Decline
-        </BracketButton>
-        <BoxButton onClick={handleAccept}>
-          Accept
-        </BoxButton>
+        <div className="flex gap-3 flex-shrink-0">
+          <BracketButton onClick={handleDecline}>
+            Decline
+          </BracketButton>
+          <BoxButton onClick={handleAccept}>
+            Accept
+          </BoxButton>
+        </div>
       </div>
     </div>
   );
