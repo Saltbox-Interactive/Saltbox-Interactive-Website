@@ -9,6 +9,7 @@ export interface BlogPost {
   coverImage: string;
   tags: string[];
   featured?: boolean;
+  project?: string;
 }
 
 export const blogPosts: BlogPost[] = [
@@ -42,6 +43,7 @@ Thank you to everyone who has supported us on this journey. We can't wait for yo
     coverImage: "/images/dod-cover.jpg",
     tags: ["Discover Old D'Hanis", "Steam", "Release", "Historical Preservation"],
     featured: true,
+    project: "Discover Old D'Hanis",
   },
   {
     slug: "remastered-version-announcement",
@@ -71,6 +73,7 @@ Stay tuned for more updates as development progresses!`,
     coverImage: "/images/temp/dod-temp-2.jpg",
     tags: ["Discover Old D'Hanis Remastered", "Unreal Engine 5", "Development"],
     featured: true,
+    project: "Discover Old D'Hanis Remastered",
   },
   {
     slug: "history-of-old-dhanis",
@@ -299,6 +302,7 @@ Thank you to the Steam Deck community for your enthusiasm and feedback. Here's t
     coverImage: "/images/dod-screenshot-2.png",
     tags: ["Steam Deck", "Portable Gaming", "Education", "Optimization"],
     featured: false,
+    project: "Discover Old D'Hanis",
   },
 ];
 

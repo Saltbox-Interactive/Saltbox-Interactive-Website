@@ -32,9 +32,8 @@ export default function NewsShowcase() {
 
   const scroll = (direction: 'left' | 'right') => {
     if (scrollContainerRef.current) {
-      // Card width (450px) + gap (24px) = 474px per card
-      // Scroll 1 card at a time
-      const scrollAmount = 474;
+      // Scroll by 2 cards at a time (full width)
+      const scrollAmount = scrollContainerRef.current.clientWidth;
       const newScrollLeft = direction === 'left'
         ? scrollContainerRef.current.scrollLeft - scrollAmount
         : scrollContainerRef.current.scrollLeft + scrollAmount;
@@ -80,6 +79,7 @@ export default function NewsShowcase() {
                 coverImage={post.coverImage}
                 date={post.date}
                 category={post.category}
+                project={post.project}
               />
             ))}
           </div>

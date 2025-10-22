@@ -7,6 +7,7 @@ interface NewsCardProps {
   coverImage: string;
   date: string;
   category: string;
+  project?: string;
 }
 
 export default function NewsCard({
@@ -15,11 +16,12 @@ export default function NewsCard({
   coverImage,
   date,
   category,
+  project,
 }: NewsCardProps) {
   return (
     <Link
       href={`/news/${slug}`}
-      className="group flex-shrink-0 w-[450px]"
+      className="group flex-shrink-0 w-[calc(50%-12px)]"
       style={{ scrollSnapAlign: 'start' }}
     >
       {/* Card */}
@@ -36,17 +38,25 @@ export default function NewsCard({
 
         {/* Content */}
         <div className="pt-6">
-          {/* Date & Category */}
-          <div className="flex items-center gap-3 mb-3 text-xs uppercase tracking-wider">
-            <span className="text-gray-500">
+          {/* Date & Tags */}
+          <div className="flex items-center gap-3 mb-3">
+            <span className="text-xs text-gray-500">
               {new Date(date).toLocaleDateString('en-US', {
-                month: 'short',
+                month: 'long',
                 day: 'numeric',
                 year: 'numeric'
               })}
             </span>
             <span className="text-gray-700">|</span>
-            <span className="text-accent">{category}</span>
+            <div className="flex items-center gap-2 text-[10px] uppercase tracking-wider">
+              {project && (
+                <>
+                  <span className="text-gray-400">{project}</span>
+                  <span className="text-gray-700">•</span>
+                </>
+              )}
+              <span className="text-gray-400">{category}</span>
+            </div>
           </div>
 
           {/* Title */}
