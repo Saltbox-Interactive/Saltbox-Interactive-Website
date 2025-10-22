@@ -12,7 +12,7 @@ export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
-  const [typedText, setTypedText] = useState({ projects: "", about: "", contact: "", openMenu: "" });
+  const [typedText, setTypedText] = useState({ projects: "", about: "", news: "", contact: "", openMenu: "" });
   const pathname = usePathname();
   const router = useRouter();
   const { lenis } = useContext(ScrollSpeedContext);
@@ -26,7 +26,7 @@ export default function Header() {
 
   // Reset typing animation when pathname changes
   useEffect(() => {
-    setTypedText({ projects: "", about: "", contact: "", openMenu: "" });
+    setTypedText({ projects: "", about: "", news: "", contact: "", openMenu: "" });
   }, [pathname]);
 
   // Typing animation for Projects
@@ -51,16 +51,27 @@ export default function Header() {
     }
   }, [typedText.projects, typedText.about]);
 
-  // Typing animation for Contact (starts after About is done)
+  // Typing animation for News (starts after About is done)
+  useEffect(() => {
+    const fullText = "NEWS";
+    if (typedText.about === "ABOUT" && typedText.news.length < fullText.length) {
+      const timeout = setTimeout(() => {
+        setTypedText(prev => ({ ...prev, news: fullText.slice(0, prev.news.length + 1) }));
+      }, 30);
+      return () => clearTimeout(timeout);
+    }
+  }, [typedText.about, typedText.news]);
+
+  // Typing animation for Contact (starts after News is done)
   useEffect(() => {
     const fullText = "CONTACT";
-    if (typedText.about === "ABOUT" && typedText.contact.length < fullText.length) {
+    if (typedText.news === "NEWS" && typedText.contact.length < fullText.length) {
       const timeout = setTimeout(() => {
         setTypedText(prev => ({ ...prev, contact: fullText.slice(0, prev.contact.length + 1) }));
       }, 30);
       return () => clearTimeout(timeout);
     }
-  }, [typedText.about, typedText.contact]);
+  }, [typedText.news, typedText.contact]);
 
   // Typing animation for [OPEN] MENU (starts after Contact is done)
   useEffect(() => {
@@ -233,6 +244,9 @@ export default function Header() {
               </Link>
               <Link href="/about" onClick={(e) => handleNavClick(e, '/about')} className={`text-base tracking-wider transition-colors duration-300 uppercase inline-block text-left ${pathname === '/about' ? 'text-accent' : 'text-foreground/80 hover:text-accent'}`} style={{ fontFamily: 'var(--font-bebas)', minWidth: '50px' }}>
                 {typedText.about}
+              </Link>
+              <Link href="/news" onClick={(e) => handleNavClick(e, '/news')} className={`text-base tracking-wider transition-colors duration-300 uppercase inline-block text-left ${pathname === '/news' ? 'text-accent' : 'text-foreground/80 hover:text-accent'}`} style={{ fontFamily: 'var(--font-bebas)', minWidth: '40px' }}>
+                {typedText.news}
               </Link>
               <Link href="/contact" onClick={(e) => handleNavClick(e, '/contact')} className={`text-base tracking-wider transition-colors duration-300 uppercase inline-block text-left ${pathname === '/contact' ? 'text-accent' : 'text-foreground/80 hover:text-accent'}`} style={{ fontFamily: 'var(--font-bebas)', minWidth: '65px' }}>
                 {typedText.contact}
