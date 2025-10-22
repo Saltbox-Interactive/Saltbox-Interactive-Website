@@ -15,6 +15,7 @@ import Container from "@/components/ui/Container";
 import FullWidthImage from "@/components/ui/FullWidthImage";
 import ProjectShowcase from "@/components/sections/ProjectShowcase";
 import EmailSubscribe from "@/components/sections/EmailSubscribe";
+import NewsShowcase from "@/components/sections/NewsShowcase";
 import { HOME_CONTENT } from "@/lib/data/content";
 import { SCROLL } from "@/lib/constants";
 
@@ -143,31 +144,43 @@ export default function Home() {
         <div className="relative z-10 text-center px-4 sm:px-6 max-w-6xl mx-auto">
           <div className="flex flex-col items-center justify-center gap-3 sm:gap-4 md:gap-6">
             <div
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-light tracking-[0.2em] sm:tracking-[0.25em] md:tracking-[0.3em] text-white transition-all duration-300"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-light tracking-[0.2em] sm:tracking-[0.25em] md:tracking-[0.3em] transition-all duration-300"
               style={{
                 fontFamily: 'var(--font-bebas)',
                 transform: `translateX(${virtualScroll * -1.5}px)`,
-                opacity: Math.max(0, 1 - virtualScroll / SCROLL.heroThreshold)
+                opacity: Math.max(0, 1 - virtualScroll / SCROLL.heroThreshold),
+                backgroundImage: 'linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 50%, rgba(255,255,255,1) 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text'
               }}
             >
               DISCOVER
             </div>
             <div
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-light tracking-[0.2em] sm:tracking-[0.25em] md:tracking-[0.3em] text-white transition-all duration-300"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-light tracking-[0.2em] sm:tracking-[0.25em] md:tracking-[0.3em] transition-all duration-300"
               style={{
                 fontFamily: 'var(--font-bebas)',
                 transform: `translateX(${virtualScroll * 1.5}px)`,
-                opacity: Math.max(0, 1 - virtualScroll / SCROLL.heroThreshold)
+                opacity: Math.max(0, 1 - virtualScroll / SCROLL.heroThreshold),
+                backgroundImage: 'linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 50%, rgba(255,255,255,1) 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text'
               }}
             >
               LEARN
             </div>
             <div
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-light tracking-[0.2em] sm:tracking-[0.25em] md:tracking-[0.3em] text-white transition-all duration-300"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-light tracking-[0.2em] sm:tracking-[0.25em] md:tracking-[0.3em] transition-all duration-300"
               style={{
                 fontFamily: 'var(--font-bebas)',
                 transform: `translateX(${virtualScroll * -1.5}px)`,
-                opacity: Math.max(0, 1 - virtualScroll / SCROLL.heroThreshold)
+                opacity: Math.max(0, 1 - virtualScroll / SCROLL.heroThreshold),
+                backgroundImage: 'linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 50%, rgba(255,255,255,1) 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text'
               }}
             >
               PRESERVE
@@ -278,6 +291,11 @@ export default function Home() {
           <BracketButton href="/projects">View Our Work</BracketButton>
         </Container>
       </SectionWrapper>
+
+      {/* News Showcase Section */}
+      <div className="relative bg-black z-20">
+        <NewsShowcase />
+      </div>
 
       {/* End section that covers the fixed background and allows footer to show */}
       <div className="relative bg-black">

@@ -14,6 +14,7 @@ import AnimatedSection from "@/components/ui/AnimatedSection";
 import EmailSubscribe from "@/components/sections/EmailSubscribe";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import ImageLightbox from "@/components/ui/ImageLightbox";
+import ArrowButton from "@/components/ui/ArrowButton";
 
 export default function ProjectContent({ project }: { project: Project }) {
   const [scrollY, setScrollY] = useState(0);
@@ -761,30 +762,21 @@ export default function ProjectContent({ project }: { project: Project }) {
                   return (
                     <div
                       key={idx}
-                      className="absolute inset-0 w-full h-full cursor-pointer group"
+                      className="absolute inset-0 w-full h-full"
                       style={{
                         opacity: isVisible ? 1 : (isNext || isPrev) ? 0.15 : 0,
                         transform: isNext ? 'translateX(10%)' : isPrev ? 'translateX(-10%)' : 'translateX(0)',
                         transition: 'opacity 0.5s ease-out, transform 0.5s ease-out',
-                        pointerEvents: isVisible ? 'auto' : 'none',
+                        pointerEvents: 'none',
                         zIndex: isVisible ? 10 : 1
-                      }}
-                      onClick={() => {
-                        setLightboxIndex(idx);
-                        setLightboxOpen(true);
                       }}
                     >
                       <Image
                         src={image}
                         alt={`${project.title} gameplay screenshot ${idx + 1} - Interactive historical exploration and authentic period environment`}
                         fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-300"
+                        className="object-cover"
                       />
-                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 flex items-center justify-center">
-                        <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white text-sm uppercase tracking-wider">
-                          Click to enlarge
-                        </div>
-                      </div>
                     </div>
                   );
                 })}
@@ -793,32 +785,17 @@ export default function ProjectContent({ project }: { project: Project }) {
               {/* Navigation Arrows and Dot Indicators */}
               <div className="flex items-center justify-center gap-6 mt-8">
                 {/* Previous Arrow */}
-                <button
+                <ArrowButton
+                  direction="left"
                   onClick={handlePrevImage}
                   disabled={currentImageIndex === 0}
-                  className="group relative w-8 h-8 flex items-center justify-center transition-all duration-300 disabled:opacity-30 disabled:cursor-not-allowed flex-shrink-0"
+                  className="flex-shrink-0"
                   style={{
                     opacity: showArrows ? 1 : 0,
                     pointerEvents: showArrows ? 'auto' : 'none'
                   }}
                   aria-label="Previous Image"
-                >
-                  {/* Full border (default state) */}
-                  <div className="absolute inset-0 border border-gray-500 group-hover:group-enabled:opacity-0 group-disabled:border-gray-800 transition-opacity duration-300"></div>
-
-                  {/* Corner borders (hover state) */}
-                  <div className="absolute inset-0 opacity-0 group-hover:group-enabled:opacity-100 transition-opacity duration-300">
-                    <div className="absolute top-0 left-0 w-3 h-3 border-t border-l border-accent"></div>
-                    <div className="absolute top-0 right-0 w-3 h-3 border-t border-r border-accent"></div>
-                    <div className="absolute bottom-0 left-0 w-3 h-3 border-b border-l border-accent"></div>
-                    <div className="absolute bottom-0 right-0 w-3 h-3 border-b border-r border-accent"></div>
-                  </div>
-
-                  {/* Arrow icon */}
-                  <svg className="w-5 h-5 text-gray-400 group-hover:group-enabled:text-accent group-disabled:text-gray-700 transition-colors duration-300 relative z-10" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
-                  </svg>
-                </button>
+                />
 
                 {/* Dot Indicators - Carousel Style */}
                 <div className="flex gap-2 items-center justify-center" style={{ width: '52px' }}>
@@ -857,32 +834,17 @@ export default function ProjectContent({ project }: { project: Project }) {
                 </div>
 
                 {/* Next Arrow */}
-                <button
+                <ArrowButton
+                  direction="right"
                   onClick={handleNextImage}
                   disabled={currentImageIndex === (project.gallery?.length || 0) - 1}
-                  className="group relative w-8 h-8 flex items-center justify-center transition-all duration-300 disabled:opacity-30 disabled:cursor-not-allowed flex-shrink-0"
+                  className="flex-shrink-0"
                   style={{
                     opacity: showArrows ? 1 : 0,
                     pointerEvents: showArrows ? 'auto' : 'none'
                   }}
                   aria-label="Next Image"
-                >
-                  {/* Full border (default state) */}
-                  <div className="absolute inset-0 border border-gray-500 group-hover:group-enabled:opacity-0 group-disabled:border-gray-800 transition-opacity duration-300"></div>
-
-                  {/* Corner borders (hover state) */}
-                  <div className="absolute inset-0 opacity-0 group-hover:group-enabled:opacity-100 transition-opacity duration-300">
-                    <div className="absolute top-0 left-0 w-3 h-3 border-t border-l border-accent"></div>
-                    <div className="absolute top-0 right-0 w-3 h-3 border-t border-r border-accent"></div>
-                    <div className="absolute bottom-0 left-0 w-3 h-3 border-b border-l border-accent"></div>
-                    <div className="absolute bottom-0 right-0 w-3 h-3 border-b border-r border-accent"></div>
-                  </div>
-
-                  {/* Arrow icon */}
-                  <svg className="w-5 h-5 text-gray-400 group-hover:group-enabled:text-accent group-disabled:text-gray-700 transition-colors duration-300 relative z-10" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z" />
-                  </svg>
-                </button>
+                />
               </div>
           </div>
         </section>
