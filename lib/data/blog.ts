@@ -226,7 +226,7 @@ As technology advances, digital preservation will become even more powerful. Vir
 Digital preservation isn't just about technology - it's about connecting people with their heritage, educating future generations, and ensuring that our shared history isn't lost to time.
 
 Every project we complete is a piece of history saved for the future. That's what drives us forward.`,
-    author: "Patricia Markert",
+    author: "Michael Salton",
     date: "2024-05-01",
     category: "History",
     coverImage: "/images/dod-screenshot-7.png",
