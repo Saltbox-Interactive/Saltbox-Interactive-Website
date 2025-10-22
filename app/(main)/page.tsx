@@ -15,7 +15,7 @@ import Container from "@/components/ui/Container";
 import FullWidthImage from "@/components/ui/FullWidthImage";
 import ProjectShowcase from "@/components/sections/ProjectShowcase";
 import EmailSubscribe from "@/components/sections/EmailSubscribe";
-import NewsShowcase from "@/components/sections/NewsShowcase";
+import NewsShowcaseWrapper from "@/components/sections/NewsShowcaseWrapper";
 import { HOME_CONTENT } from "@/lib/data/content";
 import { SCROLL } from "@/lib/constants";
 
@@ -294,7 +294,7 @@ export default function Home() {
 
       {/* News Showcase Section */}
       <div className="relative bg-black z-20">
-        <NewsShowcase />
+        <NewsShowcaseWrapper />
       </div>
 
       {/* End section that covers the fixed background and allows footer to show */}

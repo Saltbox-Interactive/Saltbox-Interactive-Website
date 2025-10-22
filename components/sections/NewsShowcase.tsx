@@ -1,34 +1,23 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { getAllNewsPosts, NewsPost } from "@/lib/sanity/queries";
+import { NewsPost } from "@/lib/sanity/queries";
 import SectionTitle from "@/components/ui/SectionTitle";
 import BracketButton from "@/components/ui/BracketButton";
 import ArrowButton from "@/components/ui/ArrowButton";
 import NewsCard from "@/components/ui/NewsCard";
 
-export default function NewsShowcase() {
+interface NewsShowcaseProps {
+  posts: NewsPost[];
+}
+
+export default function NewsShowcase({ posts }: NewsShowcaseProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
-  const [latestPosts, setLatestPosts] = useState<NewsPost[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
-  // Fetch latest 6 news posts from Sanity
-  useEffect(() => {
-    async function fetchPosts() {
-      try {
-        const posts = await getAllNewsPosts();
-        setLatestPosts(posts.slice(0, 6));
-      } catch (error) {
-        console.error('Error fetching news posts:', error);
-      } finally {
-        setIsLoading(false);
-      }
-    }
-    fetchPosts();
-  }, []);
+  const latestPosts = posts.slice(0, 6);
 
   const checkScrollButtons = () => {
     if (scrollContainerRef.current) {
@@ -78,9 +67,7 @@ export default function NewsShowcase() {
 
           {/* News Cards Container */}
           <div className="flex-1 relative overflow-hidden">
-            {isLoading ? (
-              <div className="text-gray-400 text-lg">Loading news...</div>
-            ) : latestPosts.length === 0 ? (
+            {latestPosts.length === 0 ? (
               <div className="text-gray-400 text-lg">No news at this moment. Check back soon!</div>
             ) : (
               <>
