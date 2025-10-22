@@ -12,6 +12,7 @@ export default function NewsShowcase() {
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
   const [latestPosts, setLatestPosts] = useState<NewsPost[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   // Fetch latest 6 news posts from Sanity
@@ -22,6 +23,8 @@ export default function NewsShowcase() {
         setLatestPosts(posts.slice(0, 6));
       } catch (error) {
         console.error('Error fetching news posts:', error);
+      } finally {
+        setIsLoading(false);
       }
     }
     fetchPosts();
@@ -75,44 +78,52 @@ export default function NewsShowcase() {
 
           {/* News Cards Container */}
           <div className="flex-1 relative overflow-hidden">
-            {/* Scroll Container */}
-            <div
-              ref={scrollContainerRef}
-              onScroll={checkScrollButtons}
-              className="flex gap-6 overflow-x-auto scrollbar-hide scroll-smooth pb-4"
-              style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', scrollSnapType: 'x mandatory' }}
-            >
-            {latestPosts.map((post) => (
-              <div key={post._id} className="flex-shrink-0 w-[calc(50%-12px)]" style={{ scrollSnapAlign: 'start' }}>
-                <NewsCard
-                  slug={post.slug.current}
-                  title={post.title}
-                  coverImage={post.coverImage}
-                  date={post.date}
-                  category={post.category}
-                  project={post.project}
-                />
-              </div>
-            ))}
-          </div>
+            {isLoading ? (
+              <div className="text-gray-400 text-lg">Loading news...</div>
+            ) : latestPosts.length === 0 ? (
+              <div className="text-gray-400 text-lg">No news at this moment. Check back soon!</div>
+            ) : (
+              <>
+                {/* Scroll Container */}
+                <div
+                  ref={scrollContainerRef}
+                  onScroll={checkScrollButtons}
+                  className="flex gap-6 overflow-x-auto scrollbar-hide scroll-smooth pb-4"
+                  style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', scrollSnapType: 'x mandatory' }}
+                >
+                  {latestPosts.map((post) => (
+                    <div key={post._id} className="flex-shrink-0 w-[calc(50%-12px)]" style={{ scrollSnapAlign: 'start' }}>
+                      <NewsCard
+                        slug={post.slug.current}
+                        title={post.title}
+                        coverImage={post.coverImage}
+                        date={post.date}
+                        category={post.category}
+                        project={post.project}
+                      />
+                    </div>
+                  ))}
+                </div>
 
-          {/* Navigation Controls - Bottom Right */}
-          <div className="flex items-center justify-end gap-4 mt-8">
-            <BracketButton href="/news">See All</BracketButton>
+                {/* Navigation Controls - Bottom Right */}
+                <div className="flex items-center justify-end gap-4 mt-8">
+                  <BracketButton href="/news">See All</BracketButton>
 
-            <div className="flex gap-2">
-              <ArrowButton
-                direction="left"
-                onClick={() => scroll('left')}
-                disabled={!canScrollLeft}
-              />
-              <ArrowButton
-                direction="right"
-                onClick={() => scroll('right')}
-                disabled={!canScrollRight}
-              />
-            </div>
-          </div>
+                  <div className="flex gap-2">
+                    <ArrowButton
+                      direction="left"
+                      onClick={() => scroll('left')}
+                      disabled={!canScrollLeft}
+                    />
+                    <ArrowButton
+                      direction="right"
+                      onClick={() => scroll('right')}
+                      disabled={!canScrollRight}
+                    />
+                  </div>
+                </div>
+              </>
+            )}
           </div>
         </div>
       </div>

@@ -1,8 +1,8 @@
 import { MetadataRoute } from 'next'
 import { projects } from '@/lib/data/projects'
-import { newsPosts } from '@/lib/data/news'
+import { getAllNewsPosts } from '@/lib/sanity/queries'
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://saltboxinteractive.com'
 
   // Static pages
@@ -67,13 +67,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }
 
-  // News posts
-  const newsPages = newsPosts.map((post) => ({
-    url: `${baseUrl}/news/${post.slug}`,
-    lastModified: new Date(post.date),
-    changeFrequency: 'monthly' as const,
-    priority: 0.7,
-  }))
+  // Fetch news posts from Sanity
+  let newsPages: MetadataRoute.Sitemap = []
+  try {
+    const newsPosts = await getAllNewsPosts()
+    newsPages = newsPosts.map((post) => ({
+      url: `${baseUrl}/news/${post.slug.current}`,
+      lastModified: new Date(post.date),
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    }))
+  } catch (error) {
+    console.error('Error fetching news posts for sitemap:', error)
+  }
 
   return [...staticPages, ...projectPages, creditsPage, ...newsPages]
 }
