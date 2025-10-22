@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import BracketButton from "./ui/BracketButton";
+import BoxButton from "./ui/BoxButton";
 
 export default function CookieConsent() {
   const [showBanner, setShowBanner] = useState(false);
@@ -40,35 +41,29 @@ export default function CookieConsent() {
   if (!showBanner) return null;
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 bg-black/95 backdrop-blur-sm border-t border-accent/30 p-6 z-[200]">
-      <div className="container mx-auto max-w-6xl">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="flex-1">
-            <p className="text-gray-300 text-sm md:text-base">
-              We use cookies to analyze site traffic and improve your experience. By clicking "Accept", you consent to our use of cookies for analytics purposes.
-              {' '}
-              <a href="/privacy" className="text-accent hover:underline">
-                Learn more
-              </a>
-            </p>
-          </div>
-          <div className="flex gap-4 flex-shrink-0">
-            <button
-              onClick={handleDecline}
-              className="px-6 py-2 text-gray-400 hover:text-white transition-colors duration-300 text-sm uppercase tracking-wider"
-              style={{ fontFamily: 'var(--font-bebas)' }}
-            >
-              Decline
-            </button>
-            <button
-              onClick={handleAccept}
-              className="px-6 py-2 bg-accent hover:bg-accent/80 text-black transition-colors duration-300 text-sm uppercase tracking-wider"
-              style={{ fontFamily: 'var(--font-bebas)' }}
-            >
-              Accept
-            </button>
-          </div>
-        </div>
+    <div className="fixed bottom-8 left-8 bg-black border border-accent/30 p-6 z-[200] max-w-md shadow-2xl">
+      <h3
+        className="text-2xl font-light tracking-wider text-accent mb-4 uppercase"
+        style={{ fontFamily: 'var(--font-bebas)' }}
+      >
+        Cookie Consent
+      </h3>
+
+      <p className="text-gray-300 text-sm mb-6 leading-relaxed">
+        We use cookies to analyze site traffic and improve your experience. By clicking "Accept", you consent to our use of cookies for analytics purposes.
+        {' '}
+        <a href="/privacy" className="text-accent hover:underline">
+          Learn more
+        </a>
+      </p>
+
+      <div className="flex gap-3">
+        <BracketButton onClick={handleDecline}>
+          Decline
+        </BracketButton>
+        <BoxButton onClick={handleAccept}>
+          Accept
+        </BoxButton>
       </div>
     </div>
   );
