@@ -4,6 +4,7 @@ interface ArrowButtonProps {
   disabled?: boolean;
   className?: string;
   'aria-label'?: string;
+  style?: React.CSSProperties;
 }
 
 export default function ArrowButton({
@@ -11,7 +12,8 @@ export default function ArrowButton({
   onClick,
   disabled = false,
   className = "",
-  'aria-label': ariaLabel
+  'aria-label': ariaLabel,
+  style
 }: ArrowButtonProps) {
   return (
     <button
@@ -19,6 +21,7 @@ export default function ArrowButton({
       disabled={disabled}
       className={`group relative w-8 h-8 flex items-center justify-center disabled:opacity-30 disabled:cursor-not-allowed ${className}`}
       aria-label={ariaLabel || (direction === 'left' ? 'Previous' : 'Next')}
+      style={style}
     >
       {/* Solid background (default state) */}
       <div className="absolute inset-0 bg-[#1a1a1a] group-hover:group-enabled:bg-black"></div>
