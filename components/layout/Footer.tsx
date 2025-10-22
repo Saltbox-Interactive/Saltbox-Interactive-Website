@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import SocialLinks from "@/components/ui/SocialLinks";
 
@@ -70,10 +72,35 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 pt-8 text-center">
-          <p className="text-gray-500 text-xs tracking-wider">
-            &copy; {new Date().getFullYear()} SALTBOX INTERACTIVE. ALL RIGHTS RESERVED.
-          </p>
+        <div className="mt-12 pt-8 border-t border-gray-800">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+            <p className="text-gray-500 text-xs tracking-wider">
+              &copy; {new Date().getFullYear()} SALTBOX INTERACTIVE. ALL RIGHTS RESERVED.
+            </p>
+            <div className="flex items-center gap-6">
+              <Link
+                href="/terms"
+                className="text-gray-400 hover:text-accent transition-colors duration-300 text-xs tracking-wider uppercase"
+              >
+                Terms & Conditions
+              </Link>
+              <Link
+                href="/privacy"
+                className="text-gray-400 hover:text-accent transition-colors duration-300 text-xs tracking-wider uppercase"
+              >
+                Privacy Policy
+              </Link>
+              <button
+                onClick={() => {
+                  localStorage.removeItem('cookie-consent');
+                  window.dispatchEvent(new Event('show-cookie-banner'));
+                }}
+                className="text-gray-400 hover:text-accent transition-colors duration-300 text-xs tracking-wider uppercase"
+              >
+                Cookie Preferences
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </footer>

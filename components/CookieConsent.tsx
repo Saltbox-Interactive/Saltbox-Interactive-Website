@@ -16,6 +16,14 @@ export default function CookieConsent() {
       // Enable Google Analytics
       enableAnalytics();
     }
+
+    // Listen for custom event (triggered when cookie preferences button is clicked)
+    const handleShowCookieBanner = () => {
+      setShowBanner(true);
+    };
+
+    window.addEventListener('show-cookie-banner', handleShowCookieBanner);
+    return () => window.removeEventListener('show-cookie-banner', handleShowCookieBanner);
   }, []);
 
   const enableAnalytics = () => {
