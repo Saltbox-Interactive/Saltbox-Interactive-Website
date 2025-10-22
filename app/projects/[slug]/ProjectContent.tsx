@@ -12,6 +12,8 @@ import BracketButton from "@/components/ui/BracketButton";
 import BoxButton from "@/components/ui/BoxButton";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import EmailSubscribe from "@/components/sections/EmailSubscribe";
+import Breadcrumbs from "@/components/ui/Breadcrumbs";
+import ImageLightbox from "@/components/ui/ImageLightbox";
 
 export default function ProjectContent({ project }: { project: Project }) {
   const [scrollY, setScrollY] = useState(0);
@@ -20,6 +22,8 @@ export default function ProjectContent({ project }: { project: Project }) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [showArrows, setShowArrows] = useState(false);
   const [playNowOpacity, setPlayNowOpacity] = useState(1);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [lightboxIndex, setLightboxIndex] = useState(0);
   const mouseTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const emailSectionRef = useRef<HTMLDivElement | null>(null);
@@ -177,6 +181,16 @@ export default function ProjectContent({ project }: { project: Project }) {
           />
         </>
       )}
+
+      {/* Breadcrumbs */}
+      <div className="relative z-50 bg-black">
+        <div className="container mx-auto px-6 pt-24">
+          <Breadcrumbs items={[
+            { label: "Projects", href: "/projects" },
+            { label: project.title }
+          ]} />
+        </div>
+      </div>
 
       {/* Hero Section with Game Logo/Title */}
       <section className="relative min-h-screen flex items-center justify-center bg-black overflow-hidden">
@@ -755,7 +769,7 @@ export default function ProjectContent({ project }: { project: Project }) {
                   return (
                     <div
                       key={idx}
-                      className="absolute inset-0 w-full h-full"
+                      className="absolute inset-0 w-full h-full cursor-pointer group"
                       style={{
                         opacity: isVisible ? 1 : (isNext || isPrev) ? 0.15 : 0,
                         transform: isNext ? 'translateX(10%)' : isPrev ? 'translateX(-10%)' : 'translateX(0)',
@@ -763,13 +777,22 @@ export default function ProjectContent({ project }: { project: Project }) {
                         pointerEvents: isVisible ? 'auto' : 'none',
                         zIndex: isVisible ? 10 : 1
                       }}
+                      onClick={() => {
+                        setLightboxIndex(idx);
+                        setLightboxOpen(true);
+                      }}
                     >
                       <Image
                         src={image}
                         alt={`${project.title} gameplay screenshot ${idx + 1} - Interactive historical exploration and authentic period environment`}
                         fill
-                        className="object-cover"
+                        className="object-cover group-hover:scale-105 transition-transform duration-300"
                       />
+                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 flex items-center justify-center">
+                        <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white text-sm uppercase tracking-wider">
+                          Click to enlarge
+                        </div>
+                      </div>
                     </div>
                   );
                 })}
@@ -975,6 +998,18 @@ export default function ProjectContent({ project }: { project: Project }) {
             </span>
           </a>
         </div>
+      )}
+
+      {/* Image Lightbox */}
+      {project.gallery && project.gallery.length > 0 && (
+        <ImageLightbox
+          images={project.gallery}
+          currentIndex={lightboxIndex}
+          isOpen={lightboxOpen}
+          onClose={() => setLightboxOpen(false)}
+          onNext={() => setLightboxIndex((prev) => (prev + 1) % project.gallery!.length)}
+          onPrevious={() => setLightboxIndex((prev) => (prev - 1 + project.gallery!.length) % project.gallery!.length)}
+        />
       )}
     </>
   );

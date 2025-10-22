@@ -9,6 +9,7 @@ import BracketButton from "@/components/ui/BracketButton";
 import { ArticleSchema } from "@/components/schemas";
 import { BlogPost } from "@/lib/data/blog";
 import { useScrollPosition } from "@/hooks/useScrollPosition";
+import Breadcrumbs from "@/components/ui/Breadcrumbs";
 
 export default function BlogPostContent({ post }: { post: BlogPost }) {
   const scrollY = useScrollPosition();
@@ -27,6 +28,16 @@ export default function BlogPostContent({ post }: { post: BlogPost }) {
           logo: "https://saltboxinteractive.com/icon.png",
         }}
       />
+
+      {/* Breadcrumbs */}
+      <div className="relative z-50 bg-black">
+        <div className="container mx-auto px-6 pt-24">
+          <Breadcrumbs items={[
+            { label: "News", href: "/news" },
+            { label: post.title }
+          ]} />
+        </div>
+      </div>
 
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center bg-black overflow-hidden">

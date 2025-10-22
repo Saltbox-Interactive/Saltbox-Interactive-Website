@@ -272,12 +272,12 @@ export default function Header() {
                   About
                 </Link>
                 <Link
-                  href="/blog"
-                  className={`text-lg tracking-wider transition-colors duration-300 uppercase py-2 ${pathname === '/blog' ? 'text-accent' : 'text-foreground/80 active:text-accent'}`}
+                  href="/news"
+                  className={`text-lg tracking-wider transition-colors duration-300 uppercase py-2 ${pathname === '/news' ? 'text-accent' : 'text-foreground/80 active:text-accent'}`}
                   style={{ fontFamily: 'var(--font-bebas)' }}
-                  onClick={(e) => { handleNavClick(e, '/blog'); setIsMobileMenuOpen(false); }}
+                  onClick={(e) => { handleNavClick(e, '/news'); setIsMobileMenuOpen(false); }}
                 >
-                  Blog
+                  News
                 </Link>
                 <Link
                   href="/contact"
@@ -317,7 +317,7 @@ export default function Header() {
                 <Link
                   href="/projects"
                   onClick={(e) => { handleNavClick(e, '/projects'); setIsMenuOpen(false); }}
-                  className={`group relative text-4xl md:text-5xl font-light tracking-[0.15em] uppercase inline-block overflow-hidden px-2 py-1 ${
+                  className={`group text-4xl md:text-5xl font-light tracking-[0.15em] uppercase inline-block px-2 py-1 ${
                     isMenuOpen ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
                   }`}
                   style={{
@@ -325,15 +325,17 @@ export default function Header() {
                     transitionDelay: isMenuOpen ? '200ms' : '0ms'
                   }}
                 >
-                  <span className="relative z-10 text-white group-hover:text-black transition-colors duration-300">
-                    Projects
+                  <span className="relative inline-block overflow-hidden">
+                    <span className="relative z-10 text-white group-hover:text-black transition-colors duration-300">
+                      Projects
+                    </span>
+                    <span className="absolute inset-0 bg-white transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-in-out"></span>
                   </span>
-                  <span className="absolute inset-0 bg-white transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-in-out"></span>
                 </Link>
                 <Link
                   href="/about"
                   onClick={(e) => { handleNavClick(e, '/about'); setIsMenuOpen(false); }}
-                  className={`group relative text-4xl md:text-5xl font-light tracking-[0.15em] uppercase inline-block overflow-hidden px-2 py-1 ${
+                  className={`group text-4xl md:text-5xl font-light tracking-[0.15em] uppercase inline-block px-2 py-1 ${
                     isMenuOpen ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
                   }`}
                   style={{
@@ -341,15 +343,17 @@ export default function Header() {
                     transitionDelay: isMenuOpen ? '350ms' : '0ms'
                   }}
                 >
-                  <span className="relative z-10 text-white group-hover:text-black transition-colors duration-300">
-                    About
+                  <span className="relative inline-block overflow-hidden">
+                    <span className="relative z-10 text-white group-hover:text-black transition-colors duration-300">
+                      About
+                    </span>
+                    <span className="absolute inset-0 bg-white transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-in-out"></span>
                   </span>
-                  <span className="absolute inset-0 bg-white transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-in-out"></span>
                 </Link>
                 <Link
-                  href="/blog"
-                  onClick={(e) => { handleNavClick(e, '/blog'); setIsMenuOpen(false); }}
-                  className={`group relative text-4xl md:text-5xl font-light tracking-[0.15em] uppercase inline-block overflow-hidden px-2 py-1 ${
+                  href="/news"
+                  onClick={(e) => { handleNavClick(e, '/news'); setIsMenuOpen(false); }}
+                  className={`group text-4xl md:text-5xl font-light tracking-[0.15em] uppercase inline-block px-2 py-1 ${
                     isMenuOpen ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
                   }`}
                   style={{
@@ -357,15 +361,17 @@ export default function Header() {
                     transitionDelay: isMenuOpen ? '500ms' : '0ms'
                   }}
                 >
-                  <span className="relative z-10 text-white group-hover:text-black transition-colors duration-300">
-                    Blog
+                  <span className="relative inline-block overflow-hidden">
+                    <span className="relative z-10 text-white group-hover:text-black transition-colors duration-300">
+                      News
+                    </span>
+                    <span className="absolute inset-0 bg-white transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-in-out"></span>
                   </span>
-                  <span className="absolute inset-0 bg-white transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-in-out"></span>
                 </Link>
                 <Link
                   href="/contact"
                   onClick={(e) => { handleNavClick(e, '/contact'); setIsMenuOpen(false); }}
-                  className={`group relative text-4xl md:text-5xl font-light tracking-[0.15em] uppercase inline-block overflow-hidden px-2 py-1 ${
+                  className={`group text-4xl md:text-5xl font-light tracking-[0.15em] uppercase inline-block px-2 py-1 ${
                     isMenuOpen ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
                   }`}
                   style={{
@@ -373,10 +379,12 @@ export default function Header() {
                     transitionDelay: isMenuOpen ? '650ms' : '0ms'
                   }}
                 >
-                  <span className="relative z-10 text-white group-hover:text-black transition-colors duration-300">
-                    Contact
+                  <span className="relative inline-block overflow-hidden">
+                    <span className="relative z-10 text-white group-hover:text-black transition-colors duration-300">
+                      Contact
+                    </span>
+                    <span className="absolute inset-0 bg-white transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-in-out"></span>
                   </span>
-                  <span className="absolute inset-0 bg-white transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-in-out"></span>
                 </Link>
               </div>
 

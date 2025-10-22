@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import SocialLinks from "@/components/ui/SocialLinks";
-import SlideUnderlineLink from "@/components/ui/SlideUnderlineLink";
+import WhiteHighlightLink from "@/components/ui/WhiteHighlightLink";
+import OrangeHighlightLink from "@/components/ui/OrangeHighlightLink";
 
 export default function Footer() {
   return (
@@ -28,17 +29,17 @@ export default function Footer() {
             <h4 className="text-foreground font-light tracking-wider mb-4 text-sm uppercase">Projects</h4>
             <div className="flex flex-col gap-2">
               <div className="flex items-center gap-2">
-                <SlideUnderlineLink href="/projects/discover-old-dhanis" className="text-sm">
+                <WhiteHighlightLink href="/projects/discover-old-dhanis" className="text-sm">
                   Discover Old D'Hanis
-                </SlideUnderlineLink>
+                </WhiteHighlightLink>
                 <span className="text-xs bg-accent/20 text-accent px-2 py-0.5 rounded">Available Now</span>
               </div>
-              <SlideUnderlineLink href="/projects/discover-old-dhanis-remastered" className="text-sm">
+              <WhiteHighlightLink href="/projects/discover-old-dhanis-remastered" className="text-sm">
                 Discover Old D'Hanis: Remastered
-              </SlideUnderlineLink>
-              <SlideUnderlineLink href="/projects/project-medina" className="text-sm">
+              </WhiteHighlightLink>
+              <WhiteHighlightLink href="/projects/project-medina" className="text-sm">
                 Project Medina
-              </SlideUnderlineLink>
+              </WhiteHighlightLink>
             </div>
           </div>
 
@@ -46,19 +47,24 @@ export default function Footer() {
             <h4 className="text-foreground font-light tracking-wider mb-4 text-sm uppercase">Navigate</h4>
             <ul className="space-y-2">
               <li>
-                <Link href="/projects" className="text-gray-400 hover:text-accent transition-colors duration-300 text-sm">
-                  All Projects
-                </Link>
+                <OrangeHighlightLink href="/projects" className="text-sm">
+                  Projects
+                </OrangeHighlightLink>
               </li>
               <li>
-                <Link href="/about" className="text-gray-400 hover:text-accent transition-colors duration-300 text-sm">
-                  About Us
-                </Link>
+                <OrangeHighlightLink href="/about" className="text-sm">
+                  About
+                </OrangeHighlightLink>
               </li>
               <li>
-                <Link href="/contact" className="text-gray-400 hover:text-accent transition-colors duration-300 text-sm">
+                <OrangeHighlightLink href="/news" className="text-sm">
+                  News
+                </OrangeHighlightLink>
+              </li>
+              <li>
+                <OrangeHighlightLink href="/contact" className="text-sm">
                   Contact
-                </Link>
+                </OrangeHighlightLink>
               </li>
             </ul>
           </div>
