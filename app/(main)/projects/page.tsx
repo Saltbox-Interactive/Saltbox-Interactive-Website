@@ -20,7 +20,7 @@ export default function ProjectsPage() {
       <Hero
         title="Our Projects"
         subtitle="Discover what we do"
-        backgroundImage="/images/background_pic.jpg"
+        backgroundImage="/images/temp/dod-temp-25.jpg"
         pageName="Projects"
       />
       <ProjectsSection />
