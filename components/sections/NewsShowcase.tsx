@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { blogPosts } from "@/lib/data/blog";
+import { getAllNewsPosts, NewsPost } from "@/lib/sanity/queries";
 import SectionTitle from "@/components/ui/SectionTitle";
 import BracketButton from "@/components/ui/BracketButton";
 import ArrowButton from "@/components/ui/ArrowButton";
@@ -11,10 +11,21 @@ export default function NewsShowcase() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
+  const [latestPosts, setLatestPosts] = useState<NewsPost[]>([]);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
-  // Get latest 6 news posts
-  const latestPosts = blogPosts.slice(0, 6);
+  // Fetch latest 6 news posts from Sanity
+  useEffect(() => {
+    async function fetchPosts() {
+      try {
+        const posts = await getAllNewsPosts();
+        setLatestPosts(posts.slice(0, 6));
+      } catch (error) {
+        console.error('Error fetching news posts:', error);
+      }
+    }
+    fetchPosts();
+  }, []);
 
   const checkScrollButtons = () => {
     if (scrollContainerRef.current) {
@@ -72,9 +83,9 @@ export default function NewsShowcase() {
               style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', scrollSnapType: 'x mandatory' }}
             >
             {latestPosts.map((post) => (
-              <div key={post.slug} className="flex-shrink-0 w-[calc(50%-12px)]" style={{ scrollSnapAlign: 'start' }}>
+              <div key={post._id} className="flex-shrink-0 w-[calc(50%-12px)]" style={{ scrollSnapAlign: 'start' }}>
                 <NewsCard
-                  slug={post.slug}
+                  slug={post.slug.current}
                   title={post.title}
                   coverImage={post.coverImage}
                   date={post.date}
