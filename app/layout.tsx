@@ -5,6 +5,7 @@ import Footer from "@/components/layout/Footer";
 import SmoothScroll from "@/components/SmoothScroll";
 import { OrganizationSchema } from "@/components/StructuredData";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
+import CookieConsent from "@/components/CookieConsent";
 import BackToTop from "@/components/ui/BackToTop";
 import "lenis/dist/lenis.css";
 
@@ -135,6 +136,7 @@ export default function RootLayout({
           <div style={{ height: '400px', position: 'relative', zIndex: 1 }}></div>
           <BackToTop />
         </SmoothScroll>
+        <CookieConsent />
       </body>
     </html>
   );

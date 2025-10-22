@@ -14,6 +14,12 @@ export default function GoogleAnalytics({ ga_id }: { ga_id: string }) {
           __html: `
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
+
+            // Set default consent to 'denied'
+            gtag('consent', 'default', {
+              'analytics_storage': 'denied'
+            });
+
             gtag('js', new Date());
             gtag('config', '${ga_id}', {
               page_path: window.location.pathname,
