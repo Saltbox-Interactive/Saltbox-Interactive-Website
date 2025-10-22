@@ -1,8 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { Button } from "@/components/ui/Button";
-import { Card, CardContent } from "@/components/ui/Card";
+import BracketButton from "@/components/ui/BracketButton";
 
 export default function ContactSection() {
   const [formData, setFormData] = useState({
@@ -101,12 +100,11 @@ export default function ContactSection() {
         </div>
 
         <div className="container mx-auto max-w-4xl">
-          <Card className="bg-black/40 border-accent/20">
-          <CardContent className="p-4 sm:p-6 md:p-8">
+          <div className="p-4 sm:p-6 md:p-8">
             <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                 <div>
-                  <label htmlFor="name" className="block text-xs tracking-wider uppercase text-accent/60 mb-2">
+                  <label htmlFor="name" className="block text-xs tracking-wider uppercase text-gray-400 mb-2">
                     Name
                   </label>
                   <input
@@ -116,14 +114,14 @@ export default function ContactSection() {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 sm:py-4 bg-transparent border border-accent/20 text-foreground placeholder-gray-600 focus:outline-none focus:border-accent/60 transition-colors duration-300 text-base sm:text-lg"
+                    className="w-full px-4 py-3 sm:py-4 bg-[#1a1a1a] border-b border-gray-700 text-foreground placeholder-gray-600 focus:outline-none focus:border-accent transition-colors duration-300 text-base sm:text-lg"
                     placeholder="Your Name"
                     autoComplete="name"
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="email" className="block text-xs tracking-wider uppercase text-accent/60 mb-2">
+                  <label htmlFor="email" className="block text-xs tracking-wider uppercase text-gray-400 mb-2">
                     Email
                   </label>
                   <input
@@ -133,7 +131,7 @@ export default function ContactSection() {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 sm:py-4 bg-transparent border border-accent/20 text-foreground placeholder-gray-600 focus:outline-none focus:border-accent/60 transition-colors duration-300 text-base sm:text-lg"
+                    className="w-full px-4 py-3 sm:py-4 bg-[#1a1a1a] border-b border-gray-700 text-foreground placeholder-gray-600 focus:outline-none focus:border-accent transition-colors duration-300 text-base sm:text-lg"
                     placeholder="your@email.com"
                     autoComplete="email"
                     inputMode="email"
@@ -142,7 +140,7 @@ export default function ContactSection() {
               </div>
 
               <div>
-                <label htmlFor="subject" className="block text-xs tracking-wider uppercase text-accent/60 mb-2">
+                <label htmlFor="subject" className="block text-xs tracking-wider uppercase text-gray-400 mb-2">
                   Subject
                 </label>
                 <input
@@ -152,13 +150,13 @@ export default function ContactSection() {
                   value={formData.subject}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 sm:py-4 bg-transparent border border-accent/20 text-foreground placeholder-gray-600 focus:outline-none focus:border-accent/60 transition-colors duration-300 text-base sm:text-lg"
+                  className="w-full px-4 py-3 sm:py-4 bg-[#1a1a1a] border-b border-gray-700 text-foreground placeholder-gray-600 focus:outline-none focus:border-accent transition-colors duration-300 text-base sm:text-lg"
                   placeholder="What's this about?"
                 />
               </div>
 
               <div>
-                <label htmlFor="message" className="block text-xs tracking-wider uppercase text-accent/60 mb-2">
+                <label htmlFor="message" className="block text-xs tracking-wider uppercase text-gray-400 mb-2">
                   Message
                 </label>
                 <textarea
@@ -168,21 +166,21 @@ export default function ContactSection() {
                   onChange={handleChange}
                   required
                   rows={6}
-                  className="w-full px-4 py-3 sm:py-4 bg-transparent border border-accent/20 text-foreground placeholder-gray-600 focus:outline-none focus:border-accent/60 transition-colors duration-300 resize-none text-base sm:text-lg"
+                  className="w-full px-4 py-3 sm:py-4 bg-[#1a1a1a] border-b border-gray-700 text-foreground placeholder-gray-600 focus:outline-none focus:border-accent transition-colors duration-300 resize-y text-base sm:text-lg"
                   placeholder="Tell us about your interest in historical preservation..."
                 />
               </div>
 
-              <div className="text-center">
-                <Button
+              <div className="text-center pt-4">
+                <button
                   type="submit"
-                  variant="outline"
-                  size="lg"
-                  className="w-full md:w-auto min-w-[200px] min-h-[48px] text-base sm:text-lg"
                   disabled={isSubmitting}
+                  className="inline-block"
                 >
-                  {isSubmitting ? 'Sending...' : 'Send Message'}
-                </Button>
+                  <BracketButton as="span">
+                    {isSubmitting ? 'Sending...' : 'Send Message'}
+                  </BracketButton>
+                </button>
 
                 {submitStatus === 'success' && (
                   <p className="mt-4 text-accent">Message sent successfully! We'll get back to you soon.</p>
@@ -193,8 +191,7 @@ export default function ContactSection() {
                 )}
               </div>
             </form>
-          </CardContent>
-        </Card>
+          </div>
 
           <div className="mt-16 text-center">
             <p className="text-accent/60 text-sm tracking-wider uppercase mb-4">Direct Contact</p>
