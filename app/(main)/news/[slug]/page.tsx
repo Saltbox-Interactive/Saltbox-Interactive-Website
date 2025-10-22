@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { getAllNewsPosts, getNewsPostBySlug } from "@/lib/sanity/queries";
-import BlogPostContent from "./BlogPostContent";
+import NewsPostContent from "./NewsPostContent";
 import type { Metadata } from "next";
 import { urlForImage } from "@/lib/sanity/image";
 
@@ -32,7 +32,7 @@ export async function generateMetadata({
     description: post.excerpt,
     keywords: post.tags,
     openGraph: {
-      title: `${post.title} | Saltbox Interactive Blog`,
+      title: `${post.title} | Saltbox Interactive News`,
       description: post.excerpt,
       images: imageUrl
         ? [
@@ -50,14 +50,14 @@ export async function generateMetadata({
     },
     twitter: {
       card: "summary_large_image",
-      title: `${post.title} | Saltbox Interactive Blog`,
+      title: `${post.title} | Saltbox Interactive News`,
       description: post.excerpt,
       images: imageUrl ? [imageUrl] : [],
     },
   };
 }
 
-export default async function BlogPostPage({
+export default async function NewsPostPage({
   params,
 }: {
   params: Promise<{ slug: string }>;
@@ -69,5 +69,5 @@ export default async function BlogPostPage({
     notFound();
   }
 
-  return <BlogPostContent post={post} />;
+  return <NewsPostContent post={post} />;
 }

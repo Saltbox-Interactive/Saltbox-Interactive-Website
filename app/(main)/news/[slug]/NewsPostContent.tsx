@@ -11,7 +11,7 @@ import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import { PortableText } from "@portabletext/react";
 import { urlForImage } from "@/lib/sanity/image";
 
-export default function BlogPostContent({ post }: { post: NewsPost }) {
+export default function NewsPostContent({ post }: { post: NewsPost }) {
   const postUrl = typeof window !== 'undefined' ? window.location.href : `https://saltboxinteractive.com/news/${post.slug.current}`;
   const imageUrl = post.coverImage ? urlForImage(post.coverImage).url() : '/images/placeholder.jpg';
 

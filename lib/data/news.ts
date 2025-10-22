@@ -1,25 +1,23 @@
-# Blog Posts for Sanity Import
+export interface NewsPost {
+  slug: string;
+  title: string;
+  excerpt: string;
+  content: string;
+  author: string;
+  date: string;
+  category: "Release" | "Development" | "History" | "Behind the Scenes";
+  coverImage: string;
+  tags: string[];
+  featured?: boolean;
+  project?: string;
+}
 
-Copy and paste each post's information into Sanity Studio.
-
----
-
-## Post 1: Discover Old D'Hanis Now Available on Steam
-
-**Slug:** `discover-old-dhanis-steam-release`
-**Title:** Discover Old D'Hanis Now Available on Steam
-**Excerpt:** We're thrilled to announce that Discover Old D'Hanis is now live on Steam! Explore the historic Alsatian settlement like never before.
-**Author:** Michael Salton
-**Date:** January 15, 2024
-**Category:** Release
-**Project:** Discover Old D'Hanis
-**Featured:** Yes
-**Tags:** Discover Old D'Hanis, Steam, Release, Historical Preservation
-**Cover Image:** Upload `/public/images/dod-cover.jpg`
-
-**Content:**
-
-We're incredibly excited to announce that Discover Old D'Hanis is now available on Steam! This marks a significant milestone in our mission to preserve history through interactive digital experiences.
+export const newsPosts: NewsPost[] = [
+  {
+    slug: "discover-old-dhanis-steam-release",
+    title: "Discover Old D'Hanis Now Available on Steam",
+    excerpt: "We're thrilled to announce that Discover Old D'Hanis is now live on Steam! Explore the historic Alsatian settlement like never before.",
+    content: `We're incredibly excited to announce that Discover Old D'Hanis is now available on Steam! This marks a significant milestone in our mission to preserve history through interactive digital experiences.
 
 ## What is Discover Old D'Hanis?
 
@@ -38,24 +36,20 @@ This is just the beginning. We're already working on Discover Old D'Hanis Remast
 
 Thank you to everyone who has supported us on this journey. We can't wait for you to experience Old D'Hanis!
 
----
-
-## Post 2: Discover Old D'Hanis Remastered - Powered by Unreal Engine 5
-
-**Slug:** `remastered-version-announcement`
-**Title:** Discover Old D'Hanis Remastered - Powered by Unreal Engine 5
-**Excerpt:** A glimpse into the future: Discover Old D'Hanis is being completely rebuilt in Unreal Engine 5 with photorealistic graphics.
-**Author:** Michael Salton
-**Date:** February 20, 2024
-**Category:** Development
-**Project:** Discover Old D'Hanis Remastered
-**Featured:** Yes
-**Tags:** Discover Old D'Hanis Remastered, Unreal Engine 5, Development
-**Cover Image:** Upload `/public/images/temp/dod-temp-2.jpg`
-
-**Content:**
-
-After the successful release of Discover Old D'Hanis, we've been hard at work on something truly special: a complete remaster using Unreal Engine 5.
+[Get it on Steam](https://store.steampowered.com/app/3140860/Discover_Old_DHanis/)`,
+    author: "Michael Salton",
+    date: "2024-01-15",
+    category: "Release",
+    coverImage: "/images/dod-cover.jpg",
+    tags: ["Discover Old D'Hanis", "Steam", "Release", "Historical Preservation"],
+    featured: true,
+    project: "Discover Old D'Hanis",
+  },
+  {
+    slug: "remastered-version-announcement",
+    title: "Discover Old D'Hanis Remastered - Powered by Unreal Engine 5",
+    excerpt: "A glimpse into the future: Discover Old D'Hanis is being completely rebuilt in Unreal Engine 5 with photorealistic graphics.",
+    content: `After the successful release of Discover Old D'Hanis, we've been hard at work on something truly special: a complete remaster using Unreal Engine 5.
 
 ## Why Remaster?
 
@@ -72,26 +66,20 @@ While we're incredibly proud of the original Discover Old D'Hanis, technology ha
 
 Discover Old D'Hanis Remastered is scheduled for release in 2026. We're taking our time to ensure every detail is perfect and historically accurate.
 
-Stay tuned for more updates as development progresses!
-
----
-
-## Post 3: The History of Old D'Hanis: An Alsatian Settlement in Texas
-
-**Slug:** `history-of-old-dhanis`
-**Title:** The History of Old D'Hanis: An Alsatian Settlement in Texas
-**Excerpt:** Learn about the fascinating history of the Alsatian immigrants who founded D'Hanis in the Texas Hill Country.
-**Author:** Michael Salton
-**Date:** March 10, 2024
-**Category:** History
-**Project:** (leave empty)
-**Featured:** No
-**Tags:** Old D'Hanis, History, Alsatian, Texas History
-**Cover Image:** Upload `/public/images/temp/dod-temp-12.jpg`
-
-**Content:**
-
-The story of Old D'Hanis is one of courage, determination, and cultural preservation. In the 1840s, a group of Alsatian immigrants left their homeland to build a new life in the rugged Texas Hill Country.
+Stay tuned for more updates as development progresses!`,
+    author: "Michael Salton",
+    date: "2024-02-20",
+    category: "Development",
+    coverImage: "/images/temp/dod-temp-2.jpg",
+    tags: ["Discover Old D'Hanis Remastered", "Unreal Engine 5", "Development"],
+    featured: true,
+    project: "Discover Old D'Hanis Remastered",
+  },
+  {
+    slug: "history-of-old-dhanis",
+    title: "The History of Old D'Hanis: An Alsatian Settlement in Texas",
+    excerpt: "Learn about the fascinating history of the Alsatian immigrants who founded D'Hanis in the Texas Hill Country.",
+    content: `The story of Old D'Hanis is one of courage, determination, and cultural preservation. In the 1840s, a group of Alsatian immigrants left their homeland to build a new life in the rugged Texas Hill Country.
 
 ## The Alsatian Immigrants
 
@@ -117,26 +105,19 @@ The settlers built their homes and structures using local limestone, creating di
 
 ## Legacy
 
-While the original settlement eventually declined, the legacy of Old D'Hanis lives on through descendants, preserved structures, and now, through our interactive digital experience. By preserving this history digitally, we ensure that future generations can experience and learn from this important chapter of Texas history.
-
----
-
-## Post 4: Behind the Scenes: Creating Historical 3D Models
-
-**Slug:** `behind-the-scenes-3d-modeling`
-**Title:** Behind the Scenes: Creating Historical 3D Models
-**Excerpt:** An inside look at our process for creating accurate historical reconstructions, from archaeological data to interactive 3D environments.
-**Author:** Michael Salton
-**Date:** April 15, 2024
-**Category:** Behind the Scenes
-**Project:** (leave empty)
-**Featured:** No
-**Tags:** 3D Modeling, Game Development, Historical Accuracy, Behind the Scenes
-**Cover Image:** Upload `/public/images/temp/dod-temp-15.jpg`
-
-**Content:**
-
-Creating historically accurate 3D models requires a unique blend of technical skill, artistic vision, and rigorous historical research. Here's how we bring the past to life at Saltbox Interactive.
+While the original settlement eventually declined, the legacy of Old D'Hanis lives on through descendants, preserved structures, and now, through our interactive digital experience. By preserving this history digitally, we ensure that future generations can experience and learn from this important chapter of Texas history.`,
+    author: "Michael Salton",
+    date: "2024-03-10",
+    category: "History",
+    coverImage: "/images/temp/dod-temp-12.jpg",
+    tags: ["Old D'Hanis", "History", "Alsatian", "Texas History"],
+    featured: false,
+  },
+  {
+    slug: "behind-the-scenes-3d-modeling",
+    title: "Behind the Scenes: Creating Historical 3D Models",
+    excerpt: "An inside look at our process for creating accurate historical reconstructions, from archaeological data to interactive 3D environments.",
+    content: `Creating historically accurate 3D models requires a unique blend of technical skill, artistic vision, and rigorous historical research. Here's how we bring the past to life at Saltbox Interactive.
 
 ## Starting with Research
 
@@ -186,26 +167,19 @@ We work closely with historians, archaeologists, and community members to ensure
 
 ## The Result
 
-The end result is an immersive experience that allows people to walk through history. It's incredibly rewarding to see players explore these spaces and gain a deeper understanding of the past.
-
----
-
-## Post 5: Why Digital Historical Preservation Matters
-
-**Slug:** `importance-of-historical-preservation`
-**Title:** Why Digital Historical Preservation Matters
-**Excerpt:** Exploring the role of digital technology in preserving cultural heritage and making history accessible to future generations.
-**Author:** Michael Salton
-**Date:** May 1, 2024
-**Category:** History
-**Project:** (leave empty)
-**Featured:** Yes
-**Tags:** Digital Preservation, Cultural Heritage, Education, Technology
-**Cover Image:** Upload `/public/images/dod-screenshot-7.png`
-
-**Content:**
-
-Digital preservation is revolutionizing how we protect and share our cultural heritage. Here's why it's becoming an essential tool for historians and preservationists.
+The end result is an immersive experience that allows people to walk through history. It's incredibly rewarding to see players explore these spaces and gain a deeper understanding of the past.`,
+    author: "Michael Salton",
+    date: "2024-04-15",
+    category: "Behind the Scenes",
+    coverImage: "/images/temp/dod-temp-15.jpg",
+    tags: ["3D Modeling", "Game Development", "Historical Accuracy", "Behind the Scenes"],
+    featured: false,
+  },
+  {
+    slug: "importance-of-historical-preservation",
+    title: "Why Digital Historical Preservation Matters",
+    excerpt: "Exploring the role of digital technology in preserving cultural heritage and making history accessible to future generations.",
+    content: `Digital preservation is revolutionizing how we protect and share our cultural heritage. Here's why it's becoming an essential tool for historians and preservationists.
 
 ## The Challenge of Physical Preservation
 
@@ -254,26 +228,19 @@ As technology advances, digital preservation will become even more powerful. Vir
 
 Digital preservation isn't just about technology - it's about connecting people with their heritage, educating future generations, and ensuring that our shared history isn't lost to time.
 
-Every project we complete is a piece of history saved for the future. That's what drives us forward.
-
----
-
-## Post 6: Discover Old D'Hanis Coming to Steam Deck
-
-**Slug:** `steamdeck-compatibility`
-**Title:** Discover Old D'Hanis Coming to Steam Deck
-**Excerpt:** We're thrilled to announce Steam Deck compatibility, bringing portable historical exploration to handheld gaming.
-**Author:** Michael Salton
-**Date:** June 10, 2024
-**Category:** Release
-**Project:** Discover Old D'Hanis
-**Featured:** No
-**Tags:** Steam Deck, Portable Gaming, Education, Optimization
-**Cover Image:** Upload `/public/images/dod-screenshot-2.png`
-
-**Content:**
-
-Great news for Steam Deck owners! Discover Old D'Hanis has been optimized for Valve's portable gaming device, allowing you to explore history on the go.
+Every project we complete is a piece of history saved for the future. That's what drives us forward.`,
+    author: "Michael Salton",
+    date: "2024-05-01",
+    category: "History",
+    coverImage: "/images/dod-screenshot-7.png",
+    tags: ["Digital Preservation", "Cultural Heritage", "Education", "Technology"],
+    featured: true,
+  },
+  {
+    slug: "steamdeck-compatibility",
+    title: "Discover Old D'Hanis Coming to Steam Deck",
+    excerpt: "We're thrilled to announce Steam Deck compatibility, bringing portable historical exploration to handheld gaming.",
+    content: `Great news for Steam Deck owners! Discover Old D'Hanis has been optimized for Valve's portable gaming device, allowing you to explore history on the go.
 
 ## Why Steam Deck?
 
@@ -328,4 +295,29 @@ Discover Old D'Hanis is verified for Steam Deck and available now. Simply instal
 
 We're exploring similar optimizations for Discover Old D'Hanis Remastered, though the photorealistic graphics will require more powerful hardware. Stay tuned for updates!
 
-Thank you to the Steam Deck community for your enthusiasm and feedback. Here's to portable historical exploration!
+Thank you to the Steam Deck community for your enthusiasm and feedback. Here's to portable historical exploration!`,
+    author: "Michael Salton",
+    date: "2024-06-10",
+    category: "Release",
+    coverImage: "/images/dod-screenshot-2.png",
+    tags: ["Steam Deck", "Portable Gaming", "Education", "Optimization"],
+    featured: false,
+    project: "Discover Old D'Hanis",
+  },
+];
+
+export function getFeaturedPosts(): NewsPost[] {
+  return newsPosts.filter((post) => post.featured);
+}
+
+export function getPostBySlug(slug: string): NewsPost | undefined {
+  return newsPosts.find((post) => post.slug === slug);
+}
+
+export function getPostsByCategory(category: NewsPost["category"]): NewsPost[] {
+  return newsPosts.filter((post) => post.category === category);
+}
+
+export function getAllCategories(): NewsPost["category"][] {
+  return ["Release", "Development", "History", "Behind the Scenes"];
+}

@@ -1,6 +1,6 @@
 import { MetadataRoute } from 'next'
 import { projects } from '@/lib/data/projects'
-import { blogPosts } from '@/lib/data/blog'
+import { newsPosts } from '@/lib/data/news'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://saltboxinteractive.com'
@@ -67,13 +67,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }
 
-  // Blog posts
-  const blogPages = blogPosts.map((post) => ({
+  // News posts
+  const newsPages = newsPosts.map((post) => ({
     url: `${baseUrl}/news/${post.slug}`,
     lastModified: new Date(post.date),
     changeFrequency: 'monthly' as const,
     priority: 0.7,
   }))
 
-  return [...staticPages, ...projectPages, creditsPage, ...blogPages]
+  return [...staticPages, ...projectPages, creditsPage, ...newsPages]
 }
