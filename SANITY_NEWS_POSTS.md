@@ -47,7 +47,56 @@ Stay tuned for more updates as we approach the early access launch!
 
 ---
 
-## Post 2: Discover Old D'Hanis Now Available on Steam
+## Post 2: Presenting Discover Old D'Hanis to the Texas Community
+
+**Slug:** `texas-community-presentation`
+**Title:** Presenting Discover Old D'Hanis to the Texas Community
+**Excerpt:** We traveled to Texas to present our virtual reconstruction of Old D'Hanis to over 100 community members, descendants, and heritage professionals. The response was incredible.
+**Author:** Michael Salton
+**Date:** September 1, 2024
+**Category:** Behind the Scenes
+**Project:** Discover Old D'Hanis
+**Featured:** Yes
+**Tags:** Discover Old D'Hanis, Community Engagement, Texas, Heritage Preservation
+**Cover Image:** Upload an appropriate image
+
+**Content:**
+
+This past month, our team had the incredible opportunity to travel to Texas and present Discover Old D'Hanis to the community whose history we've been working to preserve. It was one of the most meaningful experiences of the entire project.
+
+## A Homecoming for History
+
+Presenting in Texas—in the very region where Old D'Hanis once stood—felt like bringing the project home. We gathered over 100 people for the presentation, including local community members, descendants of the original Alsatian and German settlers, and heritage preservation professionals. The room was filled with people who had personal connections to this history, and that made all the difference.
+
+## Connecting with Descendants
+
+The most powerful moments came from the descendants themselves. Many had heard stories from their grandparents about the old settlement, had seen faded photographs, or had visited the ruins. Seeing their faces as they explored the digital reconstruction—walking through buildings their ancestors had built, seeing the town as it once was—was profoundly moving.
+
+Several descendants shared family stories with us, providing insights and details we hadn't found in the historical record. These conversations not only validated our research but also reminded us why this work matters. We're not just preserving buildings; we're preserving memories, stories, and cultural identity.
+
+## Recognition from the Local Press
+
+The presentation caught the attention of the Hondo Anvil Herald, the local newspaper serving the region. They ran a feature story about the project, helping to spread awareness about the digital preservation work and the importance of maintaining connections to local Alsatian and German heritage.
+
+The newspaper coverage has been invaluable in reaching community members who might not have heard about the project otherwise. It's sparked conversations about local history and the role technology can play in keeping that history alive.
+
+## Heritage Professionals Weigh In
+
+The heritage preservation professionals in attendance provided important feedback and encouragement. Many expressed excitement about the potential for digital reconstruction as a tool for sites where physical restoration isn't possible. Several discussed potential collaborations and expressed interest in similar projects for other endangered heritage sites in Texas.
+
+## The Power of Community
+
+What struck us most was how the community embraced the project as their own. This isn't just a game made by university students—it's become a shared tool for cultural preservation, a way for the community to connect with their past and share it with future generations.
+
+## Thank You, Texas
+
+We're deeply grateful to everyone who attended the presentation, shared their stories, welcomed us into their community, and supported this project. The connections we made and the stories we heard will continue to inform and improve the project as we move toward the full release.
+
+This experience reinforced why digital preservation matters: it's not about the technology, it's about the people, the stories, and the communities we serve.
+
+---
+
+## Post 3: Discover Old D'Hanis Now Available on Steam
 
 **Slug:** `discover-old-dhanis-steam-release`
 **Title:** Discover Old D'Hanis Now Available on Steam
