@@ -4,11 +4,14 @@ import Image from "next/image";
 import Typography from "@/components/ui/Typography";
 import BracketButton from "@/components/ui/BracketButton";
 import EmailSubscribe from "@/components/sections/EmailSubscribe";
+import ShareButtons from "@/components/ui/ShareButtons";
 import { ArticleSchema } from "@/components/schemas";
 import { BlogPost } from "@/lib/data/blog";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
 
 export default function BlogPostContent({ post }: { post: BlogPost }) {
+  const postUrl = typeof window !== 'undefined' ? window.location.href : `https://saltboxinteractive.com/news/${post.slug}`;
+
   return (
     <>
       <ArticleSchema
@@ -66,30 +69,35 @@ export default function BlogPostContent({ post }: { post: BlogPost }) {
             </Typography.Heading>
 
             {/* Date & Tags */}
-            <div className="flex items-center gap-3 text-sm">
-              <time dateTime={post.date} className="text-gray-500">
-                {new Date(post.date).toLocaleDateString("en-US", {
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                })}
-              </time>
-              {post.project && (
-                <>
-                  <span className="text-gray-700">|</span>
-                  <div className="flex items-center gap-2 text-[10px] uppercase tracking-wider">
-                    <span className="text-gray-400">{post.project}</span>
-                    <span className="text-gray-700">•</span>
-                    <span className="text-gray-400">{post.category}</span>
-                  </div>
-                </>
-              )}
-              {!post.project && (
-                <>
-                  <span className="text-gray-700">|</span>
-                  <span className="text-[10px] uppercase tracking-wider text-gray-400">{post.category}</span>
-                </>
-              )}
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3 text-sm">
+                <time dateTime={post.date} className="text-gray-500">
+                  {new Date(post.date).toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}
+                </time>
+                {post.project && (
+                  <>
+                    <span className="text-gray-700">|</span>
+                    <div className="flex items-center gap-2 text-[10px] uppercase tracking-wider">
+                      <span className="text-gray-400">{post.project}</span>
+                      <span className="text-gray-700">•</span>
+                      <span className="text-gray-400">{post.category}</span>
+                    </div>
+                  </>
+                )}
+                {!post.project && (
+                  <>
+                    <span className="text-gray-700">|</span>
+                    <span className="text-[10px] uppercase tracking-wider text-gray-400">{post.category}</span>
+                  </>
+                )}
+              </div>
+
+              {/* Share Buttons */}
+              <ShareButtons title={post.title} url={postUrl} />
             </div>
           </div>
 
