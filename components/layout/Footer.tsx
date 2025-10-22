@@ -2,10 +2,11 @@
 
 import Link from "next/link";
 import SocialLinks from "@/components/ui/SocialLinks";
+import SlideUnderlineLink from "@/components/ui/SlideUnderlineLink";
 
 export default function Footer() {
   return (
-    <footer className="fixed bottom-0 left-0 right-0 w-full bg-black" style={{ zIndex: 50, pointerEvents: 'auto' }}>
+    <footer className="relative w-full bg-black" style={{ zIndex: 50 }}>
       <div className="absolute inset-0 bg-noise opacity-5"></div>
 
       <div className="container mx-auto px-6 py-12 relative z-10">
@@ -25,24 +26,20 @@ export default function Footer() {
 
           <div>
             <h4 className="text-foreground font-light tracking-wider mb-4 text-sm uppercase">Projects</h4>
-            <ul className="space-y-2">
-              <li>
-                <Link href="/projects/discover-old-dhanis" className="text-gray-400 hover:text-accent transition-colors duration-300 text-sm flex items-center gap-2">
+            <div className="flex flex-col gap-2">
+              <div className="flex items-center gap-2">
+                <SlideUnderlineLink href="/projects/discover-old-dhanis" className="text-sm">
                   Discover Old D'Hanis
-                  <span className="text-xs bg-accent/20 text-accent px-2 py-0.5 rounded">Available Now</span>
-                </Link>
-              </li>
-              <li>
-                <Link href="/projects/discover-old-dhanis-remastered" className="text-gray-400 hover:text-accent transition-colors duration-300 text-sm">
-                  Discover Old D'Hanis: Remastered
-                </Link>
-              </li>
-              <li>
-                <Link href="/projects/project-medina" className="text-gray-400 hover:text-accent transition-colors duration-300 text-sm">
-                  Project Medina
-                </Link>
-              </li>
-            </ul>
+                </SlideUnderlineLink>
+                <span className="text-xs bg-accent/20 text-accent px-2 py-0.5 rounded">Available Now</span>
+              </div>
+              <SlideUnderlineLink href="/projects/discover-old-dhanis-remastered" className="text-sm">
+                Discover Old D'Hanis: Remastered
+              </SlideUnderlineLink>
+              <SlideUnderlineLink href="/projects/project-medina" className="text-sm">
+                Project Medina
+              </SlideUnderlineLink>
+            </div>
           </div>
 
           <div>
@@ -77,7 +74,7 @@ export default function Footer() {
             <p className="text-gray-500 text-xs tracking-wider">
               &copy; {new Date().getFullYear()} SALTBOX INTERACTIVE. ALL RIGHTS RESERVED.
             </p>
-            <div className="flex items-center gap-6">
+            <div className="flex items-center gap-3">
               <Link
                 href="/terms"
                 className="text-gray-400 hover:text-accent transition-colors duration-300 text-xs tracking-wider uppercase"

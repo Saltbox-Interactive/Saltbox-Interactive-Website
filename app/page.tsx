@@ -280,10 +280,9 @@ export default function Home() {
       </SectionWrapper>
 
       {/* End section that covers the fixed background and allows footer to show */}
-      <section className="relative bg-black" style={{ zIndex: 100 }}>
-        {/* Email Subscribe Section */}
+      <div className="relative bg-black">
         <EmailSubscribe />
-      </section>
+      </div>
     </>
   );
 }

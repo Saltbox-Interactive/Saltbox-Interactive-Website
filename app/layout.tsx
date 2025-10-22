@@ -127,13 +127,12 @@ export default function RootLayout({
         className={`${workSans.variable} ${bebas.variable} ${archivoBlack.variable} antialiased relative`}
       >
         <SmoothScroll>
-          <Footer />
-          <main className="relative" style={{ zIndex: 100, minHeight: '100vh' }}>
+          <main className="relative" style={{ minHeight: '100vh' }}>
             <div className="bg-black">
               {children}
             </div>
           </main>
-          <div style={{ height: '400px', position: 'relative', zIndex: 1 }}></div>
+          <Footer />
           <BackToTop />
         </SmoothScroll>
         <CookieConsent />
