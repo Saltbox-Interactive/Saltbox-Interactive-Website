@@ -21,8 +21,7 @@ export default function NewsCard({
   return (
     <Link
       href={`/news/${slug}`}
-      className="group flex-shrink-0 w-[calc(50%-12px)]"
-      style={{ scrollSnapAlign: 'start' }}
+      className="group block w-full"
     >
       {/* Card */}
       <div className="overflow-hidden">

@@ -72,15 +72,16 @@ export default function NewsShowcase() {
               style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', scrollSnapType: 'x mandatory' }}
             >
             {latestPosts.map((post) => (
-              <NewsCard
-                key={post.slug}
-                slug={post.slug}
-                title={post.title}
-                coverImage={post.coverImage}
-                date={post.date}
-                category={post.category}
-                project={post.project}
-              />
+              <div key={post.slug} className="flex-shrink-0 w-[calc(50%-12px)]" style={{ scrollSnapAlign: 'start' }}>
+                <NewsCard
+                  slug={post.slug}
+                  title={post.title}
+                  coverImage={post.coverImage}
+                  date={post.date}
+                  category={post.category}
+                  project={post.project}
+                />
+              </div>
             ))}
           </div>
 
