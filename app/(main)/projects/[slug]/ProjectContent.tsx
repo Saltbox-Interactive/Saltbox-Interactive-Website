@@ -710,7 +710,7 @@ export default function ProjectContent({ project }: { project: Project }) {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
               {/* Image - Left Side */}
               <ParallaxImage
-                src="/images/dominics.jpeg"
+                src="/images/dod-cover.jpg"
                 alt="Album artwork for the Discover Old D'Hanis Official Soundtrack, composed and produced by Joyce Lee"
                 className="aspect-square"
                 intensity={1}
@@ -732,7 +732,7 @@ export default function ProjectContent({ project }: { project: Project }) {
                 <div className="flex items-center gap-4">
                   <span className="text-gray-300 text-lg font-light">Listen now on</span>
                   <a
-                    href="https://www.youtube.com/playlist?list=YOUR_PLAYLIST_ID"
+                    href="https://www.youtube.com/watch?v=YRfJMfhoZmA"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-gray-400 hover:text-accent group-hover:text-white transition-colors duration-300"
