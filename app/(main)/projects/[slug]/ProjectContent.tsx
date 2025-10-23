@@ -587,25 +587,6 @@ export default function ProjectContent({ project }: { project: Project }) {
               </div>
             </div>
 
-            {/* Remaining Images Grid */}
-            {project.gallery.length > 19 && (
-              <div className="py-20">
-                <div className="container mx-auto px-6 max-w-7xl">
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    {project.gallery.slice(19).map((img, idx) => (
-                      <ParallaxImage
-                        key={idx}
-                        src={img}
-                        alt="Additional environmental showcase"
-                        className="aspect-square"
-                        intensity={0.5}
-                        direction="vertical"
-                      />
-                    ))}
-                  </div>
-                </div>
-              </div>
-            )}
           </>
         ) : (
           <>
@@ -749,103 +730,69 @@ export default function ProjectContent({ project }: { project: Project }) {
         </section>
       )}
 
-      {/* Screenshots Gallery - Scroll-based Slider */}
+      {/* Screenshots Gallery */}
       {project.gallery && project.gallery.length > 0 && (
         <section ref={screenshotsRef} className="relative bg-black py-20">
           <div className="container mx-auto px-6 max-w-7xl">
-            <div className="relative w-full aspect-video">
-                {project.gallery.map((image, idx) => {
-                  const isVisible = idx === currentImageIndex;
-                  const isNext = idx === currentImageIndex + 1;
-                  const isPrev = idx === currentImageIndex - 1;
-
-                  return (
-                    <div
-                      key={idx}
-                      className="absolute inset-0 w-full h-full"
-                      style={{
-                        opacity: isVisible ? 1 : (isNext || isPrev) ? 0.15 : 0,
-                        transform: isNext ? 'translateX(10%)' : isPrev ? 'translateX(-10%)' : 'translateX(0)',
-                        transition: 'opacity 0.5s ease-out, transform 0.5s ease-out',
-                        pointerEvents: 'none',
-                        zIndex: isVisible ? 10 : 1
-                      }}
-                    >
-                      <Image
-                        src={image}
-                        alt={`${project.title} gameplay screenshot ${idx + 1} - Interactive historical exploration and authentic period environment`}
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-                  );
-                })}
+            {/* Main Image Display */}
+            <div className="mb-8">
+              {/* Main Image Frame */}
+              <div className="relative w-full aspect-video mb-4">
+                <Image
+                  src={project.gallery[currentImageIndex]}
+                  alt={`${project.title} gameplay screenshot ${currentImageIndex + 1} - Interactive historical exploration and authentic period environment`}
+                  fill
+                  className="object-cover"
+                />
               </div>
 
-              {/* Navigation Arrows and Dot Indicators */}
-              <div className="flex items-center justify-center gap-6 mt-8">
-                {/* Previous Arrow */}
+              {/* Arrow Buttons */}
+              <div className="flex gap-2 justify-end">
                 <ArrowButton
                   direction="left"
                   onClick={handlePrevImage}
                   disabled={currentImageIndex === 0}
-                  className="flex-shrink-0"
-                  style={{
-                    opacity: showArrows ? 1 : 0,
-                    pointerEvents: showArrows ? 'auto' : 'none'
-                  }}
                   aria-label="Previous Image"
                 />
-
-                {/* Dot Indicators - Carousel Style */}
-                <div className="flex gap-2 items-center justify-center" style={{ width: '52px' }}>
-                  {(() => {
-                    const totalImages = project.gallery?.length || 0;
-                    const isAtStart = currentImageIndex === 0;
-                    const isAtEnd = currentImageIndex === totalImages - 1;
-
-                    if (isAtStart) {
-                      // At start: show 2 dots, orange on left
-                      return (
-                        <>
-                          <div className="w-2 h-2 rounded-full transition-all duration-300" style={{ backgroundColor: '#d4a574' }} />
-                          <div className="w-2 h-2 rounded-full transition-all duration-300" style={{ backgroundColor: '#4a4a4a' }} />
-                        </>
-                      );
-                    } else if (isAtEnd) {
-                      // At end: show 2 dots, orange on right
-                      return (
-                        <>
-                          <div className="w-2 h-2 rounded-full transition-all duration-300" style={{ backgroundColor: '#4a4a4a' }} />
-                          <div className="w-2 h-2 rounded-full transition-all duration-300" style={{ backgroundColor: '#d4a574' }} />
-                        </>
-                      );
-                    } else {
-                      // In middle: show 3 dots, orange in center
-                      return (
-                        <>
-                          <div className="w-2 h-2 rounded-full transition-all duration-300" style={{ backgroundColor: '#4a4a4a' }} />
-                          <div className="w-2 h-2 rounded-full transition-all duration-300" style={{ backgroundColor: '#d4a574' }} />
-                          <div className="w-2 h-2 rounded-full transition-all duration-300" style={{ backgroundColor: '#4a4a4a' }} />
-                        </>
-                      );
-                    }
-                  })()}
-                </div>
-
-                {/* Next Arrow */}
                 <ArrowButton
                   direction="right"
                   onClick={handleNextImage}
                   disabled={currentImageIndex === (project.gallery?.length || 0) - 1}
-                  className="flex-shrink-0"
-                  style={{
-                    opacity: showArrows ? 1 : 0,
-                    pointerEvents: showArrows ? 'auto' : 'none'
-                  }}
                   aria-label="Next Image"
                 />
               </div>
+            </div>
+
+            {/* Thumbnail Strip */}
+            <div className="flex flex-wrap gap-2">
+              {project.gallery.map((image, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setCurrentImageIndex(idx)}
+                  className={`relative flex-shrink-0 w-24 aspect-video transition-all duration-300 ${
+                    idx === currentImageIndex ? 'opacity-100 p-1' : 'opacity-50 hover:opacity-75'
+                  }`}
+                >
+                  <div className="relative w-full h-full">
+                    <Image
+                      src={image}
+                      alt={`Thumbnail ${idx + 1}`}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  {/* Corner borders for selected thumbnail - outside the image */}
+                  {idx === currentImageIndex && (
+                    <div className="absolute inset-0">
+                      <div className="absolute top-0 left-0 w-2 h-2 border-t-2 border-l-2 border-white"></div>
+                      <div className="absolute top-0 right-0 w-2 h-2 border-t-2 border-r-2 border-white"></div>
+                      <div className="absolute bottom-0 left-0 w-2 h-2 border-b-2 border-l-2 border-white"></div>
+                      <div className="absolute bottom-0 right-0 w-2 h-2 border-b-2 border-r-2 border-white"></div>
+                    </div>
+                  )}
+                </button>
+              ))}
+            </div>
           </div>
         </section>
       )}

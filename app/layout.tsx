@@ -3,7 +3,7 @@ import { Work_Sans, Bebas_Neue, Archivo_Black } from "next/font/google";
 import "./globals.css";
 import Footer from "@/components/layout/Footer";
 import SmoothScroll from "@/components/SmoothScroll";
-import { OrganizationSchema } from "@/components/StructuredData";
+import { OrganizationSchema, PersonSchema } from "@/components/StructuredData";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 import CookieConsent from "@/components/CookieConsent";
 import BackToTop from "@/components/ui/BackToTop";
@@ -121,6 +121,7 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <OrganizationSchema />
+        <PersonSchema />
         {process.env.NEXT_PUBLIC_GA_ID && <GoogleAnalytics ga_id={process.env.NEXT_PUBLIC_GA_ID} />}
       </head>
       <body

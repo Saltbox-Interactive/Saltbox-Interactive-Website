@@ -85,3 +85,36 @@ export function BreadcrumbSchema({ items }: { items: Array<{ name: string; url: 
     />
   );
 }
+
+export function PersonSchema() {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Michael Salton",
+    "jobTitle": "Founder & Game Developer",
+    "worksFor": {
+      "@type": "Organization",
+      "name": "Saltbox Interactive",
+      "url": "https://saltboxinteractive.com"
+    },
+    "url": "https://saltboxinteractive.com",
+    "sameAs": [
+      "https://twitter.com/michaelsalton"
+    ],
+    "description": "Game developer and founder of Saltbox Interactive, specializing in historical preservation through interactive digital experiences.",
+    "knowsAbout": [
+      "Game Development",
+      "Historical Preservation",
+      "Virtual Reality",
+      "Interactive Experiences",
+      "Unreal Engine"
+    ]
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  );
+}
