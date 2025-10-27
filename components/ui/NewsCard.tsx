@@ -9,6 +9,7 @@ interface NewsCardProps {
   date: string;
   category: string;
   project?: string;
+  author?: string;
 }
 
 export default function NewsCard({
@@ -18,6 +19,7 @@ export default function NewsCard({
   date,
   category,
   project,
+  author,
 }: NewsCardProps) {
   // Handle both Sanity images and regular image paths
   const imageUrl = coverImage
@@ -64,6 +66,13 @@ export default function NewsCard({
               <span className="text-gray-400">{category}</span>
             </div>
           </div>
+
+          {/* Author */}
+          {author && (
+            <div className="mb-2">
+              <span className="text-sm text-gray-400">By {author}</span>
+            </div>
+          )}
 
           {/* Title */}
           <h3

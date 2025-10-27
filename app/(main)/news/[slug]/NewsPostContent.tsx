@@ -125,6 +125,12 @@ export default function NewsPostContent({ post }: { post: NewsPost }) {
                     day: "numeric",
                   })}
                 </time>
+                {post.author && (
+                  <>
+                    <span className="text-gray-700">|</span>
+                    <span className="text-sm text-gray-400">By {post.author}</span>
+                  </>
+                )}
                 {post.project && (
                   <>
                     <span className="text-gray-700">|</span>

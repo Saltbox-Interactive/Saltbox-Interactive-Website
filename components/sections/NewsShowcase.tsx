@@ -101,6 +101,7 @@ export default function NewsShowcase() {
                         date={post.date}
                         category={post.category}
                         project={post.project}
+                        author={post.author}
                       />
                     </div>
                   ))}

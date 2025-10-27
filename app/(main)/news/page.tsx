@@ -49,6 +49,7 @@ export default async function BlogPage() {
                       date={post.date}
                       category={post.category}
                       project={post.project}
+                      author={post.author}
                     />
                   </div>
                 ))}
@@ -80,6 +81,7 @@ export default async function BlogPage() {
                   date={post.date}
                   category={post.category}
                   project={post.project}
+                  author={post.author}
                 />
               </div>
             ))}
