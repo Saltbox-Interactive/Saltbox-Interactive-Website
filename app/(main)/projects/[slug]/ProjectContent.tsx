@@ -224,7 +224,11 @@ export default function ProjectContent({ project }: { project: Project }) {
         {/* Breadcrumbs - bottom left */}
         <div className="hidden sm:block absolute bottom-10 left-4 sm:left-10 text-xs sm:text-sm text-gray-400 tracking-wider opacity-0 animate-[fadeIn_1s_1s_ease-out_forwards] z-10">
           <Breadcrumbs
-            items={[{ label: "Projects", href: "/projects" }, { label: project.title }]}
+            items={[
+              { label: "Saltbox Interactive", href: "/" },
+              { label: "Projects", href: "/projects" },
+              { label: project.title },
+            ]}
           />
         </div>
       </section>

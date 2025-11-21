@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import BracketButton from "@/components/ui/BracketButton";
 
 export default function EmailSubscribe() {
@@ -43,13 +44,15 @@ export default function EmailSubscribe() {
         <div className="relative flex flex-col lg:flex-row lg:items-start gap-8">
           {/* Left - Logo */}
           <div className="flex justify-start lg:absolute lg:left-[-7rem] lg:-top-8">
-            <Image
-              src="/images/saltbox-logo.svg"
-              alt="Saltbox Interactive"
-              width={180}
-              height={60}
-              className="w-32 sm:w-40 md:w-48 h-auto"
-            />
+            <Link href="/">
+              <Image
+                src="/images/saltbox-logo.svg"
+                alt="Saltbox Interactive"
+                width={180}
+                height={60}
+                className="w-32 sm:w-40 md:w-48 h-auto cursor-pointer hover:opacity-80 transition-opacity"
+              />
+            </Link>
           </div>
 
           {/* Center - Heading and Subscribe Button */}

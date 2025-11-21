@@ -90,7 +90,13 @@ export default function NewsPostContent({ post }: { post: NewsPost }) {
       {/* Breadcrumbs */}
       <div className="relative bg-black">
         <div className="container mx-auto px-6 pt-6 max-w-5xl">
-          <Breadcrumbs items={[{ label: "News", href: "/news" }, { label: post.title }]} />
+          <Breadcrumbs
+            items={[
+              { label: "Saltbox Interactive", href: "/" },
+              { label: "News", href: "/news" },
+              { label: post.title },
+            ]}
+          />
         </div>
       </div>
 

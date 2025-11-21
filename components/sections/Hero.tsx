@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Breadcrumbs from "@/components/ui/Breadcrumbs";
 
 interface HeroProps {
   title?: string;
@@ -119,10 +120,10 @@ export default function Hero({
         )}
       </div>
 
-      {/* Page indicator - bottom left */}
+      {/* Breadcrumbs - bottom left */}
       {pageName && (
-        <div className="absolute bottom-10 left-10 text-sm text-gray-400 tracking-wider opacity-0 animate-[fadeIn_1s_1s_ease-out_forwards]">
-          Saltbox Interactive | <span className="text-accent">{pageName}</span>
+        <div className="absolute bottom-10 left-4 sm:left-10 opacity-0 animate-[fadeIn_1s_1s_ease-out_forwards] z-10">
+          <Breadcrumbs items={[{ label: "Saltbox Interactive", href: "/" }, { label: pageName }]} />
         </div>
       )}
     </section>
