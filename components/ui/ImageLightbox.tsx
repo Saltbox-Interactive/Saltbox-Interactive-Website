@@ -19,7 +19,7 @@ export default function ImageLightbox({
   isOpen,
   onClose,
   onNext,
-  onPrevious
+  onPrevious,
 }: ImageLightboxProps) {
   useEffect(() => {
     if (isOpen) {
@@ -97,10 +97,7 @@ export default function ImageLightbox({
       )}
 
       {/* Click backdrop to close */}
-      <div
-        className="absolute inset-0 -z-10"
-        onClick={onClose}
-      />
+      <div className="absolute inset-0 -z-10" onClick={onClose} />
     </div>
   );
 }

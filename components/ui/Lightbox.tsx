@@ -11,12 +11,7 @@ interface LightboxProps {
   onClose: () => void;
 }
 
-export default function Lightbox({
-  images,
-  initialIndex = 0,
-  isOpen,
-  onClose,
-}: LightboxProps) {
+export default function Lightbox({ images, initialIndex = 0, isOpen, onClose }: LightboxProps) {
   const [currentIndex, setCurrentIndex] = useState(initialIndex);
   const prefersReducedMotion = useReducedMotion();
 
@@ -76,12 +71,7 @@ export default function Lightbox({
         className="absolute top-4 right-4 text-white/80 hover:text-white transition-colors p-2 z-10"
         aria-label="Close lightbox"
       >
-        <svg
-          className="w-8 h-8"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
+        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -106,12 +96,7 @@ export default function Lightbox({
           className="absolute left-4 top-1/2 -translate-y-1/2 text-white/80 hover:text-white transition-colors p-4 bg-black/30 rounded-full backdrop-blur-sm"
           aria-label="Previous image"
         >
-          <svg
-            className="w-6 h-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -148,18 +133,8 @@ export default function Lightbox({
           className="absolute right-4 top-1/2 -translate-y-1/2 text-white/80 hover:text-white transition-colors p-4 bg-black/30 rounded-full backdrop-blur-sm"
           aria-label="Next image"
         >
-          <svg
-            className="w-6 h-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M9 5l7 7-7 7"
-            />
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
           </svg>
         </button>
       )}

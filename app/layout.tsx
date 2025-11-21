@@ -33,14 +33,26 @@ const archivoBlack = Archivo_Black({
 export const metadata: Metadata = {
   title: {
     default: "Saltbox Interactive",
-    template: "Saltbox Interactive | %s"
+    template: "Saltbox Interactive | %s",
   },
-  description: "Saltbox Interactive creates immersive virtual environments where history comes alive. We preserve the past through interactive digital experiences, transforming historical locations into explorable virtual worlds.",
-  keywords: ["historical preservation", "virtual history", "interactive experiences", "digital heritage", "historical reconstruction", "Old D'Hanis", "virtual archaeology", "Michael Salton", "game developer", "historical games"],
+  description:
+    "Saltbox Interactive creates immersive virtual environments where history comes alive. We preserve the past through interactive digital experiences, transforming historical locations into explorable virtual worlds.",
+  keywords: [
+    "historical preservation",
+    "virtual history",
+    "interactive experiences",
+    "digital heritage",
+    "historical reconstruction",
+    "Old D'Hanis",
+    "virtual archaeology",
+    "Michael Salton",
+    "game developer",
+    "historical games",
+  ],
   authors: [{ name: "Michael Salton" }, { name: "Saltbox Interactive" }],
   creator: "Michael Salton",
   publisher: "Saltbox Interactive",
-  metadataBase: new URL('https://saltboxinteractive.com'),
+  metadataBase: new URL("https://saltboxinteractive.com"),
   viewport: {
     width: "device-width",
     initialScale: 1,
@@ -61,23 +73,25 @@ export const metadata: Metadata = {
     url: "https://saltboxinteractive.com",
     siteName: "Saltbox Interactive",
     title: "Saltbox Interactive | Preserving History Through Interactive Experiences",
-    description: "Create immersive virtual environments where history comes alive. Experience the past through interactive digital preservation.",
+    description:
+      "Create immersive virtual environments where history comes alive. Experience the past through interactive digital preservation.",
     images: [
       {
         url: "https://saltboxinteractive.com/images/background_pic.jpg",
         width: 1200,
         height: 630,
-        alt: "Saltbox Interactive - Historical Preservation Through Digital Experiences"
-      }
-    ]
+        alt: "Saltbox Interactive - Historical Preservation Through Digital Experiences",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     site: "@saltboxinteractive",
     creator: "@michaelsalton",
     title: "Saltbox Interactive | Preserving History Through Interactive Experiences",
-    description: "Create immersive virtual environments where history comes alive. Experience the past through interactive digital preservation.",
-    images: ["https://saltboxinteractive.com/images/background_pic.jpg"]
+    description:
+      "Create immersive virtual environments where history comes alive. Experience the past through interactive digital preservation.",
+    images: ["https://saltboxinteractive.com/images/background_pic.jpg"],
   },
   alternates: {
     canonical: "https://saltboxinteractive.com",
@@ -94,21 +108,19 @@ export const metadata: Metadata = {
     googleBot: {
       index: true,
       follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
     },
   },
   icons: {
     icon: [
-      { url: '/favicon.ico', sizes: 'any' },
-      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
-      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
     ],
-    apple: [
-      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
-    ],
-    shortcut: '/favicon.ico',
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
+    shortcut: "/favicon.ico",
   },
 };
 

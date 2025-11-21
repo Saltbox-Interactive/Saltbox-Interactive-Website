@@ -1,19 +1,19 @@
-import { groq } from 'next-sanity'
-import { client } from './client'
+import { groq } from "next-sanity";
+import { client } from "./client";
 
 export interface NewsPost {
-  _id: string
-  title: string
-  slug: { current: string }
-  excerpt: string
-  coverImage: any
-  category: 'Release' | 'Development' | 'History' | 'Behind the Scenes'
-  project?: string
-  content: any[]
-  author: string
-  date: string
-  tags?: string[]
-  featured?: boolean
+  _id: string;
+  title: string;
+  slug: { current: string };
+  excerpt: string;
+  coverImage: any;
+  category: "Release" | "Development" | "History" | "Behind the Scenes";
+  project?: string;
+  content: any[];
+  author: string;
+  date: string;
+  tags?: string[];
+  featured?: boolean;
 }
 
 // Get all news posts
@@ -33,7 +33,7 @@ export async function getAllNewsPosts(): Promise<NewsPost[]> {
       tags,
       featured
     }`
-  )
+  );
 }
 
 // Get a single news post by slug
@@ -54,7 +54,7 @@ export async function getNewsPostBySlug(slug: string): Promise<NewsPost | null> 
       featured
     }`,
     { slug }
-  )
+  );
 }
 
 // Get featured posts
@@ -74,7 +74,7 @@ export async function getFeaturedNewsPosts(): Promise<NewsPost[]> {
       tags,
       featured
     }`
-  )
+  );
 }
 
 // Get posts by category
@@ -95,5 +95,5 @@ export async function getNewsPostsByCategory(category: string): Promise<NewsPost
       featured
     }`,
     { category }
-  )
+  );
 }

@@ -18,9 +18,12 @@ export default function NotFound() {
         <Typography.Heading size="xl" className="text-accent/80 mb-6">
           Lost in Time
         </Typography.Heading>
-        <Typography.Body size="lg" className="text-gray-400 mb-12 max-w-2xl mx-auto leading-relaxed">
-          It seems this page has vanished into the mists of history.
-          The past is full of mysteries, but this page isn't one of them—it simply doesn't exist.
+        <Typography.Body
+          size="lg"
+          className="text-gray-400 mb-12 max-w-2xl mx-auto leading-relaxed"
+        >
+          It seems this page has vanished into the mists of history. The past is full of mysteries,
+          but this page isn't one of them—it simply doesn't exist.
         </Typography.Body>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
@@ -33,16 +36,28 @@ export default function NotFound() {
             Quick Links
           </Typography.Heading>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto">
-            <Link href="/about" className="text-gray-500 hover:text-accent transition-colors text-sm">
+            <Link
+              href="/about"
+              className="text-gray-500 hover:text-accent transition-colors text-sm"
+            >
               About Us
             </Link>
-            <Link href="/projects" className="text-gray-500 hover:text-accent transition-colors text-sm">
+            <Link
+              href="/projects"
+              className="text-gray-500 hover:text-accent transition-colors text-sm"
+            >
               All Projects
             </Link>
-            <Link href="/news" className="text-gray-500 hover:text-accent transition-colors text-sm">
+            <Link
+              href="/news"
+              className="text-gray-500 hover:text-accent transition-colors text-sm"
+            >
               News
             </Link>
-            <Link href="/contact" className="text-gray-500 hover:text-accent transition-colors text-sm">
+            <Link
+              href="/contact"
+              className="text-gray-500 hover:text-accent transition-colors text-sm"
+            >
               Contact
             </Link>
           </div>

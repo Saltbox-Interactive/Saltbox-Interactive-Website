@@ -15,7 +15,7 @@ export default function TypingAnimation({
   speed = 30,
   className = "",
   style = {},
-  onComplete
+  onComplete,
 }: TypingAnimationProps) {
   const [displayedText, setDisplayedText] = useState("");
 

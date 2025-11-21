@@ -10,13 +10,17 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
   const { slug } = await params;
   const project = getProjectBySlug(slug);
 
   if (!project) {
     return {
-      title: "Project Not Found"
+      title: "Project Not Found",
     };
   }
 
@@ -27,27 +31,29 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       project.title,
       ...(project.features || []),
       project.genre,
-      ...(project.platforms || [])
+      ...(project.platforms || []),
     ].filter((keyword): keyword is string => Boolean(keyword)),
     openGraph: {
       title: `${project.title} | Saltbox Interactive`,
       description: project.description,
-      images: project.thumbnail ? [
-        {
-          url: project.thumbnail,
-          width: 1200,
-          height: 630,
-          alt: project.title
-        }
-      ] : [],
-      type: "website"
+      images: project.thumbnail
+        ? [
+            {
+              url: project.thumbnail,
+              width: 1200,
+              height: 630,
+              alt: project.title,
+            },
+          ]
+        : [],
+      type: "website",
     },
     twitter: {
       card: "summary_large_image",
       title: `${project.title} | Saltbox Interactive`,
       description: project.description,
-      images: project.thumbnail ? [project.thumbnail] : []
-    }
+      images: project.thumbnail ? [project.thumbnail] : [],
+    },
   };
 }
 

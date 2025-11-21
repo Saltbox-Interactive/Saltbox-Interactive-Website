@@ -9,13 +9,10 @@ interface WhiteHighlightLinkProps {
 export default function WhiteHighlightLink({
   href,
   children,
-  className = ""
+  className = "",
 }: WhiteHighlightLinkProps) {
   return (
-    <Link
-      href={href}
-      className={`group inline-block ${className}`}
-    >
+    <Link href={href} className={`group inline-block ${className}`}>
       <span className="relative inline-block overflow-hidden">
         <span className="relative z-10 text-gray-400 group-hover:text-black transition-colors duration-300">
           {children}

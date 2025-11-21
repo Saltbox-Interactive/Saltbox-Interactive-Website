@@ -9,19 +9,12 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
   ({ className, variant = "default", ...props }, ref) => {
     const variants = {
       default: "bg-gray-900/40 backdrop-blur-sm border border-accent/10",
-      interactive: "bg-gray-900/40 backdrop-blur-sm border border-accent/10 hover:bg-gray-900/60 hover:border-accent/30 transition-all duration-500 cursor-pointer",
+      interactive:
+        "bg-gray-900/40 backdrop-blur-sm border border-accent/10 hover:bg-gray-900/60 hover:border-accent/30 transition-all duration-500 cursor-pointer",
     };
-    
+
     return (
-      <div
-        ref={ref}
-        className={cn(
-          "overflow-hidden",
-          variants[variant],
-          className
-        )}
-        {...props}
-      />
+      <div ref={ref} className={cn("overflow-hidden", variants[variant], className)} {...props} />
     );
   }
 );
@@ -29,24 +22,14 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
 Card.displayName = "Card";
 
 const CardHeader = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
-  ({ className, ...props }, ref) => (
-    <div
-      ref={ref}
-      className={cn("p-6", className)}
-      {...props}
-    />
-  )
+  ({ className, ...props }, ref) => <div ref={ref} className={cn("p-6", className)} {...props} />
 );
 
 CardHeader.displayName = "CardHeader";
 
 const CardTitle = forwardRef<HTMLHeadingElement, HTMLAttributes<HTMLHeadingElement>>(
   ({ className, ...props }, ref) => (
-    <h3
-      ref={ref}
-      className={cn("text-2xl font-semibold text-white", className)}
-      {...props}
-    />
+    <h3 ref={ref} className={cn("text-2xl font-semibold text-white", className)} {...props} />
   )
 );
 
@@ -54,11 +37,7 @@ CardTitle.displayName = "CardTitle";
 
 const CardDescription = forwardRef<HTMLParagraphElement, HTMLAttributes<HTMLParagraphElement>>(
   ({ className, ...props }, ref) => (
-    <p
-      ref={ref}
-      className={cn("text-gray-400 mt-2", className)}
-      {...props}
-    />
+    <p ref={ref} className={cn("text-gray-400 mt-2", className)} {...props} />
   )
 );
 

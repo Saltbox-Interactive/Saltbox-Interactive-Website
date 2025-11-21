@@ -57,11 +57,11 @@ export default function AnimatedSection({
     <section
       ref={sectionRef}
       data-section={id}
-      className={`${prefersReducedMotion ? '' : 'transition-all duration-1000'} ${
+      className={`${prefersReducedMotion ? "" : "transition-all duration-1000"} ${
         isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-20"
       } ${className}`}
       style={{
-        transitionDelay: prefersReducedMotion ? '0ms' : `${delay}ms`,
+        transitionDelay: prefersReducedMotion ? "0ms" : `${delay}ms`,
       }}
     >
       {children}

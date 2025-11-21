@@ -5,11 +5,7 @@ import { usePathname } from "next/navigation";
 import Lenis from "lenis";
 import { ScrollSpeedContext } from "./ScrollSpeedContext";
 
-export default function SmoothScroll({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function SmoothScroll({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const lenisRef = useRef<Lenis | null>(null);
 
@@ -70,9 +66,5 @@ export default function SmoothScroll({
 
   // Remove the old setScrollSpeed useMemo
 
-  return (
-    <ScrollSpeedContext.Provider value={contextValue}>
-      {children}
-    </ScrollSpeedContext.Provider>
-  );
+  return <ScrollSpeedContext.Provider value={contextValue}>{children}</ScrollSpeedContext.Provider>;
 }

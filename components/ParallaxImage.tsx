@@ -16,7 +16,7 @@ export default function ParallaxImage({
   alt,
   className = "",
   intensity = 0.1,
-  direction = "vertical"
+  direction = "vertical",
 }: ParallaxImageProps) {
   const [offset, setOffset] = useState({ x: 0, y: 0 });
   const containerRef = useRef<HTMLDivElement>(null);
@@ -46,16 +46,16 @@ export default function ParallaxImage({
         const maxOffset = 10; // Maximum offset in percentage (reduced for subtlety)
 
         if (direction === "vertical" || direction === "both") {
-          setOffset(prev => ({
+          setOffset((prev) => ({
             ...prev,
-            y: normalizedProgress * maxOffset * intensity
+            y: normalizedProgress * maxOffset * intensity,
           }));
         }
 
         if (direction === "horizontal" || direction === "both") {
-          setOffset(prev => ({
+          setOffset((prev) => ({
             ...prev,
-            x: normalizedProgress * maxOffset * intensity
+            x: normalizedProgress * maxOffset * intensity,
           }));
         }
       }
@@ -72,15 +72,10 @@ export default function ParallaxImage({
         className="relative w-full h-full"
         style={{
           transform: `translate(${offset.x}%, ${offset.y}%) scale(1.1)`,
-          transition: "transform 0.1s ease-out"
+          transition: "transform 0.1s ease-out",
         }}
       >
-        <Image
-          src={src}
-          alt={alt}
-          fill
-          className="object-cover"
-        />
+        <Image src={src} alt={alt} fill className="object-cover" />
       </div>
     </div>
   );

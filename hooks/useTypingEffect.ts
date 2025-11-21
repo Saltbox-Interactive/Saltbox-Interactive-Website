@@ -8,11 +8,7 @@ interface UseTypingEffectOptions {
   speed?: number;
 }
 
-export function useTypingEffect({
-  text,
-  enabled = true,
-  speed = 50,
-}: UseTypingEffectOptions) {
+export function useTypingEffect({ text, enabled = true, speed = 50 }: UseTypingEffectOptions) {
   const [displayText, setDisplayText] = useState("");
 
   useEffect(() => {

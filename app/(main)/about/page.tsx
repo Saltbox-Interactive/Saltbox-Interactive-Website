@@ -35,7 +35,8 @@ export default function AboutPage() {
       <AnimatedSection id="intro" className="relative py-16 sm:py-24 md:py-32 bg-black">
         <Container size="xl">
           <Typography.Body size="xl" className="text-white leading-[1.4] mb-8 sm:mb-12">
-            <span className="bg-white text-black px-1">Saltbox Interactive</span> {ABOUT_CONTENT.intro.heading.replace('Saltbox Interactive ', '')}
+            <span className="bg-white text-black px-1">Saltbox Interactive</span>{" "}
+            {ABOUT_CONTENT.intro.heading.replace("Saltbox Interactive ", "")}
           </Typography.Body>
           <Typography.Body size="lg" className="text-gray-400 max-w-4xl">
             {ABOUT_CONTENT.intro.body}
@@ -134,7 +135,9 @@ export default function AboutPage() {
       {/* View Projects CTA */}
       <SectionWrapper className="py-20">
         <Container size="sm" className="text-center">
-          <BracketButton href="/projects" className="justify-center">View Our Projects</BracketButton>
+          <BracketButton href="/projects" className="justify-center">
+            View Our Projects
+          </BracketButton>
         </Container>
       </SectionWrapper>
 

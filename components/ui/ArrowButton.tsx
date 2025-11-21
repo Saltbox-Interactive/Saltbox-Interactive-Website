@@ -1,9 +1,9 @@
 interface ArrowButtonProps {
-  direction: 'left' | 'right';
+  direction: "left" | "right";
   onClick: () => void;
   disabled?: boolean;
   className?: string;
-  'aria-label'?: string;
+  "aria-label"?: string;
   style?: React.CSSProperties;
 }
 
@@ -12,15 +12,15 @@ export default function ArrowButton({
   onClick,
   disabled = false,
   className = "",
-  'aria-label': ariaLabel,
-  style
+  "aria-label": ariaLabel,
+  style,
 }: ArrowButtonProps) {
   return (
     <button
       onClick={onClick}
       disabled={disabled}
       className={`group relative w-8 h-8 flex items-center justify-center disabled:opacity-30 disabled:cursor-not-allowed ${className}`}
-      aria-label={ariaLabel || (direction === 'left' ? 'Previous' : 'Next')}
+      aria-label={ariaLabel || (direction === "left" ? "Previous" : "Next")}
       style={style}
     >
       {/* Solid background (default state) */}
@@ -42,7 +42,7 @@ export default function ArrowButton({
         strokeWidth="2"
         viewBox="0 0 24 24"
       >
-        {direction === 'left' ? (
+        {direction === "left" ? (
           <path d="M19 12H5M5 12l7 7M5 12l7-7" />
         ) : (
           <path d="M5 12h14M12 5l7 7-7 7" />

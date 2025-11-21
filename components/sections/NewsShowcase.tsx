@@ -20,10 +20,10 @@ export default function NewsShowcase() {
     async function fetchPosts() {
       try {
         const posts = await getAllNewsPosts();
-        console.log('Fetched posts:', posts.length);
+        console.log("Fetched posts:", posts.length);
         setLatestPosts(posts.slice(0, 6));
       } catch (error) {
-        console.error('Error fetching news posts for homepage:', error);
+        console.error("Error fetching news posts for homepage:", error);
       } finally {
         setIsLoading(false);
       }
@@ -41,21 +41,22 @@ export default function NewsShowcase() {
 
   useEffect(() => {
     checkScrollButtons();
-    window.addEventListener('resize', checkScrollButtons);
-    return () => window.removeEventListener('resize', checkScrollButtons);
+    window.addEventListener("resize", checkScrollButtons);
+    return () => window.removeEventListener("resize", checkScrollButtons);
   }, []);
 
-  const scroll = (direction: 'left' | 'right') => {
+  const scroll = (direction: "left" | "right") => {
     if (scrollContainerRef.current) {
       // Scroll by 2 cards at a time (full width)
       const scrollAmount = scrollContainerRef.current.clientWidth;
-      const newScrollLeft = direction === 'left'
-        ? scrollContainerRef.current.scrollLeft - scrollAmount
-        : scrollContainerRef.current.scrollLeft + scrollAmount;
+      const newScrollLeft =
+        direction === "left"
+          ? scrollContainerRef.current.scrollLeft - scrollAmount
+          : scrollContainerRef.current.scrollLeft + scrollAmount;
 
       scrollContainerRef.current.scrollTo({
         left: newScrollLeft,
-        behavior: 'smooth'
+        behavior: "smooth",
       });
 
       setTimeout(checkScrollButtons, 300);
@@ -90,10 +91,18 @@ export default function NewsShowcase() {
                   ref={scrollContainerRef}
                   onScroll={checkScrollButtons}
                   className="flex gap-6 overflow-x-auto scrollbar-hide scroll-smooth pb-4"
-                  style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', scrollSnapType: 'x mandatory' }}
+                  style={{
+                    scrollbarWidth: "none",
+                    msOverflowStyle: "none",
+                    scrollSnapType: "x mandatory",
+                  }}
                 >
                   {latestPosts.map((post) => (
-                    <div key={post._id} className="flex-shrink-0 w-[calc(50%-12px)]" style={{ scrollSnapAlign: 'start' }}>
+                    <div
+                      key={post._id}
+                      className="flex-shrink-0 w-[calc(50%-12px)]"
+                      style={{ scrollSnapAlign: "start" }}
+                    >
                       <NewsCard
                         slug={post.slug.current}
                         title={post.title}
@@ -114,12 +123,12 @@ export default function NewsShowcase() {
                   <div className="flex gap-2">
                     <ArrowButton
                       direction="left"
-                      onClick={() => scroll('left')}
+                      onClick={() => scroll("left")}
                       disabled={!canScrollLeft}
                     />
                     <ArrowButton
                       direction="right"
-                      onClick={() => scroll('right')}
+                      onClick={() => scroll("right")}
                       disabled={!canScrollRight}
                     />
                   </div>

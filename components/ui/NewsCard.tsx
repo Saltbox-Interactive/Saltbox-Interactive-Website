@@ -23,15 +23,12 @@ export default function NewsCard({
 }: NewsCardProps) {
   // Handle both Sanity images and regular image paths
   const imageUrl = coverImage
-    ? typeof coverImage === 'string'
+    ? typeof coverImage === "string"
       ? coverImage
       : urlForImage(coverImage).width(800).height(450).url()
-    : '/images/placeholder.jpg';
+    : "/images/placeholder.jpg";
   return (
-    <Link
-      href={`/news/${slug}`}
-      className="group block w-full"
-    >
+    <Link href={`/news/${slug}`} className="group block w-full">
       {/* Card */}
       <div className="overflow-hidden">
         {/* Image */}
@@ -49,10 +46,10 @@ export default function NewsCard({
           {/* Date & Tags */}
           <div className="flex items-center gap-3 mb-3">
             <span className="text-xs text-gray-500">
-              {new Date(date).toLocaleDateString('en-US', {
-                month: 'long',
-                day: 'numeric',
-                year: 'numeric'
+              {new Date(date).toLocaleDateString("en-US", {
+                month: "long",
+                day: "numeric",
+                year: "numeric",
               })}
             </span>
             <span className="text-gray-700">|</span>

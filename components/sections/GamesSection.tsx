@@ -39,7 +39,9 @@ export default function GamesSection() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {games.map((game) => (
             <Card key={game.id} variant="interactive">
-              <div className={`aspect-video bg-gradient-to-br ${game.color} relative overflow-hidden`}>
+              <div
+                className={`aspect-video bg-gradient-to-br ${game.color} relative overflow-hidden`}
+              >
                 <div className="absolute inset-0 bg-black/20"></div>
                 <div className="absolute top-4 right-4 bg-gray-900/80 backdrop-blur-sm px-3 py-1 rounded-full text-sm text-gray-300">
                   {game.status}

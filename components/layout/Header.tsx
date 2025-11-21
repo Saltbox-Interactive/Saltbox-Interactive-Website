@@ -12,7 +12,13 @@ export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
-  const [typedText, setTypedText] = useState({ projects: "", about: "", news: "", contact: "", openMenu: "" });
+  const [typedText, setTypedText] = useState({
+    projects: "",
+    about: "",
+    news: "",
+    contact: "",
+    openMenu: "",
+  });
   const pathname = usePathname();
   const router = useRouter();
   const { lenis } = useContext(ScrollSpeedContext);
@@ -34,7 +40,10 @@ export default function Header() {
     const fullText = "PROJECTS";
     if (typedText.projects.length < fullText.length) {
       const timeout = setTimeout(() => {
-        setTypedText(prev => ({ ...prev, projects: fullText.slice(0, prev.projects.length + 1) }));
+        setTypedText((prev) => ({
+          ...prev,
+          projects: fullText.slice(0, prev.projects.length + 1),
+        }));
       }, 30);
       return () => clearTimeout(timeout);
     }
@@ -45,7 +54,7 @@ export default function Header() {
     const fullText = "ABOUT";
     if (typedText.projects === "PROJECTS" && typedText.about.length < fullText.length) {
       const timeout = setTimeout(() => {
-        setTypedText(prev => ({ ...prev, about: fullText.slice(0, prev.about.length + 1) }));
+        setTypedText((prev) => ({ ...prev, about: fullText.slice(0, prev.about.length + 1) }));
       }, 30);
       return () => clearTimeout(timeout);
     }
@@ -56,7 +65,7 @@ export default function Header() {
     const fullText = "NEWS";
     if (typedText.about === "ABOUT" && typedText.news.length < fullText.length) {
       const timeout = setTimeout(() => {
-        setTypedText(prev => ({ ...prev, news: fullText.slice(0, prev.news.length + 1) }));
+        setTypedText((prev) => ({ ...prev, news: fullText.slice(0, prev.news.length + 1) }));
       }, 30);
       return () => clearTimeout(timeout);
     }
@@ -67,7 +76,7 @@ export default function Header() {
     const fullText = "CONTACT";
     if (typedText.news === "NEWS" && typedText.contact.length < fullText.length) {
       const timeout = setTimeout(() => {
-        setTypedText(prev => ({ ...prev, contact: fullText.slice(0, prev.contact.length + 1) }));
+        setTypedText((prev) => ({ ...prev, contact: fullText.slice(0, prev.contact.length + 1) }));
       }, 30);
       return () => clearTimeout(timeout);
     }
@@ -78,7 +87,10 @@ export default function Header() {
     const fullText = "[OPEN] MENU";
     if (typedText.contact === "CONTACT" && typedText.openMenu.length < fullText.length) {
       const timeout = setTimeout(() => {
-        setTypedText(prev => ({ ...prev, openMenu: fullText.slice(0, prev.openMenu.length + 1) }));
+        setTypedText((prev) => ({
+          ...prev,
+          openMenu: fullText.slice(0, prev.openMenu.length + 1),
+        }));
       }, 30);
       return () => clearTimeout(timeout);
     }
@@ -108,25 +120,25 @@ export default function Header() {
   useEffect(() => {
     if (isMenuOpen) {
       // Measure actual scrollbar width by creating a temporary element
-      const outer = document.createElement('div');
-      outer.style.visibility = 'hidden';
-      outer.style.overflow = 'scroll';
+      const outer = document.createElement("div");
+      outer.style.visibility = "hidden";
+      outer.style.overflow = "scroll";
       document.body.appendChild(outer);
 
-      const inner = document.createElement('div');
+      const inner = document.createElement("div");
       outer.appendChild(inner);
 
       const scrollbarWidth = outer.offsetWidth - inner.offsetWidth;
 
       document.body.removeChild(outer);
 
-      document.documentElement.classList.add('menu-open');
+      document.documentElement.classList.add("menu-open");
       document.body.style.marginRight = `${scrollbarWidth}px`;
 
       // Apply margin to all fixed elements
-      const header = document.querySelector('header');
-      const footer = document.querySelector('footer');
-      const fixedBackgrounds = document.querySelectorAll('.fixed');
+      const header = document.querySelector("header");
+      const footer = document.querySelector("footer");
+      const fixedBackgrounds = document.querySelectorAll(".fixed");
 
       if (header) {
         (header as HTMLElement).style.marginRight = `${scrollbarWidth}px`;
@@ -142,22 +154,22 @@ export default function Header() {
         lenis.stop();
       }
     } else {
-      document.documentElement.classList.remove('menu-open');
-      document.body.style.marginRight = '0px';
+      document.documentElement.classList.remove("menu-open");
+      document.body.style.marginRight = "0px";
 
       // Remove margin from all fixed elements
-      const header = document.querySelector('header');
-      const footer = document.querySelector('footer');
-      const fixedBackgrounds = document.querySelectorAll('.fixed');
+      const header = document.querySelector("header");
+      const footer = document.querySelector("footer");
+      const fixedBackgrounds = document.querySelectorAll(".fixed");
 
       if (header) {
-        (header as HTMLElement).style.marginRight = '0px';
+        (header as HTMLElement).style.marginRight = "0px";
       }
       if (footer) {
-        (footer as HTMLElement).style.marginRight = '0px';
+        (footer as HTMLElement).style.marginRight = "0px";
       }
       fixedBackgrounds.forEach((el) => {
-        (el as HTMLElement).style.marginRight = '0px';
+        (el as HTMLElement).style.marginRight = "0px";
       });
 
       if (lenis) {
@@ -165,21 +177,21 @@ export default function Header() {
       }
     }
     return () => {
-      document.documentElement.classList.remove('menu-open');
-      document.body.style.marginRight = '0px';
+      document.documentElement.classList.remove("menu-open");
+      document.body.style.marginRight = "0px";
 
-      const header = document.querySelector('header');
-      const footer = document.querySelector('footer');
-      const fixedBackgrounds = document.querySelectorAll('.fixed');
+      const header = document.querySelector("header");
+      const footer = document.querySelector("footer");
+      const fixedBackgrounds = document.querySelectorAll(".fixed");
 
       if (header) {
-        (header as HTMLElement).style.marginRight = '0px';
+        (header as HTMLElement).style.marginRight = "0px";
       }
       if (footer) {
-        (footer as HTMLElement).style.marginRight = '0px';
+        (footer as HTMLElement).style.marginRight = "0px";
       }
       fixedBackgrounds.forEach((el) => {
-        (el as HTMLElement).style.marginRight = '0px';
+        (el as HTMLElement).style.marginRight = "0px";
       });
 
       if (lenis) {
@@ -189,19 +201,28 @@ export default function Header() {
   }, [isMenuOpen, lenis]);
 
   // Don't render header at all on studio, structure, or vision pages
-  const isStudioPage = pathname?.startsWith('/studio') || pathname?.startsWith('/structure') || pathname?.startsWith('/vision');
+  const isStudioPage =
+    pathname?.startsWith("/studio") ||
+    pathname?.startsWith("/structure") ||
+    pathname?.startsWith("/vision");
   if (isStudioPage) {
     return null;
   }
 
   return (
     <>
-      <header className={`fixed top-0 left-0 right-0 transition-opacity duration-300 ${
-        isVisible ? "opacity-100" : "opacity-0 pointer-events-none"
-      }`} style={{ zIndex: 200 }}>
+      <header
+        className={`fixed top-0 left-0 right-0 transition-opacity duration-300 ${
+          isVisible ? "opacity-100" : "opacity-0 pointer-events-none"
+        }`}
+        style={{ zIndex: 200 }}
+      >
         <nav className="px-4 sm:px-6 py-4 sm:py-6 max-w-[1400px] mx-auto mt-2 sm:mt-6">
           <div className="flex justify-between items-center">
-            <Link href="/" className="group flex items-center gap-2 sm:gap-4 absolute left-4 sm:left-8">
+            <Link
+              href="/"
+              className="group flex items-center gap-2 sm:gap-4 absolute left-4 sm:left-8"
+            >
               <Image
                 src="/images/saltbox-logo-blank.png"
                 alt="Saltbox Interactive Logo"
@@ -209,7 +230,10 @@ export default function Header() {
                 height={40}
                 className="object-contain sm:w-12 sm:h-12"
               />
-              <span className="relative text-base sm:text-xl font-normal tracking-wide translate-y-0.5 uppercase px-2 py-1 overflow-hidden hidden sm:inline-block" style={{ fontFamily: 'var(--font-bebas)' }}>
+              <span
+                className="relative text-base sm:text-xl font-normal tracking-wide translate-y-0.5 uppercase px-2 py-1 overflow-hidden hidden sm:inline-block"
+                style={{ fontFamily: "var(--font-bebas)" }}
+              >
                 <span className="relative z-10 text-white group-hover:text-black transition-colors duration-300">
                   Saltbox Interactive
                 </span>
@@ -223,45 +247,72 @@ export default function Header() {
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
             >
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 {isMobileMenuOpen ? (
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={1.5}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
                 ) : (
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 6h16M4 12h16M4 18h16" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={1.5}
+                    d="M4 6h16M4 12h16M4 18h16"
+                  />
                 )}
               </svg>
             </button>
 
             {/* Desktop navigation */}
             <div className="hidden lg:flex items-center gap-4 absolute right-8">
-              <Link href="/projects" onClick={(e) => handleNavClick(e, '/projects')} className={`text-base tracking-wider transition-colors duration-300 uppercase inline-block text-left ${pathname === '/projects' ? 'text-accent' : 'text-foreground/80 hover:text-accent'}`} style={{ fontFamily: 'var(--font-bebas)', minWidth: '70px' }}>
+              <Link
+                href="/projects"
+                onClick={(e) => handleNavClick(e, "/projects")}
+                className={`text-base tracking-wider transition-colors duration-300 uppercase inline-block text-left ${pathname === "/projects" ? "text-accent" : "text-foreground/80 hover:text-accent"}`}
+                style={{ fontFamily: "var(--font-bebas)", minWidth: "70px" }}
+              >
                 {typedText.projects}
               </Link>
-              <Link href="/about" onClick={(e) => handleNavClick(e, '/about')} className={`text-base tracking-wider transition-colors duration-300 uppercase inline-block text-left ${pathname === '/about' ? 'text-accent' : 'text-foreground/80 hover:text-accent'}`} style={{ fontFamily: 'var(--font-bebas)', minWidth: '50px' }}>
+              <Link
+                href="/about"
+                onClick={(e) => handleNavClick(e, "/about")}
+                className={`text-base tracking-wider transition-colors duration-300 uppercase inline-block text-left ${pathname === "/about" ? "text-accent" : "text-foreground/80 hover:text-accent"}`}
+                style={{ fontFamily: "var(--font-bebas)", minWidth: "50px" }}
+              >
                 {typedText.about}
               </Link>
-              <Link href="/news" onClick={(e) => handleNavClick(e, '/news')} className={`text-base tracking-wider transition-colors duration-300 uppercase inline-block text-left ${pathname === '/news' ? 'text-accent' : 'text-foreground/80 hover:text-accent'}`} style={{ fontFamily: 'var(--font-bebas)', minWidth: '40px' }}>
+              <Link
+                href="/news"
+                onClick={(e) => handleNavClick(e, "/news")}
+                className={`text-base tracking-wider transition-colors duration-300 uppercase inline-block text-left ${pathname === "/news" ? "text-accent" : "text-foreground/80 hover:text-accent"}`}
+                style={{ fontFamily: "var(--font-bebas)", minWidth: "40px" }}
+              >
                 {typedText.news}
               </Link>
-              <Link href="/contact" onClick={(e) => handleNavClick(e, '/contact')} className={`text-base tracking-wider transition-colors duration-300 uppercase inline-block text-left ${pathname === '/contact' ? 'text-accent' : 'text-foreground/80 hover:text-accent'}`} style={{ fontFamily: 'var(--font-bebas)', minWidth: '65px' }}>
+              <Link
+                href="/contact"
+                onClick={(e) => handleNavClick(e, "/contact")}
+                className={`text-base tracking-wider transition-colors duration-300 uppercase inline-block text-left ${pathname === "/contact" ? "text-accent" : "text-foreground/80 hover:text-accent"}`}
+                style={{ fontFamily: "var(--font-bebas)", minWidth: "65px" }}
+              >
                 {typedText.contact}
               </Link>
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 className="text-base tracking-wider transition-colors duration-300 uppercase text-foreground/80 hover:text-accent inline-block text-left"
-                style={{ fontFamily: 'var(--font-bebas)', minWidth: '95px' }}
+                style={{ fontFamily: "var(--font-bebas)", minWidth: "95px" }}
               >
                 {isMenuOpen ? (
-                  <><span className="text-accent">[CLOSE]</span> MENU</>
+                  <>
+                    <span className="text-accent">[CLOSE]</span> MENU
+                  </>
                 ) : (
                   <>
-                    {typedText.openMenu.split('').map((char, i) => (
-                      <span key={i} className={char === '[' || char === ']' ? 'text-accent' : ''}>
+                    {typedText.openMenu.split("").map((char, i) => (
+                      <span key={i} className={char === "[" || char === "]" ? "text-accent" : ""}>
                         {char}
                       </span>
                     ))}
@@ -277,33 +328,45 @@ export default function Header() {
               <div className="flex flex-col gap-4">
                 <Link
                   href="/projects"
-                  className={`text-lg tracking-wider transition-colors duration-300 uppercase py-2 ${pathname === '/projects' ? 'text-accent' : 'text-foreground/80 active:text-accent'}`}
-                  style={{ fontFamily: 'var(--font-bebas)' }}
-                  onClick={(e) => { handleNavClick(e, '/projects'); setIsMobileMenuOpen(false); }}
+                  className={`text-lg tracking-wider transition-colors duration-300 uppercase py-2 ${pathname === "/projects" ? "text-accent" : "text-foreground/80 active:text-accent"}`}
+                  style={{ fontFamily: "var(--font-bebas)" }}
+                  onClick={(e) => {
+                    handleNavClick(e, "/projects");
+                    setIsMobileMenuOpen(false);
+                  }}
                 >
                   Projects
                 </Link>
                 <Link
                   href="/about"
-                  className={`text-lg tracking-wider transition-colors duration-300 uppercase py-2 ${pathname === '/about' ? 'text-accent' : 'text-foreground/80 active:text-accent'}`}
-                  style={{ fontFamily: 'var(--font-bebas)' }}
-                  onClick={(e) => { handleNavClick(e, '/about'); setIsMobileMenuOpen(false); }}
+                  className={`text-lg tracking-wider transition-colors duration-300 uppercase py-2 ${pathname === "/about" ? "text-accent" : "text-foreground/80 active:text-accent"}`}
+                  style={{ fontFamily: "var(--font-bebas)" }}
+                  onClick={(e) => {
+                    handleNavClick(e, "/about");
+                    setIsMobileMenuOpen(false);
+                  }}
                 >
                   About
                 </Link>
                 <Link
                   href="/news"
-                  className={`text-lg tracking-wider transition-colors duration-300 uppercase py-2 ${pathname === '/news' ? 'text-accent' : 'text-foreground/80 active:text-accent'}`}
-                  style={{ fontFamily: 'var(--font-bebas)' }}
-                  onClick={(e) => { handleNavClick(e, '/news'); setIsMobileMenuOpen(false); }}
+                  className={`text-lg tracking-wider transition-colors duration-300 uppercase py-2 ${pathname === "/news" ? "text-accent" : "text-foreground/80 active:text-accent"}`}
+                  style={{ fontFamily: "var(--font-bebas)" }}
+                  onClick={(e) => {
+                    handleNavClick(e, "/news");
+                    setIsMobileMenuOpen(false);
+                  }}
                 >
                   News
                 </Link>
                 <Link
                   href="/contact"
-                  className={`text-lg tracking-wider transition-colors duration-300 uppercase py-2 ${pathname === '/contact' ? 'text-accent' : 'text-foreground/80 active:text-accent'}`}
-                  style={{ fontFamily: 'var(--font-bebas)' }}
-                  onClick={(e) => { handleNavClick(e, '/contact'); setIsMobileMenuOpen(false); }}
+                  className={`text-lg tracking-wider transition-colors duration-300 uppercase py-2 ${pathname === "/contact" ? "text-accent" : "text-foreground/80 active:text-accent"}`}
+                  style={{ fontFamily: "var(--font-bebas)" }}
+                  onClick={(e) => {
+                    handleNavClick(e, "/contact");
+                    setIsMobileMenuOpen(false);
+                  }}
                 >
                   Contact
                 </Link>
@@ -325,9 +388,9 @@ export default function Header() {
       {/* Menu Panel - Slides from top */}
       <div
         className={`fixed top-0 left-0 right-0 bg-black transition-transform duration-700 ease-in-out ${
-          isMenuOpen ? 'translate-y-0' : '-translate-y-full'
+          isMenuOpen ? "translate-y-0" : "-translate-y-full"
         }`}
-        style={{ zIndex: 199, height: '92vh' }}
+        style={{ zIndex: 199, height: "92vh" }}
       >
         <div className="container mx-auto px-12 h-full flex items-center py-12">
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-16 w-full max-w-7xl mx-auto">
@@ -336,13 +399,16 @@ export default function Header() {
               <div className="flex flex-col justify-start space-y-4 mt-8">
                 <Link
                   href="/projects"
-                  onClick={(e) => { handleNavClick(e, '/projects'); setIsMenuOpen(false); }}
+                  onClick={(e) => {
+                    handleNavClick(e, "/projects");
+                    setIsMenuOpen(false);
+                  }}
                   className={`group text-4xl md:text-5xl font-light tracking-[0.15em] uppercase inline-block px-2 py-1 ${
-                    isMenuOpen ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
+                    isMenuOpen ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-8"
                   }`}
                   style={{
-                    fontFamily: 'var(--font-bebas)',
-                    transitionDelay: isMenuOpen ? '200ms' : '0ms'
+                    fontFamily: "var(--font-bebas)",
+                    transitionDelay: isMenuOpen ? "200ms" : "0ms",
                   }}
                 >
                   <span className="relative inline-block overflow-hidden">
@@ -354,13 +420,16 @@ export default function Header() {
                 </Link>
                 <Link
                   href="/about"
-                  onClick={(e) => { handleNavClick(e, '/about'); setIsMenuOpen(false); }}
+                  onClick={(e) => {
+                    handleNavClick(e, "/about");
+                    setIsMenuOpen(false);
+                  }}
                   className={`group text-4xl md:text-5xl font-light tracking-[0.15em] uppercase inline-block px-2 py-1 ${
-                    isMenuOpen ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
+                    isMenuOpen ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-8"
                   }`}
                   style={{
-                    fontFamily: 'var(--font-bebas)',
-                    transitionDelay: isMenuOpen ? '350ms' : '0ms'
+                    fontFamily: "var(--font-bebas)",
+                    transitionDelay: isMenuOpen ? "350ms" : "0ms",
                   }}
                 >
                   <span className="relative inline-block overflow-hidden">
@@ -372,13 +441,16 @@ export default function Header() {
                 </Link>
                 <Link
                   href="/news"
-                  onClick={(e) => { handleNavClick(e, '/news'); setIsMenuOpen(false); }}
+                  onClick={(e) => {
+                    handleNavClick(e, "/news");
+                    setIsMenuOpen(false);
+                  }}
                   className={`group text-4xl md:text-5xl font-light tracking-[0.15em] uppercase inline-block px-2 py-1 ${
-                    isMenuOpen ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
+                    isMenuOpen ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-8"
                   }`}
                   style={{
-                    fontFamily: 'var(--font-bebas)',
-                    transitionDelay: isMenuOpen ? '500ms' : '0ms'
+                    fontFamily: "var(--font-bebas)",
+                    transitionDelay: isMenuOpen ? "500ms" : "0ms",
                   }}
                 >
                   <span className="relative inline-block overflow-hidden">
@@ -390,13 +462,16 @@ export default function Header() {
                 </Link>
                 <Link
                   href="/contact"
-                  onClick={(e) => { handleNavClick(e, '/contact'); setIsMenuOpen(false); }}
+                  onClick={(e) => {
+                    handleNavClick(e, "/contact");
+                    setIsMenuOpen(false);
+                  }}
                   className={`group text-4xl md:text-5xl font-light tracking-[0.15em] uppercase inline-block px-2 py-1 ${
-                    isMenuOpen ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
+                    isMenuOpen ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-8"
                   }`}
                   style={{
-                    fontFamily: 'var(--font-bebas)',
-                    transitionDelay: isMenuOpen ? '650ms' : '0ms'
+                    fontFamily: "var(--font-bebas)",
+                    transitionDelay: isMenuOpen ? "650ms" : "0ms",
                   }}
                 >
                   <span className="relative inline-block overflow-hidden">
@@ -411,9 +486,9 @@ export default function Header() {
               {/* Social Media Links - Bottom Left */}
               <div
                 className={`transition-all duration-500 ${
-                  isMenuOpen ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
+                  isMenuOpen ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-8"
                 }`}
-                style={{ transitionDelay: isMenuOpen ? '800ms' : '0ms' }}
+                style={{ transitionDelay: isMenuOpen ? "800ms" : "0ms" }}
               >
                 <SocialLinks />
               </div>
@@ -424,11 +499,14 @@ export default function Header() {
               {/* Discover Old D'Hanis Panel */}
               <Link
                 href="/projects/discover-old-dhanis"
-                onClick={(e) => { handleNavClick(e, '/projects/discover-old-dhanis'); setIsMenuOpen(false); }}
+                onClick={(e) => {
+                  handleNavClick(e, "/projects/discover-old-dhanis");
+                  setIsMenuOpen(false);
+                }}
                 className={`relative h-full min-h-[60vh] overflow-hidden group cursor-pointer flex items-center justify-center transition-all duration-500 ${
-                  isMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                  isMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
                 }`}
-                style={{ transitionDelay: isMenuOpen ? '300ms' : '0ms' }}
+                style={{ transitionDelay: isMenuOpen ? "300ms" : "0ms" }}
               >
                 <Image
                   src="/images/dod-cover.jpg"
@@ -438,7 +516,10 @@ export default function Header() {
                 />
                 <div className="absolute inset-0 bg-black/50 transition-colors duration-150 group-hover:bg-black/30"></div>
                 <div className="relative z-10 text-center">
-                  <h3 className="text-4xl md:text-5xl font-light tracking-[0.15em] text-white uppercase" style={{ fontFamily: 'var(--font-bebas)' }}>
+                  <h3
+                    className="text-4xl md:text-5xl font-light tracking-[0.15em] text-white uppercase"
+                    style={{ fontFamily: "var(--font-bebas)" }}
+                  >
                     Discover Old D'Hanis
                   </h3>
                 </div>
@@ -447,11 +528,14 @@ export default function Header() {
               {/* About Panel */}
               <Link
                 href="/about"
-                onClick={(e) => { handleNavClick(e, '/about'); setIsMenuOpen(false); }}
+                onClick={(e) => {
+                  handleNavClick(e, "/about");
+                  setIsMenuOpen(false);
+                }}
                 className={`relative h-full min-h-[60vh] overflow-hidden group cursor-pointer flex items-center justify-center transition-all duration-500 ${
-                  isMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                  isMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
                 }`}
-                style={{ transitionDelay: isMenuOpen ? '450ms' : '0ms' }}
+                style={{ transitionDelay: isMenuOpen ? "450ms" : "0ms" }}
               >
                 <Image
                   src="/images/background_pic.jpg"
@@ -461,7 +545,10 @@ export default function Header() {
                 />
                 <div className="absolute inset-0 bg-black/50 transition-colors duration-150 group-hover:bg-black/30"></div>
                 <div className="relative z-10 text-center">
-                  <h3 className="text-4xl md:text-5xl font-light tracking-[0.15em] text-white uppercase" style={{ fontFamily: 'var(--font-bebas)' }}>
+                  <h3
+                    className="text-4xl md:text-5xl font-light tracking-[0.15em] text-white uppercase"
+                    style={{ fontFamily: "var(--font-bebas)" }}
+                  >
                     About Us
                   </h3>
                 </div>

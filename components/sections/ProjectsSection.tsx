@@ -15,8 +15,8 @@ export default function ProjectsSection() {
       setScrollY(window.scrollY);
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
@@ -48,14 +48,19 @@ export default function ProjectsSection() {
 
               {/* Title Overlay - Centered */}
               <div className="absolute inset-0 flex items-center justify-center px-4">
-                <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-light tracking-[0.1em] sm:tracking-[0.15em] text-white uppercase text-center" style={{ fontFamily: 'var(--font-bebas)' }}>
+                <h3
+                  className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-light tracking-[0.1em] sm:tracking-[0.15em] text-white uppercase text-center"
+                  style={{ fontFamily: "var(--font-bebas)" }}
+                >
                   {project.title}
                 </h3>
               </div>
 
               {/* Status Badge */}
               <div className="absolute top-4 left-4 sm:top-6 sm:left-6 bg-black/60 backdrop-blur-sm px-3 py-1.5 sm:px-4 sm:py-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <span className="text-xs text-accent/80 tracking-wider uppercase">{project.status}</span>
+                <span className="text-xs text-accent/80 tracking-wider uppercase">
+                  {project.status}
+                </span>
               </div>
             </Link>
 

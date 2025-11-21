@@ -36,7 +36,8 @@ export const HOME_CONTENT = {
 // About Page Content
 export const ABOUT_CONTENT = {
   intro: {
-    heading: "Saltbox Interactive was founded on the belief that history should be experienced, not just read about.",
+    heading:
+      "Saltbox Interactive was founded on the belief that history should be experienced, not just read about.",
     body: "Our journey began with a simple question: What if we could use modern technology to step back in time? Today, we transform historical locations into explorable virtual environments where history comes alive.",
   },
   team: {
@@ -62,7 +63,8 @@ export const PROJECTS_CONTENT = {
 
 // Footer Content
 export const FOOTER_CONTENT = {
-  tagline: "Preserving history through immersive digital experiences. Where the past meets cutting-edge technology.",
+  tagline:
+    "Preserving history through immersive digital experiences. Where the past meets cutting-edge technology.",
   motto: "DISCOVER. LEARN. PRESERVE.",
   copyright: "SALTBOX INTERACTIVE. ALL RIGHTS RESERVED.",
 } as const;

@@ -11,7 +11,14 @@ interface HeroProps {
   pageName?: string;
 }
 
-export default function Hero({ title, subtitle, backgroundImage, className = "", showMotto = false, pageName }: HeroProps) {
+export default function Hero({
+  title,
+  subtitle,
+  backgroundImage,
+  className = "",
+  showMotto = false,
+  pageName,
+}: HeroProps) {
   const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
@@ -44,16 +51,16 @@ export default function Hero({ title, subtitle, backgroundImage, className = "",
 
       {/* Subtle texture overlay */}
       <div className="absolute inset-0 bg-noise opacity-5"></div>
-      
+
       <div className="relative z-10 text-center px-6 max-w-6xl mx-auto">
         {showMotto ? (
           <div className="flex flex-col items-center justify-center gap-4 md:gap-6">
             <div
               className="text-5xl md:text-7xl lg:text-8xl font-light tracking-[0.3em] text-white transition-all duration-300"
               style={{
-                fontFamily: 'var(--font-bebas)',
+                fontFamily: "var(--font-bebas)",
                 transform: `translateX(${scrollY * -1.5}px)`,
-                opacity: Math.max(0, 1 - scrollY / 300)
+                opacity: Math.max(0, 1 - scrollY / 300),
               }}
             >
               DISCOVER
@@ -61,9 +68,9 @@ export default function Hero({ title, subtitle, backgroundImage, className = "",
             <div
               className="text-5xl md:text-7xl lg:text-8xl font-light tracking-[0.3em] text-white transition-all duration-300"
               style={{
-                fontFamily: 'var(--font-bebas)',
+                fontFamily: "var(--font-bebas)",
                 transform: `translateX(${scrollY * 1.5}px)`,
-                opacity: Math.max(0, 1 - scrollY / 300)
+                opacity: Math.max(0, 1 - scrollY / 300),
               }}
             >
               LEARN
@@ -71,9 +78,9 @@ export default function Hero({ title, subtitle, backgroundImage, className = "",
             <div
               className="text-5xl md:text-7xl lg:text-8xl font-light tracking-[0.3em] text-white transition-all duration-300"
               style={{
-                fontFamily: 'var(--font-bebas)',
+                fontFamily: "var(--font-bebas)",
                 transform: `translateX(${scrollY * -1.5}px)`,
-                opacity: Math.max(0, 1 - scrollY / 300)
+                opacity: Math.max(0, 1 - scrollY / 300),
               }}
             >
               PRESERVE
@@ -87,7 +94,10 @@ export default function Hero({ title, subtitle, backgroundImage, className = "",
             >
               {title && (
                 <>
-                  <h1 className="font-bebas text-7xl md:text-8xl lg:text-9xl tracking-wider text-white/90 mb-2" style={{ fontFamily: 'var(--font-bebas)' }}>
+                  <h1
+                    className="font-bebas text-7xl md:text-8xl lg:text-9xl tracking-wider text-white/90 mb-2"
+                    style={{ fontFamily: "var(--font-bebas)" }}
+                  >
                     {title}
                   </h1>
                   <div className="h-px w-32 mx-auto bg-gradient-to-r from-transparent via-accent to-transparent"></div>
