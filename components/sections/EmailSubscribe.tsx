@@ -38,7 +38,7 @@ export default function EmailSubscribe() {
   };
 
   return (
-    <section className="relative bg-black py-16 sm:py-20 md:py-24 pb-32 sm:pb-40 md:pb-48 border-b border-accent/10">
+    <section className="relative bg-black py-16 sm:py-20 md:py-24 pb-40 sm:pb-52 md:pb-64 border-b border-accent/10">
       <div className="container mx-auto px-4 sm:px-6">
         <div className="relative flex flex-col lg:flex-row lg:items-start gap-8">
           {/* Left - Logo */}
