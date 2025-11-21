@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import Hero from "@/components/sections/Hero";
 import ParallaxImage from "@/components/ParallaxImage";
 import BracketButton from "@/components/ui/BracketButton";
@@ -11,13 +10,10 @@ import Container from "@/components/ui/Container";
 import SectionWrapper from "@/components/ui/SectionWrapper";
 import { LocalBusinessSchema, FAQSchema } from "@/components/schemas";
 import { ABOUT_PAGE_FAQS } from "@/lib/data/seo";
-import { useScrollPosition } from "@/hooks/useScrollPosition";
 import { ABOUT_CONTENT } from "@/lib/data/content";
 import EmailSubscribe from "@/components/sections/EmailSubscribe";
 
 export default function AboutPage() {
-  const scrollY = useScrollPosition();
-
   return (
     <>
       <LocalBusinessSchema />
