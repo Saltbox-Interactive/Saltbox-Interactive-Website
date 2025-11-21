@@ -14,6 +14,8 @@ const workSans = Work_Sans({
   subsets: ["latin"],
   display: "swap",
   weight: ["300", "400", "500", "600"],
+  preload: true,
+  fallback: ["system-ui", "arial"],
 });
 
 const bebas = Bebas_Neue({
@@ -21,6 +23,8 @@ const bebas = Bebas_Neue({
   weight: "400",
   subsets: ["latin"],
   display: "swap",
+  preload: true,
+  fallback: ["impact", "arial"],
 });
 
 const archivoBlack = Archivo_Black({
@@ -28,6 +32,8 @@ const archivoBlack = Archivo_Black({
   weight: "400",
   subsets: ["latin"],
   display: "swap",
+  preload: true,
+  fallback: ["arial", "sans-serif"],
 });
 
 export const metadata: Metadata = {
@@ -113,15 +119,6 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  icons: {
-    icon: [
-      { url: "/favicon.ico", sizes: "any" },
-      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
-      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
-    ],
-    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
-    shortcut: "/favicon.ico",
-  },
 };
 
 export default function RootLayout({
@@ -132,6 +129,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        {/* Preconnect to external domains for faster resource loading */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+
         <OrganizationSchema />
         <PersonSchema />
         {process.env.NEXT_PUBLIC_GA_ID && <GoogleAnalytics ga_id={process.env.NEXT_PUBLIC_GA_ID} />}

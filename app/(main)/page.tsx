@@ -125,11 +125,14 @@ export default function Home() {
           opacity: scrollY > 3000 ? Math.max(0, 1 - (scrollY - 3000) / 500) : 1,
         }}
       >
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{
-            backgroundImage: "url(/images/background_pic.jpg)",
-          }}
+        <Image
+          src="/images/background_pic.jpg"
+          alt="Historic background"
+          fill
+          priority
+          quality={85}
+          sizes="100vw"
+          className="object-cover object-center"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-gray-900/80 to-black/90"></div>
         <div className="absolute inset-0 gradient-dust opacity-40"></div>
