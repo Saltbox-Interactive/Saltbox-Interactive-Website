@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
-import { useReducedMotion } from "@/hooks/useReducedMotion";
 
 interface LightboxProps {
   images: { src: string; alt: string }[];
@@ -13,7 +12,6 @@ interface LightboxProps {
 
 export default function Lightbox({ images, initialIndex = 0, isOpen, onClose }: LightboxProps) {
   const [currentIndex, setCurrentIndex] = useState(initialIndex);
-  const prefersReducedMotion = useReducedMotion();
 
   useEffect(() => {
     setCurrentIndex(initialIndex);

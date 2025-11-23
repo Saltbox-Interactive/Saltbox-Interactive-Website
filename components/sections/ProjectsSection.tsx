@@ -1,35 +1,20 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { projects } from "@/lib/data/projects";
 import BracketButton from "@/components/ui/BracketButton";
 
 export default function ProjectsSection() {
-  const [hoveredProject, setHoveredProject] = useState<number | null>(null);
-  const [scrollY, setScrollY] = useState(0);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
   return (
     <section id="projects" className="relative bg-black py-16 sm:py-24 md:py-32 px-4 sm:px-6">
       {/* Projects Stack */}
       <div className="flex flex-col gap-8 sm:gap-12 max-w-[1400px] mx-auto">
-        {projects.map((project, index) => (
+        {projects.map((project) => (
           <div key={project.id} className="w-full">
             <Link
               href={`/projects/${project.slug}`}
               className="relative h-[250px] sm:h-[300px] md:h-[350px] lg:h-[400px] block overflow-hidden group"
-              onMouseEnter={() => setHoveredProject(index)}
-              onMouseLeave={() => setHoveredProject(null)}
             >
               {/* Background Image */}
               <div className="absolute inset-0">

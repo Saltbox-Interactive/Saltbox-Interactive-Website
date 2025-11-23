@@ -1,6 +1,5 @@
 import { notFound } from "next/navigation";
 import { getProjectBySlug, projects } from "@/lib/data/projects";
-import Link from "next/link";
 import ProjectContent from "./ProjectContent";
 import type { Metadata } from "next";
 

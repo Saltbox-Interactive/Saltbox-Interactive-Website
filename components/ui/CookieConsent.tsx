@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { COLORS } from "@/lib/constants";
 
 export default function CookieConsent() {
   const [showBanner, setShowBanner] = useState(false);

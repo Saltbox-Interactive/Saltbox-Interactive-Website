@@ -8,7 +8,6 @@ import ArrowButton from "@/components/ui/ArrowButton";
 import NewsCard from "@/components/ui/NewsCard";
 
 export default function NewsShowcase() {
-  const [currentIndex, setCurrentIndex] = useState(0);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
   const [latestPosts, setLatestPosts] = useState<NewsPost[]>([]);

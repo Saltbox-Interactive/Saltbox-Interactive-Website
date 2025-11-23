@@ -44,7 +44,7 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
 
   const [contextValue, setContextValue] = useState({
     lenis: null as Lenis | null,
-    setScrollSpeed: (duration: number, smooth = true) => {
+    setScrollSpeed: (duration: number) => {
       if (lenisRef.current) {
         lenisRef.current.options.duration = duration;
       }
@@ -55,7 +55,7 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
     if (lenisRef.current) {
       setContextValue({
         lenis: lenisRef.current,
-        setScrollSpeed: (duration: number, smooth = true) => {
+        setScrollSpeed: (duration: number) => {
           if (lenisRef.current) {
             lenisRef.current.options.duration = duration;
           }

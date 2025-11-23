@@ -35,7 +35,6 @@ export default function ParallaxImage({
       const elementBottom = rect.bottom;
 
       // Calculate progress through viewport (0 at bottom, 1 at top)
-      const visibleHeight = Math.min(elementBottom, windowHeight) - Math.max(elementTop, 0);
       const progress = (windowHeight - elementTop) / (windowHeight + rect.height);
 
       // Only apply parallax when element is in viewport

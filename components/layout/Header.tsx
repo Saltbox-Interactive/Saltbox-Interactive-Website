@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState, useEffect, useContext, useRef } from "react";
-import { usePathname, useRouter } from "next/navigation";
+import { useState, useEffect, useContext } from "react";
+import { usePathname } from "next/navigation";
 import { ScrollSpeedContext } from "../ScrollSpeedContext";
 import SocialLinks from "@/components/ui/SocialLinks";
 
@@ -20,7 +20,6 @@ export default function Header() {
     openMenu: "",
   });
   const pathname = usePathname();
-  const router = useRouter();
   const { lenis } = useContext(ScrollSpeedContext);
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
