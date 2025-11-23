@@ -2,7 +2,6 @@
 
 import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { Project } from "@/lib/data/projects";
 import ParallaxImage from "@/components/ParallaxImage";
 import { VideoGameSchema, BreadcrumbSchema } from "@/components/StructuredData";
@@ -19,9 +18,7 @@ import ArrowButton from "@/components/ui/ArrowButton";
 export default function ProjectContent({ project }: { project: Project }) {
   const [scrollY, setScrollY] = useState(0);
   const screenshotsRef = useRef<HTMLElement>(null);
-  const [screenshotsVisible, setScreenshotsVisible] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [showArrows, setShowArrows] = useState(false);
   const [playNowOpacity, setPlayNowOpacity] = useState(1);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
@@ -43,9 +40,6 @@ export default function ProjectContent({ project }: { project: Project }) {
         clearTimeout(scrollTimeoutRef.current);
       }
 
-      scrollTimeoutRef.current = setTimeout(() => {
-        setShowArrows(false);
-      }, 1500);
       // Calculate position based on Steam banner visibility
       if (steamBannerRef.current) {
         const bannerRect = steamBannerRef.current.getBoundingClientRect();
@@ -115,7 +109,7 @@ export default function ProjectContent({ project }: { project: Project }) {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.target === screenshotsRef.current) {
-            setScreenshotsVisible(entry.isIntersecting);
+            // Screenshots visibility tracking removed
           }
         });
       },
@@ -129,14 +123,12 @@ export default function ProjectContent({ project }: { project: Project }) {
 
   useEffect(() => {
     const handleMouseMove = () => {
-      setShowArrows(true);
-
       if (mouseTimeoutRef.current) {
         clearTimeout(mouseTimeoutRef.current);
       }
 
       mouseTimeoutRef.current = setTimeout(() => {
-        setShowArrows(false);
+        // Arrow visibility tracking removed
       }, 20000);
     };
 
