@@ -80,12 +80,17 @@ html {
   scroll-behavior: smooth;
   overscroll-behavior: none;
   overflow-x: hidden;
-  overflow-y: scroll !important;
 }
 
-/* Force scrollbar to always be visible, even with Lenis */
-html.lenis {
-  overflow-y: scroll !important;
+/* Force scrollbar to always be visible on desktop, even with Lenis */
+@media (min-width: 768px) {
+  html {
+    overflow-y: scroll !important;
+  }
+
+  html.lenis {
+    overflow-y: scroll !important;
+  }
 }
 
 html.menu-open,
@@ -93,30 +98,32 @@ html.lenis.menu-open {
   overflow-y: hidden !important;
 }
 
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-  width: 12px;
-}
+/* Custom Scrollbar - Desktop only */
+@media (min-width: 768px) {
+  ::-webkit-scrollbar {
+    width: 12px;
+  }
 
-::-webkit-scrollbar-track {
-  background: var(--gray-dark);
-  border-left: 1px solid rgba(212, 165, 116, 0.1);
-}
+  ::-webkit-scrollbar-track {
+    background: var(--gray-dark);
+    border-left: 1px solid rgba(212, 165, 116, 0.1);
+  }
 
-::-webkit-scrollbar-thumb {
-  background: var(--accent-dark);
-  border-radius: 6px;
-  border: 2px solid var(--gray-dark);
-}
+  ::-webkit-scrollbar-thumb {
+    background: var(--accent-dark);
+    border-radius: 6px;
+    border: 2px solid var(--gray-dark);
+  }
 
-::-webkit-scrollbar-thumb:hover {
-  background: var(--accent);
-}
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--accent);
+  }
 
-/* Firefox */
-* {
-  scrollbar-width: thin;
-  scrollbar-color: var(--accent-dark) var(--gray-dark);
+  /* Firefox */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent-dark) var(--gray-dark);
+  }
 }
 
 a {
@@ -238,4 +245,23 @@ a {
 .animate-scroll-seamless {
   animation: scroll-seamless 40s linear infinite;
   will-change: transform;
+}
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .animate-scroll,
+  .animate-scroll-fast,
+  .animate-scroll-very-fast,
+  .animate-scroll-seamless {
+    animation: none;
+  }
 }

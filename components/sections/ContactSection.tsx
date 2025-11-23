@@ -122,7 +122,7 @@ export default function ContactSection() {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 sm:py-4 bg-[#1a1a1a] border-b border-gray-700 text-foreground placeholder-gray-600 focus:outline-none focus:border-accent transition-colors duration-300 text-base sm:text-lg"
+                    className="w-full px-4 py-4 sm:py-5 min-h-[48px] bg-[#1a1a1a] border-b border-gray-700 text-foreground placeholder-gray-600 focus:outline-none focus:border-accent transition-colors duration-300 text-base sm:text-lg"
                     placeholder="Your Name"
                     autoComplete="name"
                   />
@@ -142,7 +142,7 @@ export default function ContactSection() {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 sm:py-4 bg-[#1a1a1a] border-b border-gray-700 text-foreground placeholder-gray-600 focus:outline-none focus:border-accent transition-colors duration-300 text-base sm:text-lg"
+                    className="w-full px-4 py-4 sm:py-5 min-h-[48px] bg-[#1a1a1a] border-b border-gray-700 text-foreground placeholder-gray-600 focus:outline-none focus:border-accent transition-colors duration-300 text-base sm:text-lg"
                     placeholder="your@email.com"
                     autoComplete="email"
                     inputMode="email"
@@ -164,7 +164,7 @@ export default function ContactSection() {
                   value={formData.subject}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 sm:py-4 bg-[#1a1a1a] border-b border-gray-700 text-foreground placeholder-gray-600 focus:outline-none focus:border-accent transition-colors duration-300 text-base sm:text-lg"
+                  className="w-full px-4 py-4 sm:py-5 min-h-[48px] bg-[#1a1a1a] border-b border-gray-700 text-foreground placeholder-gray-600 focus:outline-none focus:border-accent transition-colors duration-300 text-base sm:text-lg"
                   placeholder="What's this about?"
                 />
               </div>
@@ -183,7 +183,7 @@ export default function ContactSection() {
                   onChange={handleChange}
                   required
                   rows={6}
-                  className="w-full px-4 py-3 sm:py-4 bg-[#1a1a1a] border-b border-gray-700 text-foreground placeholder-gray-600 focus:outline-none focus:border-accent transition-colors duration-300 resize-y text-base sm:text-lg"
+                  className="w-full px-4 py-4 sm:py-5 bg-[#1a1a1a] border-b border-gray-700 text-foreground placeholder-gray-600 focus:outline-none focus:border-accent transition-colors duration-300 resize-y text-base sm:text-lg"
                   placeholder="Tell us about your interest in historical preservation..."
                 />
               </div>

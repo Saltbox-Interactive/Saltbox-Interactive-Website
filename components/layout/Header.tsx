@@ -242,7 +242,7 @@ export default function Header() {
 
             {/* Mobile menu toggle */}
             <button
-              className="lg:hidden text-foreground hover:text-accent transition-colors absolute right-4 sm:right-8 p-2 -m-2"
+              className="lg:hidden text-foreground hover:text-accent active:text-accent transition-colors absolute right-4 sm:right-8 p-3 min-w-[44px] min-h-[44px] flex items-center justify-center"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
             >

@@ -7,8 +7,8 @@ interface SocialLinksProps {
 }
 
 export default function SocialLinks({ variant = "default", className = "" }: SocialLinksProps) {
-  const iconSize = variant === "small" ? "w-5 h-5" : "w-6 h-6";
-  const gap = variant === "small" ? "gap-4" : "gap-6";
+  const iconSize = variant === "small" ? "w-5 h-5" : "w-5 h-5 sm:w-6 sm:h-6";
+  const gap = variant === "small" ? "gap-3 sm:gap-4" : "gap-4 sm:gap-6";
 
   return (
     <div className={`flex ${gap} ${className}`}>
@@ -16,7 +16,7 @@ export default function SocialLinks({ variant = "default", className = "" }: Soc
         href={SOCIAL_LINKS.linkedin}
         target="_blank"
         rel="noopener noreferrer"
-        className="text-gray-400 hover:text-accent transition-colors duration-300"
+        className="text-gray-400 hover:text-accent active:text-accent transition-colors duration-300 p-2 min-w-[44px] min-h-[44px] flex items-center justify-center"
         aria-label="LinkedIn"
       >
         <svg className={iconSize} fill="currentColor" viewBox="0 0 24 24">
@@ -28,7 +28,7 @@ export default function SocialLinks({ variant = "default", className = "" }: Soc
         href={SOCIAL_LINKS.youtube}
         target="_blank"
         rel="noopener noreferrer"
-        className="text-gray-400 hover:text-accent transition-colors duration-300"
+        className="text-gray-400 hover:text-accent active:text-accent transition-colors duration-300 p-2 min-w-[44px] min-h-[44px] flex items-center justify-center"
         aria-label="YouTube"
       >
         <svg className={iconSize} fill="currentColor" viewBox="0 0 24 24">
@@ -40,7 +40,7 @@ export default function SocialLinks({ variant = "default", className = "" }: Soc
         href={SOCIAL_LINKS.steam}
         target="_blank"
         rel="noopener noreferrer"
-        className="text-gray-400 hover:text-accent transition-colors duration-300"
+        className="text-gray-400 hover:text-accent active:text-accent transition-colors duration-300 p-2 min-w-[44px] min-h-[44px] flex items-center justify-center"
         aria-label="Steam"
       >
         <svg className={iconSize} fill="currentColor" viewBox="0 0 24 24">
@@ -49,7 +49,7 @@ export default function SocialLinks({ variant = "default", className = "" }: Soc
       </Link>
 
       <span
-        className="text-gray-600 cursor-not-allowed opacity-50"
+        className="text-gray-600 cursor-not-allowed opacity-50 p-2 min-w-[44px] min-h-[44px] flex items-center justify-center"
         aria-label="Facebook (Coming Soon)"
       >
         <svg className={iconSize} fill="currentColor" viewBox="0 0 24 24">
@@ -58,7 +58,7 @@ export default function SocialLinks({ variant = "default", className = "" }: Soc
       </span>
 
       <span
-        className="text-gray-600 cursor-not-allowed opacity-50"
+        className="text-gray-600 cursor-not-allowed opacity-50 p-2 min-w-[44px] min-h-[44px] flex items-center justify-center"
         aria-label="Instagram (Coming Soon)"
       >
         <svg className={iconSize} fill="currentColor" viewBox="0 0 24 24">
@@ -67,7 +67,7 @@ export default function SocialLinks({ variant = "default", className = "" }: Soc
       </span>
 
       <span
-        className="text-gray-600 cursor-not-allowed opacity-50"
+        className="text-gray-600 cursor-not-allowed opacity-50 p-2 min-w-[44px] min-h-[44px] flex items-center justify-center"
         aria-label="Twitter (Coming Soon)"
       >
         <svg className={iconSize} fill="currentColor" viewBox="0 0 24 24">
@@ -76,7 +76,7 @@ export default function SocialLinks({ variant = "default", className = "" }: Soc
       </span>
 
       <span
-        className="text-gray-600 cursor-not-allowed opacity-50"
+        className="text-gray-600 cursor-not-allowed opacity-50 p-2 min-w-[44px] min-h-[44px] flex items-center justify-center"
         aria-label="Discord (Coming Soon)"
       >
         <svg className={iconSize} fill="currentColor" viewBox="0 0 24 24">

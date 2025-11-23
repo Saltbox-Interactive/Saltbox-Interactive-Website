@@ -39,11 +39,11 @@ export default function EmailSubscribe() {
   };
 
   return (
-    <section className="relative bg-black py-16 sm:py-20 md:py-24 pb-40 sm:pb-52 md:pb-64 border-b border-accent/10">
+    <section className="relative bg-black py-12 sm:py-16 md:py-20 lg:py-24 pb-20 sm:pb-32 md:pb-40 lg:pb-52 border-b border-accent/10">
       <div className="container mx-auto px-4 sm:px-6">
         <div className="relative flex flex-col lg:flex-row lg:items-start gap-8">
           {/* Left - Logo */}
-          <div className="flex justify-start lg:absolute lg:left-[-7rem] lg:-top-8">
+          <div className="flex justify-start xl:absolute xl:left-[-7rem] xl:-top-8">
             <Link href="/">
               <Image
                 src="/images/saltbox-logo.svg"
@@ -56,7 +56,7 @@ export default function EmailSubscribe() {
           </div>
 
           {/* Center - Heading and Subscribe Button */}
-          <div className="flex-1 text-left space-y-6 sm:space-y-8 lg:mx-auto lg:max-w-xl lg:pt-0">
+          <div className="flex-1 text-left space-y-4 sm:space-y-6 md:space-y-8 lg:mx-auto lg:max-w-xl lg:pt-0">
             <h2
               className="text-2xl sm:text-3xl md:text-4xl font-light tracking-[0.2em] text-white"
               style={{ fontFamily: "var(--font-bebas)" }}
@@ -67,7 +67,7 @@ export default function EmailSubscribe() {
             <div className="flex justify-start">
               <button
                 onClick={() => setShowForm(!showForm)}
-                className="inline-flex items-center gap-2 group py-2"
+                className="inline-flex items-center gap-2 group py-3 min-h-[44px] active:opacity-75 transition-opacity"
               >
                 <span className="text-accent transition-all duration-300 group-hover:-translate-x-1 text-base sm:text-lg">
                   [
@@ -86,7 +86,7 @@ export default function EmailSubscribe() {
           </div>
 
           {/* Right - Image or Form */}
-          <div className="relative w-full lg:w-1/3 lg:absolute lg:right-0 lg:mr-[-6rem] overflow-hidden">
+          <div className="relative w-full lg:w-1/3 xl:absolute xl:right-0 xl:mr-[-6rem] overflow-hidden">
             <div
               className={`relative w-full aspect-[4/3] lg:aspect-[3/2] transition-all duration-700 ease-in-out ${
                 showForm ? "translate-y-full opacity-0" : "translate-y-0 opacity-100"
@@ -114,7 +114,7 @@ export default function EmailSubscribe() {
                     placeholder="Name"
                     value={nameValue}
                     onChange={(e) => setNameValue(e.target.value)}
-                    className="w-full bg-black border border-accent/20 text-white px-4 py-5 focus:outline-none focus:border-accent transition-colors text-base"
+                    className="w-full bg-black border border-accent/20 text-white px-4 py-4 sm:py-5 min-h-[48px] focus:outline-none focus:border-accent transition-colors text-base"
                   />
                   <div className="relative">
                     <input
@@ -122,7 +122,7 @@ export default function EmailSubscribe() {
                       placeholder="Email"
                       value={emailValue}
                       onChange={(e) => setEmailValue(e.target.value)}
-                      className="w-full bg-black border border-accent/20 text-white px-4 py-5 focus:outline-none focus:border-accent transition-colors text-base"
+                      className="w-full bg-black border border-accent/20 text-white px-4 py-4 sm:py-5 min-h-[48px] focus:outline-none focus:border-accent transition-colors text-base"
                     />
                     {!emailValue && (
                       <span className="absolute left-[4.25rem] top-1/2 -translate-y-1/2 text-accent text-base pointer-events-none">

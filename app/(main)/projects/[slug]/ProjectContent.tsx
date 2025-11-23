@@ -250,7 +250,7 @@ export default function ProjectContent({ project }: { project: Project }) {
 
         <div className="container mx-auto px-4 sm:px-6">
           {/* General Info Section */}
-          <div className="flex flex-col lg:flex-row lg:items-start gap-6 lg:gap-12">
+          <div className="flex flex-col md:flex-row md:items-start gap-6 md:gap-8 lg:gap-12">
             <h3
               className="text-lg sm:text-xl font-light tracking-[0.2em] text-accent uppercase"
               style={{ fontFamily: "var(--font-bebas)" }}
@@ -355,7 +355,7 @@ export default function ProjectContent({ project }: { project: Project }) {
             {/* First Feature - Image Left, Text Right */}
             <div className="py-20">
               <div className="container mx-auto px-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 lg:gap-12 items-center">
                   <ParallaxImage
                     src={project.gallery[3]}
                     alt={`${project.features[0]}`}
@@ -386,7 +386,7 @@ export default function ProjectContent({ project }: { project: Project }) {
             {/* Small Image Grid */}
             <div className="py-20">
               <div className="container mx-auto px-6 max-w-7xl">
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-5 lg:gap-6">
                   {project.gallery.slice(4, 8).map((img, idx) => (
                     <ParallaxImage
                       key={idx}
@@ -404,7 +404,7 @@ export default function ProjectContent({ project }: { project: Project }) {
             {/* Second Feature - Text Left, Image Right */}
             <div className="py-20">
               <div className="container mx-auto px-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 lg:gap-12 items-center">
                   <div
                     style={{
                       transform: `translateY(${scrollY * -0.02}px)`,
@@ -458,7 +458,7 @@ export default function ProjectContent({ project }: { project: Project }) {
             {/* Third Feature - Large Image Left, Small Images + Text Right */}
             <div className="py-20">
               <div className="container mx-auto px-6 max-w-7xl">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 lg:gap-12">
                   <div
                     ref={(el) => {
                       imageRefs.current["portrait1"] = el;
@@ -493,7 +493,7 @@ export default function ProjectContent({ project }: { project: Project }) {
                         {project.longDescription.split("\n\n")[2] || project.description}
                       </p>
                     </div>
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-2 gap-3 sm:gap-4">
                       {project.gallery.slice(10, 12).map((img, idx) => (
                         <ParallaxImage
                           key={idx}
@@ -513,7 +513,7 @@ export default function ProjectContent({ project }: { project: Project }) {
             {/* Medium Image Duo */}
             <div className="py-20">
               <div className="container mx-auto px-6 max-w-7xl">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 lg:gap-12">
                   <ParallaxImage
                     src={project.gallery[12]}
                     alt="Natural landscape with dynamic time-of-day lighting"
@@ -535,7 +535,7 @@ export default function ProjectContent({ project }: { project: Project }) {
             {/* Fourth Feature - Vertical Image Right, Text Left */}
             <div className="py-20">
               <div className="container mx-auto px-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 lg:gap-12 items-center">
                   <div
                     style={{
                       transform: `translateY(${scrollY * -0.028}px)`,
@@ -585,7 +585,7 @@ export default function ProjectContent({ project }: { project: Project }) {
             {/* Large Showcase Grid */}
             <div className="py-20">
               <div className="container mx-auto px-6 max-w-7xl">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5 md:gap-6">
                   <div className="grid grid-rows-2 gap-6">
                     <ParallaxImage
                       src={project.gallery[15]}
@@ -646,7 +646,7 @@ export default function ProjectContent({ project }: { project: Project }) {
             {/* Default Layout for Other Projects */}
             <div className="py-20 flex items-center">
               <div className="container mx-auto px-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 lg:gap-12 items-center">
                   {project.gallery && "/images/temp/dod-temp-9.jpg" && (
                     <ParallaxImage
                       src={"/images/temp/dod-temp-9.jpg"}
@@ -679,7 +679,7 @@ export default function ProjectContent({ project }: { project: Project }) {
 
             <div className="py-20 flex items-center">
               <div className="container mx-auto px-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 lg:gap-12 items-center">
                   <div
                     style={{
                       transform: `translateY(${scrollY * -0.02}px)`,
@@ -713,7 +713,7 @@ export default function ProjectContent({ project }: { project: Project }) {
             {project.slug === "discover-old-dhanis" && (
               <div className="py-20 flex items-center">
                 <div className="container mx-auto px-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 lg:gap-12 items-center">
                     {project.gallery && project.gallery[2] && (
                       <ParallaxImage
                         src={project.gallery[2]}

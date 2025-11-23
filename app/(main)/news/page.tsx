@@ -25,23 +25,23 @@ export default async function BlogPage() {
 
       <section className="relative py-20 bg-black">
         {/* Horizontal line */}
-        <div className="px-16 mb-6">
+        <div className="px-4 sm:px-8 md:px-16 mb-6">
           <div className="h-px w-full bg-white/30"></div>
         </div>
 
         {/* Latest News Section */}
-        <div className="px-16 mb-20">
-          <div className="flex items-start gap-12">
+        <div className="px-4 sm:px-8 md:px-16 mb-20">
+          <div className="flex flex-col lg:flex-row items-start gap-4 sm:gap-8 lg:gap-12">
             {/* Section Title */}
             <div className="flex-shrink-0">
               <SectionTitle>Latest News</SectionTitle>
             </div>
 
             {/* News Cards Container */}
-            <div className="flex-1 relative overflow-hidden">
-              <div className="flex gap-6">
+            <div className="flex-1 relative overflow-hidden w-full">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                 {recentPosts.map((post) => (
-                  <div key={post._id} className="flex-shrink-0 w-[calc(50%-12px)]">
+                  <div key={post._id}>
                     <NewsCard
                       slug={post.slug.current}
                       title={post.title}
@@ -59,19 +59,19 @@ export default async function BlogPage() {
         </div>
 
         {/* Horizontal line */}
-        <div className="px-16 mb-6">
+        <div className="px-4 sm:px-8 md:px-16 mb-6">
           <div className="h-px w-full bg-white/30"></div>
         </div>
 
         {/* All News Section */}
-        <div className="px-16">
+        <div className="px-4 sm:px-8 md:px-16">
           {/* Section Title */}
           <div className="mb-12">
             <SectionTitle>All News</SectionTitle>
           </div>
 
           {/* News Cards Grid */}
-          <div className="grid grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {allPosts.map((post) => (
               <div key={post._id} className="w-full">
                 <NewsCard

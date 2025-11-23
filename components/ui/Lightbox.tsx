@@ -66,7 +66,7 @@ export default function Lightbox({ images, initialIndex = 0, isOpen, onClose }: 
       {/* Close button */}
       <button
         onClick={onClose}
-        className="absolute top-4 right-4 text-white/80 hover:text-white transition-colors p-2 z-10"
+        className="absolute top-4 right-4 text-white/80 hover:text-white active:text-white transition-colors p-3 sm:p-2 min-w-[48px] min-h-[48px] flex items-center justify-center z-10"
         aria-label="Close lightbox"
       >
         <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -91,7 +91,7 @@ export default function Lightbox({ images, initialIndex = 0, isOpen, onClose }: 
             e.stopPropagation();
             goToPrevious();
           }}
-          className="absolute left-4 top-1/2 -translate-y-1/2 text-white/80 hover:text-white transition-colors p-4 bg-black/30 rounded-full backdrop-blur-sm"
+          className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 text-white/80 hover:text-white active:text-white transition-colors p-4 sm:p-4 min-w-[56px] min-h-[56px] flex items-center justify-center bg-black/30 rounded-full backdrop-blur-sm"
           aria-label="Previous image"
         >
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -107,7 +107,7 @@ export default function Lightbox({ images, initialIndex = 0, isOpen, onClose }: 
 
       {/* Image container */}
       <div
-        className="relative w-full h-full flex items-center justify-center p-8"
+        className="relative w-full h-full flex items-center justify-center p-4 sm:p-8"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="relative max-w-7xl max-h-full w-full h-full">
@@ -128,7 +128,7 @@ export default function Lightbox({ images, initialIndex = 0, isOpen, onClose }: 
             e.stopPropagation();
             goToNext();
           }}
-          className="absolute right-4 top-1/2 -translate-y-1/2 text-white/80 hover:text-white transition-colors p-4 bg-black/30 rounded-full backdrop-blur-sm"
+          className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 text-white/80 hover:text-white active:text-white transition-colors p-4 sm:p-4 min-w-[56px] min-h-[56px] flex items-center justify-center bg-black/30 rounded-full backdrop-blur-sm"
           aria-label="Next image"
         >
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -147,10 +147,10 @@ export default function Lightbox({ images, initialIndex = 0, isOpen, onClose }: 
                 e.stopPropagation();
                 setCurrentIndex(idx);
               }}
-              className={`relative w-16 h-16 rounded overflow-hidden transition-all ${
+              className={`relative w-20 h-20 sm:w-16 sm:h-16 rounded overflow-hidden transition-all ${
                 idx === currentIndex
                   ? "ring-2 ring-accent scale-110"
-                  : "opacity-60 hover:opacity-100"
+                  : "opacity-60 hover:opacity-100 active:opacity-100"
               }`}
               aria-label={`View image ${idx + 1}`}
             >

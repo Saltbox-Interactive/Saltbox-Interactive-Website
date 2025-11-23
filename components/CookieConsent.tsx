@@ -49,9 +49,9 @@ export default function CookieConsent() {
   if (!showBanner) return null;
 
   return (
-    <div className="fixed bottom-8 left-8 bg-[#1a1a1a] p-6 z-[200] max-w-2xl shadow-2xl">
+    <div className="fixed bottom-4 left-4 right-4 sm:bottom-8 sm:left-8 sm:right-auto bg-[#1a1a1a] p-4 sm:p-6 z-[200] sm:max-w-2xl shadow-2xl">
       <h3
-        className="text-xl font-light tracking-wider text-white mb-2 uppercase"
+        className="text-lg sm:text-xl font-light tracking-wider text-white mb-2 uppercase"
         style={{ fontFamily: "var(--font-bebas)" }}
       >
         Cookie Consent
@@ -65,7 +65,7 @@ export default function CookieConsent() {
         </a>
       </p>
 
-      <div className="flex gap-6 justify-end">
+      <div className="flex gap-3 sm:gap-6 justify-end">
         <BracketButton onClick={handleDecline}>Decline</BracketButton>
         <WhiteBoxButton onClick={handleAccept}>Accept</WhiteBoxButton>
       </div>
