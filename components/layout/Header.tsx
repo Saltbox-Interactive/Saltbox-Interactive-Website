@@ -115,9 +115,9 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
 
-  // Disable scrolling when menu is open
+  // Disable scrolling when mobile or desktop menu is open
   useEffect(() => {
-    if (isMenuOpen) {
+    if (isMenuOpen || isMobileMenuOpen) {
       // Measure actual scrollbar width by creating a temporary element
       const outer = document.createElement("div");
       outer.style.visibility = "hidden";
@@ -197,7 +197,7 @@ export default function Header() {
         lenis.start();
       }
     };
-  }, [isMenuOpen, lenis]);
+  }, [isMenuOpen, isMobileMenuOpen, lenis]);
 
   // Don't render header at all on studio, structure, or vision pages
   const isStudioPage =
@@ -216,7 +216,7 @@ export default function Header() {
         }`}
         style={{ zIndex: 200 }}
       >
-        <nav className="px-4 sm:px-6 py-4 sm:py-6 max-w-[1400px] mx-auto mt-2 sm:mt-6">
+        <nav className="px-4 sm:px-6 py-4 sm:py-6 max-w-[1400px] mx-auto mt-6 sm:mt-6">
           <div className="flex justify-between items-center">
             <Link
               href="/"
@@ -230,7 +230,7 @@ export default function Header() {
                 className="object-contain sm:w-12 sm:h-12"
               />
               <span
-                className="relative text-base sm:text-xl font-normal tracking-wide translate-y-0.5 uppercase px-2 py-1 overflow-hidden hidden sm:inline-block"
+                className="relative text-lg sm:text-xl font-normal tracking-wide translate-y-0.5 uppercase px-2 py-1 overflow-hidden inline-block"
                 style={{ fontFamily: "var(--font-bebas)" }}
               >
                 <span className="relative z-10 text-white group-hover:text-black transition-colors duration-300">
@@ -320,62 +320,191 @@ export default function Header() {
               </button>
             </div>
           </div>
-
-          {/* Mobile dropdown menu */}
-          {isMobileMenuOpen && (
-            <div className="lg:hidden mt-6 pb-4 border-t border-accent/20 pt-4">
-              <div className="flex flex-col gap-4">
-                <Link
-                  href="/projects"
-                  className={`text-lg tracking-wider transition-colors duration-300 uppercase py-2 ${pathname === "/projects" ? "text-accent" : "text-foreground/80 active:text-accent"}`}
-                  style={{ fontFamily: "var(--font-bebas)" }}
-                  onClick={(e) => {
-                    handleNavClick(e, "/projects");
-                    setIsMobileMenuOpen(false);
-                  }}
-                >
-                  Projects
-                </Link>
-                <Link
-                  href="/about"
-                  className={`text-lg tracking-wider transition-colors duration-300 uppercase py-2 ${pathname === "/about" ? "text-accent" : "text-foreground/80 active:text-accent"}`}
-                  style={{ fontFamily: "var(--font-bebas)" }}
-                  onClick={(e) => {
-                    handleNavClick(e, "/about");
-                    setIsMobileMenuOpen(false);
-                  }}
-                >
-                  About
-                </Link>
-                <Link
-                  href="/news"
-                  className={`text-lg tracking-wider transition-colors duration-300 uppercase py-2 ${pathname === "/news" ? "text-accent" : "text-foreground/80 active:text-accent"}`}
-                  style={{ fontFamily: "var(--font-bebas)" }}
-                  onClick={(e) => {
-                    handleNavClick(e, "/news");
-                    setIsMobileMenuOpen(false);
-                  }}
-                >
-                  News
-                </Link>
-                <Link
-                  href="/contact"
-                  className={`text-lg tracking-wider transition-colors duration-300 uppercase py-2 ${pathname === "/contact" ? "text-accent" : "text-foreground/80 active:text-accent"}`}
-                  style={{ fontFamily: "var(--font-bebas)" }}
-                  onClick={(e) => {
-                    handleNavClick(e, "/contact");
-                    setIsMobileMenuOpen(false);
-                  }}
-                >
-                  Contact
-                </Link>
-              </div>
-            </div>
-          )}
         </nav>
       </header>
 
-      {/* Overlay - Click to close menu */}
+      {/* Mobile Menu Overlay - Expands from center */}
+      {isMobileMenuOpen && (
+        <div
+          className="lg:hidden fixed bg-black z-[199] transition-all duration-700 ease-in-out"
+          style={{
+            top: isMobileMenuOpen ? "0" : "50%",
+            left: isMobileMenuOpen ? "0" : "50%",
+            right: isMobileMenuOpen ? "0" : "auto",
+            bottom: isMobileMenuOpen ? "0" : "auto",
+            width: isMobileMenuOpen ? "100%" : "0",
+            height: isMobileMenuOpen ? "100vh" : "0",
+            transform: isMobileMenuOpen ? "translate(0, 0)" : "translate(-50%, -50%)",
+          }}
+        >
+          <div className="flex flex-col h-full">
+            {/* Mobile Menu Content */}
+            <div
+              className={`flex-1 overflow-y-auto transition-opacity duration-300 delay-500 ${
+                isMobileMenuOpen ? "opacity-100" : "opacity-0"
+              }`}
+            >
+              <div
+                className="container mx-auto px-4 sm:px-6 h-full flex items-start pb-20"
+                style={{ paddingTop: "calc(88px + 1.5rem + 2rem)" }}
+              >
+                <div className="grid grid-cols-1 md:grid-cols-[1fr_1fr] gap-8 md:gap-12 w-full">
+                  {/* Left side - Navigation Links */}
+                  <div className="flex flex-col justify-start space-y-6 md:space-y-8">
+                    <nav className="flex flex-col space-y-4 md:space-y-6">
+                      <Link
+                        href="/projects"
+                        className={`text-3xl sm:text-4xl md:text-5xl font-light tracking-[0.15em] uppercase transition-all duration-300 inline-block ${
+                          isMobileMenuOpen
+                            ? "opacity-100 translate-x-0"
+                            : "opacity-0 -translate-x-8"
+                        } ${pathname === "/projects" ? "text-accent" : "text-white hover:text-accent active:text-accent"}`}
+                        style={{
+                          fontFamily: "var(--font-bebas)",
+                          transitionDelay: isMobileMenuOpen ? "100ms" : "0ms",
+                        }}
+                        onClick={(e) => {
+                          handleNavClick(e, "/projects");
+                          setIsMobileMenuOpen(false);
+                        }}
+                      >
+                        Projects
+                      </Link>
+                      <Link
+                        href="/about"
+                        className={`text-3xl sm:text-4xl md:text-5xl font-light tracking-[0.15em] uppercase transition-all duration-300 inline-block ${
+                          isMobileMenuOpen
+                            ? "opacity-100 translate-x-0"
+                            : "opacity-0 -translate-x-8"
+                        } ${pathname === "/about" ? "text-accent" : "text-white hover:text-accent active:text-accent"}`}
+                        style={{
+                          fontFamily: "var(--font-bebas)",
+                          transitionDelay: isMobileMenuOpen ? "200ms" : "0ms",
+                        }}
+                        onClick={(e) => {
+                          handleNavClick(e, "/about");
+                          setIsMobileMenuOpen(false);
+                        }}
+                      >
+                        About
+                      </Link>
+                      <Link
+                        href="/news"
+                        className={`text-3xl sm:text-4xl md:text-5xl font-light tracking-[0.15em] uppercase transition-all duration-300 inline-block ${
+                          isMobileMenuOpen
+                            ? "opacity-100 translate-x-0"
+                            : "opacity-0 -translate-x-8"
+                        } ${pathname === "/news" ? "text-accent" : "text-white hover:text-accent active:text-accent"}`}
+                        style={{
+                          fontFamily: "var(--font-bebas)",
+                          transitionDelay: isMobileMenuOpen ? "300ms" : "0ms",
+                        }}
+                        onClick={(e) => {
+                          handleNavClick(e, "/news");
+                          setIsMobileMenuOpen(false);
+                        }}
+                      >
+                        News
+                      </Link>
+                      <Link
+                        href="/contact"
+                        className={`text-3xl sm:text-4xl md:text-5xl font-light tracking-[0.15em] uppercase transition-all duration-300 inline-block ${
+                          isMobileMenuOpen
+                            ? "opacity-100 translate-x-0"
+                            : "opacity-0 -translate-x-8"
+                        } ${pathname === "/contact" ? "text-accent" : "text-white hover:text-accent active:text-accent"}`}
+                        style={{
+                          fontFamily: "var(--font-bebas)",
+                          transitionDelay: isMobileMenuOpen ? "400ms" : "0ms",
+                        }}
+                        onClick={(e) => {
+                          handleNavClick(e, "/contact");
+                          setIsMobileMenuOpen(false);
+                        }}
+                      >
+                        Contact
+                      </Link>
+                    </nav>
+
+                    {/* Social Links - Below Navigation */}
+                    <div
+                      className={`mt-8 transition-all duration-500 ${
+                        isMobileMenuOpen ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-8"
+                      }`}
+                      style={{ transitionDelay: isMobileMenuOpen ? "500ms" : "0ms" }}
+                    >
+                      <SocialLinks variant="small" />
+                    </div>
+                  </div>
+
+                  {/* Right side - Image Cards (Hidden on small mobile, shown on tablet+) */}
+                  <div className="hidden sm:flex flex-col gap-6">
+                    {/* Discover Old D'Hanis Card */}
+                    <Link
+                      href="/projects/discover-old-dhanis"
+                      onClick={(e) => {
+                        handleNavClick(e, "/projects/discover-old-dhanis");
+                        setIsMobileMenuOpen(false);
+                      }}
+                      className={`relative h-48 md:h-64 overflow-hidden group cursor-pointer flex items-center justify-center transition-all duration-500 ${
+                        isMobileMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+                      }`}
+                      style={{ transitionDelay: isMobileMenuOpen ? "300ms" : "0ms" }}
+                    >
+                      <Image
+                        src="/images/dod-cover.jpg"
+                        alt="Discover Old D'Hanis"
+                        fill
+                        className="object-cover transition-transform duration-300 group-hover:scale-105"
+                      />
+                      <div className="absolute inset-0 bg-black/50 transition-colors duration-300 group-hover:bg-black/30"></div>
+                      <div className="relative z-10 text-center px-4">
+                        <h3
+                          className="text-2xl sm:text-3xl md:text-4xl font-light tracking-[0.15em] text-white uppercase"
+                          style={{ fontFamily: "var(--font-bebas)" }}
+                        >
+                          Discover Old D'Hanis
+                        </h3>
+                      </div>
+                    </Link>
+
+                    {/* About Card */}
+                    <Link
+                      href="/about"
+                      onClick={(e) => {
+                        handleNavClick(e, "/about");
+                        setIsMobileMenuOpen(false);
+                      }}
+                      className={`relative h-48 md:h-64 overflow-hidden group cursor-pointer flex items-center justify-center transition-all duration-500 ${
+                        isMobileMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+                      }`}
+                      style={{ transitionDelay: isMobileMenuOpen ? "450ms" : "0ms" }}
+                    >
+                      <Image
+                        src="/images/background_pic.jpg"
+                        alt="About Us"
+                        fill
+                        className="object-cover transition-transform duration-300 group-hover:scale-105"
+                      />
+                      <div className="absolute inset-0 bg-black/50 transition-colors duration-300 group-hover:bg-black/30"></div>
+                      <div className="relative z-10 text-center px-4">
+                        <h3
+                          className="text-2xl sm:text-3xl md:text-4xl font-light tracking-[0.15em] text-white uppercase"
+                          style={{ fontFamily: "var(--font-bebas)" }}
+                        >
+                          About Us
+                        </h3>
+                      </div>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Desktop Menu Overlay - Click to close menu */}
       {isMenuOpen && (
         <div
           className="fixed inset-0 bg-transparent"
@@ -384,9 +513,9 @@ export default function Header() {
         />
       )}
 
-      {/* Menu Panel - Slides from top */}
+      {/* Desktop Menu Panel - Slides from top */}
       <div
-        className={`fixed top-0 left-0 right-0 bg-black transition-transform duration-700 ease-in-out ${
+        className={`hidden lg:block fixed top-0 left-0 right-0 bg-black transition-transform duration-700 ease-in-out ${
           isMenuOpen ? "translate-y-0" : "-translate-y-full"
         }`}
         style={{ zIndex: 199, height: "92vh" }}
