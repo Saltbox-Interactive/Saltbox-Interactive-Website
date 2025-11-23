@@ -1,14 +1,11 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Hero from "@/components/sections/Hero";
-import Link from "next/link";
 import Image from "next/image";
 import { useScrollSpeed } from "@/hooks/useScrollSpeed";
 import { useScrollPosition } from "@/hooks/useScrollPosition";
 import { useTypingEffect } from "@/hooks/useTypingEffect";
 import BracketButton from "@/components/ui/BracketButton";
-import AnimatedSection from "@/components/ui/AnimatedSection";
 import Typography from "@/components/ui/Typography";
 import SectionWrapper from "@/components/ui/SectionWrapper";
 import Container from "@/components/ui/Container";
