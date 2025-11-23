@@ -348,9 +348,9 @@ export default function Header() {
                 className="container mx-auto px-4 sm:px-6 h-full flex items-start pb-20"
                 style={{ paddingTop: "calc(88px + 1.5rem + 2rem)" }}
               >
-                <div className="grid grid-cols-1 md:grid-cols-[1fr_1fr] gap-8 md:gap-12 w-full">
-                  {/* Left side - Navigation Links */}
-                  <div className="flex flex-col justify-start space-y-6 md:space-y-8">
+                <div className="w-full">
+                  {/* Navigation Links */}
+                  <div className="flex flex-col justify-start space-y-6 md:space-y-8 mb-12">
                     <nav className="flex flex-col space-y-4 md:space-y-6">
                       <Link
                         href="/projects"
@@ -425,20 +425,10 @@ export default function Header() {
                         Contact
                       </Link>
                     </nav>
-
-                    {/* Social Links - Below Navigation */}
-                    <div
-                      className={`mt-8 transition-all duration-500 ${
-                        isMobileMenuOpen ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-8"
-                      }`}
-                      style={{ transitionDelay: isMobileMenuOpen ? "500ms" : "0ms" }}
-                    >
-                      <SocialLinks variant="small" />
-                    </div>
                   </div>
 
-                  {/* Right side - Image Cards (Hidden on small mobile, shown on tablet+) */}
-                  <div className="hidden sm:flex flex-col gap-6">
+                  {/* Image Cards - Below Navigation */}
+                  <div className="grid grid-cols-2 gap-4 sm:gap-6 mb-8">
                     {/* Discover Old D'Hanis Card */}
                     <Link
                       href="/projects/discover-old-dhanis"
@@ -446,10 +436,10 @@ export default function Header() {
                         handleNavClick(e, "/projects/discover-old-dhanis");
                         setIsMobileMenuOpen(false);
                       }}
-                      className={`relative h-48 md:h-64 overflow-hidden group cursor-pointer flex items-center justify-center transition-all duration-500 ${
+                      className={`relative aspect-[3/4] overflow-hidden group cursor-pointer flex items-center justify-center transition-all duration-500 ${
                         isMobileMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
                       }`}
-                      style={{ transitionDelay: isMobileMenuOpen ? "300ms" : "0ms" }}
+                      style={{ transitionDelay: isMobileMenuOpen ? "700ms" : "0ms" }}
                     >
                       <Image
                         src="/images/dod-cover.jpg"
@@ -475,10 +465,10 @@ export default function Header() {
                         handleNavClick(e, "/about");
                         setIsMobileMenuOpen(false);
                       }}
-                      className={`relative h-48 md:h-64 overflow-hidden group cursor-pointer flex items-center justify-center transition-all duration-500 ${
+                      className={`relative aspect-[3/4] overflow-hidden group cursor-pointer flex items-center justify-center transition-all duration-500 ${
                         isMobileMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
                       }`}
-                      style={{ transitionDelay: isMobileMenuOpen ? "450ms" : "0ms" }}
+                      style={{ transitionDelay: isMobileMenuOpen ? "800ms" : "0ms" }}
                     >
                       <Image
                         src="/images/background_pic.jpg"
@@ -496,6 +486,16 @@ export default function Header() {
                         </h3>
                       </div>
                     </Link>
+                  </div>
+
+                  {/* Social Links - Below Cards */}
+                  <div
+                    className={`transition-all duration-500 ${
+                      isMobileMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+                    }`}
+                    style={{ transitionDelay: isMobileMenuOpen ? "900ms" : "0ms" }}
+                  >
+                    <SocialLinks variant="small" />
                   </div>
                 </div>
               </div>
