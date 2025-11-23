@@ -1,14 +1,11 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Hero from "@/components/sections/Hero";
-import Link from "next/link";
 import Image from "next/image";
 import { useScrollSpeed } from "@/hooks/useScrollSpeed";
 import { useScrollPosition } from "@/hooks/useScrollPosition";
 import { useTypingEffect } from "@/hooks/useTypingEffect";
 import BracketButton from "@/components/ui/BracketButton";
-import AnimatedSection from "@/components/ui/AnimatedSection";
 import Typography from "@/components/ui/Typography";
 import SectionWrapper from "@/components/ui/SectionWrapper";
 import Container from "@/components/ui/Container";
@@ -50,7 +47,7 @@ export default function Home() {
   useEffect(() => {
     const observerOptions = {
       threshold: 0.2,
-      rootMargin: '0px 0px -100px 0px'
+      rootMargin: "0px 0px -100px 0px",
     };
 
     const handleIntersection = (entries: IntersectionObserverEntry[]) => {
@@ -91,7 +88,10 @@ export default function Home() {
     const handleWheel = (e: WheelEvent) => {
       // Only lock scroll when we're at the top of the page
       if (window.scrollY === 0) {
-        const newVirtualScroll = Math.max(0, Math.min(SCROLL.heroThreshold, virtualScroll + e.deltaY));
+        const newVirtualScroll = Math.max(
+          0,
+          Math.min(SCROLL.heroThreshold, virtualScroll + e.deltaY)
+        );
         setVirtualScroll(newVirtualScroll);
 
         // Lock scrolling until threshold is reached
@@ -104,12 +104,12 @@ export default function Home() {
       }
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    window.addEventListener('wheel', handleWheel, { passive: false });
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("wheel", handleWheel, { passive: false });
 
     return () => {
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('wheel', handleWheel);
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("wheel", handleWheel);
     };
   }, [virtualScroll]);
 
@@ -119,14 +119,17 @@ export default function Home() {
       <div
         className="fixed inset-0 z-0"
         style={{
-          opacity: scrollY > 3000 ? Math.max(0, 1 - (scrollY - 3000) / 500) : 1
+          opacity: scrollY > 3000 ? Math.max(0, 1 - (scrollY - 3000) / 500) : 1,
         }}
       >
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{
-            backgroundImage: 'url(/images/background_pic.jpg)',
-          }}
+        <Image
+          src="/images/background_pic.jpg"
+          alt="Historic background"
+          fill
+          priority
+          quality={85}
+          sizes="100vw"
+          className="object-cover object-center"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-gray-900/80 to-black/90"></div>
         <div className="absolute inset-0 gradient-dust opacity-40"></div>
@@ -140,19 +143,23 @@ export default function Home() {
       </div>
 
       {/* Hero Content */}
-      <section ref={heroRef} className="relative min-h-screen flex items-center justify-center z-10">
+      <section
+        ref={heroRef}
+        className="relative min-h-screen flex items-center justify-center z-10"
+      >
         <div className="relative z-10 text-center px-4 sm:px-6 max-w-6xl mx-auto">
           <div className="flex flex-col items-center justify-center gap-3 sm:gap-4 md:gap-6">
             <div
               className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-light tracking-[0.2em] sm:tracking-[0.25em] md:tracking-[0.3em] transition-all duration-300"
               style={{
-                fontFamily: 'var(--font-bebas)',
+                fontFamily: "var(--font-bebas)",
                 transform: `translateX(${virtualScroll * -1.5}px)`,
                 opacity: Math.max(0, 1 - virtualScroll / SCROLL.heroThreshold),
-                backgroundImage: 'linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 50%, rgba(255,255,255,1) 100%)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text'
+                backgroundImage:
+                  "linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 50%, rgba(255,255,255,1) 100%)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
               }}
             >
               DISCOVER
@@ -160,13 +167,14 @@ export default function Home() {
             <div
               className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-light tracking-[0.2em] sm:tracking-[0.25em] md:tracking-[0.3em] transition-all duration-300"
               style={{
-                fontFamily: 'var(--font-bebas)',
+                fontFamily: "var(--font-bebas)",
                 transform: `translateX(${virtualScroll * 1.5}px)`,
                 opacity: Math.max(0, 1 - virtualScroll / SCROLL.heroThreshold),
-                backgroundImage: 'linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 50%, rgba(255,255,255,1) 100%)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text'
+                backgroundImage:
+                  "linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 50%, rgba(255,255,255,1) 100%)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
               }}
             >
               LEARN
@@ -174,13 +182,14 @@ export default function Home() {
             <div
               className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-light tracking-[0.2em] sm:tracking-[0.25em] md:tracking-[0.3em] transition-all duration-300"
               style={{
-                fontFamily: 'var(--font-bebas)',
+                fontFamily: "var(--font-bebas)",
                 transform: `translateX(${virtualScroll * -1.5}px)`,
                 opacity: Math.max(0, 1 - virtualScroll / SCROLL.heroThreshold),
-                backgroundImage: 'linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 50%, rgba(255,255,255,1) 100%)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text'
+                backgroundImage:
+                  "linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 50%, rgba(255,255,255,1) 100%)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
               }}
             >
               PRESERVE
@@ -190,28 +199,27 @@ export default function Home() {
       </section>
 
       {/* About Section - Scrolls over background */}
-      <section
-        ref={aboutRef}
-        className="relative py-16 sm:py-24 md:py-32 px-4 sm:px-6 z-20"
-      >
+      <section ref={aboutRef} className="relative py-16 sm:py-24 md:py-32 px-4 sm:px-6 z-20">
         <div
           className={`relative z-10 container mx-auto max-w-4xl text-center transition-all duration-1000 ${
-            aboutVisible
-              ? 'opacity-100 translate-y-0'
-              : 'opacity-0 translate-y-20'
+            aboutVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-20"
           }`}
         >
           <Typography.Heading size="xl" className="mb-6 sm:mb-8">
-            WE CREATE<br />
-            IMMERSIVE HISTORICAL<br />
+            WE CREATE
+            <br />
+            IMMERSIVE HISTORICAL
+            <br />
             EXPERIENCES
           </Typography.Heading>
 
           <Typography.Body size="lg" className="max-w-3xl mx-auto">
-            {HOME_CONTENT.about.staticText.split('Saltbox Interactive').map((part, i, arr) => (
+            {HOME_CONTENT.about.staticText.split("Saltbox Interactive").map((part, i, arr) => (
               <span key={i}>
                 {part}
-                {i < arr.length - 1 && <span className="bg-white text-black px-1">Saltbox Interactive</span>}
+                {i < arr.length - 1 && (
+                  <span className="bg-white text-black px-1">Saltbox Interactive</span>
+                )}
               </span>
             ))}
             {aboutTypedText}
@@ -245,9 +253,7 @@ export default function Home() {
       >
         <div
           className={`relative z-10 transition-all duration-1000 ${
-            introVisible
-              ? 'opacity-100 translate-y-0'
-              : 'opacity-0 translate-y-20'
+            introVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-20"
           }`}
         >
           <ProjectShowcase

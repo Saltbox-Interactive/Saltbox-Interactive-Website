@@ -1,12 +1,9 @@
 import type { Metadata } from "next";
 import { Work_Sans, Bebas_Neue, Archivo_Black } from "next/font/google";
 import "./globals.css";
-import Footer from "@/components/layout/Footer";
-import SmoothScroll from "@/components/SmoothScroll";
 import { OrganizationSchema, PersonSchema } from "@/components/StructuredData";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 import CookieConsent from "@/components/CookieConsent";
-import BackToTop from "@/components/ui/BackToTop";
 import "lenis/dist/lenis.css";
 
 const workSans = Work_Sans({
@@ -14,6 +11,8 @@ const workSans = Work_Sans({
   subsets: ["latin"],
   display: "swap",
   weight: ["300", "400", "500", "600"],
+  preload: true,
+  fallback: ["system-ui", "arial"],
 });
 
 const bebas = Bebas_Neue({
@@ -21,6 +20,8 @@ const bebas = Bebas_Neue({
   weight: "400",
   subsets: ["latin"],
   display: "swap",
+  preload: true,
+  fallback: ["impact", "arial"],
 });
 
 const archivoBlack = Archivo_Black({
@@ -28,19 +29,33 @@ const archivoBlack = Archivo_Black({
   weight: "400",
   subsets: ["latin"],
   display: "swap",
+  preload: true,
+  fallback: ["arial", "sans-serif"],
 });
 
 export const metadata: Metadata = {
   title: {
     default: "Saltbox Interactive",
-    template: "Saltbox Interactive | %s"
+    template: "Saltbox Interactive | %s",
   },
-  description: "Saltbox Interactive creates immersive virtual environments where history comes alive. We preserve the past through interactive digital experiences, transforming historical locations into explorable virtual worlds.",
-  keywords: ["historical preservation", "virtual history", "interactive experiences", "digital heritage", "historical reconstruction", "Old D'Hanis", "virtual archaeology", "Michael Salton", "game developer", "historical games"],
+  description:
+    "Saltbox Interactive creates immersive virtual environments where history comes alive. We preserve the past through interactive digital experiences, transforming historical locations into explorable virtual worlds.",
+  keywords: [
+    "historical preservation",
+    "virtual history",
+    "interactive experiences",
+    "digital heritage",
+    "historical reconstruction",
+    "Old D'Hanis",
+    "virtual archaeology",
+    "Michael Salton",
+    "game developer",
+    "historical games",
+  ],
   authors: [{ name: "Michael Salton" }, { name: "Saltbox Interactive" }],
   creator: "Michael Salton",
   publisher: "Saltbox Interactive",
-  metadataBase: new URL('https://saltboxinteractive.com'),
+  metadataBase: new URL("https://saltboxinteractive.com"),
   viewport: {
     width: "device-width",
     initialScale: 1,
@@ -61,23 +76,25 @@ export const metadata: Metadata = {
     url: "https://saltboxinteractive.com",
     siteName: "Saltbox Interactive",
     title: "Saltbox Interactive | Preserving History Through Interactive Experiences",
-    description: "Create immersive virtual environments where history comes alive. Experience the past through interactive digital preservation.",
+    description:
+      "Create immersive virtual environments where history comes alive. Experience the past through interactive digital preservation.",
     images: [
       {
         url: "https://saltboxinteractive.com/images/background_pic.jpg",
         width: 1200,
         height: 630,
-        alt: "Saltbox Interactive - Historical Preservation Through Digital Experiences"
-      }
-    ]
+        alt: "Saltbox Interactive - Historical Preservation Through Digital Experiences",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     site: "@saltboxinteractive",
     creator: "@michaelsalton",
     title: "Saltbox Interactive | Preserving History Through Interactive Experiences",
-    description: "Create immersive virtual environments where history comes alive. Experience the past through interactive digital preservation.",
-    images: ["https://saltboxinteractive.com/images/background_pic.jpg"]
+    description:
+      "Create immersive virtual environments where history comes alive. Experience the past through interactive digital preservation.",
+    images: ["https://saltboxinteractive.com/images/background_pic.jpg"],
   },
   alternates: {
     canonical: "https://saltboxinteractive.com",
@@ -94,21 +111,10 @@ export const metadata: Metadata = {
     googleBot: {
       index: true,
       follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
     },
-  },
-  icons: {
-    icon: [
-      { url: '/favicon.ico', sizes: 'any' },
-      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
-      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
-    ],
-    apple: [
-      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
-    ],
-    shortcut: '/favicon.ico',
   },
 };
 
@@ -120,6 +126,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        {/* Preconnect to external domains for faster resource loading */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+
         <OrganizationSchema />
         <PersonSchema />
         {process.env.NEXT_PUBLIC_GA_ID && <GoogleAnalytics ga_id={process.env.NEXT_PUBLIC_GA_ID} />}

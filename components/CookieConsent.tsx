@@ -22,15 +22,15 @@ export default function CookieConsent() {
       setShowBanner(true);
     };
 
-    window.addEventListener('show-cookie-banner', handleShowCookieBanner);
-    return () => window.removeEventListener('show-cookie-banner', handleShowCookieBanner);
+    window.addEventListener("show-cookie-banner", handleShowCookieBanner);
+    return () => window.removeEventListener("show-cookie-banner", handleShowCookieBanner);
   }, []);
 
   const enableAnalytics = () => {
     // Enable Google Analytics by setting consent
-    if (typeof window !== 'undefined' && (window as any).gtag) {
-      (window as any).gtag('consent', 'update', {
-        analytics_storage: 'granted'
+    if (typeof window !== "undefined" && (window as any).gtag) {
+      (window as any).gtag("consent", "update", {
+        analytics_storage: "granted",
       });
     }
   };
@@ -52,26 +52,22 @@ export default function CookieConsent() {
     <div className="fixed bottom-8 left-8 bg-[#1a1a1a] p-6 z-[200] max-w-2xl shadow-2xl">
       <h3
         className="text-xl font-light tracking-wider text-white mb-2 uppercase"
-        style={{ fontFamily: 'var(--font-bebas)' }}
+        style={{ fontFamily: "var(--font-bebas)" }}
       >
         Cookie Consent
       </h3>
 
       <p className="text-white text-sm leading-relaxed mb-4">
-        We use cookies to analyze site traffic and improve your experience. By clicking "Accept", you consent to our use of cookies for analytics purposes.
-        {' '}
+        We use cookies to analyze site traffic and improve your experience. By clicking "Accept",
+        you consent to our use of cookies for analytics purposes.{" "}
         <a href="/privacy" className="text-accent hover:underline">
           Learn more
         </a>
       </p>
 
       <div className="flex gap-6 justify-end">
-        <BracketButton onClick={handleDecline}>
-          Decline
-        </BracketButton>
-        <WhiteBoxButton onClick={handleAccept}>
-          Accept
-        </WhiteBoxButton>
+        <BracketButton onClick={handleDecline}>Decline</BracketButton>
+        <WhiteBoxButton onClick={handleAccept}>Accept</WhiteBoxButton>
       </div>
     </div>
   );

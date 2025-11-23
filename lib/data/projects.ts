@@ -26,7 +26,8 @@ export const projects: Project[] = [
     slug: "discover-old-dhanis",
     title: "Discover Old D'Hanis",
     era: "1847-1920s",
-    description: "An immersive educational experience that invites you to explore the history of the old town of D'Hanis, TX.",
+    description:
+      "An immersive educational experience that invites you to explore the history of the old town of D'Hanis, TX.",
     longDescription: `Discover Old D'Hanis is an immersive educational experience that invites you to explore the history of the old town of D'Hanis, TX. The game is based on data from the Old D'Hanis Archaeological Mapping Project, a real archaeological project that examined the ruins, stories, and landscapes of the historic town, alongside community members, in 2018.
 
     Enter D'Hanis and you will find yourself in front of the ruin of its Catholic church, grass beneath your feet, the sound of wind and the occasional bird in a landscape empty of people. You stand at the intersection of past and present. Walking through the historic streets, you will find virtual reconstructions of white-walled cottages from the 19th century alongside 21st century ruins scanned by archaeologists.
@@ -45,13 +46,13 @@ export const projects: Project[] = [
       "Interactive storytelling elements",
       "Historical artifacts and documents",
       "Original musical composition inspired by German folk songs",
-      "Stories of Alsatian, German, Black, and Mexican families"
+      "Stories of Alsatian, German, Black, and Mexican families",
     ],
     technologies: [
       "Unity Engine",
       "3D modeling and texturing",
       "Historical research integration",
-      "Interactive storytelling"
+      "Interactive storytelling",
     ],
     releaseDate: "May 22, 2025",
     platforms: ["Windows", "Mac"],
@@ -62,15 +63,16 @@ export const projects: Project[] = [
       "/images/dod-screenshot-4.png",
       "/images/dod-screenshot-5.png",
       "/images/dod-screenshot-6.png",
-      "/images/dod-screenshot-7.png"
-    ]
+      "/images/dod-screenshot-7.png",
+    ],
   },
   {
     id: "2",
     slug: "discover-old-dhanis-remastered",
     title: "Discover Old D'Hanis: Remastered",
     era: "1840s-1860s",
-    description: "A stunning reimagining of the original Discover Old D'Hanis experience, rebuilt from the ground up in Unreal Engine 5 with breathtaking photorealistic graphics and immersive environments.",
+    description:
+      "A stunning reimagining of the original Discover Old D'Hanis experience, rebuilt from the ground up in Unreal Engine 5 with breathtaking photorealistic graphics and immersive environments.",
     longDescription: `Experience Old D'Hanis like never before in this complete reimagining of the original game. Built from the ground up in Unreal Engine 5, this remastered edition brings the historic Alsatian settlement to life with unprecedented visual fidelity and realism.
 
     Leveraging cutting-edge photogrammetry technology and Unreal Engine 5's revolutionary Lumen and Nanite systems, every detail of this 19th-century Texas community has been meticulously recreated with stunning accuracy. From the weathered textures of limestone buildings to the natural beauty of the Texas Hill Country, experience history in breathtaking photorealistic quality.
@@ -85,7 +87,7 @@ export const projects: Project[] = [
       "Ultra-detailed geometry with Nanite",
       "Immersive exploration and discovery",
       "Enhanced environmental storytelling",
-      "Virtual reality support"
+      "Virtual reality support",
     ],
     technologies: [
       "Unreal Engine 5",
@@ -93,7 +95,7 @@ export const projects: Project[] = [
       "Lumen global illumination",
       "Nanite virtualized geometry",
       "Advanced lighting systems",
-      "Virtual reality support"
+      "Virtual reality support",
     ],
     releaseDate: "Coming 2026",
     platforms: ["PC"],
@@ -120,8 +122,8 @@ export const projects: Project[] = [
       "/images/temp/dod-temp-24.jpg",
       "/images/temp/dod-temp-25.jpg",
       "/images/temp/dod-temp-26.jpg",
-      "/images/temp/dod-temp-27.jpg"
-    ]
+      "/images/temp/dod-temp-27.jpg",
+    ],
   },
   {
     id: "3",
@@ -133,21 +135,14 @@ export const projects: Project[] = [
     status: "Coming Soon",
     color: "from-blue-900/40 to-gray-900/40",
     thumbnail: "/images/medina.jpg",
-    features: [
-      "Coming soon..."
-    ],
-    technologies: [
-      "Unity Engine",
-      "3D modeling",
-      "Historical research",
-      "Interactive design"
-    ],
+    features: ["Coming soon..."],
+    technologies: ["Unity Engine", "3D modeling", "Historical research", "Interactive design"],
     releaseDate: "TBA",
     platforms: ["PC", "Mac", "Web Browser"],
-    genre: "Historical Exploration"
-  }
+    genre: "Historical Exploration",
+  },
 ];
 
 export function getProjectBySlug(slug: string): Project | undefined {
-  return projects.find(project => project.slug === slug);
+  return projects.find((project) => project.slug === slug);
 }

@@ -2,7 +2,6 @@
 
 import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { Project } from "@/lib/data/projects";
 import ParallaxImage from "@/components/ParallaxImage";
 import { VideoGameSchema, BreadcrumbSchema } from "@/components/StructuredData";
@@ -19,9 +18,7 @@ import ArrowButton from "@/components/ui/ArrowButton";
 export default function ProjectContent({ project }: { project: Project }) {
   const [scrollY, setScrollY] = useState(0);
   const screenshotsRef = useRef<HTMLElement>(null);
-  const [screenshotsVisible, setScreenshotsVisible] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [showArrows, setShowArrows] = useState(false);
   const [playNowOpacity, setPlayNowOpacity] = useState(1);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
@@ -43,9 +40,6 @@ export default function ProjectContent({ project }: { project: Project }) {
         clearTimeout(scrollTimeoutRef.current);
       }
 
-      scrollTimeoutRef.current = setTimeout(() => {
-        setShowArrows(false);
-      }, 1500);
       // Calculate position based on Steam banner visibility
       if (steamBannerRef.current) {
         const bannerRect = steamBannerRef.current.getBoundingClientRect();
@@ -57,7 +51,7 @@ export default function ProjectContent({ project }: { project: Project }) {
 
         // Fade out when banner is approaching (top coming into view)
         if (distanceFromBottom < fadeDistance && distanceFromBottom > 0) {
-          const fadeAmount = Math.min(1, Math.max(0, 1 - (distanceFromBottom / fadeDistance)));
+          const fadeAmount = Math.min(1, Math.max(0, 1 - distanceFromBottom / fadeDistance));
           setPlayNowOpacity(fadeAmount);
         }
         // Keep hidden while banner is in viewport
@@ -115,7 +109,7 @@ export default function ProjectContent({ project }: { project: Project }) {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.target === screenshotsRef.current) {
-            setScreenshotsVisible(entry.isIntersecting);
+            // Screenshots visibility tracking removed
           }
         });
       },
@@ -129,21 +123,19 @@ export default function ProjectContent({ project }: { project: Project }) {
 
   useEffect(() => {
     const handleMouseMove = () => {
-      setShowArrows(true);
-
       if (mouseTimeoutRef.current) {
         clearTimeout(mouseTimeoutRef.current);
       }
 
       mouseTimeoutRef.current = setTimeout(() => {
-        setShowArrows(false);
+        // Arrow visibility tracking removed
       }, 20000);
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener("mousemove", handleMouseMove);
 
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener("mousemove", handleMouseMove);
       if (mouseTimeoutRef.current) {
         clearTimeout(mouseTimeoutRef.current);
       }
@@ -166,12 +158,14 @@ export default function ProjectContent({ project }: { project: Project }) {
   return (
     <>
       <VideoGameSchema project={project} />
-      <BreadcrumbSchema items={[
-        { name: "Home", url: "https://saltboxinteractive.com" },
-        { name: "Projects", url: "https://saltboxinteractive.com/projects" },
-        { name: project.title, url: `https://saltboxinteractive.com/projects/${project.slug}` }
-      ]} />
-      {project.slug === 'discover-old-dhanis' && (
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", url: "https://saltboxinteractive.com" },
+          { name: "Projects", url: "https://saltboxinteractive.com/projects" },
+          { name: project.title, url: `https://saltboxinteractive.com/projects/${project.slug}` },
+        ]}
+      />
+      {project.slug === "discover-old-dhanis" && (
         <>
           <FAQSchema faqs={DISCOVER_OLD_DHANIS_FAQS} />
           <ReviewSchema
@@ -190,7 +184,7 @@ export default function ProjectContent({ project }: { project: Project }) {
           <div
             className="absolute inset-0"
             style={{
-              transform: `translateY(${scrollY * 0.5}px)`
+              transform: `translateY(${scrollY * 0.5}px)`,
             }}
           >
             <Image
@@ -204,23 +198,30 @@ export default function ProjectContent({ project }: { project: Project }) {
         )}
 
         {/* Game Title/Logo */}
-        <div className="absolute bottom-20 sm:bottom-24 left-0 right-0 z-10 text-center px-4 sm:px-6"
+        <div
+          className="absolute bottom-20 sm:bottom-24 left-0 right-0 z-10 text-center px-4 sm:px-6"
           style={{
             transform: `translateY(${scrollY * -0.2}px)`,
-            opacity: Math.max(0, 1 - scrollY / 600)
+            opacity: Math.max(0, 1 - scrollY / 600),
           }}
         >
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-light tracking-[0.15em] sm:tracking-[0.2em] text-white" style={{ fontFamily: 'var(--font-bebas)' }}>
+          <h1
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-light tracking-[0.15em] sm:tracking-[0.2em] text-white"
+            style={{ fontFamily: "var(--font-bebas)" }}
+          >
             {project.title}
           </h1>
         </div>
 
         {/* Breadcrumbs - bottom left */}
         <div className="hidden sm:block absolute bottom-10 left-4 sm:left-10 text-xs sm:text-sm text-gray-400 tracking-wider opacity-0 animate-[fadeIn_1s_1s_ease-out_forwards] z-10">
-          <Breadcrumbs items={[
-            { label: "Projects", href: "/projects" },
-            { label: project.title }
-          ]} />
+          <Breadcrumbs
+            items={[
+              { label: "Saltbox Interactive", href: "/" },
+              { label: "Projects", href: "/projects" },
+              { label: project.title },
+            ]}
+          />
         </div>
       </section>
 
@@ -228,14 +229,17 @@ export default function ProjectContent({ project }: { project: Project }) {
       <AnimatedSection className="relative py-12 sm:py-16 md:py-20 bg-black">
         <div className="container mx-auto px-4 sm:px-6 max-w-4xl">
           <div className="space-y-4 sm:space-y-6 mb-12 sm:mb-16 md:mb-20">
-            {project.longDescription.split('\n\n').slice(0, 2).map((paragraph, index) => (
-              <p
-                key={index}
-                className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-300 leading-relaxed"
-              >
-                {paragraph.trim()}
-              </p>
-            ))}
+            {project.longDescription
+              .split("\n\n")
+              .slice(0, 2)
+              .map((paragraph, index) => (
+                <p
+                  key={index}
+                  className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-300 leading-relaxed"
+                >
+                  {paragraph.trim()}
+                </p>
+              ))}
           </div>
         </div>
 
@@ -247,7 +251,10 @@ export default function ProjectContent({ project }: { project: Project }) {
         <div className="container mx-auto px-4 sm:px-6">
           {/* General Info Section */}
           <div className="flex flex-col lg:flex-row lg:items-start gap-6 lg:gap-12">
-            <h3 className="text-lg sm:text-xl font-light tracking-[0.2em] text-accent uppercase" style={{ fontFamily: 'var(--font-bebas)' }}>
+            <h3
+              className="text-lg sm:text-xl font-light tracking-[0.2em] text-accent uppercase"
+              style={{ fontFamily: "var(--font-bebas)" }}
+            >
               General Info
             </h3>
 
@@ -255,22 +262,28 @@ export default function ProjectContent({ project }: { project: Project }) {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 {project.releaseDate && (
                   <div>
-                    <span className="text-gray-500 text-xs sm:text-sm uppercase tracking-wider block mb-2">Release Date</span>
+                    <span className="text-gray-500 text-xs sm:text-sm uppercase tracking-wider block mb-2">
+                      Release Date
+                    </span>
                     <p className="text-base sm:text-lg">{project.releaseDate}</p>
                   </div>
                 )}
 
                 {project.platforms && project.platforms.length > 0 && (
                   <div>
-                    <span className="text-gray-500 text-xs sm:text-sm uppercase tracking-wider block mb-2">Platforms</span>
-                    <p className="text-base sm:text-lg">{project.platforms.join(', ')}</p>
+                    <span className="text-gray-500 text-xs sm:text-sm uppercase tracking-wider block mb-2">
+                      Platforms
+                    </span>
+                    <p className="text-base sm:text-lg">{project.platforms.join(", ")}</p>
                   </div>
                 )}
               </div>
 
               {project.genre && (
                 <div>
-                  <span className="text-gray-500 text-xs sm:text-sm uppercase tracking-wider block mb-2">Genre</span>
+                  <span className="text-gray-500 text-xs sm:text-sm uppercase tracking-wider block mb-2">
+                    Genre
+                  </span>
                   <p className="text-base sm:text-lg">{project.genre}</p>
                 </div>
               )}
@@ -280,19 +293,27 @@ export default function ProjectContent({ project }: { project: Project }) {
       </AnimatedSection>
 
       {/* Scrolling Text Ticker - Only for Discover Old D'Hanis */}
-      {project.slug === 'discover-old-dhanis' && (
+      {project.slug === "discover-old-dhanis" && (
         <section className="relative bg-black py-6 overflow-hidden">
-          <div className="inline-flex animate-scroll-seamless" style={{ minWidth: '200%' }}>
+          <div className="inline-flex animate-scroll-seamless" style={{ minWidth: "200%" }}>
             <div className="flex whitespace-nowrap flex-shrink-0">
               {[...Array(25)].map((_, i) => (
-                <span key={`a-${i}`} className="text-3xl font-light tracking-[0.15em] text-white uppercase mx-16" style={{ fontFamily: 'var(--font-bebas)' }}>
+                <span
+                  key={`a-${i}`}
+                  className="text-3xl font-light tracking-[0.15em] text-white uppercase mx-16"
+                  style={{ fontFamily: "var(--font-bebas)" }}
+                >
                   Discover. Learn. Preserve.
                 </span>
               ))}
             </div>
             <div className="flex whitespace-nowrap flex-shrink-0" aria-hidden="true">
               {[...Array(25)].map((_, i) => (
-                <span key={`b-${i}`} className="text-3xl font-light tracking-[0.15em] text-white uppercase mx-16" style={{ fontFamily: 'var(--font-bebas)' }}>
+                <span
+                  key={`b-${i}`}
+                  className="text-3xl font-light tracking-[0.15em] text-white uppercase mx-16"
+                  style={{ fontFamily: "var(--font-bebas)" }}
+                >
                   Discover. Learn. Preserve.
                 </span>
               ))}
@@ -304,17 +325,21 @@ export default function ProjectContent({ project }: { project: Project }) {
       {/* Image + Text Sections with Parallax */}
       <section className="relative bg-black py-12">
         {/* Remastered - Enhanced Image Gallery Layout */}
-        {project.slug === 'discover-old-dhanis-remastered' && project.gallery && project.gallery.length > 2 ? (
+        {project.slug === "discover-old-dhanis-remastered" &&
+        project.gallery &&
+        project.gallery.length > 2 ? (
           <>
             {/* Large Full-Width Hero Image */}
             <div className="py-20">
               <div className="container mx-auto px-6 max-w-7xl">
                 <div
-                  ref={(el) => { imageRefs.current['hero1'] = el; }}
+                  ref={(el) => {
+                    imageRefs.current["hero1"] = el;
+                  }}
                   className="relative aspect-[21/9] overflow-hidden"
                   style={{
-                    transform: `translateY(${(imageOffsets['hero1'] || 0) * 80}px)`,
-                    transition: 'transform 0.1s ease-out'
+                    transform: `translateY(${(imageOffsets["hero1"] || 0) * 80}px)`,
+                    transition: "transform 0.1s ease-out",
                   }}
                 >
                   <Image
@@ -341,14 +366,17 @@ export default function ProjectContent({ project }: { project: Project }) {
                   <div
                     style={{
                       transform: `translateY(${scrollY * -0.03}px)`,
-                      transition: 'transform 0.1s ease-out'
+                      transition: "transform 0.1s ease-out",
                     }}
                   >
-                    <h3 className="text-4xl md:text-5xl font-light tracking-wider text-white mb-6" style={{ fontFamily: 'var(--font-bebas)' }}>
+                    <h3
+                      className="text-4xl md:text-5xl font-light tracking-wider text-white mb-6"
+                      style={{ fontFamily: "var(--font-bebas)" }}
+                    >
                       {project.features[0]}
                     </h3>
                     <p className="text-lg text-gray-300 leading-relaxed">
-                      {project.longDescription.split('\n\n')[0]}
+                      {project.longDescription.split("\n\n")[0]}
                     </p>
                   </div>
                 </div>
@@ -380,14 +408,17 @@ export default function ProjectContent({ project }: { project: Project }) {
                   <div
                     style={{
                       transform: `translateY(${scrollY * -0.02}px)`,
-                      transition: 'transform 0.1s ease-out'
+                      transition: "transform 0.1s ease-out",
                     }}
                   >
-                    <h3 className="text-4xl md:text-5xl font-light tracking-wider text-white mb-6" style={{ fontFamily: 'var(--font-bebas)' }}>
+                    <h3
+                      className="text-4xl md:text-5xl font-light tracking-wider text-white mb-6"
+                      style={{ fontFamily: "var(--font-bebas)" }}
+                    >
                       {project.features[1]}
                     </h3>
                     <p className="text-lg text-gray-300 leading-relaxed">
-                      {project.longDescription.split('\n\n')[1] || project.description}
+                      {project.longDescription.split("\n\n")[1] || project.description}
                     </p>
                   </div>
                   <ParallaxImage
@@ -405,11 +436,13 @@ export default function ProjectContent({ project }: { project: Project }) {
             <div className="py-20">
               <div className="container mx-auto px-6 max-w-7xl">
                 <div
-                  ref={(el) => { imageRefs.current['hero2'] = el; }}
+                  ref={(el) => {
+                    imageRefs.current["hero2"] = el;
+                  }}
                   className="relative aspect-[21/9] overflow-hidden"
                   style={{
-                    transform: `translateY(${(imageOffsets['hero2'] || 0) * 70}px)`,
-                    transition: 'transform 0.1s ease-out'
+                    transform: `translateY(${(imageOffsets["hero2"] || 0) * 70}px)`,
+                    transition: "transform 0.1s ease-out",
                   }}
                 >
                   <Image
@@ -427,11 +460,13 @@ export default function ProjectContent({ project }: { project: Project }) {
               <div className="container mx-auto px-6 max-w-7xl">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
                   <div
-                    ref={(el) => { imageRefs.current['portrait1'] = el; }}
+                    ref={(el) => {
+                      imageRefs.current["portrait1"] = el;
+                    }}
                     className="relative aspect-[4/5] overflow-hidden"
                     style={{
-                      transform: `translateY(${(imageOffsets['portrait1'] || 0) * 60}px)`,
-                      transition: 'transform 0.1s ease-out'
+                      transform: `translateY(${(imageOffsets["portrait1"] || 0) * 60}px)`,
+                      transition: "transform 0.1s ease-out",
                     }}
                   >
                     <Image
@@ -445,14 +480,17 @@ export default function ProjectContent({ project }: { project: Project }) {
                     <div
                       style={{
                         transform: `translateY(${scrollY * -0.025}px)`,
-                        transition: 'transform 0.1s ease-out'
+                        transition: "transform 0.1s ease-out",
                       }}
                     >
-                      <h3 className="text-4xl md:text-5xl font-light tracking-wider text-white mb-6" style={{ fontFamily: 'var(--font-bebas)' }}>
+                      <h3
+                        className="text-4xl md:text-5xl font-light tracking-wider text-white mb-6"
+                        style={{ fontFamily: "var(--font-bebas)" }}
+                      >
                         {project.features[2]}
                       </h3>
                       <p className="text-lg text-gray-300 leading-relaxed mb-8">
-                        {project.longDescription.split('\n\n')[2] || project.description}
+                        {project.longDescription.split("\n\n")[2] || project.description}
                       </p>
                     </div>
                     <div className="grid grid-cols-2 gap-4">
@@ -501,22 +539,36 @@ export default function ProjectContent({ project }: { project: Project }) {
                   <div
                     style={{
                       transform: `translateY(${scrollY * -0.028}px)`,
-                      transition: 'transform 0.1s ease-out'
+                      transition: "transform 0.1s ease-out",
                     }}
                   >
-                    <h3 className="text-4xl md:text-5xl font-light tracking-wider text-white mb-6" style={{ fontFamily: 'var(--font-bebas)' }}>
+                    <h3
+                      className="text-4xl md:text-5xl font-light tracking-wider text-white mb-6"
+                      style={{ fontFamily: "var(--font-bebas)" }}
+                    >
                       {project.features[3]}
                     </h3>
                     <p className="text-lg text-gray-300 leading-relaxed">
-                      Explore every corner of the meticulously reconstructed settlement with unprecedented freedom and immersion. Discover hidden details in the limestone architecture, walk through authentic period structures with historically accurate interiors, and experience the sweeping Texas Hill Country landscape rendered in stunning photorealistic detail. Every building, every pathway, and every vista has been crafted to transport you back to the 1840s-1860s, allowing you to truly feel what life was like in this historic Alsatian settlement. From the weathered textures of hand-hewn timbers to the rolling hills stretching to the horizon, experience historical preservation like never before.
+                      Explore every corner of the meticulously reconstructed settlement with
+                      unprecedented freedom and immersion. Discover hidden details in the limestone
+                      architecture, walk through authentic period structures with historically
+                      accurate interiors, and experience the sweeping Texas Hill Country landscape
+                      rendered in stunning photorealistic detail. Every building, every pathway, and
+                      every vista has been crafted to transport you back to the 1840s-1860s,
+                      allowing you to truly feel what life was like in this historic Alsatian
+                      settlement. From the weathered textures of hand-hewn timbers to the rolling
+                      hills stretching to the horizon, experience historical preservation like never
+                      before.
                     </p>
                   </div>
                   <div
-                    ref={(el) => { imageRefs.current['vertical1'] = el; }}
+                    ref={(el) => {
+                      imageRefs.current["vertical1"] = el;
+                    }}
                     className="relative aspect-[3/4] overflow-hidden"
                     style={{
-                      transform: `translateY(${(imageOffsets['vertical1'] || 0) * 50}px)`,
-                      transition: 'transform 0.1s ease-out'
+                      transform: `translateY(${(imageOffsets["vertical1"] || 0) * 50}px)`,
+                      transition: "transform 0.1s ease-out",
                     }}
                   >
                     <Image
@@ -570,11 +622,13 @@ export default function ProjectContent({ project }: { project: Project }) {
             <div className="py-20">
               <div className="container mx-auto px-6 max-w-7xl">
                 <div
-                  ref={(el) => { imageRefs.current['hero3'] = el; }}
+                  ref={(el) => {
+                    imageRefs.current["hero3"] = el;
+                  }}
                   className="relative aspect-[21/9] overflow-hidden"
                   style={{
-                    transform: `translateY(${(imageOffsets['hero3'] || 0) * 60}px)`,
-                    transition: 'transform 0.1s ease-out'
+                    transform: `translateY(${(imageOffsets["hero3"] || 0) * 60}px)`,
+                    transition: "transform 0.1s ease-out",
                   }}
                 >
                   <Image
@@ -586,7 +640,6 @@ export default function ProjectContent({ project }: { project: Project }) {
                 </div>
               </div>
             </div>
-
           </>
         ) : (
           <>
@@ -606,14 +659,18 @@ export default function ProjectContent({ project }: { project: Project }) {
                   <div
                     style={{
                       transform: `translateY(${scrollY * -0.03}px)`,
-                      transition: 'transform 0.1s ease-out'
+                      transition: "transform 0.1s ease-out",
                     }}
                   >
-                    <h3 className="text-4xl md:text-5xl font-light tracking-wider text-white mb-6" style={{ fontFamily: 'var(--font-bebas)' }}>
-                      {project.features[0] || 'FEATURE TITLE'}
+                    <h3
+                      className="text-4xl md:text-5xl font-light tracking-wider text-white mb-6"
+                      style={{ fontFamily: "var(--font-bebas)" }}
+                    >
+                      {project.features[0] || "FEATURE TITLE"}
                     </h3>
                     <p className="text-lg text-gray-300 leading-relaxed">
-                      {project.longDescription.split('\n\n')[2] || project.longDescription.split('\n\n')[0]}
+                      {project.longDescription.split("\n\n")[2] ||
+                        project.longDescription.split("\n\n")[0]}
                     </p>
                   </div>
                 </div>
@@ -626,14 +683,17 @@ export default function ProjectContent({ project }: { project: Project }) {
                   <div
                     style={{
                       transform: `translateY(${scrollY * -0.02}px)`,
-                      transition: 'transform 0.1s ease-out'
+                      transition: "transform 0.1s ease-out",
                     }}
                   >
-                    <h3 className="text-4xl md:text-5xl font-light tracking-wider text-white mb-6" style={{ fontFamily: 'var(--font-bebas)' }}>
-                      {project.features[1] || 'FEATURE TITLE'}
+                    <h3
+                      className="text-4xl md:text-5xl font-light tracking-wider text-white mb-6"
+                      style={{ fontFamily: "var(--font-bebas)" }}
+                    >
+                      {project.features[1] || "FEATURE TITLE"}
                     </h3>
                     <p className="text-lg text-gray-300 leading-relaxed">
-                      {project.longDescription.split('\n\n')[3] || project.description}
+                      {project.longDescription.split("\n\n")[3] || project.description}
                     </p>
                   </div>
                   {project.gallery && project.gallery[1] && (
@@ -650,7 +710,7 @@ export default function ProjectContent({ project }: { project: Project }) {
             </div>
 
             {/* Third section - only for Discover Old D'Hanis */}
-            {project.slug === 'discover-old-dhanis' && (
+            {project.slug === "discover-old-dhanis" && (
               <div className="py-20 flex items-center">
                 <div className="container mx-auto px-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
@@ -666,14 +726,17 @@ export default function ProjectContent({ project }: { project: Project }) {
                     <div
                       style={{
                         transform: `translateY(${scrollY * -0.025}px)`,
-                        transition: 'transform 0.1s ease-out'
+                        transition: "transform 0.1s ease-out",
                       }}
                     >
-                      <h3 className="text-4xl md:text-5xl font-light tracking-wider text-white mb-6" style={{ fontFamily: 'var(--font-bebas)' }}>
-                        {project.features[2] || 'FEATURE TITLE'}
+                      <h3
+                        className="text-4xl md:text-5xl font-light tracking-wider text-white mb-6"
+                        style={{ fontFamily: "var(--font-bebas)" }}
+                      >
+                        {project.features[2] || "FEATURE TITLE"}
                       </h3>
                       <p className="text-lg text-gray-300 leading-relaxed">
-                        {project.longDescription.split('\n\n')[4] || project.description}
+                        {project.longDescription.split("\n\n")[4] || project.description}
                       </p>
                     </div>
                   </div>
@@ -685,7 +748,7 @@ export default function ProjectContent({ project }: { project: Project }) {
       </section>
 
       {/* Soundtrack Section - Only for Discover Old D'Hanis */}
-      {project.slug === 'discover-old-dhanis' && (
+      {project.slug === "discover-old-dhanis" && (
         <section className="relative py-32 bg-black">
           <div className="container mx-auto px-6 max-w-7xl">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
@@ -700,9 +763,14 @@ export default function ProjectContent({ project }: { project: Project }) {
 
               {/* Text - Right Side */}
               <div>
-                <h2 className="text-5xl md:text-6xl lg:text-7xl font-light tracking-[0.15em] text-white mb-6" style={{ fontFamily: 'var(--font-bebas)' }}>
-                  THE DISCOVER<br />
-                  OLD D'HANIS<br />
+                <h2
+                  className="text-5xl md:text-6xl lg:text-7xl font-light tracking-[0.15em] text-white mb-6"
+                  style={{ fontFamily: "var(--font-bebas)" }}
+                >
+                  THE DISCOVER
+                  <br />
+                  OLD D'HANIS
+                  <br />
                   OFFICIAL SOUNDTRACK
                 </h2>
 
@@ -720,7 +788,7 @@ export default function ProjectContent({ project }: { project: Project }) {
                     aria-label="YouTube"
                   >
                     <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                      <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
                     </svg>
                   </a>
                 </div>
@@ -770,16 +838,11 @@ export default function ProjectContent({ project }: { project: Project }) {
                   key={idx}
                   onClick={() => setCurrentImageIndex(idx)}
                   className={`relative flex-shrink-0 w-24 aspect-video transition-all duration-300 ${
-                    idx === currentImageIndex ? 'opacity-100 p-1' : 'opacity-50 hover:opacity-75'
+                    idx === currentImageIndex ? "opacity-100 p-1" : "opacity-50 hover:opacity-75"
                   }`}
                 >
                   <div className="relative w-full h-full">
-                    <Image
-                      src={image}
-                      alt={`Thumbnail ${idx + 1}`}
-                      fill
-                      className="object-cover"
-                    />
+                    <Image src={image} alt={`Thumbnail ${idx + 1}`} fill className="object-cover" />
                   </div>
                   {/* Corner borders for selected thumbnail - outside the image */}
                   {idx === currentImageIndex && (
@@ -798,7 +861,7 @@ export default function ProjectContent({ project }: { project: Project }) {
       )}
 
       {/* Credits Section - Only for Discover Old D'Hanis */}
-      {project.slug === 'discover-old-dhanis' && (
+      {project.slug === "discover-old-dhanis" && (
         <section className="relative py-32 bg-black">
           <div className="container mx-auto px-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
@@ -815,9 +878,14 @@ export default function ProjectContent({ project }: { project: Project }) {
 
               {/* Text and Button - Right Side */}
               <div className="flex flex-col gap-8">
-                <h2 className="text-4xl md:text-5xl lg:text-6xl font-light tracking-[0.15em] text-white" style={{ fontFamily: 'var(--font-bebas)' }}>
-                  SEE THE AMAZING TEAM<br />
-                  BEHIND DISCOVER<br />
+                <h2
+                  className="text-4xl md:text-5xl lg:text-6xl font-light tracking-[0.15em] text-white"
+                  style={{ fontFamily: "var(--font-bebas)" }}
+                >
+                  SEE THE AMAZING TEAM
+                  <br />
+                  BEHIND DISCOVER
+                  <br />
                   OLD D'HANIS
                 </h2>
 
@@ -831,13 +899,13 @@ export default function ProjectContent({ project }: { project: Project }) {
       )}
 
       {/* Steam Call to Action Section - Only for Discover Old D'Hanis */}
-      {project.slug === 'discover-old-dhanis' && (
+      {project.slug === "discover-old-dhanis" && (
         <section ref={steamBannerRef} className="relative py-32 bg-black">
           <div className="container mx-auto px-2 max-w-full">
             <div className="relative w-full aspect-[21/9] overflow-hidden">
               {/* Background Image */}
               <Image
-                src={project.thumbnail || '/images/dod-cover.jpg'}
+                src={project.thumbnail || "/images/dod-cover.jpg"}
                 alt="Call-to-action banner featuring Discover Old D'Hanis with Steam platform link for game purchase"
                 fill
                 className="object-cover opacity-30"
@@ -845,8 +913,12 @@ export default function ProjectContent({ project }: { project: Project }) {
 
               {/* Overlay Content */}
               <div className="absolute inset-0 flex flex-col items-center justify-center gap-8">
-                <h2 className="text-4xl md:text-5xl lg:text-6xl font-light tracking-[0.15em] text-white text-center" style={{ fontFamily: 'var(--font-bebas)' }}>
-                  PLAY DISCOVER OLD D'HANIS<br />
+                <h2
+                  className="text-4xl md:text-5xl lg:text-6xl font-light tracking-[0.15em] text-white text-center"
+                  style={{ fontFamily: "var(--font-bebas)" }}
+                >
+                  PLAY DISCOVER OLD D'HANIS
+                  <br />
                   ON STEAM
                 </h2>
 
@@ -857,7 +929,7 @@ export default function ProjectContent({ project }: { project: Project }) {
                   className="text-lg"
                   icon={
                     <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M11.979 0C5.678 0 .511 4.86.022 11.037l6.432 2.658c.545-.371 1.203-.59 1.912-.59.063 0 .125.004.188.006l2.861-4.142V8.91c0-2.495 2.028-4.524 4.524-4.524 2.494 0 4.524 2.031 4.524 4.527s-2.03 4.525-4.524 4.525h-.105l-4.076 2.911c0 .052.004.105.004.159 0 1.875-1.515 3.396-3.39 3.396-1.635 0-3.016-1.173-3.331-2.727L.436 15.27C1.862 20.307 6.486 24 11.979 24c6.627 0 11.999-5.373 11.999-12S18.605 0 11.979 0zM7.54 18.21l-1.473-.61c.262.543.714.999 1.314 1.25 1.297.539 2.793-.076 3.332-1.375.263-.63.264-1.319.005-1.949s-.75-1.121-1.377-1.383c-.624-.26-1.29-.249-1.878-.03l1.523.63c.956.4 1.409 1.5 1.009 2.455-.397.957-1.497 1.41-2.454 1.012H7.54zm11.415-9.303c0-1.662-1.353-3.015-3.015-3.015-1.665 0-3.015 1.353-3.015 3.015 0 1.665 1.35 3.015 3.015 3.015 1.663 0 3.015-1.35 3.015-3.015zm-5.273-.005c0-1.252 1.013-2.266 2.265-2.266 1.249 0 2.266 1.014 2.266 2.266 0 1.251-1.017 2.265-2.266 2.265-1.253 0-2.265-1.014-2.265-2.265z"/>
+                      <path d="M11.979 0C5.678 0 .511 4.86.022 11.037l6.432 2.658c.545-.371 1.203-.59 1.912-.59.063 0 .125.004.188.006l2.861-4.142V8.91c0-2.495 2.028-4.524 4.524-4.524 2.494 0 4.524 2.031 4.524 4.527s-2.03 4.525-4.524 4.525h-.105l-4.076 2.911c0 .052.004.105.004.159 0 1.875-1.515 3.396-3.39 3.396-1.635 0-3.016-1.173-3.331-2.727L.436 15.27C1.862 20.307 6.486 24 11.979 24c6.627 0 11.999-5.373 11.999-12S18.605 0 11.979 0zM7.54 18.21l-1.473-.61c.262.543.714.999 1.314 1.25 1.297.539 2.793-.076 3.332-1.375.263-.63.264-1.319.005-1.949s-.75-1.121-1.377-1.383c-.624-.26-1.29-.249-1.878-.03l1.523.63c.956.4 1.409 1.5 1.009 2.455-.397.957-1.497 1.41-2.454 1.012H7.54zm11.415-9.303c0-1.662-1.353-3.015-3.015-3.015-1.665 0-3.015 1.353-3.015 3.015 0 1.665 1.35 3.015 3.015 3.015 1.663 0 3.015-1.35 3.015-3.015zm-5.273-.005c0-1.252 1.013-2.266 2.265-2.266 1.249 0 2.266 1.014 2.266 2.266 0 1.251-1.017 2.265-2.266 2.265-1.253 0-2.265-1.014-2.265-2.265z" />
                     </svg>
                   }
                 >
@@ -869,19 +941,18 @@ export default function ProjectContent({ project }: { project: Project }) {
         </section>
       )}
 
-
       {/* Email Subscribe Section */}
       <div ref={emailSectionRef} className="relative bg-black" style={{ zIndex: 100 }}>
         <EmailSubscribe />
       </div>
 
       {/* Fixed Play on Steam Button - Only for Discover Old D'Hanis */}
-      {project.slug === 'discover-old-dhanis' && (
+      {project.slug === "discover-old-dhanis" && (
         <div
           className="fixed bottom-8 right-8 transition-all duration-500 z-[150]"
           style={{
             transform: `translateY(${playNowOpacity * 100}%)`,
-            opacity: 1 - playNowOpacity
+            opacity: 1 - playNowOpacity,
           }}
         >
           <a
@@ -891,10 +962,17 @@ export default function ProjectContent({ project }: { project: Project }) {
             className="group inline-flex items-center gap-3 bg-[#1a1a1a] px-6 py-4 rounded-lg transition-all duration-300"
           >
             {/* Steam Icon */}
-            <svg className="w-6 h-6 text-accent group-hover:text-white transition-colors duration-300" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M11.979 0C5.678 0 .511 4.86.022 11.037l6.432 2.658c.545-.371 1.203-.59 1.912-.59.063 0 .125.004.188.006l2.861-4.142V8.91c0-2.495 2.028-4.524 4.524-4.524 2.494 0 4.524 2.031 4.524 4.527s-2.03 4.525-4.524 4.525h-.105l-4.076 2.911c0 .052.004.105.004.159 0 1.875-1.515 3.396-3.39 3.396-1.635 0-3.016-1.173-3.331-2.727L.436 15.27C1.862 20.307 6.486 24 11.979 24c6.627 0 11.999-5.373 11.999-12S18.605 0 11.979 0zM7.54 18.21l-1.473-.61c.262.543.714.999 1.314 1.25 1.297.539 2.793-.076 3.332-1.375.263-.63.264-1.319.005-1.949s-.75-1.121-1.377-1.383c-.624-.26-1.29-.249-1.878-.03l1.523.63c.956.4 1.409 1.5 1.009 2.455-.397.957-1.497 1.41-2.454 1.012H7.54zm11.415-9.303c0-1.662-1.353-3.015-3.015-3.015-1.665 0-3.015 1.353-3.015 3.015 0 1.665 1.35 3.015 3.015 3.015 1.663 0 3.015-1.35 3.015-3.015zm-5.273-.005c0-1.252 1.013-2.266 2.265-2.266 1.249 0 2.266 1.014 2.266 2.266 0 1.251-1.017 2.265-2.266 2.265-1.253 0-2.265-1.014-2.265-2.265z"/>
+            <svg
+              className="w-6 h-6 text-accent group-hover:text-white transition-colors duration-300"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path d="M11.979 0C5.678 0 .511 4.86.022 11.037l6.432 2.658c.545-.371 1.203-.59 1.912-.59.063 0 .125.004.188.006l2.861-4.142V8.91c0-2.495 2.028-4.524 4.524-4.524 2.494 0 4.524 2.031 4.524 4.527s-2.03 4.525-4.524 4.525h-.105l-4.076 2.911c0 .052.004.105.004.159 0 1.875-1.515 3.396-3.39 3.396-1.635 0-3.016-1.173-3.331-2.727L.436 15.27C1.862 20.307 6.486 24 11.979 24c6.627 0 11.999-5.373 11.999-12S18.605 0 11.979 0zM7.54 18.21l-1.473-.61c.262.543.714.999 1.314 1.25 1.297.539 2.793-.076 3.332-1.375.263-.63.264-1.319.005-1.949s-.75-1.121-1.377-1.383c-.624-.26-1.29-.249-1.878-.03l1.523.63c.956.4 1.409 1.5 1.009 2.455-.397.957-1.497 1.41-2.454 1.012H7.54zm11.415-9.303c0-1.662-1.353-3.015-3.015-3.015-1.665 0-3.015 1.353-3.015 3.015 0 1.665 1.35 3.015 3.015 3.015 1.663 0 3.015-1.35 3.015-3.015zm-5.273-.005c0-1.252 1.013-2.266 2.265-2.266 1.249 0 2.266 1.014 2.266 2.266 0 1.251-1.017 2.265-2.266 2.265-1.253 0-2.265-1.014-2.265-2.265z" />
             </svg>
-            <span className="text-base font-light tracking-[0.15em] text-accent group-hover:text-white transition-colors duration-300 uppercase" style={{ fontFamily: 'var(--font-bebas)' }}>
+            <span
+              className="text-base font-light tracking-[0.15em] text-accent group-hover:text-white transition-colors duration-300 uppercase"
+              style={{ fontFamily: "var(--font-bebas)" }}
+            >
               Play on Steam
             </span>
           </a>
@@ -909,7 +987,11 @@ export default function ProjectContent({ project }: { project: Project }) {
           isOpen={lightboxOpen}
           onClose={() => setLightboxOpen(false)}
           onNext={() => setLightboxIndex((prev) => (prev + 1) % project.gallery!.length)}
-          onPrevious={() => setLightboxIndex((prev) => (prev - 1 + project.gallery!.length) % project.gallery!.length)}
+          onPrevious={() =>
+            setLightboxIndex(
+              (prev) => (prev - 1 + project.gallery!.length) % project.gallery!.length
+            )
+          }
         />
       )}
     </>

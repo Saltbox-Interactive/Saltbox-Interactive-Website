@@ -3,6 +3,7 @@
 ## 🎨 UI Components
 
 ### BracketLink
+
 Reusable navigation link with animated brackets.
 
 ```tsx
@@ -13,6 +14,7 @@ import BracketLink from "@/components/ui/BracketLink";
 ```
 
 ### Typography
+
 Consistent typography with Bebas Neue headings and Work Sans body text.
 
 ```tsx
@@ -26,6 +28,7 @@ import Typography from "@/components/ui/Typography";
 **Body Sizes**: `sm`, `base`, `lg`, `xl`
 
 ### Container
+
 Responsive container with predefined max-widths.
 
 ```tsx
@@ -38,6 +41,7 @@ import Container from "@/components/ui/Container";
 **Sizes**: `sm` (max-w-3xl), `md`, `lg`, `xl`, `2xl`, `full` (max-w-[1800px])
 
 ### SectionWrapper
+
 Section container with optional noise overlay.
 
 ```tsx
@@ -45,10 +49,11 @@ import SectionWrapper from "@/components/ui/SectionWrapper";
 
 <SectionWrapper className="py-20" noise={true}>
   <Container>Content</Container>
-</SectionWrapper>
+</SectionWrapper>;
 ```
 
 ### AnimatedSection
+
 Fade-in animation with Intersection Observer and motion preferences support.
 
 ```tsx
@@ -56,10 +61,11 @@ import AnimatedSection from "@/components/ui/AnimatedSection";
 
 <AnimatedSection id="about" threshold={0.3} delay={200}>
   Content fades in on scroll
-</AnimatedSection>
+</AnimatedSection>;
 ```
 
 ### StatusBadge
+
 Project status indicator.
 
 ```tsx
@@ -70,6 +76,7 @@ import StatusBadge from "@/components/ui/StatusBadge";
 ```
 
 ### SocialLinks
+
 Reusable social media icon links.
 
 ```tsx
@@ -80,16 +87,18 @@ import SocialLinks from "@/components/ui/SocialLinks";
 ```
 
 ### BackToTop
+
 Floating button that appears on scroll.
 
 ```tsx
 import BackToTop from "@/components/ui/BackToTop";
 
 // Auto-integrates into layout
-<BackToTop />
+<BackToTop />;
 ```
 
 ### LoadingSpinner
+
 Animated loading indicator.
 
 ```tsx
@@ -102,6 +111,7 @@ import LoadingSpinner from "@/components/ui/LoadingSpinner";
 **Sizes**: `sm`, `md`, `lg`
 
 ### Skeleton
+
 Loading skeleton for content placeholders.
 
 ```tsx
@@ -113,6 +123,7 @@ import Skeleton, { SkeletonCard, SkeletonText } from "@/components/ui/Skeleton";
 ```
 
 ### ImageGallery
+
 Grid gallery with lightbox functionality.
 
 ```tsx
@@ -125,24 +136,21 @@ import ImageGallery from "@/components/ui/ImageGallery";
   ]}
   columns={3}
   gap={4}
-/>
+/>;
 ```
 
 ### Lightbox
+
 Full-screen image viewer with keyboard navigation.
 
 ```tsx
 import Lightbox from "@/components/ui/Lightbox";
 
-<Lightbox
-  images={images}
-  initialIndex={0}
-  isOpen={isOpen}
-  onClose={() => setIsOpen(false)}
-/>
+<Lightbox images={images} initialIndex={0} isOpen={isOpen} onClose={() => setIsOpen(false)} />;
 ```
 
 ### FullWidthImage
+
 Parallax background image with vignette.
 
 ```tsx
@@ -155,7 +163,7 @@ import FullWidthImage from "@/components/ui/FullWidthImage";
   parallaxSpeed={-0.2}
   fadeStart={1800}
   priority
-/>
+/>;
 ```
 
 ---
@@ -163,6 +171,7 @@ import FullWidthImage from "@/components/ui/FullWidthImage";
 ## 📦 Section Components
 
 ### ProjectShowcase
+
 Reusable project display with image and content.
 
 ```tsx
@@ -176,7 +185,7 @@ import ProjectShowcase from "@/components/sections/ProjectShowcase";
   description="Project description..."
   linkHref="/projects/slug"
   imagePosition="left"
-/>
+/>;
 ```
 
 ---
@@ -184,6 +193,7 @@ import ProjectShowcase from "@/components/sections/ProjectShowcase";
 ## 🪝 Custom Hooks
 
 ### useScrollPosition
+
 Track scroll position efficiently.
 
 ```tsx
@@ -193,6 +203,7 @@ const scrollY = useScrollPosition();
 ```
 
 ### useTypingEffect
+
 Animated typing effect.
 
 ```tsx
@@ -206,6 +217,7 @@ const text = useTypingEffect({
 ```
 
 ### useReducedMotion
+
 Respect user motion preferences.
 
 ```tsx
@@ -215,6 +227,7 @@ const prefersReducedMotion = useReducedMotion();
 ```
 
 ### useSmoothScroll
+
 Enable smooth scroll for anchor links.
 
 ```tsx
@@ -229,6 +242,7 @@ useSmoothScroll();
 ## 📊 Constants & Data
 
 ### Constants
+
 ```tsx
 import { COLORS, ANIMATION, SCROLL, SOCIAL_LINKS } from "@/lib/constants";
 
@@ -237,11 +251,12 @@ style={{ color: COLORS.accent }}
 ```
 
 ### Content Data
+
 ```tsx
 import { HOME_CONTENT, ABOUT_CONTENT, PROJECTS_CONTENT } from "@/lib/data/content";
 
 // Use in pages
-<Typography.Heading>{HOME_CONTENT.projects.discoverOldDhanis.title}</Typography.Heading>
+<Typography.Heading>{HOME_CONTENT.projects.discoverOldDhanis.title}</Typography.Heading>;
 ```
 
 ---
@@ -249,6 +264,7 @@ import { HOME_CONTENT, ABOUT_CONTENT, PROJECTS_CONTENT } from "@/lib/data/conten
 ## 🛡️ Error Handling
 
 ### ErrorBoundary
+
 Catch and display errors gracefully.
 
 ```tsx
@@ -256,7 +272,7 @@ import ErrorBoundary from "@/components/ErrorBoundary";
 
 <ErrorBoundary>
   <YourComponent />
-</ErrorBoundary>
+</ErrorBoundary>;
 ```
 
 ---
@@ -274,6 +290,7 @@ import ErrorBoundary from "@/components/ErrorBoundary";
 ## 🎯 Usage Examples
 
 ### Complete Page Layout
+
 ```tsx
 import Container from "@/components/ui/Container";
 import Typography from "@/components/ui/Typography";
@@ -296,6 +313,7 @@ export default function Page() {
 ```
 
 ### Image Gallery Section
+
 ```tsx
 import ImageGallery from "@/components/ui/ImageGallery";
 
@@ -304,7 +322,7 @@ const images = [
   { src: "/img2.jpg", alt: "Image 2" },
 ];
 
-<ImageGallery images={images} columns={3} />
+<ImageGallery images={images} columns={3} />;
 ```
 
 ---

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import BracketButton from "@/components/ui/BracketButton";
 
 export default function EmailSubscribe() {
@@ -18,9 +19,9 @@ export default function EmailSubscribe() {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch('/api/subscribe', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const response = await fetch("/api/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name: nameValue, email: emailValue }),
       });
 
@@ -28,35 +29,37 @@ export default function EmailSubscribe() {
         setIsSubmitted(true);
       } else {
         const data = await response.json();
-        setError(data.error || 'Something went wrong');
+        setError(data.error || "Something went wrong");
       }
     } catch (err) {
-      setError('Failed to subscribe. Please try again.');
+      setError("Failed to subscribe. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
   };
 
   return (
-    <section className="relative bg-black py-16 sm:py-20 md:py-24 pb-32 sm:pb-40 md:pb-48 border-b border-accent/10">
+    <section className="relative bg-black py-16 sm:py-20 md:py-24 pb-40 sm:pb-52 md:pb-64 border-b border-accent/10">
       <div className="container mx-auto px-4 sm:px-6">
         <div className="relative flex flex-col lg:flex-row lg:items-start gap-8">
           {/* Left - Logo */}
           <div className="flex justify-start lg:absolute lg:left-[-7rem] lg:-top-8">
-            <Image
-              src="/images/saltbox-logo.svg"
-              alt="Saltbox Interactive"
-              width={180}
-              height={60}
-              className="w-32 sm:w-40 md:w-48 h-auto"
-            />
+            <Link href="/">
+              <Image
+                src="/images/saltbox-logo.svg"
+                alt="Saltbox Interactive"
+                width={180}
+                height={60}
+                className="w-32 sm:w-40 md:w-48 h-auto cursor-pointer hover:opacity-80 transition-opacity"
+              />
+            </Link>
           </div>
 
           {/* Center - Heading and Subscribe Button */}
           <div className="flex-1 text-left space-y-6 sm:space-y-8 lg:mx-auto lg:max-w-xl lg:pt-0">
             <h2
               className="text-2xl sm:text-3xl md:text-4xl font-light tracking-[0.2em] text-white"
-              style={{ fontFamily: 'var(--font-bebas)' }}
+              style={{ fontFamily: "var(--font-bebas)" }}
             >
               EXPLORE THE PAST WITH US. SUBSCRIBE.
             </h2>
@@ -86,7 +89,7 @@ export default function EmailSubscribe() {
           <div className="relative w-full lg:w-1/3 lg:absolute lg:right-0 lg:mr-[-6rem] overflow-hidden">
             <div
               className={`relative w-full aspect-[4/3] lg:aspect-[3/2] transition-all duration-700 ease-in-out ${
-                showForm ? 'translate-y-full opacity-0' : 'translate-y-0 opacity-100'
+                showForm ? "translate-y-full opacity-0" : "translate-y-0 opacity-100"
               }`}
             >
               <Image
@@ -99,7 +102,9 @@ export default function EmailSubscribe() {
 
             <div
               className={`absolute inset-0 flex items-start transition-all duration-700 ease-in-out ${
-                showForm ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-full pointer-events-none'
+                showForm
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 -translate-y-full pointer-events-none"
               }`}
             >
               {!isSubmitted ? (
@@ -120,15 +125,18 @@ export default function EmailSubscribe() {
                       className="w-full bg-black border border-accent/20 text-white px-4 py-5 focus:outline-none focus:border-accent transition-colors text-base"
                     />
                     {!emailValue && (
-                      <span className="absolute left-[4.25rem] top-1/2 -translate-y-1/2 text-accent text-base pointer-events-none">*</span>
+                      <span className="absolute left-[4.25rem] top-1/2 -translate-y-1/2 text-accent text-base pointer-events-none">
+                        *
+                      </span>
                     )}
                   </div>
-                  {error && (
-                    <p className="text-red-500 text-sm">{error}</p>
-                  )}
+                  {error && <p className="text-red-500 text-sm">{error}</p>}
                   <div className="flex justify-start">
-                    <BracketButton onClick={handleSubmit} className={isSubmitting ? 'opacity-50 pointer-events-none' : ''}>
-                      {isSubmitting ? 'SUBMITTING...' : 'SUBMIT'}
+                    <BracketButton
+                      onClick={handleSubmit}
+                      className={isSubmitting ? "opacity-50 pointer-events-none" : ""}
+                    >
+                      {isSubmitting ? "SUBMITTING..." : "SUBMIT"}
                     </BracketButton>
                   </div>
                 </div>
@@ -136,7 +144,7 @@ export default function EmailSubscribe() {
                 <div className="w-full flex items-start py-0">
                   <p
                     className="text-2xl sm:text-3xl md:text-4xl font-light tracking-[0.2em] text-white"
-                    style={{ fontFamily: 'var(--font-bebas)' }}
+                    style={{ fontFamily: "var(--font-bebas)" }}
                   >
                     THANKS FOR SUBSCRIBING.
                   </p>

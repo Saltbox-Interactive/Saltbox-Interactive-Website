@@ -9,7 +9,7 @@ interface OrangeHighlightLinkProps {
 export default function OrangeHighlightLink({
   href,
   children,
-  className = ""
+  className = "",
 }: OrangeHighlightLinkProps) {
   return (
     <Link

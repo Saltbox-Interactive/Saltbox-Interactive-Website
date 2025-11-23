@@ -36,9 +36,7 @@ export default function BoxButton({
     <>
       <div
         className={`absolute inset-0 border transition-opacity duration-300 ${
-          isActive
-            ? "border-accent opacity-100"
-            : "border-gray-500 group-hover:opacity-0"
+          isActive ? "border-accent opacity-100" : "border-gray-500 group-hover:opacity-0"
         }`}
       ></div>
       {!isActive && (
@@ -50,9 +48,11 @@ export default function BoxButton({
         </div>
       )}
       {icon && (
-        <span className={`relative transition-colors duration-300 ${
-          isActive ? "text-accent" : "group-hover:text-accent"
-        }`}>
+        <span
+          className={`relative transition-colors duration-300 ${
+            isActive ? "text-accent" : "group-hover:text-accent"
+          }`}
+        >
           {icon}
         </span>
       )}

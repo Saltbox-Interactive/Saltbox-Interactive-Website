@@ -16,7 +16,7 @@ A modern, responsive website for Saltbox Interactive game studio built with Next
 
 ### Prerequisites
 
-- Node.js 18+ 
+- Node.js 18+
 - npm or yarn
 
 ### Installation
@@ -51,11 +51,11 @@ npm start
 
 ```
 ├── app/                  # Next.js app directory
-├── components/          
+├── components/
 │   ├── layout/          # Header, Footer components
 │   ├── sections/        # Page sections (Hero, Games, About, etc.)
 │   └── ui/              # Reusable UI components
-├── lib/                 
+├── lib/
 │   └── utils/           # Utility functions
 └── public/              # Static assets
 ```

@@ -13,7 +13,7 @@ export default function ContactSection() {
 
   const [isVisible, setIsVisible] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
   const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -38,19 +38,19 @@ export default function ContactSection() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setSubmitStatus('idle');
+    setSubmitStatus("idle");
 
     try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
+      const response = await fetch("/api/contact", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
       });
 
       if (response.ok) {
-        setSubmitStatus('success');
+        setSubmitStatus("success");
         setFormData({
           name: "",
           email: "",
@@ -58,19 +58,21 @@ export default function ContactSection() {
           message: "",
         });
         // Reset success message after 5 seconds
-        setTimeout(() => setSubmitStatus('idle'), 5000);
+        setTimeout(() => setSubmitStatus("idle"), 5000);
       } else {
-        setSubmitStatus('error');
+        setSubmitStatus("error");
       }
     } catch (error) {
-      console.error('Error submitting form:', error);
-      setSubmitStatus('error');
+      console.error("Error submitting form:", error);
+      setSubmitStatus("error");
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
@@ -87,11 +89,14 @@ export default function ContactSection() {
 
       <div
         className={`relative z-10 transition-all duration-1000 ${
-          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'
+          isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-20"
         }`}
       >
         <div className="text-center mb-16 sm:mb-24 md:mb-32 max-w-4xl mx-auto">
-          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-light tracking-[0.15em] text-foreground mb-4 sm:mb-6 md:mb-8" style={{ fontFamily: 'var(--font-bebas)' }}>
+          <h2
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-light tracking-[0.15em] text-foreground mb-4 sm:mb-6 md:mb-8"
+            style={{ fontFamily: "var(--font-bebas)" }}
+          >
             CONNECT WITH US
           </h2>
           <p className="text-lg sm:text-xl md:text-2xl text-gray-300 leading-relaxed font-light px-4">
@@ -104,7 +109,10 @@ export default function ContactSection() {
             <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                 <div>
-                  <label htmlFor="name" className="block text-xs tracking-wider uppercase text-gray-400 mb-2">
+                  <label
+                    htmlFor="name"
+                    className="block text-xs tracking-wider uppercase text-gray-400 mb-2"
+                  >
                     Name
                   </label>
                   <input
@@ -121,7 +129,10 @@ export default function ContactSection() {
                 </div>
 
                 <div>
-                  <label htmlFor="email" className="block text-xs tracking-wider uppercase text-gray-400 mb-2">
+                  <label
+                    htmlFor="email"
+                    className="block text-xs tracking-wider uppercase text-gray-400 mb-2"
+                  >
                     Email
                   </label>
                   <input
@@ -140,7 +151,10 @@ export default function ContactSection() {
               </div>
 
               <div>
-                <label htmlFor="subject" className="block text-xs tracking-wider uppercase text-gray-400 mb-2">
+                <label
+                  htmlFor="subject"
+                  className="block text-xs tracking-wider uppercase text-gray-400 mb-2"
+                >
                   Subject
                 </label>
                 <input
@@ -156,7 +170,10 @@ export default function ContactSection() {
               </div>
 
               <div>
-                <label htmlFor="message" className="block text-xs tracking-wider uppercase text-gray-400 mb-2">
+                <label
+                  htmlFor="message"
+                  className="block text-xs tracking-wider uppercase text-gray-400 mb-2"
+                >
                   Message
                 </label>
                 <textarea
@@ -173,15 +190,19 @@ export default function ContactSection() {
 
               <div className="text-center pt-4">
                 <BracketButton type="submit">
-                  {isSubmitting ? 'Sending...' : 'Send Message'}
+                  {isSubmitting ? "Sending..." : "Send Message"}
                 </BracketButton>
 
-                {submitStatus === 'success' && (
-                  <p className="mt-4 text-accent">Message sent successfully! We'll get back to you soon.</p>
+                {submitStatus === "success" && (
+                  <p className="mt-4 text-accent">
+                    Message sent successfully! We'll get back to you soon.
+                  </p>
                 )}
 
-                {submitStatus === 'error' && (
-                  <p className="mt-4 text-red-500">Failed to send message. Please try again or email us directly.</p>
+                {submitStatus === "error" && (
+                  <p className="mt-4 text-red-500">
+                    Failed to send message. Please try again or email us directly.
+                  </p>
                 )}
               </div>
             </form>
@@ -189,7 +210,10 @@ export default function ContactSection() {
 
           <div className="mt-16 text-center">
             <p className="text-accent/60 text-sm tracking-wider uppercase mb-4">Direct Contact</p>
-            <a href="mailto:discover@saltboxinteractive.com" className="text-foreground hover:text-accent transition-colors duration-300 tracking-wider text-lg">
+            <a
+              href="mailto:discover@saltboxinteractive.com"
+              className="text-foreground hover:text-accent transition-colors duration-300 tracking-wider text-lg"
+            >
               discover@saltboxinteractive.com
             </a>
           </div>

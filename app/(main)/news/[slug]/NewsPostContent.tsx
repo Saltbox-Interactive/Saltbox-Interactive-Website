@@ -12,8 +12,11 @@ import { PortableText } from "@portabletext/react";
 import { urlForImage } from "@/lib/sanity/image";
 
 export default function NewsPostContent({ post }: { post: NewsPost }) {
-  const postUrl = typeof window !== 'undefined' ? window.location.href : `https://saltboxinteractive.com/news/${post.slug.current}`;
-  const imageUrl = post.coverImage ? urlForImage(post.coverImage).url() : '/images/placeholder.jpg';
+  const postUrl =
+    typeof window !== "undefined"
+      ? window.location.href
+      : `https://saltboxinteractive.com/news/${post.slug.current}`;
+  const imageUrl = post.coverImage ? urlForImage(post.coverImage).url() : "/images/placeholder.jpg";
 
   const portableTextComponents = {
     block: {
@@ -35,9 +38,7 @@ export default function NewsPostContent({ post }: { post: NewsPost }) {
       ),
     },
     list: {
-      bullet: ({ children }: any) => (
-        <ul className="space-y-3 my-6 list-disc pl-6">{children}</ul>
-      ),
+      bullet: ({ children }: any) => <ul className="space-y-3 my-6 list-disc pl-6">{children}</ul>,
     },
     listItem: {
       bullet: ({ children }: any) => (
@@ -50,9 +51,7 @@ export default function NewsPostContent({ post }: { post: NewsPost }) {
       ),
     },
     marks: {
-      strong: ({ children }: any) => (
-        <strong className="text-white">{children}</strong>
-      ),
+      strong: ({ children }: any) => <strong className="text-white">{children}</strong>,
       link: ({ value, children }: any) => (
         <BracketButton href={value.href}>{children}</BracketButton>
       ),
@@ -77,32 +76,27 @@ export default function NewsPostContent({ post }: { post: NewsPost }) {
       {/* Title Above Image */}
       <div className="relative bg-black">
         <div className="container mx-auto px-6 pt-48 pb-12 max-w-5xl">
-          <Typography.Heading size="xl">
-            {post.title}
-          </Typography.Heading>
+          <Typography.Heading size="xl">{post.title}</Typography.Heading>
         </div>
       </div>
 
       {/* Hero Image */}
       <section className="relative bg-black">
         <div className="relative w-full h-[85vh] overflow-hidden">
-          <Image
-            src={imageUrl}
-            alt={post.title}
-            fill
-            className="object-cover"
-            priority
-          />
+          <Image src={imageUrl} alt={post.title} fill className="object-cover" priority />
         </div>
       </section>
 
       {/* Breadcrumbs */}
       <div className="relative bg-black">
         <div className="container mx-auto px-6 pt-6 max-w-5xl">
-          <Breadcrumbs items={[
-            { label: "News", href: "/news" },
-            { label: post.title }
-          ]} />
+          <Breadcrumbs
+            items={[
+              { label: "Saltbox Interactive", href: "/" },
+              { label: "News", href: "/news" },
+              { label: post.title },
+            ]}
+          />
         </div>
       </div>
 
@@ -144,7 +138,9 @@ export default function NewsPostContent({ post }: { post: NewsPost }) {
                 {!post.project && (
                   <>
                     <span className="text-gray-700">|</span>
-                    <span className="text-[10px] uppercase tracking-wider text-gray-400">{post.category}</span>
+                    <span className="text-[10px] uppercase tracking-wider text-gray-400">
+                      {post.category}
+                    </span>
                   </>
                 )}
               </div>

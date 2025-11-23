@@ -33,10 +33,7 @@ export default function FullWidthImage({
     : 1;
 
   return (
-    <section
-      className="relative bg-black z-10 overflow-hidden"
-      style={{ height }}
-    >
+    <section className="relative bg-black z-10 overflow-hidden" style={{ height }}>
       <div
         className="absolute inset-0 w-full h-full"
         style={{
@@ -44,13 +41,7 @@ export default function FullWidthImage({
           opacity,
         }}
       >
-        <Image
-          src={src}
-          alt={alt}
-          fill
-          className="object-contain"
-          priority={priority}
-        />
+        <Image src={src} alt={alt} fill className="object-contain" priority={priority} />
         {vignette && (
           <div
             className="absolute inset-0"

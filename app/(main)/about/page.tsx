@@ -1,8 +1,6 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import Hero from "@/components/sections/Hero";
 import ParallaxImage from "@/components/ParallaxImage";
 import BracketButton from "@/components/ui/BracketButton";
@@ -12,13 +10,10 @@ import Container from "@/components/ui/Container";
 import SectionWrapper from "@/components/ui/SectionWrapper";
 import { LocalBusinessSchema, FAQSchema } from "@/components/schemas";
 import { ABOUT_PAGE_FAQS } from "@/lib/data/seo";
-import { useScrollPosition } from "@/hooks/useScrollPosition";
 import { ABOUT_CONTENT } from "@/lib/data/content";
 import EmailSubscribe from "@/components/sections/EmailSubscribe";
 
 export default function AboutPage() {
-  const scrollY = useScrollPosition();
-
   return (
     <>
       <LocalBusinessSchema />
@@ -35,7 +30,8 @@ export default function AboutPage() {
       <AnimatedSection id="intro" className="relative py-16 sm:py-24 md:py-32 bg-black">
         <Container size="xl">
           <Typography.Body size="xl" className="text-white leading-[1.4] mb-8 sm:mb-12">
-            <span className="bg-white text-black px-1">Saltbox Interactive</span> {ABOUT_CONTENT.intro.heading.replace('Saltbox Interactive ', '')}
+            <span className="bg-white text-black px-1">Saltbox Interactive</span>{" "}
+            {ABOUT_CONTENT.intro.heading.replace("Saltbox Interactive ", "")}
           </Typography.Body>
           <Typography.Body size="lg" className="text-gray-400 max-w-4xl">
             {ABOUT_CONTENT.intro.body}
@@ -134,7 +130,9 @@ export default function AboutPage() {
       {/* View Projects CTA */}
       <SectionWrapper className="py-20">
         <Container size="sm" className="text-center">
-          <BracketButton href="/projects" className="justify-center">View Our Projects</BracketButton>
+          <BracketButton href="/projects" className="justify-center">
+            View Our Projects
+          </BracketButton>
         </Container>
       </SectionWrapper>
 

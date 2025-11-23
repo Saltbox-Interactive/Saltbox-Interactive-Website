@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { COLORS } from "@/lib/constants";
 
 export default function CookieConsent() {
   const [showBanner, setShowBanner] = useState(false);
@@ -66,10 +65,7 @@ export default function CookieConsent() {
                 We use essential cookies to ensure our website functions properly. We do not use
                 tracking or advertising cookies. By continuing to use this site, you agree to our
                 use of essential cookies.{" "}
-                <a
-                  href="/privacy"
-                  className="underline hover:text-accent transition-colors"
-                >
+                <a href="/privacy" className="underline hover:text-accent transition-colors">
                   Learn more
                 </a>
               </p>

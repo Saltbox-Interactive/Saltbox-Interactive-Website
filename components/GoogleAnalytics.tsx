@@ -1,4 +1,4 @@
-import Script from 'next/script'
+import Script from "next/script";
 
 export default function GoogleAnalytics({ ga_id }: { ga_id: string }) {
   return (
@@ -28,5 +28,5 @@ export default function GoogleAnalytics({ ga_id }: { ga_id: string }) {
         }}
       />
     </>
-  )
+  );
 }

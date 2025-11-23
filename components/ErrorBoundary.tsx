@@ -42,8 +42,8 @@ export default class ErrorBoundary extends Component<Props, State> {
               SOMETHING WENT WRONG
             </Typography.Heading>
             <Typography.Body className="text-gray-400 mb-12">
-              We apologize for the inconvenience. Please try refreshing the page
-              or return to the homepage.
+              We apologize for the inconvenience. Please try refreshing the page or return to the
+              homepage.
             </Typography.Body>
             <div className="flex gap-6 justify-center">
               <BracketButton href="/">Go Home</BracketButton>

@@ -7,4 +7,8 @@ export { default as ReviewSchema } from "./ReviewSchema";
 export { default as LocalBusinessSchema } from "./LocalBusinessSchema";
 
 // Re-export existing schemas for convenience
-export { VideoGameSchema, OrganizationSchema, BreadcrumbSchema as LegacyBreadcrumbSchema } from "../StructuredData";
+export {
+  VideoGameSchema,
+  OrganizationSchema,
+  BreadcrumbSchema as LegacyBreadcrumbSchema,
+} from "../StructuredData";

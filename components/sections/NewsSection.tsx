@@ -5,21 +5,24 @@ const newsItems = [
     id: 1,
     title: "Project Horizon Alpha Test Begins",
     date: "December 15, 2024",
-    excerpt: "We're excited to announce that alpha testing for Project Horizon has officially begun. Selected testers will get early access to explore the vast universe we've created.",
+    excerpt:
+      "We're excited to announce that alpha testing for Project Horizon has officially begun. Selected testers will get early access to explore the vast universe we've created.",
     category: "Announcement",
   },
   {
     id: 2,
     title: "Mystic Realms Development Update",
     date: "December 10, 2024",
-    excerpt: "Check out the latest screenshots and gameplay footage from Mystic Realms. The magic system is coming together beautifully!",
+    excerpt:
+      "Check out the latest screenshots and gameplay footage from Mystic Realms. The magic system is coming together beautifully!",
     category: "Development",
   },
   {
     id: 3,
     title: "Join Us at Game Developers Conference 2025",
     date: "December 5, 2024",
-    excerpt: "We'll be showcasing our upcoming titles at GDC 2025. Stop by our booth to play demos and meet the team!",
+    excerpt:
+      "We'll be showcasing our upcoming titles at GDC 2025. Stop by our booth to play demos and meet the team!",
     category: "Events",
   },
 ];
@@ -31,7 +34,8 @@ export default function NewsSection() {
         <div className="text-center mb-12">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Latest News</h2>
           <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-            Stay updated with the latest developments from <span className="bg-white text-black px-1">Saltbox Interactive</span>
+            Stay updated with the latest developments from{" "}
+            <span className="bg-white text-black px-1">Saltbox Interactive</span>
           </p>
         </div>
 
@@ -49,7 +53,10 @@ export default function NewsSection() {
               </CardHeader>
               <CardContent>
                 <CardDescription className="line-clamp-3">{item.excerpt}</CardDescription>
-                <a href="#" className="text-white hover:text-gray-300 mt-4 inline-block font-medium">
+                <a
+                  href="#"
+                  className="text-white hover:text-gray-300 mt-4 inline-block font-medium"
+                >
                   Read More →
                 </a>
               </CardContent>
