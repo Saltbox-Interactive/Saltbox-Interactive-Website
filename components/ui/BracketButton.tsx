@@ -51,7 +51,7 @@ export default function BracketButton({
       <Link
         href={href}
         onClick={onClick}
-        className={`inline-flex items-center gap-2 group py-2 ${className}`}
+        className={`inline-flex items-center gap-2 group py-3 px-2 min-h-[44px] active:opacity-75 transition-opacity ${className}`}
         target={target}
         rel={rel}
       >
@@ -64,7 +64,7 @@ export default function BracketButton({
     <button
       type={type}
       onClick={onClick}
-      className={`inline-flex items-center gap-2 group py-2 ${className}`}
+      className={`inline-flex items-center gap-2 group py-3 px-2 min-h-[44px] active:opacity-75 transition-opacity ${className}`}
     >
       {content}
     </button>

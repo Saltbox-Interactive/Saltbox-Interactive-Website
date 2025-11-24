@@ -22,6 +22,15 @@ export default function ParallaxImage({
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    // Detect if device supports touch (mobile/tablet) or user prefers reduced motion
+    const isTouchDevice = "ontouchstart" in window || navigator.maxTouchPoints > 0;
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    // Disable parallax on mobile or when user prefers reduced motion
+    if (isTouchDevice || prefersReducedMotion) {
+      return;
+    }
+
     const handleScroll = () => {
       if (!containerRef.current) return;
 

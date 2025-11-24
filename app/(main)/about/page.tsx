@@ -27,7 +27,7 @@ export default function AboutPage() {
       />
 
       {/* Intro Text Section */}
-      <AnimatedSection id="intro" className="relative py-16 sm:py-24 md:py-32 bg-black">
+      <AnimatedSection id="intro" className="relative py-12 sm:py-16 md:py-24 lg:py-32 bg-black">
         <Container size="xl">
           <Typography.Body size="xl" className="text-white leading-[1.4] mb-8 sm:mb-12">
             <span className="bg-white text-black px-1">Saltbox Interactive</span>{" "}
@@ -43,7 +43,7 @@ export default function AboutPage() {
       <AnimatedSection id="gallery1" className="relative bg-black">
         <div>
           {/* Large Featured Image */}
-          <div className="relative h-[50vh] sm:h-[60vh] md:h-[70vh] lg:h-[80vh] overflow-hidden">
+          <div className="relative h-[400px] sm:h-[500px] md:h-[600px] lg:h-[700px] overflow-hidden">
             <Image
               src="/images/temp/dod-temp-20.jpg"
               alt="Historic limestone building with arched doorway in Old D'Hanis, showcasing 19th-century Alsatian architecture"
@@ -56,7 +56,7 @@ export default function AboutPage() {
           {/* Overlapping Images Layout */}
           <div className="container mx-auto px-4 sm:px-6 md:px-12 -mt-16 sm:-mt-24 md:-mt-32 relative z-10">
             <div className="grid grid-cols-2 gap-4 sm:gap-6 md:gap-8 max-w-5xl ml-auto">
-              <div className="relative h-[30vh] sm:h-[35vh] md:h-[40vh] lg:h-[50vh]">
+              <div className="relative h-[250px] sm:h-[300px] md:h-[350px] lg:h-[450px]">
                 <ParallaxImage
                   src="/images/dhanis2.jpg"
                   alt="Detailed view of weathered stone masonry and traditional construction techniques in Old D'Hanis historic site"
@@ -65,7 +65,7 @@ export default function AboutPage() {
                   direction="vertical"
                 />
               </div>
-              <div className="relative h-[30vh] sm:h-[35vh] md:h-[40vh] lg:h-[50vh] mt-8 sm:mt-12 md:mt-16">
+              <div className="relative h-[250px] sm:h-[300px] md:h-[350px] lg:h-[450px] mt-8 sm:mt-12 md:mt-16">
                 <ParallaxImage
                   src="/images/dhanis3.jpg"
                   alt="Close-up of historic architectural elements and textures from the Old D'Hanis settlement"
@@ -80,7 +80,7 @@ export default function AboutPage() {
       </AnimatedSection>
 
       {/* Team Philosophy Section */}
-      <AnimatedSection id="team" className="relative py-16 sm:py-24 md:py-32 lg:py-48 bg-black">
+      <AnimatedSection id="team" className="relative py-12 sm:py-16 md:py-24 lg:py-32 bg-black">
         <Container size="xl">
           <div className="grid md:grid-cols-5 gap-8 sm:gap-12 md:gap-16 items-center">
             <div className="md:col-span-2">
@@ -101,7 +101,7 @@ export default function AboutPage() {
       {/* Full-Width Mission Image */}
       <AnimatedSection id="mission-image" className="relative bg-black">
         <div>
-          <div className="relative h-[60vh] md:h-[80vh] overflow-hidden">
+          <div className="relative h-[450px] sm:h-[550px] md:h-[700px] overflow-hidden">
             <Image
               src="/images/temp/dod-temp-23.jpg"
               alt="Atmospheric view of historic Old D'Hanis landscape, featuring preserved ruins and vegetation of the 19th-century Texas settlement"
@@ -114,7 +114,7 @@ export default function AboutPage() {
       </AnimatedSection>
 
       {/* Mission Statement */}
-      <AnimatedSection id="mission" className="relative py-32 md:py-48 bg-black">
+      <AnimatedSection id="mission" className="relative py-16 sm:py-20 md:py-28 lg:py-32 bg-black">
         <Container size="xl">
           <div className="max-w-4xl mx-auto text-center">
             <Typography.Heading size="xl" className="mb-12 leading-[1.3] tracking-[0.1em]">
@@ -128,7 +128,7 @@ export default function AboutPage() {
       </AnimatedSection>
 
       {/* View Projects CTA */}
-      <SectionWrapper className="py-20">
+      <SectionWrapper className="py-12 sm:py-16">
         <Container size="sm" className="text-center">
           <BracketButton href="/projects" className="justify-center">
             View Our Projects

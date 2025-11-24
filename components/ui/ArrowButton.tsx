@@ -19,7 +19,7 @@ export default function ArrowButton({
     <button
       onClick={onClick}
       disabled={disabled}
-      className={`group relative w-8 h-8 flex items-center justify-center disabled:opacity-30 disabled:cursor-not-allowed ${className}`}
+      className={`group relative w-11 h-11 sm:w-8 sm:h-8 flex items-center justify-center disabled:opacity-30 disabled:cursor-not-allowed active:opacity-75 transition-opacity ${className}`}
       aria-label={ariaLabel || (direction === "left" ? "Previous" : "Next")}
       style={style}
     >

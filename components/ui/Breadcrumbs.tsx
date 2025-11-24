@@ -11,8 +11,8 @@ interface BreadcrumbsProps {
 
 export default function Breadcrumbs({ items }: BreadcrumbsProps) {
   return (
-    <nav aria-label="Breadcrumb" className="py-4">
-      <ol className="flex items-center gap-2 text-sm text-gray-400">
+    <nav aria-label="Breadcrumb" className="py-3 sm:py-4">
+      <ol className="flex items-center gap-2 text-xs sm:text-sm text-gray-400">
         {items.map((item, index) => {
           const isLast = index === items.length - 1;
 
@@ -22,7 +22,7 @@ export default function Breadcrumbs({ items }: BreadcrumbsProps) {
                 <>
                   <Link
                     href={item.href}
-                    className="hover:text-accent transition-colors duration-300"
+                    className="hover:text-accent active:text-accent transition-colors duration-300 py-1 min-h-[44px] flex items-center"
                   >
                     {item.label}
                   </Link>
@@ -35,7 +35,7 @@ export default function Breadcrumbs({ items }: BreadcrumbsProps) {
                   {item.href ? (
                     <Link
                       href={item.href}
-                      className="hover:text-accent transition-colors duration-300"
+                      className="hover:text-accent active:text-accent transition-colors duration-300 py-1 min-h-[44px] flex items-center"
                     >
                       {item.label}
                     </Link>

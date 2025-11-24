@@ -110,8 +110,8 @@ export default function NewsPostContent({ post }: { post: NewsPost }) {
             </Typography.Heading>
 
             {/* Date & Tags */}
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3 text-sm">
+            <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+              <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-3 text-sm">
                 <time dateTime={post.date} className="text-gray-500">
                   {new Date(post.date).toLocaleDateString("en-US", {
                     year: "numeric",
@@ -120,28 +120,28 @@ export default function NewsPostContent({ post }: { post: NewsPost }) {
                   })}
                 </time>
                 {post.author && (
-                  <>
-                    <span className="text-gray-700">|</span>
+                  <div className="flex items-center gap-3">
+                    <span className="hidden sm:inline text-gray-700">|</span>
                     <span className="text-sm text-gray-400">By {post.author}</span>
-                  </>
+                  </div>
                 )}
                 {post.project && (
-                  <>
-                    <span className="text-gray-700">|</span>
+                  <div className="flex items-center gap-3">
+                    <span className="hidden sm:inline text-gray-700">|</span>
                     <div className="flex items-center gap-2 text-[10px] uppercase tracking-wider">
                       <span className="text-gray-400">{post.project}</span>
                       <span className="text-gray-700">•</span>
                       <span className="text-gray-400">{post.category}</span>
                     </div>
-                  </>
+                  </div>
                 )}
                 {!post.project && (
-                  <>
-                    <span className="text-gray-700">|</span>
+                  <div className="flex items-center gap-3">
+                    <span className="hidden sm:inline text-gray-700">|</span>
                     <span className="text-[10px] uppercase tracking-wider text-gray-400">
                       {post.category}
                     </span>
-                  </>
+                  </div>
                 )}
               </div>
 

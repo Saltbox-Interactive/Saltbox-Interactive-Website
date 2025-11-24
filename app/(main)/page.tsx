@@ -74,6 +74,9 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
+    // Detect if device supports touch (mobile/tablet)
+    const isTouchDevice = "ontouchstart" in window || navigator.maxTouchPoints > 0;
+
     const handleScroll = () => {
       // Reset virtual scroll to full threshold (animated out) when we've scrolled past the hero
       if (window.scrollY > 100) {
@@ -86,6 +89,9 @@ export default function Home() {
     };
 
     const handleWheel = (e: WheelEvent) => {
+      // Skip scroll hijacking on touch devices to prevent mobile scrolling issues
+      if (isTouchDevice) return;
+
       // Only lock scroll when we're at the top of the page
       if (window.scrollY === 0) {
         const newVirtualScroll = Math.max(
@@ -105,11 +111,17 @@ export default function Home() {
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
-    window.addEventListener("wheel", handleWheel, { passive: false });
+
+    // Only add wheel listener on non-touch devices
+    if (!isTouchDevice) {
+      window.addEventListener("wheel", handleWheel, { passive: false });
+    }
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("wheel", handleWheel);
+      if (!isTouchDevice) {
+        window.removeEventListener("wheel", handleWheel);
+      }
     };
   }, [virtualScroll]);
 
@@ -150,7 +162,7 @@ export default function Home() {
         <div className="relative z-10 text-center px-4 sm:px-6 max-w-6xl mx-auto">
           <div className="flex flex-col items-center justify-center gap-3 sm:gap-4 md:gap-6">
             <div
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-light tracking-[0.2em] sm:tracking-[0.25em] md:tracking-[0.3em] transition-all duration-300"
+              className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-light tracking-[0.15em] sm:tracking-[0.2em] md:tracking-[0.25em] lg:tracking-[0.3em] transition-all duration-300"
               style={{
                 fontFamily: "var(--font-bebas)",
                 transform: `translateX(${virtualScroll * -1.5}px)`,
@@ -165,7 +177,7 @@ export default function Home() {
               DISCOVER
             </div>
             <div
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-light tracking-[0.2em] sm:tracking-[0.25em] md:tracking-[0.3em] transition-all duration-300"
+              className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-light tracking-[0.15em] sm:tracking-[0.2em] md:tracking-[0.25em] lg:tracking-[0.3em] transition-all duration-300"
               style={{
                 fontFamily: "var(--font-bebas)",
                 transform: `translateX(${virtualScroll * 1.5}px)`,
@@ -180,7 +192,7 @@ export default function Home() {
               LEARN
             </div>
             <div
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-light tracking-[0.2em] sm:tracking-[0.25em] md:tracking-[0.3em] transition-all duration-300"
+              className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-light tracking-[0.15em] sm:tracking-[0.2em] md:tracking-[0.25em] lg:tracking-[0.3em] transition-all duration-300"
               style={{
                 fontFamily: "var(--font-bebas)",
                 transform: `translateX(${virtualScroll * -1.5}px)`,
@@ -199,7 +211,10 @@ export default function Home() {
       </section>
 
       {/* About Section - Scrolls over background */}
-      <section ref={aboutRef} className="relative py-16 sm:py-24 md:py-32 px-4 sm:px-6 z-20">
+      <section
+        ref={aboutRef}
+        className="relative py-12 sm:py-16 md:py-24 lg:py-32 px-4 sm:px-6 z-20"
+      >
         <div
           className={`relative z-10 container mx-auto max-w-4xl text-center transition-all duration-1000 ${
             aboutVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-20"
@@ -249,7 +264,7 @@ export default function Home() {
       <section
         id="intro"
         ref={introRef}
-        className="relative -mt-[10vh] sm:-mt-[20vh] lg:-mt-[70vh] z-20 pb-12 sm:pb-24 lg:pb-32"
+        className="relative -mt-[10vh] sm:-mt-[20vh] lg:-mt-[70vh] z-20 pb-8 sm:pb-16 md:pb-20 lg:pb-24"
       >
         <div
           className={`relative z-10 transition-all duration-1000 ${
@@ -279,7 +294,7 @@ export default function Home() {
       />
 
       {/* Discover Old D'Hanis Remastered Section */}
-      <section className="relative -mt-[10vh] sm:-mt-[20vh] lg:-mt-[70vh] z-20 pb-12 sm:pb-24">
+      <section className="relative -mt-[10vh] sm:-mt-[20vh] lg:-mt-[70vh] z-20 pb-8 sm:pb-16 md:pb-20">
         <ProjectShowcase
           imageSrc={HOME_CONTENT.projects.discoverOldDhanisRemastered.image}
           imageAlt="Discover Old D'Hanis Remastered game cover art showing photorealistic recreation with Unreal Engine 5"

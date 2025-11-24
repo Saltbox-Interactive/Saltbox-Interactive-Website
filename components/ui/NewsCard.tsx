@@ -53,7 +53,7 @@ export default function NewsCard({
               })}
             </span>
             <span className="text-gray-700">|</span>
-            <div className="flex items-center gap-2 text-[10px] uppercase tracking-wider">
+            <div className="flex items-center gap-2 text-xs sm:text-[10px] uppercase tracking-wider">
               {project && (
                 <>
                   <span className="text-gray-400">{project}</span>

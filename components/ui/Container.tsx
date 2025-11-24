@@ -22,7 +22,7 @@ export default function Container({
     full: "max-w-[1800px]",
   };
 
-  const paddingClass = padding ? "px-6 md:px-12" : "";
+  const paddingClass = padding ? "px-4 sm:px-6 md:px-12" : "";
 
   return (
     <div className={`container mx-auto ${sizeClasses[size]} ${paddingClass} ${className}`}>

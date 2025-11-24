@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { useState, useEffect } from "react";
 
 interface FullWidthImageProps {
   src: string;
@@ -25,6 +26,18 @@ export default function FullWidthImage({
   fadeDistance = 600,
   priority = false,
 }: FullWidthImageProps) {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
   // Calculate opacity if fade parameters are provided
   const opacity = fadeStart
     ? scrollY < fadeStart
@@ -32,8 +45,14 @@ export default function FullWidthImage({
       : Math.max(0, 1 - (scrollY - fadeStart) / fadeDistance)
     : 1;
 
+  // Use reduced height on mobile if default height is used
+  const responsiveHeight = height === "150vh" && isMobile ? "100vh" : height;
+
   return (
-    <section className="relative bg-black z-10 overflow-hidden" style={{ height }}>
+    <section
+      className="relative bg-black z-10 overflow-hidden"
+      style={{ height: responsiveHeight }}
+    >
       <div
         className="absolute inset-0 w-full h-full"
         style={{

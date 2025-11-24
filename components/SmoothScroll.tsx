@@ -10,11 +10,14 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
   const lenisRef = useRef<Lenis | null>(null);
 
   useEffect(() => {
+    // Detect if device supports touch (mobile/tablet)
+    const isTouchDevice = "ontouchstart" in window || navigator.maxTouchPoints > 0;
+
     const lenis = new Lenis({
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: "vertical",
-      smoothWheel: true,
+      smoothWheel: !isTouchDevice, // Disable smooth scrolling on mobile for better performance
     });
 
     lenisRef.current = lenis;

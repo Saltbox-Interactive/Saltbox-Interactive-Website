@@ -65,20 +65,20 @@ export default function NewsShowcase() {
   return (
     <section className="relative py-20 bg-black">
       {/* Horizontal line - almost full width */}
-      <div className="px-16 mb-6">
+      <div className="px-4 sm:px-8 md:px-16 mb-6">
         <div className="h-px w-full bg-white/30"></div>
       </div>
 
       {/* Header and News Cards Container */}
-      <div className="px-16">
-        <div className="flex items-start gap-12">
+      <div className="px-4 sm:px-8 md:px-16">
+        <div className="flex flex-col lg:flex-row items-start gap-4 sm:gap-8 lg:gap-12">
           {/* Section Title */}
           <div className="flex-shrink-0">
             <SectionTitle>Latest News</SectionTitle>
           </div>
 
           {/* News Cards Container */}
-          <div className="flex-1 relative overflow-hidden">
+          <div className="flex-1 relative overflow-hidden w-full">
             {isLoading ? (
               <div className="text-gray-400 text-lg">Loading news...</div>
             ) : latestPosts.length === 0 ? (
@@ -89,7 +89,7 @@ export default function NewsShowcase() {
                 <div
                   ref={scrollContainerRef}
                   onScroll={checkScrollButtons}
-                  className="flex gap-6 overflow-x-auto scrollbar-hide scroll-smooth pb-4"
+                  className="flex gap-4 sm:gap-6 overflow-x-auto scrollbar-hide scroll-smooth pb-4"
                   style={{
                     scrollbarWidth: "none",
                     msOverflowStyle: "none",
@@ -99,7 +99,7 @@ export default function NewsShowcase() {
                   {latestPosts.map((post) => (
                     <div
                       key={post._id}
-                      className="flex-shrink-0 w-[calc(50%-12px)]"
+                      className="flex-shrink-0 w-full sm:w-[calc(50%-12px)] min-w-[280px]"
                       style={{ scrollSnapAlign: "start" }}
                     >
                       <NewsCard

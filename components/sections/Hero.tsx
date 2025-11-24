@@ -57,7 +57,7 @@ export default function Hero({
         {showMotto ? (
           <div className="flex flex-col items-center justify-center gap-4 md:gap-6">
             <div
-              className="text-5xl md:text-7xl lg:text-8xl font-light tracking-[0.3em] text-white transition-all duration-300"
+              className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-light tracking-[0.15em] sm:tracking-[0.2em] md:tracking-[0.25em] lg:tracking-[0.3em] text-white transition-all duration-300"
               style={{
                 fontFamily: "var(--font-bebas)",
                 transform: `translateX(${scrollY * -1.5}px)`,
@@ -67,7 +67,7 @@ export default function Hero({
               DISCOVER
             </div>
             <div
-              className="text-5xl md:text-7xl lg:text-8xl font-light tracking-[0.3em] text-white transition-all duration-300"
+              className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-light tracking-[0.15em] sm:tracking-[0.2em] md:tracking-[0.25em] lg:tracking-[0.3em] text-white transition-all duration-300"
               style={{
                 fontFamily: "var(--font-bebas)",
                 transform: `translateX(${scrollY * 1.5}px)`,
@@ -77,7 +77,7 @@ export default function Hero({
               LEARN
             </div>
             <div
-              className="text-5xl md:text-7xl lg:text-8xl font-light tracking-[0.3em] text-white transition-all duration-300"
+              className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-light tracking-[0.15em] sm:tracking-[0.2em] md:tracking-[0.25em] lg:tracking-[0.3em] text-white transition-all duration-300"
               style={{
                 fontFamily: "var(--font-bebas)",
                 transform: `translateX(${scrollY * -1.5}px)`,
@@ -96,7 +96,7 @@ export default function Hero({
               {title && (
                 <>
                   <h1
-                    className="font-bebas text-7xl md:text-8xl lg:text-9xl tracking-wider text-white/90 mb-2"
+                    className="font-bebas text-4xl sm:text-5xl md:text-7xl lg:text-8xl xl:text-9xl tracking-wider text-white/90 mb-2"
                     style={{ fontFamily: "var(--font-bebas)" }}
                   >
                     {title}
@@ -111,7 +111,7 @@ export default function Hero({
               style={{ transform: `translateY(${scrollY * 0.25}px)` }}
             >
               {subtitle && (
-                <p className="text-2xl md:text-3xl text-accent font-light tracking-[0.2em]">
+                <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-accent font-light tracking-[0.15em] sm:tracking-[0.2em]">
                   {subtitle}
                 </p>
               )}
