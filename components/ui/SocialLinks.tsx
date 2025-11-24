@@ -16,7 +16,7 @@ export default function SocialLinks({ variant = "default", className = "" }: Soc
         href={SOCIAL_LINKS.linkedin}
         target="_blank"
         rel="noopener noreferrer"
-        className="text-gray-400 hover:text-accent active:text-accent transition-colors duration-300 p-2 min-w-[44px] min-h-[44px] flex items-center justify-center"
+        className="text-gray-300 hover:text-accent active:text-accent transition-colors duration-300 p-2 min-w-[44px] min-h-[44px] flex items-center justify-center"
         aria-label="LinkedIn"
       >
         <svg className={iconSize} fill="currentColor" viewBox="0 0 24 24">
@@ -28,7 +28,7 @@ export default function SocialLinks({ variant = "default", className = "" }: Soc
         href={SOCIAL_LINKS.youtube}
         target="_blank"
         rel="noopener noreferrer"
-        className="text-gray-400 hover:text-accent active:text-accent transition-colors duration-300 p-2 min-w-[44px] min-h-[44px] flex items-center justify-center"
+        className="text-gray-300 hover:text-accent active:text-accent transition-colors duration-300 p-2 min-w-[44px] min-h-[44px] flex items-center justify-center"
         aria-label="YouTube"
       >
         <svg className={iconSize} fill="currentColor" viewBox="0 0 24 24">
@@ -40,7 +40,7 @@ export default function SocialLinks({ variant = "default", className = "" }: Soc
         href={SOCIAL_LINKS.steam}
         target="_blank"
         rel="noopener noreferrer"
-        className="text-gray-400 hover:text-accent active:text-accent transition-colors duration-300 p-2 min-w-[44px] min-h-[44px] flex items-center justify-center"
+        className="text-gray-300 hover:text-accent active:text-accent transition-colors duration-300 p-2 min-w-[44px] min-h-[44px] flex items-center justify-center"
         aria-label="Steam"
       >
         <svg className={iconSize} fill="currentColor" viewBox="0 0 24 24">

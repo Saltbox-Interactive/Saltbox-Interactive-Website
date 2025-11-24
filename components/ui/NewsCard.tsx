@@ -28,14 +28,18 @@ export default function NewsCard({
       : urlForImage(coverImage).width(800).height(450).url()
     : "/images/placeholder.jpg";
   return (
-    <Link href={`/news/${slug}`} className="group block w-full">
+    <Link
+      href={`/news/${slug}`}
+      className="group block w-full"
+      aria-label={`Read article: ${title}`}
+    >
       {/* Card */}
       <div className="overflow-hidden">
         {/* Image */}
         <div className="relative aspect-video overflow-hidden">
           <Image
             src={imageUrl}
-            alt={title}
+            alt=""
             fill
             className="object-cover group-hover:scale-105 transition-transform duration-500"
           />

@@ -432,6 +432,7 @@ export default function Header() {
                       isMobileMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
                     }`}
                     style={{ transitionDelay: isMobileMenuOpen ? "800ms" : "0ms" }}
+                    aria-label="View Discover Old D'Hanis project"
                   >
                     <Image
                       src="/images/dod-cover.jpg"
@@ -461,6 +462,7 @@ export default function Header() {
                       isMobileMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
                     }`}
                     style={{ transitionDelay: isMobileMenuOpen ? "900ms" : "0ms" }}
+                    aria-label="Learn more about Saltbox Interactive"
                   >
                     <Image
                       src="/images/background_pic.jpg"
@@ -626,6 +628,7 @@ export default function Header() {
                   isMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
                 }`}
                 style={{ transitionDelay: isMenuOpen ? "300ms" : "0ms" }}
+                aria-label="View Discover Old D'Hanis project"
               >
                 <Image
                   src="/images/dod-cover.jpg"
@@ -655,6 +658,7 @@ export default function Header() {
                   isMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
                 }`}
                 style={{ transitionDelay: isMenuOpen ? "450ms" : "0ms" }}
+                aria-label="Learn more about Saltbox Interactive"
               >
                 <Image
                   src="/images/background_pic.jpg"

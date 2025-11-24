@@ -15,6 +15,7 @@ export default function ProjectsSection() {
             <Link
               href={`/projects/${project.slug}`}
               className="relative h-[250px] sm:h-[300px] md:h-[350px] lg:h-[400px] block overflow-hidden group"
+              aria-label={`View ${project.title} project details`}
             >
               {/* Background Image */}
               <div className="absolute inset-0">

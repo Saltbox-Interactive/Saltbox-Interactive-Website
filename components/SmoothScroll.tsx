@@ -2,36 +2,50 @@
 
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
-import Lenis from "lenis";
 import { ScrollSpeedContext } from "./ScrollSpeedContext";
+
+// Define Lenis type
+type Lenis = any;
 
 export default function SmoothScroll({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const lenisRef = useRef<Lenis | null>(null);
 
   useEffect(() => {
-    // Detect if device supports touch (mobile/tablet)
-    const isTouchDevice = "ontouchstart" in window || navigator.maxTouchPoints > 0;
+    // Dynamically import Lenis to reduce initial bundle size
+    let rafId: number;
 
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      orientation: "vertical",
-      smoothWheel: !isTouchDevice, // Disable smooth scrolling on mobile for better performance
-    });
+    const initLenis = async () => {
+      // Detect if device supports touch (mobile/tablet)
+      const isTouchDevice = "ontouchstart" in window || navigator.maxTouchPoints > 0;
 
-    lenisRef.current = lenis;
+      const Lenis = (await import("lenis")).default;
 
-    function raf(time: number) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
+      const lenis = new Lenis({
+        duration: 1.2,
+        easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        orientation: "vertical" as const,
+        smoothWheel: !isTouchDevice, // Disable smooth scrolling on mobile for better performance
+      });
 
-    requestAnimationFrame(raf);
+      lenisRef.current = lenis;
+
+      function raf(time: number) {
+        lenis.raf(time);
+        rafId = requestAnimationFrame(raf);
+      }
+
+      rafId = requestAnimationFrame(raf);
+    };
+
+    initLenis();
 
     return () => {
-      lenis.destroy();
-      lenisRef.current = null;
+      if (rafId) cancelAnimationFrame(rafId);
+      if (lenisRef.current) {
+        lenisRef.current.destroy();
+        lenisRef.current = null;
+      }
     };
   }, []);
 
