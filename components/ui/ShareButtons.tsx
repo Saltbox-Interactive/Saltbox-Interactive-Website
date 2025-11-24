@@ -43,7 +43,7 @@ export default function ShareButtons({ title, url }: ShareButtonsProps) {
       {/* LinkedIn */}
       <button
         onClick={shareOnLinkedIn}
-        className="text-gray-400 hover:text-accent active:text-accent transition-colors duration-300 p-2 min-w-[44px] min-h-[44px] flex items-center justify-center"
+        className="text-gray-300 hover:text-accent active:text-accent transition-colors duration-300 p-2 min-w-[44px] min-h-[44px] flex items-center justify-center"
         aria-label="Share on LinkedIn"
       >
         <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -54,7 +54,7 @@ export default function ShareButtons({ title, url }: ShareButtonsProps) {
       {/* Facebook */}
       <button
         onClick={shareOnFacebook}
-        className="text-gray-400 hover:text-accent active:text-accent transition-colors duration-300 p-2 min-w-[44px] min-h-[44px] flex items-center justify-center"
+        className="text-gray-300 hover:text-accent active:text-accent transition-colors duration-300 p-2 min-w-[44px] min-h-[44px] flex items-center justify-center"
         aria-label="Share on Facebook"
       >
         <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -65,7 +65,7 @@ export default function ShareButtons({ title, url }: ShareButtonsProps) {
       {/* Twitter */}
       <button
         onClick={shareOnTwitter}
-        className="text-gray-400 hover:text-accent active:text-accent transition-colors duration-300 p-2 min-w-[44px] min-h-[44px] flex items-center justify-center"
+        className="text-gray-300 hover:text-accent active:text-accent transition-colors duration-300 p-2 min-w-[44px] min-h-[44px] flex items-center justify-center"
         aria-label="Share on Twitter"
       >
         <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -76,7 +76,7 @@ export default function ShareButtons({ title, url }: ShareButtonsProps) {
       {/* Email */}
       <button
         onClick={shareViaEmail}
-        className="text-gray-400 hover:text-accent active:text-accent transition-colors duration-300 p-2 min-w-[44px] min-h-[44px] flex items-center justify-center"
+        className="text-gray-300 hover:text-accent active:text-accent transition-colors duration-300 p-2 min-w-[44px] min-h-[44px] flex items-center justify-center"
         aria-label="Share via Email"
       >
         <svg
@@ -93,7 +93,7 @@ export default function ShareButtons({ title, url }: ShareButtonsProps) {
       {/* Copy Link */}
       <button
         onClick={copyLink}
-        className="text-gray-400 hover:text-accent active:text-accent transition-colors duration-300 p-2 min-w-[44px] min-h-[44px] flex items-center justify-center"
+        className="text-gray-300 hover:text-accent active:text-accent transition-colors duration-300 p-2 min-w-[44px] min-h-[44px] flex items-center justify-center"
         aria-label="Copy link"
       >
         <svg

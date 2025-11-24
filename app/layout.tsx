@@ -4,7 +4,6 @@ import "./globals.css";
 import { OrganizationSchema, PersonSchema } from "@/components/StructuredData";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 import CookieConsent from "@/components/CookieConsent";
-import "lenis/dist/lenis.css";
 
 const workSans = Work_Sans({
   variable: "--font-work-sans",
@@ -130,6 +129,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+        <link rel="dns-prefetch" href="https://cdn.sanity.io" />
 
         <OrganizationSchema />
         <PersonSchema />

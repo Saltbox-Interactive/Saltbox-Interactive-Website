@@ -95,13 +95,13 @@ export default function Footer() {
             <div className="flex items-center gap-3">
               <Link
                 href="/terms"
-                className="text-gray-400 hover:text-accent transition-colors duration-300 text-xs tracking-wider uppercase"
+                className="text-gray-300 hover:text-accent transition-colors duration-300 text-xs tracking-wider uppercase underline underline-offset-2"
               >
                 Terms & Conditions
               </Link>
               <Link
                 href="/privacy"
-                className="text-gray-400 hover:text-accent transition-colors duration-300 text-xs tracking-wider uppercase"
+                className="text-gray-300 hover:text-accent transition-colors duration-300 text-xs tracking-wider uppercase underline underline-offset-2"
               >
                 Privacy Policy
               </Link>
@@ -110,7 +110,7 @@ export default function Footer() {
                   localStorage.removeItem("cookie-consent");
                   window.dispatchEvent(new Event("show-cookie-banner"));
                 }}
-                className="text-gray-400 hover:text-accent transition-colors duration-300 text-xs tracking-wider uppercase"
+                className="text-gray-300 hover:text-accent transition-colors duration-300 text-xs tracking-wider uppercase underline underline-offset-2"
               >
                 Cookie Preferences
               </button>
