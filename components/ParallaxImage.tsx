@@ -83,7 +83,7 @@ export default function ParallaxImage({
           transition: "transform 0.1s ease-out",
         }}
       >
-        <Image src={src} alt={alt} fill className="object-cover" />
+        <Image src={src} alt={alt} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" />
       </div>
     </div>
   );

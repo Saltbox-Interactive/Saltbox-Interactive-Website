@@ -47,11 +47,14 @@ export default function Hero({
       )}
 
       {/* Atmospheric background layers */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-gray-900/80 to-black/90"></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-gray-900/80 to-black"></div>
       <div className="absolute inset-0 gradient-dust opacity-40"></div>
 
       {/* Subtle texture overlay */}
       <div className="absolute inset-0 bg-noise opacity-5"></div>
+
+      {/* Fade to black at bottom */}
+      <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-b from-transparent to-black"></div>
 
       <div className="relative z-10 text-center px-6 max-w-6xl mx-auto">
         {showMotto ? (

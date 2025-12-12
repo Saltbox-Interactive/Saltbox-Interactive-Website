@@ -60,7 +60,7 @@ export default function FullWidthImage({
           opacity,
         }}
       >
-        <Image src={src} alt={alt} fill className="object-contain" priority={priority} />
+        <Image src={src} alt={alt} fill sizes="100vw" className="object-contain" priority={priority} />
         {vignette && (
           <div
             className="absolute inset-0"

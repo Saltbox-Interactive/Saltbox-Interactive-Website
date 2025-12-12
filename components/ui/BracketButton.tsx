@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 type BracketButtonProps =
   | {
@@ -30,20 +33,28 @@ export default function BracketButton({
   rel,
 }: BracketButtonProps) {
   const content = (
-    <>
-      <span className="text-accent transition-all duration-300 group-hover:-translate-x-1 text-base sm:text-lg">
+    <div className="inline-flex items-center gap-2 group py-3 px-2 min-h-[44px]">
+      <motion.span
+        className="text-accent transition-all duration-300 text-base sm:text-lg"
+        whileHover={{ x: -4, scale: 1.1 }}
+        transition={{ type: "spring", stiffness: 400, damping: 10 }}
+      >
         [
-      </span>
+      </motion.span>
       <span
         className="text-base sm:text-lg font-light tracking-[0.15em] text-gray-400 group-hover:text-accent transition-colors duration-300 uppercase"
         style={{ fontFamily: "var(--font-bebas)" }}
       >
         {children}
       </span>
-      <span className="text-accent transition-all duration-300 group-hover:translate-x-1 text-base sm:text-lg">
+      <motion.span
+        className="text-accent transition-all duration-300 text-base sm:text-lg"
+        whileHover={{ x: 4, scale: 1.1 }}
+        transition={{ type: "spring", stiffness: 400, damping: 10 }}
+      >
         ]
-      </span>
-    </>
+      </motion.span>
+    </div>
   );
 
   if (href) {
@@ -51,7 +62,7 @@ export default function BracketButton({
       <Link
         href={href}
         onClick={onClick}
-        className={`inline-flex items-center gap-2 group py-3 px-2 min-h-[44px] active:opacity-75 transition-opacity ${className}`}
+        className={`inline-block active:opacity-75 transition-opacity ${className}`}
         target={target}
         rel={rel}
       >
@@ -64,7 +75,7 @@ export default function BracketButton({
     <button
       type={type}
       onClick={onClick}
-      className={`inline-flex items-center gap-2 group py-3 px-2 min-h-[44px] active:opacity-75 transition-opacity ${className}`}
+      className={`inline-block active:opacity-75 transition-opacity ${className}`}
     >
       {content}
     </button>

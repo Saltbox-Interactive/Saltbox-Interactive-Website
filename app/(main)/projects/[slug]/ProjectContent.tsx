@@ -199,7 +199,7 @@ export default function ProjectContent({ project }: { project: Project }) {
 
         {/* Game Title/Logo */}
         <div
-          className="absolute bottom-20 sm:bottom-24 left-0 right-0 z-10 text-center px-4 sm:px-6"
+          className="absolute bottom-32 sm:bottom-40 md:bottom-48 left-0 right-0 z-10 text-center px-4 sm:px-6"
           style={{
             transform: `translateY(${scrollY * -0.2}px)`,
             opacity: Math.max(0, 1 - scrollY / 600),
@@ -959,7 +959,7 @@ export default function ProjectContent({ project }: { project: Project }) {
             href="https://store.steampowered.com/app/3140860/Discover_Old_DHanis/"
             target="_blank"
             rel="noopener noreferrer"
-            className="group inline-flex items-center gap-3 bg-[#1a1a1a] px-6 py-4 rounded-lg transition-all duration-300"
+            className="group inline-flex items-center gap-3 bg-[#1a1a1a] px-6 py-4 transition-all duration-300"
           >
             {/* Steam Icon */}
             <svg

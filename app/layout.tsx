@@ -4,6 +4,7 @@ import "./globals.css";
 import { OrganizationSchema, PersonSchema } from "@/components/StructuredData";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 import CookieConsent from "@/components/CookieConsent";
+import ParticleSystem from "@/components/ui/ParticleSystem";
 
 const workSans = Work_Sans({
   variable: "--font-work-sans",
@@ -138,6 +139,13 @@ export default function RootLayout({
       <body
         className={`${workSans.variable} ${bebas.variable} ${archivoBlack.variable} antialiased relative`}
       >
+        <ParticleSystem
+          count={50}
+          speed={0.15}
+          color="rgba(212, 165, 116, 0.06)"
+          minSize={0.5}
+          maxSize={1.5}
+        />
         {children}
         <CookieConsent />
       </body>

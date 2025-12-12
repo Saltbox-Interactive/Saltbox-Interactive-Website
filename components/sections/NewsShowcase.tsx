@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import { motion } from "framer-motion";
 import { getAllNewsPosts, NewsPost } from "@/lib/sanity/queries";
 import SectionTitle from "@/components/ui/SectionTitle";
 import BracketButton from "@/components/ui/BracketButton";
@@ -86,7 +87,7 @@ export default function NewsShowcase() {
             ) : (
               <>
                 {/* Scroll Container */}
-                <div
+                <motion.div
                   ref={scrollContainerRef}
                   onScroll={checkScrollButtons}
                   className="flex gap-4 sm:gap-6 overflow-x-auto scrollbar-hide scroll-smooth pb-4"
@@ -95,12 +96,24 @@ export default function NewsShowcase() {
                     msOverflowStyle: "none",
                     scrollSnapType: "x mandatory",
                   }}
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true, margin: "-100px" }}
+                  transition={{ duration: 0.6 }}
                 >
-                  {latestPosts.map((post) => (
-                    <div
+                  {latestPosts.map((post, index) => (
+                    <motion.div
                       key={post._id}
                       className="flex-shrink-0 w-full sm:w-[calc(50%-12px)] min-w-[280px]"
                       style={{ scrollSnapAlign: "start" }}
+                      initial={{ opacity: 0, x: 50 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true, margin: "-50px" }}
+                      transition={{
+                        duration: 0.5,
+                        delay: index * 0.1,
+                        ease: "easeOut",
+                      }}
                     >
                       <NewsCard
                         slug={post.slug.current}
@@ -111,9 +124,9 @@ export default function NewsShowcase() {
                         project={post.project}
                         author={post.author}
                       />
-                    </div>
+                    </motion.div>
                   ))}
-                </div>
+                </motion.div>
 
                 {/* Navigation Controls - Bottom Right */}
                 <div className="flex items-center justify-end gap-4 mt-8">

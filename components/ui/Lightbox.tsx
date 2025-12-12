@@ -154,7 +154,7 @@ export default function Lightbox({ images, initialIndex = 0, isOpen, onClose }: 
               }`}
               aria-label={`View image ${idx + 1}`}
             >
-              <Image src={img.src} alt={img.alt} fill className="object-cover" />
+              <Image src={img.src} alt={img.alt} fill sizes="80px" className="object-cover" />
             </button>
           ))}
         </div>

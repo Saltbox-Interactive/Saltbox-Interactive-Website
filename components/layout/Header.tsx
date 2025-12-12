@@ -438,6 +438,7 @@ export default function Header() {
                       src="/images/dod-cover.jpg"
                       alt="Discover Old D'Hanis"
                       fill
+                      sizes="(max-width: 768px) 50vw, 33vw"
                       className="object-cover transition-transform duration-300 group-hover:scale-105"
                     />
                     <div className="absolute inset-0 bg-black/50 transition-colors duration-300 group-hover:bg-black/30"></div>
@@ -468,6 +469,7 @@ export default function Header() {
                       src="/images/background_pic.jpg"
                       alt="About Us"
                       fill
+                      sizes="(max-width: 768px) 50vw, 33vw"
                       className="object-cover transition-transform duration-300 group-hover:scale-105"
                     />
                     <div className="absolute inset-0 bg-black/50 transition-colors duration-300 group-hover:bg-black/30"></div>
@@ -634,6 +636,7 @@ export default function Header() {
                   src="/images/dod-cover.jpg"
                   alt="Menu panel featuring Discover Old D'Hanis project with historic stone ruins and atmospheric landscape"
                   fill
+                  sizes="33vw"
                   className="object-cover transition-transform duration-150 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-black/50 transition-colors duration-150 group-hover:bg-black/30"></div>
@@ -664,6 +667,7 @@ export default function Header() {
                   src="/images/background_pic.jpg"
                   alt="Menu panel for About section showing historic architecture and heritage preservation work at Saltbox Interactive"
                   fill
+                  sizes="33vw"
                   className="object-cover transition-transform duration-150 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-black/50 transition-colors duration-150 group-hover:bg-black/30"></div>
